@@ -1,0 +1,14 @@
+@import "../../common//styles/sass/variables.scss";
+
+.logoBlock {
+    // height: 134px;
+
+    .logoTitle {
+        font-family: "Moon Dance";
+        font-weight: 400;
+        font-size: 100px;
+        line-height: 134px;
+        color: $text-white;
+        text-align: center;
+    }
+}

@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap');
+@import "./common/styles/sass/variables.scss";
 
 :root {
   font-family: "Montserrat", sans-serif;
@@ -6,8 +8,5 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
-}
-
-* {
-  box-sizing: border-box;
+  color: $text-primary
 }
