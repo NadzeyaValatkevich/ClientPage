@@ -6,4 +6,7 @@
     border: $border-secondary;
     @include typography(500, 20px, 24.38px,  $text-white);
     box-shadow: $shadow-1;
+    @include media-query(sm) {
+                    font-size: 18px;
+                }
 }

@@ -36,12 +36,17 @@ background-color: rgba(0, 0, 0, 0.4);
         top: 0px;
         left: 50%;
         transform: translate(-50%, 0);
-
         @include flex(column, flex-start, center, nowrap);
-        gap: 100px;
+        gap: 20%;
+
+        @media(max-width: 500px) {
+        gap: 10%;
+     }
+
 
         .title {
-            @include h1($text-white)
+            @include h1($text-white);
+            font-size: calc(24px + (66 - 24) * ((100vw - 391px) / (1920 - 391)));
         }
     }
 }

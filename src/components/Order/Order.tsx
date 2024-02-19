@@ -9,7 +9,7 @@ import { Button } from "../Button/Button";
 type OrderItemType = {
     label: string,
     alt: string,
-    src: ReactNode
+    src: any
 };
 
 const orderItems: OrderItemType[] = [
@@ -21,19 +21,21 @@ const orderItems: OrderItemType[] = [
 
 export const Order = () => {
     return (
-        <div className={`${styleContainer.container} ${style.orderContainer}`}>
-            <div className={style.orderBlock}>
-                {orderItems.map(el => {
-                    return (
-                        <div key={el.label} className={style.btnBlock}>
-                            <p className={style.descriptionBtn}>{el.label}</p>
-                            <Button className={style.btnInfo} />
-                            {/* <MainButton value={<Image alt={el.alt} src={el.src} />} /> */}
-                        </div>
-                    )
-                })}
-                <div className={style.btnBlock}>
-                    <Button value={"Подобрать"} className={style.btnSearch} />
+        <div className={style.orderWrapper}>
+            <div className={`${styleContainer.container} ${style.orderContainer}`}>
+                <div className={style.orderBlock}>
+                    {orderItems.map(el => {
+                        return (
+                            <div key={el.label} className={style.btnBlock}>
+                                <p className={style.descriptionBtn}>{el.label}</p>
+                                <Button className={style.btnInfo} value={<img alt={el.alt} src={el.src} />} />
+                                {/* <MainButton value={<Image alt={el.alt} src={el.src} />} /> */}
+                            </div>
+                        )
+                    })}
+                    <div className={style.btnBlock}>
+                        <Button value={"Подобрать"} className={style.btnSearch} />
+                    </div>
                 </div>
             </div>
         </div>
