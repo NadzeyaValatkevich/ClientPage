@@ -6,7 +6,7 @@ export const Main = () => {
         <div>
             <div className={styleContainer.container}>
                 <HouseCard />
-
+                <HouseCard />
             </div>
         </div>
     )
