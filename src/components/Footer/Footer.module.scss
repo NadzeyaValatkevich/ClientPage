@@ -1,0 +1,72 @@
+@import "../../common/styles/sass/mixins.scss";
+@import "../../common/styles/sass/variables.scss";
+
+.footer {
+    width: 100%;
+    background-color: $primary;
+
+    .headerContainer {
+        padding: 100px 0px; 
+        @include flex(row, flex-start, flex-start, nowrap);
+        gap: 142px;
+        height: 672px;
+
+        .footerBlock-left {
+            @include flex(column, space-between, flex-start, nowrap);
+            height: 100%;
+
+            & p:first-child {
+                text-align: left;
+                line-height: 70px;
+            }
+
+            .social {
+                @include flex(row, flex-start, flex-start, nowrap);
+                gap: 20px;
+            }
+
+            .address {
+                @include typography(400, 24px, 40px, $text-white);
+            }
+
+            .phone, .email {
+                @include typography(600, 24px, 29.26px, $text-white);
+            }
+
+            .footerLeftInfo {
+                @include flex(row, space-between, flex-start, nowrap);
+                gap: 20px;
+
+                .infoDescription {
+                    @include typography(400, 14px, 17.07px, $secondary);
+                }
+                
+                & span:first-child {
+                    font-weight: 500;
+                }
+            }
+
+        }
+
+        .footerBlock-right {
+            height: 100%;
+            @include flex(column, space-between, flex-start, nowrap);
+
+                .map {
+                width: 588px;
+                height: 400px;
+                border-radius: $radius-primary;
+                -webkit-border-radius: 16px  16px 16px 16px;
+                -moz-border-radius: 16px  16px 16px 16px;
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .footerRightInfo {
+                @include typography(500, 14px, 17.07px, $secondary);
+                align-self: flex-end;
+            }
+        }
+
+    }
+}

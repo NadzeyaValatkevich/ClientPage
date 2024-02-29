@@ -44,25 +44,25 @@
                         font-size: 12px;
                     }
 
-            & :global(.slick-slider) {
+            // & :global(.slick-slider) {
             
                 
 
-                &:global(.slick-slider) {
+                // & :global(.slick-slider) {
                     
-                    &:global(.slick-list) {
+                    & :global(.slick-list) {
+                        margin: 0 -20px;
+                        // & :global(.slick-track) {
 
-                        &:global(.slick-track) {
-
-                            &:global(.slick-slide) {
-
+                            & :global(.slick-slide) {
+                                padding: 0 20px;
                             }
-                        }
+                        // }
                     }
 
 
-                }
-            }
+                // }
+            // }
         }
 
         .houseBlock-right {
