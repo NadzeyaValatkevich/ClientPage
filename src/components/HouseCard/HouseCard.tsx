@@ -15,8 +15,9 @@ import { Button } from "../Button/Button";
 import { Carousel } from "../Carousel";
 import { Modal } from "../Modal/Modal";
 import { useState } from "react";
+import { FullHouseCard } from "../FullHouseCard";
 
-const features: any = [
+export const features: any = [
     { id: 1, icon: wifi, title: "Wi-Fi" },
     { id: 2, icon: alcove, title: "Беседка" },
     { id: 3, icon: tv, title: "TV" },
@@ -25,7 +26,7 @@ const features: any = [
     { id: 6, icon: child, title: "Детская площадка" },
 ];
 
-const photos: any = [
+export const photos: any = [
     { id: 1, src: photo1, title: "photo1" },
     { id: 2, src: photo2, title: "photo2" },
     { id: 3, src: photo3, title: "photo3" },
@@ -63,11 +64,11 @@ export const HouseCard = () => {
     };
 
     const onClickOrderHandler = () => {
-        setModalActive(true)
+        setModalOrderActive(true)
     };
 
     const onCloseOrderHandler = () => {
-        setModalActive(false)
+        setModalOrderActive(false)
     }
 
     return (
@@ -124,12 +125,10 @@ export const HouseCard = () => {
                         <Button value={"Забронировать"} className={style.btnBook} onClick={onClickOrderHandler} />
                         <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
                     </div>
-                    {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive}>
-
-                    </Modal>}
+                    {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive}><FullHouseCard /></Modal>}
 
                     {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive}>
-
+                        {'Hello'}
                     </Modal>}
                 </div>
             </div>

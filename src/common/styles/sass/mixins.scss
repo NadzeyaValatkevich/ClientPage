@@ -41,3 +41,7 @@
 @mixin h2($color: $text-primary) {
   @include typography(600, 40px, 48.76px, $color);
 }
+
+@mixin h3($color: $text-primary) {
+  @include typography(600, 30px, 36.57px, $color);
+}
