@@ -13,6 +13,8 @@ import photo3 from "../../assets/img/a26be162e11e7f29bbab2f8cd1c31065.jpg";
 import photo4 from "../../assets/img/ff6ca08ba1469ee50f1d35eec29ee705.jpg";
 import { Button } from "../Button/Button";
 import { Carousel } from "../Carousel";
+import { Modal } from "../Modal/Modal";
+import { useState } from "react";
 
 const features: any = [
     { id: 1, icon: wifi, title: "Wi-Fi" },
@@ -32,6 +34,9 @@ const photos: any = [
 
 export const HouseCard = () => {
 
+    const [modalActive, setModalActive] = useState(false);
+    const [modalOrderActive, setModalOrderActive] = useState(false);
+
     const housePhotosSettings = {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -48,6 +53,22 @@ export const HouseCard = () => {
         //     },
         // ],
     };
+
+    const onClickHandler = () => {
+        setModalActive(true)
+    };
+
+    const onCloseHandler = () => {
+        setModalActive(false)
+    };
+
+    const onClickOrderHandler = () => {
+        setModalActive(true)
+    };
+
+    const onCloseOrderHandler = () => {
+        setModalActive(false)
+    }
 
     return (
         <div className={style.card}>
@@ -100,9 +121,16 @@ export const HouseCard = () => {
                         </div>
                     </div>
                     <div className={style.btnsBlock}>
-                        <Button value={"Забронировать"} className={style.btnBook} />
-                        <Button value={"Подробнее"} className={style.btnDetails} />
+                        <Button value={"Забронировать"} className={style.btnBook} onClick={onClickOrderHandler} />
+                        <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
                     </div>
+                    {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive}>
+
+                    </Modal>}
+
+                    {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive}>
+
+                    </Modal>}
                 </div>
             </div>
 

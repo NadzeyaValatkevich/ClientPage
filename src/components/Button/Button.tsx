@@ -3,15 +3,15 @@ import style from "../Button/Button.module.scss";
 
 type ButtonProps = {
     value?: any,
-    onClickHandler?: () => void,
+    onClick?: () => void,
     className?: string,
     type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
 };
 
-export const Button: FC<ButtonProps> = ({ onClickHandler, value, className, type = "button" }) => {
+export const Button: FC<ButtonProps> = ({ onClick, value, className, type = "button" }) => {
     return (
         <button
-            onClick={onClickHandler}
+            onClick={onClick}
             className={
                 className ? `${style.button} ${className}` : style.button
             }

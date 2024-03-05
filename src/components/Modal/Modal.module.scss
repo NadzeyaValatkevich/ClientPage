@@ -1,0 +1,46 @@
+@import "../../common/styles/sass/variables.scss";
+@import "../../common/styles/sass/mixins.scss";
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color-8, 0.4);
+    z-index: 1;
+    transition: 0.5s;
+    // opacity: 0;
+    // pointer-events: none;
+
+    @include flex(row, center, center, nowrap);
+
+    .modalContent {
+        background-color: $secondary;
+        border-radius: $radius-secondary;
+        padding: 30px 60px 70px; 
+        width: 1440px;
+        height: 686px;
+
+    }
+}
+
+.modal--entering,
+.modal--entered {
+    opacity: 1;
+}
+
+.modal--entering .modal-content,
+.modal--entered .modal-content {
+    transform: translateY(0);
+}
+
+.modal--exiting,
+.modal--exited {
+    opacity: 0;
+}
+
+.modal--exiting .modal-content,
+.modal--exited .modal-content {
+    transform: translateY(-100px);
+}

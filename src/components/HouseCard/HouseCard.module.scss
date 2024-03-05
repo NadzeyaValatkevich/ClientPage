@@ -67,7 +67,6 @@
 
         .houseBlock-right {
             width: 100%;
-            background-color: aquamarine;
             height: 100%;
             padding-bottom: 15px;
              @include flex(column, space-between, flex-start, nowrap);
