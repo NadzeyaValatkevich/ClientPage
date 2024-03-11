@@ -24,6 +24,9 @@ export const features: any = [
     { id: 4, icon: kitchen, title: "Кухня" },
     { id: 5, icon: barbecue, title: "Барбекю" },
     { id: 6, icon: child, title: "Детская площадка" },
+    { id: 7, icon: kitchen, title: "Кухня" },
+    { id: 8, icon: barbecue, title: "Барбекю" },
+    { id: 9, icon: child, title: "Детская площадка" },
 ];
 
 export const photos: any = [

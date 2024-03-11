@@ -46,8 +46,8 @@ export const FullHouseCard = () => {
                     </div>
                     <div className={style.beds}>
                         <p>Спальные места: </p>
-                        <p > 2 <img alt={"bedBig"} src={bedBig} /></p>
-                        <p> 1 <img alt={"bed"} src={bed} /></p>
+                        <p className={style.bedsBlock}> 2 <img alt={"bedBig"} src={bedBig} /></p>
+                        <p className={style.bedsBlock}> 1 <img alt={"bed"} src={bed} /></p>
                     </div>
                 </div>
                 <div className={style.featuresBlock}>
