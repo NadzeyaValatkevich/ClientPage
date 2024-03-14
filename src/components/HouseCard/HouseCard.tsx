@@ -16,6 +16,7 @@ import { Carousel } from "../Carousel";
 import { Modal } from "../Modal/Modal";
 import { useState } from "react";
 import { FullHouseCard } from "../FullHouseCard";
+import { Booking } from "../Booking";
 
 export const features: any = [
     { id: 1, icon: wifi, title: "Wi-Fi" },
@@ -128,10 +129,10 @@ export const HouseCard = () => {
                         <Button value={"Забронировать"} className={style.btnBook} onClick={onClickOrderHandler} />
                         <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
                     </div>
-                    {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive}><FullHouseCard /></Modal>}
+                    {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}><FullHouseCard /></Modal>}
 
-                    {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive}>
-                        {'Hello'}
+                    {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive} type={"bookingModal"}>
+                        <Booking />
                     </Modal>}
                 </div>
             </div>

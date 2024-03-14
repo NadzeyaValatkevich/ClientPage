@@ -1,0 +1,18 @@
+@import "../../../common/styles/sass/variables.scss";
+@import "../../../common/styles/sass/mixins.scss";
+
+.input__box {
+    @include flex(column, flex-start, flex-start, nowrap);
+
+    &-label {
+        @include typography(400, 20px, 26px, $text-secondary);
+        margin-bottom: 5px;
+    }
+
+    &-input {
+        @include typography(500, 20px, 26px, $text-secondary);
+        padding: 8px 10px;
+        border-radius: 4px;
+        border: 0.25px solid $color-6;
+    }
+}

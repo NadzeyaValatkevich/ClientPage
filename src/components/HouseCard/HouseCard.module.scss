@@ -143,6 +143,7 @@
 
                 button {
                     @include typography(500, 16px, 19.36px,  $text-white);
+                    font-family: "Inter", sans-serif;
                     padding: 16px 26px;
                 }
 

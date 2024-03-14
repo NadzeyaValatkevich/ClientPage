@@ -1,10 +1,11 @@
 import styles from "./Close.module.scss";
 
 type CloseIconPropsType = {
-  onClick: (ev: React.MouseEvent<HTMLDivElement>) => void
+  onClick: (ev: React.MouseEvent<HTMLDivElement>) => void,
+  color: string
 };
 
-export const CloseIcon = ({ onClick }: CloseIconPropsType) => {
+export const CloseIcon = ({ onClick, color }: CloseIconPropsType) => {
 
   return (
     <div onClick={onClick} className={styles.closeIcon}>
@@ -17,14 +18,14 @@ export const CloseIcon = ({ onClick }: CloseIconPropsType) => {
       >
         <path
           d="M18 6L6 18"
-          stroke="#3f260a"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M6 6L18 18"
-          stroke="#424242"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

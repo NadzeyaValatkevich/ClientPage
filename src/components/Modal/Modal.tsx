@@ -9,10 +9,11 @@ type ModalPropsType = {
     active: boolean,
     onClose: (ev: React.MouseEvent<HTMLDivElement>) => void,
     setActive: (value: boolean) => void,
-    children: ReactNode
+    children: ReactNode,
+    type: string
 };
 
-export const Modal = ({ active, onClose, setActive, children }: ModalPropsType) => {
+export const Modal = ({ active, onClose, setActive, children, type }: ModalPropsType) => {
 
     return (
         <>
@@ -20,8 +21,17 @@ export const Modal = ({ active, onClose, setActive, children }: ModalPropsType) 
                 {(state) => (
                     <div className={`${style.modal} ${style[`modal--${state}`]}`} onClick={() => setActive(false)}>
                         {/* <div className="modalWrapper"> */}
-                        <div className={style.modalContent} onClick={e => e.stopPropagation()}>
-                            <CloseIcon onClick={onClose} />
+                        <div className={type === "houseModal" ? `${style.modalContent} ` : `${style.modalContentBooking}`} onClick={e => e.stopPropagation()}>
+                            {type === "houseModal"
+                                ? <CloseIcon onClick={onClose} color={"#0F2664"} />
+                                : <div className={style["modalContentBooking__header"]}>
+                                    <h3 className={style["modalContentBooking__header-title"]}>Бронь</h3>
+                                    <div className={style["modalContentBooking__header-right"]}>
+                                        <button className={style["modalContentBooking__header-btn"]}>Сохранить</button>
+                                        <CloseIcon onClick={onClose} color={"#FFFFFF"} />
+                                    </div>
+                                </div>
+                            }
                             {children}
                         </div>
                         {/* </div> */}
