@@ -16,10 +16,11 @@ export const Calendar = () => {
     };
     const CustomInput = React.forwardRef((props: any, ref: any) => {
         return (
-            <div className={selectedDate ? `${style.customDatePickDiv} ${style["customDatePickDiv-selected"]}` : style.customDatePickDiv}>
-                <label className={style.label} onClick={props.onClick} ref={ref}>
+            <div className={selectedDate ? `${style.customDatePickDiv} ${style["customDatePickDiv-selected"]}` : style.customDatePickDiv} onClick={props.onClick}>
+                <input className={style.customInput} ref={ref} value={props.value || props.placeholder} onChange={props.onChange} />
+                {/* <label className={style.label} onClick={props.onClick} ref={ref}>
                     {props.value || props.placeholder}
-                </label>
+                </label> */}
                 <img className={style.image} src={calendarIcon} alt="Calendar" onClick={props.onClick} />
             </div>
 

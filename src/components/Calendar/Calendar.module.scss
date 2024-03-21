@@ -27,6 +27,14 @@
     box-shadow: $shadow-1;
 }
 
+.customInput:focus {
+    outline: none;
+}
+
+.customInput {
+    border: none;
+}
+
 :global(.react-datepicker__header) { 
     background-color: $text-white;
     margin-bottom: 20px;
@@ -49,13 +57,18 @@
   color: red;
 }
 
+:global(.react-datepicker__day--weekend):global(.react-datepicker__day--disabled) {
+    opacity: 50%;
+}
+
+
 :global(.react-datepicker__day-name:last-child),
 :global(.react-datepicker__day-name:nth-last-child(2)) {
   color: red; 
 }
 
 :global(.react-datepicker__navigation-icon::before) {
-    top: -2px;
+    top: 0px;
 }
 
 :global(.react-datepicker__day) {
