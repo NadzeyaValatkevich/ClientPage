@@ -1,0 +1,41 @@
+@import "../../../common/styles/sass/variables.scss";
+@import "../../../common/styles/sass/mixins.scss";
+
+.personalInfo {
+    margin-bottom: 20px;
+
+    &__title {
+        @extend %titleBookingBlock;
+    }
+
+    &__title::before {
+        @extend %titleBookingLine;
+    }
+
+    &__block {
+        @include flex(row, flex-start, flex-start, nowrap);
+        gap: 20px;
+    }
+
+    &__block-left, &__block-right {
+        max-width: 690px;
+        width: 100%;
+    }
+
+    &__block-left div, &__block-right div {
+        margin-bottom: 10px;
+    }
+
+    &__block input {
+        width: 100%;
+    }
+
+    &__block-right--date {
+        max-width: 165px;
+    }
+
+    &__block-right--sex {
+        max-width: 120px;
+    }
+
+}

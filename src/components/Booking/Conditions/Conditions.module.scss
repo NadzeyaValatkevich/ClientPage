@@ -1,0 +1,31 @@
+@import "../../../common/styles/sass/variables.scss";
+@import "../../../common/styles/sass/mixins.scss";
+
+.conditions {
+    margin-bottom: 20px;
+
+    &__title {
+        @extend %titleBookingBlock;
+    }
+
+    &__title::before {
+        @extend %titleBookingLine;
+    }
+
+    &__text {
+        @include typography(400, 20px, 26px, $text-secondary);
+        margin-left: 20px;
+        position: relative;
+    }
+
+    &__text::before {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: $text-secondary;
+        left: -14px;
+        top: 11px;
+    }
+}

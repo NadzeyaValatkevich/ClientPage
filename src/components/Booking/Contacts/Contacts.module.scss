@@ -1,0 +1,32 @@
+@import "../../../common/styles/sass/variables.scss";
+@import "../../../common/styles/sass/mixins.scss";
+
+.contacts {
+    margin-bottom: 20px;
+
+    &__title {
+        @extend %titleBookingBlock;
+    }
+
+    &__title::before {
+        @extend %titleBookingLine;
+    }
+
+    &__block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        column-gap: 20px;
+        row-gap: 10px;
+
+        &-telegram {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        & input {
+            width: 100%;
+        }
+    }
+
+}

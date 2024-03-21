@@ -1,0 +1,80 @@
+@import "../../common/styles/sass/variables.scss";
+@import "../../common/styles/sass/mixins.scss";
+
+.datePickerDiv {
+    position: relative;
+}
+
+.customDatePickDiv {
+    width: 280px;
+    padding: 25px 20px;
+    background-color: $text-white;
+    border: solid 1px $text-secondary;
+    border-radius: $radius-secondary;
+    @include flex(row, space-between, center, nowrap);
+
+    .label {
+        @include typography(500, 14px, 17.07px, $text-primary)
+    }
+
+    .image {
+        cursor: pointer;
+    }
+}
+
+.customDatePickDiv-selected {
+    border-color: $primary;
+    box-shadow: $shadow-1;
+}
+
+:global(.react-datepicker__header) { 
+    background-color: $text-white;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+:global(.react-datepicker__month-container) {
+    padding: 10px;
+    float: none;
+}
+
+:global(.react-datepicker) {
+    width: 356px;
+    height: 395px;
+    border-radius: $radius-primary;
+    box-shadow: $shadow-1;
+}
+
+:global(.react-datepicker__day--weekend) {
+  color: red;
+}
+
+:global(.react-datepicker__day-name:last-child),
+:global(.react-datepicker__day-name:nth-last-child(2)) {
+  color: red; 
+}
+
+:global(.react-datepicker__navigation-icon::before) {
+    top: -2px;
+}
+
+:global(.react-datepicker__day) {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 40px;
+    width: 2.7rem;
+}
+
+:global(.react-datepicker__current-month) {
+    @include typography(600, 20px, 32px, rgba(10, 10, 10, 1));
+    font-family: "Inter", sans-serif;
+    margin-bottom: 20px;
+}
+
+:global(.react-datepicker__day-name) {
+    @include typography(600, 18px, 24px, rgba(10, 10, 10, 1));
+    font-family: "Inter", sans-serif;
+    width: 2.7rem;
+}
+

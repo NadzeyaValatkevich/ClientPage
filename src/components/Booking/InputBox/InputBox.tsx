@@ -8,11 +8,11 @@ type InputBoxPropsType = {
     className?: string,
 }
 
-export const InputBox = ({ title, name, value, className }: InputBoxPropsType) => {
+export const InputBox = ({ title, name, value, className, type }: InputBoxPropsType) => {
     return (
         <div className={`${style["input__box"]} ${className}`} >
             <label className={style["input__box-label"]} htmlFor={name}>{title}</label>
-            <input className={style["input__box-input"]} id={name} type="text" name={name} value={value} />
+            <input className={style["input__box-input"]} id={name} type={type} name={name} value={value} />
         </div >
     )
 }

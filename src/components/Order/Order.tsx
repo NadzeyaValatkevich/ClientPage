@@ -4,19 +4,8 @@ import calendar from "../../assets/icons/Calender.svg";
 import users from "../../assets/icons/users.svg";
 import { ReactNode } from "react";
 import { Button } from "../Button/Button";
-
-
-type OrderItemType = {
-    label: string,
-    alt: string,
-    src: any
-};
-
-const orderItems: OrderItemType[] = [
-    { label: "Дата заезда", alt: "Календарь", src: calendar },
-    { label: "Дата выезда", alt: "Календарь", src: calendar },
-    { label: "Количество гостей", alt: "Гости", src: users }
-];
+import { InputBox } from "../Booking/InputBox";
+import { Calendar } from "../Calendar";
 
 
 export const Order = () => {
@@ -24,15 +13,9 @@ export const Order = () => {
         <div className={style.orderWrapper}>
             <div className={`${styleContainer.container} ${style.orderContainer}`}>
                 <div className={style.orderBlock}>
-                    {orderItems.map(el => {
-                        return (
-                            <div key={el.label} className={style.btnBlock}>
-                                <p className={style.descriptionBtn}>{el.label}</p>
-                                <Button className={style.btnInfo} value={<img alt={el.alt} src={el.src} />} />
-                                {/* <MainButton value={<Image alt={el.alt} src={el.src} />} /> */}
-                            </div>
-                        )
-                    })}
+                    <Calendar />
+                    <Calendar />
+                    {/* <InputBox title={"Дата заезда"} name={"date"} value={""} type={"date"} /> */}
                     <div className={style.btnBlock}>
                         <Button value={"Подобрать"} className={style.btnSearch} />
                     </div>
