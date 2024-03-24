@@ -1,21 +1,17 @@
-@import "../../common/styles/sass/variables.scss";
-@import "../../common/styles/sass/mixins.scss";
+@import "../../../common/styles/sass/variables.scss";
+@import "../../../common/styles/sass/mixins.scss";
 
 .datePickerDiv {
     position: relative;
 }
 
 .customDatePickDiv {
-    width: 280px;
+    width: 288px;
     padding: 25px 20px;
     background-color: $text-white;
     border: solid 1px $text-secondary;
     border-radius: $radius-secondary;
     @include flex(row, space-between, center, nowrap);
-
-    .label {
-        @include typography(500, 14px, 17.07px, $text-primary)
-    }
 
     .image {
         cursor: pointer;
@@ -33,6 +29,7 @@
 
 .customInput {
     border: none;
+    @include typography(500, 14px, 17.07px, $text-primary)
 }
 
 :global(.react-datepicker__header) { 

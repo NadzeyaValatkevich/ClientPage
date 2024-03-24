@@ -1,0 +1,35 @@
+@import "../../../../common/styles/sass/variables.scss";
+@import "../../../../common/styles/sass/mixins.scss";
+
+.select__block {
+    width: 100%;
+    @include flex(row, space-between, center, nowrap);
+    margin-bottom: 15px;
+
+    &-title {
+        @include typography(400, 16px, 19.5px, $text-secondary)
+    }
+
+    &-item {
+        @include flex(row, center, center, nowrap);
+    }
+
+    &-item--btn {
+        width: 25px;
+        height: 25px;
+        background-color: $primary;
+        border-radius: 50%;
+        border: none;
+        color: $text-white;
+    }
+
+    &-item--number {
+        width: 28px;
+        text-align: center;
+        margin: 0px 5px;
+    }
+
+    .disabled {
+        background-color: $text-secondary;
+    }
+}

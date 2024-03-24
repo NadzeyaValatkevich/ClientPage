@@ -1,0 +1,41 @@
+@import "../../../common/styles/sass/variables.scss";
+@import "../../../common/styles/sass/mixins.scss";
+
+.customDropDown {
+    max-width: 288px;
+    width: 100%;
+    position: relative;
+    padding: 25px 20px;
+    background-color: $text-white;
+    border: solid 1px $text-secondary;
+    border-radius: $radius-secondary;
+
+    .customDropDown__item {
+        @include flex(row, space-between, center, nowrap);
+
+        &-input {
+            border: none;
+            @include typography(500, 14px, 17.07px, $text-primary)
+        }
+
+        &-input:focus {
+            outline: none;
+        }
+
+        &-image {
+            cursor: pointer;
+        }
+    }
+}
+
+.guestsSelectBlock {
+    width: 356px;
+    padding: 10px 14px;
+    border-radius: $radius-primary;
+    border: 0.5px solid $text-secondary;
+    box-shadow: $shadow-1;
+    background-color: $text-white;
+    position: absolute;
+    left: -34px;
+    top: 75px;
+}

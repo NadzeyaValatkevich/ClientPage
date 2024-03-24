@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import ru from 'date-fns/locale/ru';
 import "react-datepicker/dist/react-datepicker.css";
 import style from "./Calendar.module.scss";
-import calendarIcon from "../../assets/icons/calendar.svg";
+import calendarIcon from "../../../assets/icons/calendar.svg";
 import React from "react";
 
 export const Calendar = () => {
@@ -18,9 +18,6 @@ export const Calendar = () => {
         return (
             <div className={selectedDate ? `${style.customDatePickDiv} ${style["customDatePickDiv-selected"]}` : style.customDatePickDiv} onClick={props.onClick}>
                 <input className={style.customInput} ref={ref} value={props.value || props.placeholder} onChange={props.onChange} />
-                {/* <label className={style.label} onClick={props.onClick} ref={ref}>
-                    {props.value || props.placeholder}
-                </label> */}
                 <img className={style.image} src={calendarIcon} alt="Calendar" onClick={props.onClick} />
             </div>
 
