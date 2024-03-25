@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./GuestsSelect.module.scss";
 import guestsIcon from "../../../assets/icons/users.svg";
 import { SelectCountPeople } from "./SelectCountPeople";
@@ -27,8 +27,23 @@ export const GuestsSelect = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [adults, setAdults] = useState(0);
     const [children, setChildren] = useState(0);
-    const [age, setAge] = useState(0);
+    const [childAges, setChildAges] = useState<number[]>([]);
+    const modalRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+                setIsOpen(false)
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+
+    }, []);
 
 
     const toggleDropdown = () => {
@@ -47,13 +62,23 @@ export const GuestsSelect = () => {
 
     const handleChildIncrement = () => {
         setChildren((lastChildren) => lastChildren + 1);
+        setChildAges((lastAges) => [...lastAges, 0])
     };
 
     const handleChildDecrement = () => {
         if (children > 0) {
             setChildren((lastChildren) => lastChildren - 1);
+            setChildAges((lastAges) => lastAges.slice(0, -1))
         }
+    };
+
+    const handleAgeChange = (indexAge: number, newAge: number) => {
+        setChildAges((lastAges) => {
+            return lastAges.map((age: number, index: number) => index === indexAge ? newAge : age)
+        })
+
     }
+
 
     return (
         <div className={style.customDropDown}>
@@ -62,12 +87,19 @@ export const GuestsSelect = () => {
                 <img className={style["customDropDown__item-image"]} src={guestsIcon} alt="Guests" />
             </div>
             {isOpen && (
-                <div className={style.guestsSelectBlock}>
+                <div className={style.guestsSelectBlock} ref={modalRef}>
                     <SelectCountPeople title={"Количество взрослых"} value={adults} onIncrement={handleAdultIncrement}
                         onDecrement={handleAdultDecrement} />
                     <SelectCountPeople title={"Количество детей"} value={children} onIncrement={handleChildIncrement}
                         onDecrement={handleChildDecrement} />
-                    <SelectAgeChildren selectedAge={age} onChangeAge={setAge} options={options} />
+                    {childAges.map((age, index) => (
+                        <SelectAgeChildren key={index} selectedAge={age}
+                            onChangeAge={(newAge: number) => handleAgeChange(index, newAge)}
+                            options={options}
+                            index={index}
+                        />
+                    ))}
+                    {/* <SelectAgeChildren selectedAge={age} onChangeAge={setAge} options={options} /> */}
                 </div>
             )}
 

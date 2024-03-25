@@ -4,14 +4,15 @@ import style from "./SelectAgeChildren.module.scss";
 
 type SelectAgeChildrenPropsType = {
     selectedAge: number,
-    onChangeAge: () => void,
-    options: any
+    onChangeAge: (newAge: number) => void,
+    options: any,
+    index: number
 };
 
-export const SelectAgeChildren = ({ selectedAge, onChangeAge, options }: SelectAgeChildrenPropsType) => {
+export const SelectAgeChildren = ({ selectedAge, onChangeAge, options, index }: SelectAgeChildrenPropsType) => {
     return (
         <div className={style["age__select"]}>
-            <p className={style["age__label"]}>Возраст 1-го ребенка</p>
+            <p className={style["age__label"]}>Возраст {index + 1}-ого ребенка</p>
             <Select
                 value={selectedAge}
                 onChange={onChangeAge}
