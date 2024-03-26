@@ -3,8 +3,9 @@ import style from "./GuestsSelect.module.scss";
 import guestsIcon from "../../../assets/icons/users.svg";
 import { SelectCountPeople } from "./SelectCountPeople";
 import { SelectAgeChildren } from "./SelectAgeChildren";
+import { Button } from "../../Button/Button";
 
-type OptionType = {
+export type OptionType = {
     value: number;
     label: string;
 };
@@ -13,7 +14,7 @@ export type OptionsAgePropsType = OptionType[];
 
 const options: OptionsAgePropsType = [];
 
-for (let i = 1; i <= 17; i++) {
+for (let i = 0; i <= 17; i++) {
     if (i === 1) {
         options.push({ value: i, label: `${i} год` })
     } else if (i > 1 && i < 5) {
@@ -27,7 +28,9 @@ export const GuestsSelect = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [adults, setAdults] = useState(0);
     const [children, setChildren] = useState(0);
-    const [childAges, setChildAges] = useState<number[]>([]);
+    const [childAges, setChildAges] = useState<Array<OptionType | undefined>>([]);
+    const [formattedValue, setFormattedValue] = useState("");
+    const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -44,6 +47,34 @@ export const GuestsSelect = () => {
         };
 
     }, []);
+
+    const formatPeople = () => {
+        let valueCountPeople = "";
+
+        if (adults % 10 === 1 && adults !== 11) {
+            valueCountPeople = adults + " взрослый, ";
+        } else {
+            valueCountPeople = adults + " взрослых, ";
+        }
+
+
+        if (children === 1) {
+            valueCountPeople = valueCountPeople + children + " ребенок";
+        } else if (children >= 2 && children <= 4) {
+            valueCountPeople = valueCountPeople + children + " ребенка";
+        } else {
+            const lastDigit = children % 10;
+            const secondLastDigit = Math.floor(children / 10) % 10;
+
+            if (lastDigit >= 5 || lastDigit === 0 || (secondLastDigit !== 1 && lastDigit >= 1)) {
+                valueCountPeople = valueCountPeople + children + " детей";
+            } else {
+                valueCountPeople = valueCountPeople + children + " ребенок";
+            }
+        }
+
+        return valueCountPeople;
+    };
 
 
     const toggleDropdown = () => {
@@ -62,7 +93,7 @@ export const GuestsSelect = () => {
 
     const handleChildIncrement = () => {
         setChildren((lastChildren) => lastChildren + 1);
-        setChildAges((lastAges) => [...lastAges, 0])
+        setChildAges((lastAges) => [...lastAges, undefined])
     };
 
     const handleChildDecrement = () => {
@@ -72,18 +103,34 @@ export const GuestsSelect = () => {
         }
     };
 
-    const handleAgeChange = (indexAge: number, newAge: number) => {
+    const handleAgeChange = (indexAge: number, newAge: OptionType | undefined) => {
         setChildAges((lastAges) => {
-            return lastAges.map((age: number, index: number) => index === indexAge ? newAge : age)
-        })
+            return lastAges.map((age: OptionType | undefined, index: number) => index === indexAge ? newAge : age)
+        });
 
-    }
+        const updatedChildAgeErrors = [...childAgeErrors];
+        updatedChildAgeErrors[indexAge] = "";
+        setChildAgeErrors(updatedChildAgeErrors);
+    };
 
+    const handleButtonClick = () => {
+
+        const newErrors = childAges.map((age: OptionType | undefined) => {
+            return age === undefined ? "Поле обязательно к заполнению" : "";
+        });
+        setChildAgeErrors(newErrors);
+
+        if (newErrors.every(error => error === "")) {
+            const formattedPeople = formatPeople();
+            setFormattedValue(formattedPeople);
+            setIsOpen(false);
+        }
+    };
 
     return (
-        <div className={style.customDropDown}>
+        <div className={formattedValue ? `${style.customDropDown} ${style["customDropDown--selected"]}` : style.customDropDown}>
             <div className={style["customDropDown__item"]} onClick={toggleDropdown}>
-                <input className={style["customDropDown__item-input"]} />
+                <input className={style["customDropDown__item-input"]} value={formattedValue} readOnly />
                 <img className={style["customDropDown__item-image"]} src={guestsIcon} alt="Guests" />
             </div>
             {isOpen && (
@@ -94,12 +141,13 @@ export const GuestsSelect = () => {
                         onDecrement={handleChildDecrement} />
                     {childAges.map((age, index) => (
                         <SelectAgeChildren key={index} selectedAge={age}
-                            onChangeAge={(newAge: number) => handleAgeChange(index, newAge)}
+                            onChangeAge={(newAge: OptionType | undefined) => handleAgeChange(index, newAge)}
                             options={options}
                             index={index}
+                            error={childAgeErrors[index]}
                         />
                     ))}
-                    {/* <SelectAgeChildren selectedAge={age} onChangeAge={setAge} options={options} /> */}
+                    <Button className={style["customDropDown__btn"]} value={"Готово"} onClick={handleButtonClick} />
                 </div>
             )}
 

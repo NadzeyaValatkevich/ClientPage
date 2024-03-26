@@ -10,6 +10,11 @@
     border: solid 1px $text-secondary;
     border-radius: $radius-secondary;
 
+    &--selected {
+            border-color: $primary;
+            box-shadow: $shadow-1;
+        }
+
     .customDropDown__item {
         @include flex(row, space-between, center, nowrap);
 
@@ -26,6 +31,14 @@
             cursor: pointer;
         }
     }
+
+    &__btn {
+        max-width: 122px;
+        width: 100%;
+        padding: 16px 26px;
+        background-color: $primary;
+        align-self: flex-end;
+    }
 }
 
 .guestsSelectBlock {
@@ -38,4 +51,6 @@
     position: absolute;
     left: -34px;
     top: 75px;
+    display: flex;
+    flex-direction: column;
 }
