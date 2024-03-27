@@ -1,10 +1,10 @@
-import { useState } from "react";
 import DatePicker from "react-datepicker";
 import ru from 'date-fns/locale/ru';
 import "react-datepicker/dist/react-datepicker.css";
 import style from "./Calendar.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
 import React from "react";
+
 
 type CalendarPropsType = {
     selectedDate: Date | null,
@@ -13,6 +13,12 @@ type CalendarPropsType = {
 };
 
 export const Calendar = ({ selectedDate, onDateChange, firstDay }: CalendarPropsType) => {
+    // const { register } = useFormContext();
+
+    // useEffect(() => {
+    //     register("selectedDate");
+    // }, [register]);
+
 
     const CustomInput = React.forwardRef((props: any, ref: any) => {
         return (

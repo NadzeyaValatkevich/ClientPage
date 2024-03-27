@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import style from "./GuestsSelect.module.scss";
 import guestsIcon from "../../../assets/icons/users.svg";
 import { SelectCountPeople } from "./SelectCountPeople";
@@ -24,13 +24,19 @@ for (let i = 0; i <= 17; i++) {
     }
 }
 
-export const GuestsSelect = () => {
+type GuestsSelectPropsType = {
+    onGuestsChange: (newGuests: any) => void
+}
+
+export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsType, ref: any) => {
+
     const [isOpen, setIsOpen] = useState(false);
     const [adults, setAdults] = useState(0);
     const [children, setChildren] = useState(0);
     const [childAges, setChildAges] = useState<Array<OptionType | undefined>>([]);
     const [formattedValue, setFormattedValue] = useState("");
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
+    // const [localGuests, setLocalGuests] = useState({ adults: 0, children: 0, childAges: [] });
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -91,17 +97,17 @@ export const GuestsSelect = () => {
         }
     };
 
-    const handleChildIncrement = () => {
+    const handleChildIncrement = useCallback(() => {
         setChildren((lastChildren) => lastChildren + 1);
         setChildAges((lastAges) => [...lastAges, undefined])
-    };
+    }, [setChildren, setChildAges]);
 
-    const handleChildDecrement = () => {
+    const handleChildDecrement = useCallback(() => {
         if (children > 0) {
             setChildren((lastChildren) => lastChildren - 1);
             setChildAges((lastAges) => lastAges.slice(0, -1))
         }
-    };
+    }, [children, setChildren, setChildAges]);
 
     const handleAgeChange = (indexAge: number, newAge: OptionType | undefined) => {
         setChildAges((lastAges) => {
@@ -125,7 +131,19 @@ export const GuestsSelect = () => {
             setFormattedValue(formattedPeople);
             setIsOpen(false);
         }
+
+        const guestsData: any = {
+            adults: adults,
+            children: children,
+            childAges: childAges,
+        };
+
+        onGuestsChange(guestsData);
     };
+
+    // const handleGuestsChange = useCallback((newGuests: any) => {
+    //     setLocalGuests(newGuests); // Обновляем локальное состояние
+    // }, []);
 
     return (
         <div className={formattedValue ? `${style.customDropDown} ${style["customDropDown--selected"]}` : style.customDropDown}>
@@ -153,4 +171,4 @@ export const GuestsSelect = () => {
 
         </div>
     )
-}
+})

@@ -5,13 +5,15 @@ type ButtonProps = {
     value?: any,
     onClick?: () => void,
     className?: string,
-    type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
+    type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+    disabled?: boolean
 };
 
-export const Button: FC<ButtonProps> = ({ onClick, value, className, type = "button" }) => {
+export const Button: FC<ButtonProps> = ({ onClick, value, className, type = "button", disabled }) => {
     return (
         <button
             onClick={onClick}
+            disabled={disabled}
             className={
                 className ? `${style.button} ${className}` : style.button
             }
