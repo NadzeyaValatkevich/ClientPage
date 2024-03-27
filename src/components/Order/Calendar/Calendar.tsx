@@ -6,14 +6,14 @@ import style from "./Calendar.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
 import React from "react";
 
-export const Calendar = () => {
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+type CalendarPropsType = {
+    selectedDate: Date | null,
+    onDateChange: (date: Date) => void,
+    firstDay: Date
+};
 
-    const today = new Date();
+export const Calendar = ({ selectedDate, onDateChange, firstDay }: CalendarPropsType) => {
 
-    const handleSelectedChange = (date: Date) => {
-        setSelectedDate(date)
-    };
     const CustomInput = React.forwardRef((props: any, ref: any) => {
         return (
             <div className={selectedDate ? `${style.customDatePickDiv} ${style["customDatePickDiv-selected"]}` : style.customDatePickDiv} onClick={props.onClick}>
@@ -22,7 +22,7 @@ export const Calendar = () => {
             </div>
 
         )
-    })
+    });
 
     return (
         <div className={style.datePickerDiv}>
@@ -30,9 +30,9 @@ export const Calendar = () => {
                 selected={selectedDate}
                 locale={ru}
                 dateFormat="dd.MM.yyyy"
-                onChange={handleSelectedChange}
+                onChange={onDateChange}
                 customInput={<CustomInput />}
-                minDate={today}
+                minDate={firstDay}
             />
         </div>
     )
