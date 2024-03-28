@@ -4,6 +4,7 @@ import guestsIcon from "../../../assets/icons/users.svg";
 import { SelectCountPeople } from "./SelectCountPeople";
 import { SelectAgeChildren } from "./SelectAgeChildren";
 import { Button } from "../../Button/Button";
+import { formatPeople } from "../../../utils/formatPeople";
 
 export type OptionType = {
     value: number;
@@ -36,7 +37,6 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
     const [childAges, setChildAges] = useState<Array<OptionType | undefined>>([]);
     const [formattedValue, setFormattedValue] = useState("");
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
-    // const [localGuests, setLocalGuests] = useState({ adults: 0, children: 0, childAges: [] });
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -53,35 +53,6 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
         };
 
     }, []);
-
-    const formatPeople = () => {
-        let valueCountPeople = "";
-
-        if (adults % 10 === 1 && adults !== 11) {
-            valueCountPeople = adults + " взрослый, ";
-        } else {
-            valueCountPeople = adults + " взрослых, ";
-        }
-
-
-        if (children === 1) {
-            valueCountPeople = valueCountPeople + children + " ребенок";
-        } else if (children >= 2 && children <= 4) {
-            valueCountPeople = valueCountPeople + children + " ребенка";
-        } else {
-            const lastDigit = children % 10;
-            const secondLastDigit = Math.floor(children / 10) % 10;
-
-            if (lastDigit >= 5 || lastDigit === 0 || (secondLastDigit !== 1 && lastDigit >= 1)) {
-                valueCountPeople = valueCountPeople + children + " детей";
-            } else {
-                valueCountPeople = valueCountPeople + children + " ребенок";
-            }
-        }
-
-        return valueCountPeople;
-    };
-
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen)
@@ -127,7 +98,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
         setChildAgeErrors(newErrors);
 
         if (newErrors.every(error => error === "")) {
-            const formattedPeople = formatPeople();
+            const formattedPeople = formatPeople(adults, children);
             setFormattedValue(formattedPeople);
             setIsOpen(false);
         }
@@ -140,10 +111,6 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
 
         onGuestsChange(guestsData);
     };
-
-    // const handleGuestsChange = useCallback((newGuests: any) => {
-    //     setLocalGuests(newGuests); // Обновляем локальное состояние
-    // }, []);
 
     return (
         <div className={formattedValue ? `${style.customDropDown} ${style["customDropDown--selected"]}` : style.customDropDown}>

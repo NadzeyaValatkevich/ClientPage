@@ -8,21 +8,12 @@ import { FormProvider, useForm } from "react-hook-form";
 import React from "react";
 
 
-export const Order = React.memo(() => {
+export const Order = () => {
     const [checkInDate, setCheckInDate] = useState<Date | null>(null);
     const [checkOutDate, setCheckOutDate] = useState<Date | null>(null);
     const [guests, setGuests] = useState({ adults: 0, children: 0, childAges: [] });
-    const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
-    const { handleSubmit, formState: { errors }, setValue } = useForm();
-
-    const checkAllFields = useCallback(() => {
-        if (checkInDate && checkOutDate && guests.adults + guests.children > 0) {
-            setAllFieldsFilled(true);
-        } else {
-            setAllFieldsFilled(false);
-        }
-    }, [checkInDate, checkOutDate, guests]);
+    const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();
 
     const handleCheckInDateChange = (date: Date) => {
         setCheckInDate(date);
@@ -32,22 +23,24 @@ export const Order = React.memo(() => {
             setCheckOutDate(null);
             setValue("checkOutDate", null);
         }
-
-        checkAllFields();
-
+        clearErrors("checkInDate")
     };
 
-    const onSubmit = useCallback((data: any) => {
+    const onSubmit = (data: any) => {
+        console.log("hello");
         console.log(data);
-    }, []);
+    };
+
+    console.log(errors);
+
 
     const handleCheckOutDateChange = (date: Date) => {
         setCheckOutDate(date);
         setValue("checkOutDate", date);
-        checkAllFields();
+        clearErrors("checkOutDate");
     };
 
-    const handleGuestsChange = useCallback((newGuests: any) => {
+    const handleGuestsChange = (newGuests: any) => {
         console.log(newGuests);
 
         setGuests((prevGuests: any) => {
@@ -56,8 +49,9 @@ export const Order = React.memo(() => {
             return updatedGuests
         });
 
-        checkAllFields();
-    }, [setValue, checkAllFields]);
+        clearErrors("guests");
+
+    };
 
     const today = new Date();
 
@@ -66,15 +60,18 @@ export const Order = React.memo(() => {
             <div className={`${styleContainer.container} ${style.orderContainer}`}>
                 <FormProvider {...useForm()} >
                     <form className={style.orderBlock} onSubmit={handleSubmit(onSubmit)}>
-                        <Calendar selectedDate={checkInDate} onDateChange={handleCheckInDateChange} firstDay={today} />
-                        <Calendar selectedDate={checkOutDate} onDateChange={handleCheckOutDateChange} firstDay={checkInDate || today} />
-                        <GuestsSelect onGuestsChange={handleGuestsChange} />
+                        <Calendar {...register("checkInDate", { required: true })} selectedDate={checkInDate} onDateChange={handleCheckInDateChange} firstDay={today} />
+                        <Calendar {...register("checkOutDate", { required: true })} selectedDate={checkOutDate} onDateChange={handleCheckOutDateChange} firstDay={checkInDate || today} />
+                        <GuestsSelect {...register("guests", { required: true })} onGuestsChange={handleGuestsChange} />
                         <div className={style.btnBlock}>
-                            <Button className={style.btnSearch} type="submit" value={"Подобрать"} disabled={!allFieldsFilled} />
+                            <Button className={style.btnSearch} type="submit" value={"Подобрать"}
+                                disabled={Object.keys(errors).length > 0}
+                            />
                         </div>
                     </form>
                 </FormProvider>
+                {Object.keys(errors).length > 0 && <p className={style.error}>Все поля должны быть заполнены</p>}
             </div>
         </div >
     )
-})
+}

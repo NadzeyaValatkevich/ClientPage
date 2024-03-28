@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import style from "./Calendar.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
 
 type CalendarPropsType = {
@@ -13,12 +14,6 @@ type CalendarPropsType = {
 };
 
 export const Calendar = ({ selectedDate, onDateChange, firstDay }: CalendarPropsType) => {
-    // const { register } = useFormContext();
-
-    // useEffect(() => {
-    //     register("selectedDate");
-    // }, [register]);
-
 
     const CustomInput = React.forwardRef((props: any, ref: any) => {
         return (
