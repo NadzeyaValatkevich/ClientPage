@@ -3,15 +3,20 @@ import style from "./Order.module.scss";
 import { Button } from "../Button/Button";
 import { Calendar } from "./Calendar";
 import { GuestsSelect } from "./GuestsSelect";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import React from "react";
-
+import { Guests } from "../../store/types/datesGuestsTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { setDatesGuestsObject } from "../../store/reducers/datesGuestsSlice";
 
 export const Order = () => {
     const [checkInDate, setCheckInDate] = useState<Date | null>(null);
     const [checkOutDate, setCheckOutDate] = useState<Date | null>(null);
-    const [guests, setGuests] = useState({ adults: 0, children: 0, childAges: [] });
+    const [guests, setGuests] = useState<Guests>({ adults: 0, children: 0, childAges: [] });
+    const dispatch = useDispatch();
+
+    console.log(value);
+
 
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();
 
@@ -27,12 +32,9 @@ export const Order = () => {
     };
 
     const onSubmit = (data: any) => {
-        console.log("hello");
+        dispatch(setDatesGuestsObject(data))
         console.log(data);
     };
-
-    console.log(errors);
-
 
     const handleCheckOutDateChange = (date: Date) => {
         setCheckOutDate(date);

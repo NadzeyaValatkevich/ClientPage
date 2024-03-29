@@ -5,13 +5,14 @@ import { SelectCountPeople } from "./SelectCountPeople";
 import { SelectAgeChildren } from "./SelectAgeChildren";
 import { Button } from "../../Button/Button";
 import { formatPeople } from "../../../utils/formatPeople";
+import { ChildAge } from "../../../store/types/datesGuestsTypes";
 
-export type OptionType = {
-    value: number;
-    label: string;
-};
+// export type OptionType = {
+//     value: number;
+//     label: string;
+// };
 
-export type OptionsAgePropsType = OptionType[];
+export type OptionsAgePropsType = ChildAge[];
 
 const options: OptionsAgePropsType = [];
 
@@ -34,7 +35,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
     const [isOpen, setIsOpen] = useState(false);
     const [adults, setAdults] = useState(0);
     const [children, setChildren] = useState(0);
-    const [childAges, setChildAges] = useState<Array<OptionType | undefined>>([]);
+    const [childAges, setChildAges] = useState<Array<ChildAge | undefined>>([]);
     const [formattedValue, setFormattedValue] = useState("");
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
     const modalRef = useRef<HTMLDivElement>(null);
@@ -80,9 +81,9 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
         }
     }, [children, setChildren, setChildAges]);
 
-    const handleAgeChange = (indexAge: number, newAge: OptionType | undefined) => {
+    const handleAgeChange = (indexAge: number, newAge: ChildAge | undefined) => {
         setChildAges((lastAges) => {
-            return lastAges.map((age: OptionType | undefined, index: number) => index === indexAge ? newAge : age)
+            return lastAges.map((age: ChildAge | undefined, index: number) => index === indexAge ? newAge : age)
         });
 
         const updatedChildAgeErrors = [...childAgeErrors];
@@ -92,7 +93,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
 
     const handleButtonClick = () => {
 
-        const newErrors = childAges.map((age: OptionType | undefined) => {
+        const newErrors = childAges.map((age: ChildAge | undefined) => {
             return age === undefined ? "Поле обязательно к заполнению" : "";
         });
         setChildAgeErrors(newErrors);
