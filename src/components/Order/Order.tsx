@@ -5,9 +5,9 @@ import { Calendar } from "./Calendar";
 import { GuestsSelect } from "./GuestsSelect";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Guests } from "../../store/types/datesGuestsTypes";
-import { useDispatch, useSelector } from "react-redux";
-import { setDatesGuestsObject } from "../../store/reducers/datesGuestsSlice";
+import { Guests } from "../../redux/types/datesGuestsTypes";
+import { useDispatch } from "react-redux";
+import { setDatesGuestsObject } from "../../redux/reducers/datesGuestsSlice";
 
 export const Order = () => {
     const [checkInDate, setCheckInDate] = useState<Date | null>(null);
@@ -15,7 +15,6 @@ export const Order = () => {
     const [guests, setGuests] = useState<Guests>({ adults: 0, children: 0, childAges: [] });
     const dispatch = useDispatch();
 
-    console.log(value);
 
 
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();

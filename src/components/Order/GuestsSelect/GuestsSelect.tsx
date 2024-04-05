@@ -4,8 +4,8 @@ import guestsIcon from "../../../assets/icons/users.svg";
 import { SelectCountPeople } from "./SelectCountPeople";
 import { SelectAgeChildren } from "./SelectAgeChildren";
 import { Button } from "../../Button/Button";
-import { formatPeople } from "../../../utils/formatPeople";
-import { ChildAge } from "../../../store/types/datesGuestsTypes";
+import { formatPeople } from "../../../utils/functions/formatPeople";
+import { ChildAge } from "../../../redux/types/datesGuestsTypes";
 
 // export type OptionType = {
 //     value: number;

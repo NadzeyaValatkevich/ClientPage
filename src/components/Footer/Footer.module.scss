@@ -15,10 +15,10 @@
             @include flex(column, space-between, flex-start, nowrap);
             height: 100%;
 
-            & p:first-child {
-                text-align: left;
-                line-height: 70px;
-            }
+            // & p:first-child {
+            //     text-align: left;
+            //     line-height: 70px;
+            // }
 
             .social {
                 @include flex(row, flex-start, flex-start, nowrap);
