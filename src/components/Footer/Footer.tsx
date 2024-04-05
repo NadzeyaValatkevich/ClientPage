@@ -4,19 +4,26 @@ import { Logo } from "../Logo";
 import facebook from "../../assets/iconsSocial/f.svg";
 import instagram from "../../assets/iconsSocial/insta.svg";
 import { YMaps, Map, Placemark, GeolocationControl, FullscreenControl } from "react-yandex-maps";
+import { useAppSelector } from "../../utils/hooks";
 
 export const Footer = () => {
+    const { country, full_address } = useAppSelector(state => state.mainObject);
+    const region = full_address?.region;
+    const locality = full_address?.locality;
+    const address = full_address?.address;
+
     return (
         <div className={style.footer}>
             <div className={`${styleContainer.container} ${style.headerContainer}`}>
                 <div className={style["footerBlock-left"]}>
                     <Logo />
-                    {/* <div className={style.footerLogo}></div> */}
                     <div className={style.social}>
                         <img alt={"facebook"} src={facebook} />
                         <img alt={"instagram"} src={instagram} />
                     </div>
-                    <p className={style.address}>Республика Беларусь, Витебская обл., Глубокский р-н, д. Шо, ул. Полевая, д. 17.</p>
+                    <p className={style.address}>
+                        {`${country ? country : null}, ${region ? region : null}, ${locality ? locality : null}, ${address ? address : null}`}
+                    </p>
                     <div className={style.phone}>+375 (29) 853-25-10</div>
                     <div className={style.email}>info@gmail.com</div>
                     <div className={style.footerLeftInfo}>

@@ -42,11 +42,12 @@ background-color: rgba(0, 0, 0, 0.4);
         @media(max-width: 500px) {
         gap: 10%;
      }
-
-
-        .title {
-            @include h1($text-white);
-            font-size: calc(24px + (66 - 24) * ((100vw - 391px) / (1920 - 391)));
-        }
+     .header_logo {
+        margin-top: 30px;
+    }
+    .title {
+        @include h1($text-white);
+        font-size: calc(24px + (66 - 24) * ((100vw - 391px) / (1920 - 391)));
+    }
     }
 }
