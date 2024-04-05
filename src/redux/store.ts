@@ -4,10 +4,9 @@ import mainObjectReducer from "./reducers/mainObjectSlice";
 import rentalObjectsReducer from "./reducers/rentalObjectsSlice";
 
 const rootReducer = combineReducers({
-    datesGuestsObject: datesGuestsObjectReducer,
     mainObject: mainObjectReducer,
     rentalObjects: rentalObjectsReducer,
-
+    datesGuestsObject: datesGuestsObjectReducer,
 });
 
 const store = configureStore ({
