@@ -1,6 +1,4 @@
-import { forwardRef } from "react";
 import style from "./SelectCountPeople.module.scss";
-import React from "react";
 
 type SelectCountPeoplePropsType = {
     title: string,
