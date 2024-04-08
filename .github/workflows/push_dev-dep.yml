@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - dev-dep
+      - feat/CICD
 
 jobs:
   build:
