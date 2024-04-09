@@ -27,7 +27,8 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@types/node": "^20.12.5",
+    "@types/json-schema": "^7.0.15",
+    "@types/node": "^20.12.6",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@types/react-slick": "^0.23.13",
