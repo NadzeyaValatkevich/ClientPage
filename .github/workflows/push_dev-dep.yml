@@ -1,0 +1,60 @@
+on:
+  push:
+    branches:
+      - dev-dep
+      - feat/CICD
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # REACT_APP_HOST: ${{ secrets.REACT_APP_HOST }}
+      REACT_APP_HOST: localhost
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.5'
+
+      - name: Build Docker Image
+        run: sudo docker build --build-arg REACT_APP_HOST=$REACT_APP_HOST -t eugenestudio/vitaem-client:latest .
+
+      - name: Login to Docker Hub
+        run: |
+          docker login -u eugenestudio -p ${{ secrets.DOCKER_PASSWORD }} && \
+          echo "The logining has done successful"
+
+      - name: Push Docker Image to Docker Hub
+        run: docker push eugenestudio/vitaem-client:latest
+
+
+  # deploy:
+  #   needs: build
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Set Permissions
+  #       run: echo ${{ secrets.EUGENE_PASSWORD }} | sudo -S chown -R $USER:$USER /home/eugene/
+
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+
+  #     - name: Login to Docker Hub
+  #       run: |
+  #         echo ${{ secrets.EUGENE_PASSWORD }} | sudo -S docker login -u eugenestudio -p ${{ secrets.DOCKER_PASSWORD }} && \
+  #         echo "The logining has done successful"
+
+  #     - name: Download Docker Image
+  #       run: echo ${{ secrets.EUGENE_PASSWORD }} | sudo -S docker pull eugenestudio/front-vitaem-dev:latest
+
+  #     - name: Stop Existing Container
+  #       run: echo ${{ secrets.EUGENE_PASSWORD }} | sudo -S docker stop front-vitaem-dev
+
+  #     - name: Remove Existing Container
+  #       run: echo ${{ secrets.EUGENE_PASSWORD }} | sudo -S docker rm front-vitaem-dev
+
+  #     - name: Deploy to VPS
+  #       run: |
+  #         echo ${{ secrets.EUGENE_PASSWORD }} | sudo -S docker run -d -p 80:80 -d --name front-vitaem-dev eugenestudio/front-vitaem-dev:latest
