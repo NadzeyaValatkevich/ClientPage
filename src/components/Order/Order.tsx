@@ -15,6 +15,7 @@ export const Order = () => {
     const [guests, setGuests] = useState<Guests>({ adults: 0, children: 0, childAges: [] });
     const dispatch = useDispatch();
 
+    console.log(guests)
 
 
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();

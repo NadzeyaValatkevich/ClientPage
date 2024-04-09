@@ -1,11 +1,8 @@
 import DatePicker from "react-datepicker";
-import ru from 'date-fns/locale/ru';
 import "react-datepicker/dist/react-datepicker.css";
 import style from "./Calendar.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
 import React from "react";
-import { useFormContext } from "react-hook-form";
-
 
 type CalendarPropsType = {
     selectedDate: Date | null,
@@ -29,7 +26,7 @@ export const Calendar = ({ selectedDate, onDateChange, firstDay }: CalendarProps
         <div className={style.datePickerDiv}>
             <DatePicker
                 selected={selectedDate}
-                locale={ru}
+                locale={"ru"}
                 dateFormat="dd.MM.yyyy"
                 onChange={onDateChange}
                 customInput={<CustomInput />}

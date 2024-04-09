@@ -7,10 +7,10 @@ import { Button } from "../../Button/Button";
 import { formatPeople } from "../../../utils/functions/formatPeople";
 import { ChildAge } from "../../../redux/types/datesGuestsTypes";
 
-// export type OptionType = {
-//     value: number;
-//     label: string;
-// };
+export type OptionType = {
+    value: number;
+    label: string;
+};
 
 export type OptionsAgePropsType = ChildAge[];
 
@@ -39,6 +39,8 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
     const [formattedValue, setFormattedValue] = useState("");
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
     const modalRef = useRef<HTMLDivElement>(null);
+
+    console.log(ref)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

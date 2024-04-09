@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchMainObject(1))
-    dispatch(fetchRentalObjects(1))
+    dispatch(fetchRentalObjects())
 
   }, [])
 
