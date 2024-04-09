@@ -6,8 +6,8 @@ ARG REACT_APP_HOST
 ENV REACT_APP_HOST=$REACT_APP_HOST
 
 COPY . .
-RUN npm install
-RUN npm run build
+RUN yarn
+RUN yarn build
 
 # Stage 2: Create Nginx Server
 FROM nginx:alpine
