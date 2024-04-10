@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchRentalObjects } from "../thunks/rentalObjectsThunk";
-import { RentalObjectType } from "../types/rentalObjectsTypes";
+import { RentalObjectType } from "../types/rentalObjectTypes";
 
 const rentalObjectsSlice = createSlice({
     name: "rentalObjects",
