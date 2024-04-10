@@ -17,7 +17,6 @@ export const Order = () => {
 
     console.log(guests)
 
-
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();
 
     const handleCheckInDateChange = (date: Date) => {
@@ -60,11 +59,21 @@ export const Order = () => {
     return (
         <div className={style.orderWrapper}>
             <div className={`${styleContainer.container} ${style.orderContainer}`}>
+                <h3 className={style.titleBlock}>Бронирование</h3>
                 <FormProvider {...useForm()} >
                     <form className={style.orderBlock} onSubmit={handleSubmit(onSubmit)}>
-                        <Calendar {...register("checkInDate", { required: true })} selectedDate={checkInDate} onDateChange={handleCheckInDateChange} firstDay={today} />
-                        <Calendar {...register("checkOutDate", { required: true })} selectedDate={checkOutDate} onDateChange={handleCheckOutDateChange} firstDay={checkInDate || today} />
-                        <GuestsSelect {...register("guests", { required: true })} onGuestsChange={handleGuestsChange} />
+                        <div className={style.titleItemBlock}>
+                            <h4 className={style.titleItem}>Дата заезда</h4>
+                            <Calendar {...register("checkInDate", { required: true })} selectedDate={checkInDate} onDateChange={handleCheckInDateChange} firstDay={today} />
+                        </div>
+                        <div className={style.titleItemBlock}>
+                            <h4 className={style.titleItem}>Дата выезда</h4>
+                            <Calendar {...register("checkOutDate", { required: true })} selectedDate={checkOutDate} onDateChange={handleCheckOutDateChange} firstDay={checkInDate || today} />
+                        </div>
+                        <div className={style.titleItemBlock}>
+                            <h4 className={style.titleItem}>Количество гостей</h4>
+                            <GuestsSelect {...register("guests", { required: true })} onGuestsChange={handleGuestsChange} />
+                        </div>
                         <div className={style.btnBlock}>
                             <Button className={style.btnSearch} type="submit" value={"Подобрать"}
                                 disabled={Object.keys(errors).length > 0}

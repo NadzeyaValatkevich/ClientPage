@@ -13,7 +13,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchMainObject(1))
+    dispatch(fetchMainObject(2))
     dispatch(fetchRentalObjects())
 
   }, [])

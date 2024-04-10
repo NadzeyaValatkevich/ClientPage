@@ -1,6 +1,7 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import style from "./GuestsSelect.module.scss";
 import guestsIcon from "../../../assets/icons/users.svg";
+import guestsGrayIcon from "../../../assets/icons/usersGray.svg";
 import { SelectCountPeople } from "./SelectCountPeople";
 import { SelectAgeChildren } from "./SelectAgeChildren";
 import { Button } from "../../Button/Button";
@@ -119,7 +120,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
         <div className={formattedValue ? `${style.customDropDown} ${style["customDropDown--selected"]}` : style.customDropDown}>
             <div className={style["customDropDown__item"]} onClick={toggleDropdown}>
                 <input className={style["customDropDown__item-input"]} value={formattedValue} readOnly />
-                <img className={style["customDropDown__item-image"]} src={guestsIcon} alt="Guests" />
+                <img className={style["customDropDown__item-image"]} src={formattedValue ? guestsIcon : guestsGrayIcon} alt="Guests" />
             </div>
             {isOpen && (
                 <div className={style.guestsSelectBlock} ref={modalRef}>
