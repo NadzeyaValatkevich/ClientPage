@@ -1,5 +1,5 @@
 import styleContainer from "../../common/styles/Container.module.scss";
-import { HouseCard } from "../HouseCard";
+import { HouseCard } from "../../components/HouseCard";
 import style from "./Main.module.scss";
 
 export const Main = () => {

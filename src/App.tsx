@@ -1,12 +1,10 @@
 import './App.scss'
-import { Footer } from './components/Footer'
-import { Header } from './components/Header'
-import { Main } from './components/Main'
-import { Order } from './components/Order'
 import { useEffect } from 'react';
 import { fetchMainObject } from './redux/thunks/mainObjectThunk'
 import { useAppDispatch } from './utils/hooks'
 import { fetchRentalObjects } from './redux/thunks/rentalObjectsThunk'
+import { Route, Routes } from 'react-router-dom'
+import { Layout } from './components/Layout/Layout'
 
 
 function App() {
@@ -18,13 +16,15 @@ function App() {
 
   }, [])
 
+  console.log("App")
+
   return (
-    <>
-      <Header />
-      <Order />
-      <Main />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="/rental_objects" element={""} />
+      </Route>
+
+    </Routes>
   )
 }
 
