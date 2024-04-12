@@ -73,7 +73,7 @@ export const HouseCard = () => {
 
     const onCloseOrderHandler = () => {
         setModalOrderActive(false)
-    }
+    };
 
     return (
         <div className={style.card}>

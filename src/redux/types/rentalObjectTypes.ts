@@ -1,5 +1,9 @@
-import { RentalObjectStatuses, RentalObjectsTypes } from "../../common/enums/enums";
 import { ResponseData } from "./@types";
+
+export type RentalObjectsTypes = "Домик" | "Комната" |"Номер" | "Кемп" | "Место под палатку" | "Стояночное место автодома"; 
+
+export type RentalObjectStatuses = "Доступен к бронированию" | "Закрыт к бронированию" |"Техобслуживание"; 
+
 
 export type RentalObjectType = {
     id: number,
