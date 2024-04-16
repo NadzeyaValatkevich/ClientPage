@@ -1,7 +1,6 @@
 import Select from 'react-select';
 import style from "./SelectAgeChildren.module.scss";
 import { OptionType } from '../GuestsSelect';
-import { forwardRef } from 'react';
 // import 'react-select/dist/react-select.css';
 
 type SelectAgeChildrenPropsType = {
@@ -27,17 +26,17 @@ export const SelectAgeChildren = ({ selectedAge, onChangeAge, options, index, er
                     className={style.select}
                     // required
                     styles={{
-                        control: (provided) => ({
+                        control: (provided: any) => ({
                             ...provided,
                             backgroundColor: "#1855B7",
                             cursor: "pointer",
                             border: 'none',
                         }),
-                        singleValue: (provided) => ({
+                        singleValue: (provided: any) => ({
                             ...provided,
                             color: 'white',
                         }),
-                        option: (provided) => ({
+                        option: (provided: any) => ({
                             ...provided,
                             cursor: "pointer",
                         })

@@ -1,14 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { mainObjectApi } from "../api";
+import { objectsApi } from "../api";
 import { AxiosError } from "axios";
+import { RentalObjectsResponseData } from "../types/rentalObjectTypes";
 
-export const fetchRentalObjects = createAsyncThunk<{rentalObjects: any}, number>(
+export const fetchRentalObjects = createAsyncThunk<RentalObjectsResponseData, undefined>(
     'rentalObjects/fetchRentalObjects',
-    async (id, thunkAPI) => {
+    async (_, thunkAPI) => {
         try {
-            const response = await mainObjectApi.getRentalObjects(id);
+            const response = await objectsApi.getRentalObjects();
             if(response.status === 200) {
-                return {rentalObjects: response.data}
+                return response.data
             } else {
                 return thunkAPI.rejectWithValue({errors: response.data.message})
             }

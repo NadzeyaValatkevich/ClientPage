@@ -1,26 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchMainObject } from "../thunks/mainObjectThunk";
-import { mainObjectApi } from './../api/index';
 import { fetchRentalObjects } from "../thunks/rentalObjectsThunk";
-
-type RentalObjectsState = {
-    rentalObjects: any
-};
-
-const initialState: RentalObjectsState = {
-    rentalObjects: {}
-};
+import { RentalObjectsResponseData } from "../types/rentalObjectTypes";
 
 const rentalObjectsSlice = createSlice({
     name: "rentalObjects",
-    initialState,
+    initialState: {} as RentalObjectsResponseData,
     reducers: {
 
     },
     extraReducers: (builder) => {
         builder
-        .addCase(fetchRentalObjects.fulfilled, (state, action: PayloadAction<any>) => {
-            state.rentalObjects = action.payload 
+        .addCase(fetchRentalObjects.fulfilled, (_, action: PayloadAction<RentalObjectsResponseData>) => {
+            return action.payload 
         })
     }
 });

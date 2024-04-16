@@ -1,16 +1,17 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import style from "./GuestsSelect.module.scss";
 import guestsIcon from "../../../assets/icons/users.svg";
+import guestsGrayIcon from "../../../assets/icons/usersGray.svg";
 import { SelectCountPeople } from "./SelectCountPeople";
 import { SelectAgeChildren } from "./SelectAgeChildren";
 import { Button } from "../../Button/Button";
 import { formatPeople } from "../../../utils/functions/formatPeople";
 import { ChildAge } from "../../../redux/types/datesGuestsTypes";
 
-// export type OptionType = {
-//     value: number;
-//     label: string;
-// };
+export type OptionType = {
+    value: number;
+    label: string;
+};
 
 export type OptionsAgePropsType = ChildAge[];
 
@@ -39,6 +40,8 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
     const [formattedValue, setFormattedValue] = useState("");
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
     const modalRef = useRef<HTMLDivElement>(null);
+
+    console.log(ref)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -117,7 +120,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
         <div className={formattedValue ? `${style.customDropDown} ${style["customDropDown--selected"]}` : style.customDropDown}>
             <div className={style["customDropDown__item"]} onClick={toggleDropdown}>
                 <input className={style["customDropDown__item-input"]} value={formattedValue} readOnly />
-                <img className={style["customDropDown__item-image"]} src={guestsIcon} alt="Guests" />
+                <img className={style["customDropDown__item-image"]} src={formattedValue ? guestsIcon : guestsGrayIcon} alt="Guests" />
             </div>
             {isOpen && (
                 <div className={style.guestsSelectBlock} ref={modalRef}>

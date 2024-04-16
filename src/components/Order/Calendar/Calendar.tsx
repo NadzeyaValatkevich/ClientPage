@@ -1,11 +1,11 @@
 import DatePicker from "react-datepicker";
-import ru from 'date-fns/locale/ru';
 import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale } from "react-datepicker";
+import { ru } from "date-fns/locale/ru";
 import style from "./Calendar.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
+import calendarGrayIcon from "../../../assets/icons/calendarGray.svg";
 import React from "react";
-import { useFormContext } from "react-hook-form";
-
 
 type CalendarPropsType = {
     selectedDate: Date | null,
@@ -13,13 +13,15 @@ type CalendarPropsType = {
     firstDay: Date
 };
 
+registerLocale("ru", ru);
+
 export const Calendar = ({ selectedDate, onDateChange, firstDay }: CalendarPropsType) => {
 
     const CustomInput = React.forwardRef((props: any, ref: any) => {
         return (
             <div className={selectedDate ? `${style.customDatePickDiv} ${style["customDatePickDiv-selected"]}` : style.customDatePickDiv} onClick={props.onClick}>
                 <input className={style.customInput} ref={ref} value={props.value || props.placeholder} onChange={props.onChange} />
-                <img className={style.image} src={calendarIcon} alt="Calendar" onClick={props.onClick} />
+                <img className={style.image} src={selectedDate ? calendarIcon : calendarGrayIcon} alt="Calendar" onClick={props.onClick} />
             </div>
 
         )
@@ -29,7 +31,7 @@ export const Calendar = ({ selectedDate, onDateChange, firstDay }: CalendarProps
         <div className={style.datePickerDiv}>
             <DatePicker
                 selected={selectedDate}
-                locale={ru}
+                locale={"ru"}
                 dateFormat="dd.MM.yyyy"
                 onChange={onDateChange}
                 customInput={<CustomInput />}

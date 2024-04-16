@@ -1,11 +1,18 @@
 import style from "./FullHouseCard.module.scss";
-import { photos as fullPhotos } from '../HouseCard/HouseCard';
 import { features as fullFeatures } from '../HouseCard/HouseCard';
 import { Carousel } from "../Carousel";
 import bedBig from "../../assets/icons/bedBig.svg";
 import bed from "../../assets/icons/bed.svg";
+import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
+import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
+import { countRooms } from "../../utils/functions/countRooms";
 
-export const FullHouseCard = () => {
+export type FullHouseCardPropsType = {
+    rentalObject: RentalObject
+};
+
+export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
+    const { name, images, description, rooms, total_beds } = rentalObject
 
     const houseFullPhotosSettings = {
         slidesToShow: 1,
@@ -21,33 +28,31 @@ export const FullHouseCard = () => {
         <div className={style.houseBlock}>
             <div className={style.houseBlockLeft}>
                 <Carousel settings={houseFullPhotosSettings}>
-                    {fullPhotos.map((el: any) => {
+                    {images.map((el: ImageItem) => {
                         return (
                             <div key={el.id} className={style.imageBlock}>
-                                <img className={style.image} src={el.src} alt={el.title} />
+                                <img className={style.image} src={el.image} alt={"housePhoto"} />
                             </div>
                         )
                     })}
                 </Carousel>
             </div>
             <div className={style.houseBlockRight}>
-                <div className={style.houseBlockTitle}>Домик 1</div>
+                <div className={style.houseBlockTitle}>{name}</div>
                 <div className={style.houseBlockDescription}>
                     <p className={style.title}>Описание:</p>
-                    <p className={style.description}>Дома в аренду стоят под сводами вековых сосен, а вокруг царит чистейший воздух.
-                        Для оформления интерьера домов использовались только натуральные материалы, мебель – ручная работа.
-                        Дома в аренду стоят под сводами вековых сосен, а вокруг царит чистейший воздух.
-                        Для оформления интерьера домов использовались только натуральные материалы, мебель – ручная работа.</p>
+                    <p className={style.description}>{description}</p>
                 </div>
                 <div className={style.places}>
                     <div className={style.rooms}>
                         <p>Комнаты: </p>
-                        <p>2 спальни, 1 гостиная</p>
+                        <p>{countRooms(rooms)}</p>
                     </div>
                     <div className={style.beds}>
                         <p>Спальные места: </p>
-                        <p className={style.bedsBlock}> 2 <img alt={"bedBig"} src={bedBig} /></p>
-                        <p className={style.bedsBlock}> 1 <img alt={"bed"} src={bed} /></p>
+                        <p>{countSleepingPlaces(total_beds)}</p>
+                        {/* <p className={style.bedsBlock}> 2 <img alt={"bedBig"} src={bedBig} /></p>
+                        <p className={style.bedsBlock}> 1 <img alt={"bed"} src={bed} /></p> */}
                     </div>
                 </div>
                 <div className={style.featuresBlock}>
@@ -63,13 +68,13 @@ export const FullHouseCard = () => {
                         })}
                     </div>
                 </div>
-                <div className={style.pricesBlock}>
+                {/* <div className={style.pricesBlock}>
                     <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>
                     <div className={style.prices}>
                         <p>будни от <span>150 BYN</span></p>
                         <p>выходные от <span>250 BYN</span></p>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
 

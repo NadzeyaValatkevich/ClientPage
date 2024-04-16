@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { mainObjectApi } from "../api";
+import { objectsApi } from "../api";
 import { AxiosError } from "axios";
 import { MainObjectType } from "../types/mainObjectTypes";
 
@@ -7,7 +7,7 @@ export const fetchMainObject = createAsyncThunk<MainObjectType, number>(
     'mainObject/fetchMainObject',
     async (id, thunkAPI) => {
         try {
-            const response = await mainObjectApi.getMainObject(id);
+            const response = await objectsApi.getMainObject(id);
             if(response.status === 200) {             
                 return response.data
             } else {

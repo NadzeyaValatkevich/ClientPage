@@ -1,81 +1,26 @@
 @import "../../common/styles/sass/variables.scss";
 @import "../../common/styles/sass/mixins.scss";
-.card {
+
+.main {
     width: 100%;
-    height: 686px;
-    border-radius: $radius-primary;
-    border: $border-primary;
-    background-color: $secondary;
-    padding: 60px 114px 70px 80px;
-    margin-bottom: 80px;
-    @include flex(column, flex-start, flex-start, no-wrap);
-    gap: 30px;
+    padding-bottom: 80px;
+}
 
-    .cardTitle {
-        @include h2;
-    }
-
-    .houseBlock {
-        width: 100%;
-        height: 480px;
-        @include flex(row, space-between, flex-start, nowrap);
-        gap: 60px;
-
-        .houseBlock-left {
-            width: 100%;
-            max-width: 560px;
-            min-width: 0;
-            height: 100%;
-
-            .imageBlock {
-                width: 100%;
-                height: 460px;
-                
-                .image {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-
-            & :global(.slick-dots li button:before) {
-                        font-size: 12px;
-                    }
-
-            // & :global(.slick-slider) {
-            
-                
-
-                // & :global(.slick-slider) {
-                    
-                    & :global(.slick-list) {
-                        margin: 0 -20px;
-                        // & :global(.slick-track) {
-
-                            & :global(.slick-slide) {
-                                padding: 0 20px;
-                            }
-                        // }
-                    }
-
-
-                // }
-            // }
-        }
-
-        .houseBlock-right {
+.houseBlock-right {
             width: 100%;
             height: 100%;
             padding-bottom: 15px;
-             @include flex(column, space-between, flex-start, nowrap);
+             @include flex(column, center, flex-start, nowrap);
 
             .description {
                 @include typography(400, 20px, 25px, $text-primary);
+                margin-bottom: 20px;
             }
 
             .places {
                 width: 100%;
                 @include flex(row, space-between, flex-start, nowrap);
+                margin-bottom: 40px;
 
                 .rooms {
                     @include flex(row, space-between, flex-start, nowrap);
@@ -89,6 +34,7 @@
 
                 .rooms p:first-child, .beds p:first-child {
                     @include typography(700, 18px, 25px, $text-primary);
+                    margin-right: 20px;
                 }
 
                 .rooms > p, .beds > p  {
@@ -97,6 +43,7 @@
             }
 
             .featuresBlock {
+                margin-bottom: 60px;
 
                 .featuresTitle {
                     @include typography(700, 18px, 25px, $text-primary);
@@ -108,7 +55,7 @@
                 grid-template-columns: 1fr 1fr 1fr;
                 grid-template-rows: 1fr 1fr;
 
-                .featuresBlock {
+                .featuresItem {
                     @include flex(row, flex-start, center, nowrap);
 
                     img {
@@ -146,17 +93,24 @@
                     padding: 16px 26px;
                 }
 
-                .btnBook {
-                    background-color: $color-8;
-                    margin-right: 20px;
-                }
+                // .btnBook {
+                //     background-color: $color-8;
+                //     margin-right: 20px;
+                // }
 
                 .btnDetails {
+                    padding: 16px 50px;
                     color: $text-primary;
+                    box-shadow: $shadow-2;
+                    border: none;
                     background-color: $text-white;
-
                 }
+
+                .btnDetails:hover {
+                    color: $text-white;
+                    background-color: $primary;
+                    transition: all 0.5s ease 0s;
+                }
+
             }
         }
-    }
-}

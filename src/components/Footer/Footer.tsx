@@ -22,7 +22,7 @@ export const Footer = () => {
                         <img alt={"instagram"} src={instagram} />
                     </div>
                     <p className={style.address}>
-                        {`${country ? country : null}, ${region ? region : null}, ${locality ? locality : null}, ${address ? address : null}`}
+                        {`${country ? country : "страна"}, ${region ? region : "регион"}, ${locality ? locality : "населенный пункт"}, ${address ? address : "адрес"}`}
                     </p>
                     <div className={style.phone}>+375 (29) 853-25-10</div>
                     <div className={style.email}>info@gmail.com</div>
