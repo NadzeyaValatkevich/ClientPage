@@ -3,8 +3,6 @@ import { CloseIcon } from "../../assets/icons/Close";
 import style from "../Modal/Modal.module.scss";
 import { ReactNode } from 'react';
 
-
-
 type ModalPropsType = {
     active: boolean,
     onClose: (ev: React.MouseEvent<HTMLDivElement>) => void,

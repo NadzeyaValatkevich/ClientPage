@@ -30,12 +30,12 @@ export const features: any = [
     { id: 9, icon: child, title: "Детская площадка" },
 ];
 
-export const photos: any = [
-    { id: 1, src: photo1, title: "photo1" },
-    { id: 2, src: photo2, title: "photo2" },
-    { id: 3, src: photo3, title: "photo3" },
-    { id: 4, src: photo4, title: "photo4" },
-];
+// export const photos: any = [
+//     { id: 1, src: photo1, title: "photo1" },
+//     { id: 2, src: photo2, title: "photo2" },
+//     { id: 3, src: photo3, title: "photo3" },
+//     { id: 4, src: photo4, title: "photo4" },
+// ];
 
 export const HouseCard = () => {
 
