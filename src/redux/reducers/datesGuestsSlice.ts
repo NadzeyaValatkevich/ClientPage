@@ -1,29 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { DatesGuestsObject } from "../types/datesGuestsTypes";
-
-type DatesGuestsState = {
-    datesGuestsData: DatesGuestsObject
-};
-
-const initialState: DatesGuestsState = {
-    datesGuestsData: {
-        checkInDate: null,
-        checkOutDate: null,
-        guests: {
-            adults: null,
-            children: null,
-            childAges: []
-        }
-    }
-};
-
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { DatesGuestsObjectType } from "../types/datesGuestsTypes";
 
 const datesGuestsSlice = createSlice({
     name: "datesGuestsObject",
-    initialState,
+    initialState: {} as DatesGuestsObjectType,
     reducers: {
-        setDatesGuestsObject(state, action: any) {
-            state.datesGuestsData = action.payload
+        setDatesGuestsObject(_, action: PayloadAction<DatesGuestsObjectType>) {
+            return action.payload
         }
     }
 });

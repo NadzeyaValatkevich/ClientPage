@@ -41,7 +41,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
     const modalRef = useRef<HTMLDivElement>(null);
 
-    console.log(ref)
+    // console.log(ref)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

@@ -9,8 +9,15 @@ export type Guests = {
     childAges: ChildAge | null[]
 };
 
-export type DatesGuestsObject = {
-    checkInDate: Date | null,
-    checkOutDate: Date | null,
+export type DatesGuestsObjectType = {
+    check_in_date: Date | string,
+    check_out_date: Date | string,
     guests: Guests
+}
+
+export type DatesGuestsObjectRequestType = {
+    check_in_date: Date | string,
+    check_out_date: Date | string,
+    max_places: number,
+    main_object: number 
 }

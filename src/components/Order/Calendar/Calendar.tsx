@@ -8,7 +8,7 @@ import calendarGrayIcon from "../../../assets/icons/calendarGray.svg";
 import React from "react";
 
 type CalendarPropsType = {
-    selectedDate: Date | null,
+    selectedDate: Date | string,
     onDateChange: (date: Date) => void,
     firstDay: Date
 };

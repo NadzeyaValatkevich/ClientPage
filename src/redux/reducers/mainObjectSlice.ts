@@ -1,8 +1,8 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 import { fetchMainObject } from "../thunks/mainObjectThunk";
 import { MainObjectType } from "../types/mainObjectTypes";
 
-const mainObjectSlice = createSlice({
+const mainObjectSlice: Slice<MainObjectType> = createSlice({
     name: "mainObject",
     initialState: {} as MainObjectType,
     reducers: {

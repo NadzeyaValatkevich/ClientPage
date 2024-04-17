@@ -7,6 +7,7 @@ const rootReducer = combineReducers({
     mainObject: mainObjectReducer,
     rentalObjects: rentalObjectsReducer,
     datesGuestsObject: datesGuestsObjectReducer,
+    filteredRentalObjects: rentalObjectsReducer,
 });
 
 const store = configureStore ({
