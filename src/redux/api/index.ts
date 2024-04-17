@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_HOST } from "../../utils/config";
+import { DatesGuestsObjectRequestType } from "../types/datesGuestsTypes";
 
 const instance = axios.create({
     baseURL: `http://${API_HOST}:8000/api`,
@@ -12,5 +13,9 @@ export const objectsApi = {
 
     getRentalObjects() {
         return instance.get(`/client_part/rental_objects/`)
+    },
+
+    getFilteredRentalObjects(data: DatesGuestsObjectRequestType) {
+        return instance.get(`/client_part/rental_objects/prices?main_object=${data.main_object}&max_places=${data.max_places}&check_in_date=${data.check_in_date}&check_out_date=${data.check_out_date}`)
     }
 };

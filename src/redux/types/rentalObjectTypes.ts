@@ -27,6 +27,11 @@ export type TotalBeds = {
     extra_sleeping_place: number
 };
 
+export type ReservationItem = {
+    check_in: string,
+    check_out: string
+};
+
 export type RentalObject = {
     id: number,
     name: string,
@@ -37,7 +42,7 @@ export type RentalObject = {
     features: [],
     rooms: string[],
     total_beds: TotalBeds,
-    reservations: []
+    reservations: ReservationItem[],
 };
 
 export type RentalObjectsList = RentalObject[];
