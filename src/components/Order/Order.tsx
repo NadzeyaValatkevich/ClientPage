@@ -1,20 +1,21 @@
 import styleContainer from "../../common/styles/Container.module.scss";
 import style from "./Order.module.scss";
 import { Button } from "../Button/Button";
-import { Calendar } from "./Calendar";
 import { GuestsSelect } from "./GuestsSelect";
 import { useState } from "react";
 import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { ChildAge, DatesGuestsObjectRequestType, DatesGuestsObjectType, Guests } from "../../redux/types/datesGuestsTypes";
+import { ChildAge, DatesGuestsObjectRequestType, DatesGuestsObjectType, GuestsType } from "../../redux/types/datesGuestsTypes";
 import { setDatesGuestsObject } from "../../redux/reducers/datesGuestsSlice";
 import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
 import { useAppDispatch } from "../../utils/hooks";
 import { formatDate } from "../../utils/functions/formatDate";
+import { CheckDateInput } from "./CheckInDateInput";
 
 export const Order = () => {
-    const [check_in_date, setCheckInDate] = useState<Date | string>("");
-    const [check_out_date, setCheckOutDate] = useState<Date | string>("");
-    const [guests, setGuests] = useState<Guests>({ adults: 0, children: 0, childAges: [] });
+    const [check_in_date, setCheckInDate] = useState<Date | null>(null);
+    const [check_out_date, setCheckOutDate] = useState<Date | null>(null);
+    const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
+    const [formattedValue, setFormattedValue] = useState("");
     const dispatch = useAppDispatch();
 
     console.log(guests)
@@ -26,7 +27,7 @@ export const Order = () => {
         setValue("check_in_date", date);
 
         if (check_out_date && date > check_out_date) {
-            setCheckOutDate("");
+            setCheckOutDate(null);
             setValue("check_out_date", null);
         }
         clearErrors("check_in_date")
@@ -45,7 +46,7 @@ export const Order = () => {
             check_in_date: formatDate(data.check_in_date),
             check_out_date: formatDate(data.check_out_date),
             max_places: data.guests.adults + children,
-            main_object: 1,
+            main_object: 2,
         };
 
         const transformedData: DatesGuestsObjectType = {
@@ -54,13 +55,11 @@ export const Order = () => {
             guests: data.guests
         };
 
-        console.log(filteredData)
-
         dispatch(setDatesGuestsObject(transformedData));
         dispatch(fetchFilteredRentalObjects(filteredData));
-        setCheckInDate("");
-        setCheckOutDate("");
-        // setGuests(null);
+        setCheckInDate(null);
+        setCheckOutDate(null);
+        setFormattedValue("");
     };
 
     const handleCheckOutDateChange = (date: Date) => {
@@ -69,11 +68,11 @@ export const Order = () => {
         clearErrors("check_out_date");
     };
 
-    const handleGuestsChange = (newGuests: any) => {
+    const handleGuestsChange = (newGuests: GuestsType) => {
         console.log(newGuests);
 
-        setGuests((prevGuests: any) => {
-            const updatedGuests = { ...prevGuests, ...newGuests };
+        setGuests((guests: GuestsType) => {
+            const updatedGuests = { ...guests, ...newGuests };
             setValue("guests", updatedGuests);
             return updatedGuests
         });
@@ -92,15 +91,15 @@ export const Order = () => {
                     <form className={style.orderBlock} onSubmit={handleSubmit(onSubmit)}>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Дата заезда</h4>
-                            <Calendar {...register("check_in_date", { required: true })} selectedDate={check_in_date} onDateChange={handleCheckInDateChange} firstDay={today} />
+                            <CheckDateInput {...register("check_in_date", { required: true })} selectedDate={check_in_date} onDateChange={handleCheckInDateChange} firstDay={today} />
                         </div>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Дата выезда</h4>
-                            <Calendar {...register("check_out_date", { required: true })} selectedDate={check_out_date} onDateChange={handleCheckOutDateChange} firstDay={check_in_date || today} />
+                            <CheckDateInput {...register("check_out_date", { required: true })} selectedDate={check_out_date} onDateChange={handleCheckOutDateChange} firstDay={check_in_date || today} />
                         </div>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Количество гостей</h4>
-                            <GuestsSelect {...register("guests", { required: true })} onGuestsChange={handleGuestsChange} />
+                            <GuestsSelect {...register("guests", { required: true })} onGuestsChange={handleGuestsChange} value={formattedValue} setFormattedValue={setFormattedValue} />
                         </div>
                         <div className={style.btnBlock}>
                             <Button className={style.btnSearch} type="submit" value={"Подобрать"}

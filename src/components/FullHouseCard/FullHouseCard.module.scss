@@ -130,26 +130,41 @@
                 }
             }
             }
-            .pricesBlock {
+            .calendarBlock {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 20px;
 
-                .pricesBlockTitle {
+                .calendarBlockTitle {
                     @include typography(700, 18px, 25px, $text-primary);
-                    margin-bottom: 20px;
+                    margin-right: 20px;
                 }
-
-                .prices {
-                    @include flex(row, flex-start, center, nowrap);
-
-                    span {
-                        @include typography(700, 24px, 34px, $text-primary);
-                        margin-left: 10px;
-                    }
-                }
-
-                .prices p:first-child {
-                    margin-right: 30px;
+                
+                .calendarBlockImage {
+                    cursor: pointer;
+                    margin-right: 20px;
                 }
             }
+            // .pricesBlock {
+
+            //     .pricesBlockTitle {
+            //         @include typography(700, 18px, 25px, $text-primary);
+            //         margin-bottom: 20px;
+            //     }
+
+            //     .prices {
+            //         @include flex(row, flex-start, center, nowrap);
+
+            //         span {
+            //             @include typography(700, 24px, 34px, $text-primary);
+            //             margin-left: 10px;
+            //         }
+            //     }
+
+            //     .prices p:first-child {
+            //         margin-right: 30px;
+            //     }
+            // }
 
     }
 }

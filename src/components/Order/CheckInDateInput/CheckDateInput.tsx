@@ -2,20 +2,20 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import { ru } from "date-fns/locale/ru";
-import style from "./Calendar.module.scss";
+import style from "./CheckDateInput.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
 import calendarGrayIcon from "../../../assets/icons/calendarGray.svg";
 import React from "react";
 
-type CalendarPropsType = {
-    selectedDate: Date | string,
+type CheckDateInputPropsType = {
+    selectedDate: Date | null,
     onDateChange: (date: Date) => void,
     firstDay: Date
 };
 
 registerLocale("ru", ru);
 
-export const Calendar = ({ selectedDate, onDateChange, firstDay }: CalendarPropsType) => {
+export const CheckDateInput = ({ selectedDate, onDateChange, firstDay }: CheckDateInputPropsType) => {
 
     const CustomInput = React.forwardRef((props: any, ref: any) => {
         return (

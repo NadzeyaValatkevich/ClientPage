@@ -1,17 +1,21 @@
 import style from "./FullHouseCard.module.scss";
 import { features as fullFeatures } from '../HouseCard/HouseCard';
 import { Carousel } from "../Carousel";
-import bedBig from "../../assets/icons/bedBig.svg";
-import bed from "../../assets/icons/bed.svg";
+import calendar from "../../assets/icons/bigCalendar.svg";
+
 import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
 import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
 import { countRooms } from "../../utils/functions/countRooms";
+import { useState } from "react";
+import { Calendar } from "../Calendar";
 
 export type FullHouseCardPropsType = {
     rentalObject: RentalObject
 };
 
 export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
+    const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+
     const { name, images, description, rooms, total_beds } = rentalObject
 
     const houseFullPhotosSettings = {
@@ -22,6 +26,10 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
         infinite: true,
         arrows: false,
     };
+
+    const handleImgClick = () => {
+        setDatePickerVisible(isDatePickerVisible => isDatePickerVisible = !isDatePickerVisible)
+    }
 
 
     return (
@@ -67,6 +75,11 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                             )
                         })}
                     </div>
+                </div>
+                <div className={style.calendarBlock}>
+                    <p className={style.calendarBlockTitle}>Свободные даты:</p>
+                    <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
+                    {isDatePickerVisible && <Calendar />}
                 </div>
                 {/* <div className={style.pricesBlock}>
                     <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>
