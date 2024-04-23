@@ -1,24 +1,52 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import style from "./Calendar.module.scss";
+import styles from "./Calendar.module.scss";
+import { defineReservationsDates } from "../../utils/functions/defineReservationsDates";
+import { ReservationItem } from "../../redux/types/rentalObjectTypes";
 
+type CalendarPropsType = {
+    reservations: ReservationItem[]
+};
 
+export const Calendar = ({ reservations }: CalendarPropsType) => {
 
-export const Calendar = () => {
     const startDay = new Date();
 
-    return (
-        <div className={style.datePickerDiv}>
-            <DatePicker
-                selected={startDay}
-                locale={"ru"}
-                minDate={new Date()}
-                maxDate={new Date(new Date().setMonth(new Date().getMonth() + 6))}
-                readOnly
-                inline
-                wrapperClassName="custom-datepickerInfo"
-            />
-        </div>
+    const renderCustomHeader = ({ date, decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled }: any) => {
+        const monthName = date.toLocaleDateString("ru", { month: "long" });
+        return (
+            <div className={styles.customHeader}>
+                <div className={styles.legend}>
+                    <div className={styles.legendItem}>
+                        <div className={styles.legendSquare} />
+                        <div className={styles.legendText}> - занято</div>
+                    </div>
+                </div>
+                <div className={styles.header}>
+                    <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled} className={styles.arrowLeft}>
+                        <span className={styles.arrowLeftIcon}></span>
+                    </button>
+                    <span className={styles.monthName}>{monthName} {date.getFullYear()}</span>
+                    <button onClick={increaseMonth} disabled={nextMonthButtonDisabled} className={styles.arrowRight}>
+                        <span className={styles.arrowRightIcon}></span>
+                    </button>
+                </div>
+            </div>
+        );
+    };
 
+    return (
+        <DatePicker
+            selected={startDay}
+            locale={"ru"}
+            minDate={new Date()}
+            maxDate={new Date(new Date().setMonth(new Date().getMonth() + 6))}
+            onChange={() => { }}
+            highlightDates={defineReservationsDates(reservations)}
+            className={styles.datePickerDiv}
+            renderCustomHeader={renderCustomHeader}
+            readOnly
+            inline
+        />
     )
 }

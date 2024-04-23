@@ -6,7 +6,7 @@ import calendar from "../../assets/icons/bigCalendar.svg";
 import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
 import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
 import { countRooms } from "../../utils/functions/countRooms";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 
 export type FullHouseCardPropsType = {
@@ -15,8 +15,24 @@ export type FullHouseCardPropsType = {
 
 export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+    // const [reservationDate, setReservationDate] = useState();
 
-    const { name, images, description, rooms, total_beds } = rentalObject
+    const { name, images, description, rooms, total_beds, reservations } = rentalObject;
+
+    const datePickerRef = useRef<HTMLDivElement>(null);
+
+    const handleOutsideClick = (event: MouseEvent) => {
+        if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
+            setDatePickerVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleOutsideClick);
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        };
+    }, []);
 
     const houseFullPhotosSettings = {
         slidesToShow: 1,
@@ -28,9 +44,8 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
     };
 
     const handleImgClick = () => {
-        setDatePickerVisible(isDatePickerVisible => isDatePickerVisible = !isDatePickerVisible)
-    }
-
+        setDatePickerVisible(prevState => !prevState)
+    };
 
     return (
         <div className={style.houseBlock}>
@@ -79,7 +94,7 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                 <div className={style.calendarBlock}>
                     <p className={style.calendarBlockTitle}>Свободные даты:</p>
                     <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
-                    {isDatePickerVisible && <Calendar />}
+                    {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} /></div>}
                 </div>
                 {/* <div className={style.pricesBlock}>
                     <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>

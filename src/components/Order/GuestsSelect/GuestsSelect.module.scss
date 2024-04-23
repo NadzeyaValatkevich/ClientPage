@@ -49,10 +49,13 @@
     box-shadow: $shadow-1;
     background-color: $text-white;
     position: absolute;
+    // position: relative;
     left: -34px;
     top: 75px;
     display: flex;
     flex-direction: column;
     max-height: 380px;
-    overflow-y: auto;
+    // overflow-y: auto;
+    overflow-y: scroll;
+    // z-index: 1;
 }
