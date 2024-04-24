@@ -15,6 +15,7 @@ import { useAppSelector } from "../../utils/hooks";
 import { RentalObject } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
 import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
+import store from "../../redux/store";
 
 export const features: any = [
     { id: 1, icon: wifi, title: "Wi-Fi" },
@@ -30,7 +31,7 @@ export const features: any = [
 
 export const Main = () => {
     const { results } = useAppSelector(state => state.rentalObjects);
-
+    console.log(store.getState())
     const [modalActive, setModalActive] = useState(false);
     // const [modalOrderActive, setModalOrderActive] = useState(false);
 

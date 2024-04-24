@@ -2,15 +2,16 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import datesGuestsObjectReducer from "./reducers/datesGuestsSlice";
 import mainObjectReducer from "./reducers/mainObjectSlice";
 import rentalObjectsReducer from "./reducers/rentalObjectsSlice";
+import filteredRentalObjectsSlice from "./reducers/filteredRentalObjectsSlice";
 
 const rootReducer = combineReducers({
     mainObject: mainObjectReducer,
     rentalObjects: rentalObjectsReducer,
     datesGuestsObject: datesGuestsObjectReducer,
-    filteredRentalObjects: rentalObjectsReducer,
+    filteredRentalObjects: filteredRentalObjectsSlice,
 });
 
-const store = configureStore ({
+export const store = configureStore ({
     reducer: rootReducer,
 
 });

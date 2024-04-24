@@ -18,6 +18,6 @@ export type DatesGuestsObjectType = {
 export type DatesGuestsObjectRequestType = {
     check_in_date: Date | string,
     check_out_date: Date | string,
-    max_places: number,
+    people_amount: number,
     main_object: number 
 }

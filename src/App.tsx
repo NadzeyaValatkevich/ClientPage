@@ -5,6 +5,8 @@ import { useAppDispatch } from './utils/hooks'
 import { fetchRentalObjects } from './redux/thunks/rentalObjectsThunk'
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout/Layout'
+import { Main } from './pages/Main';
+import { FilteredRentalObjects } from './pages/FilteredRentalObjects';
 
 
 function App() {
@@ -21,9 +23,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/rental_objects" element={""} />
+        <Route index element={<Main />} />
+        <Route path="/filteredRental_objects" element={<FilteredRentalObjects />} />
       </Route>
-
     </Routes>
   )
 }

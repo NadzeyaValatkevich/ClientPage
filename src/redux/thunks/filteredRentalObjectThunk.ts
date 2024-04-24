@@ -2,8 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { objectsApi } from "../api";
 import { DatesGuestsObjectRequestType } from "../types/datesGuestsTypes";
+import { RentalObjectsResponseData } from "../types/rentalObjectTypes";
 
-export const fetchFilteredRentalObjects = createAsyncThunk< undefined, DatesGuestsObjectRequestType> (
+export const fetchFilteredRentalObjects = createAsyncThunk<RentalObjectsResponseData, DatesGuestsObjectRequestType> (
     'filteredRentalObjects/fetchFilteredRentalObjects',
     async (data, thunkAPI) => {
         try {

@@ -44,6 +44,7 @@ export type RentalObject = {
     rooms: string[],
     total_beds: TotalBeds,
     reservations: ReservationItem[],
+    price?: number
 };
 
 export type RentalObjectsList = RentalObject[];
