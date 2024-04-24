@@ -1,4 +1,4 @@
-import DatePicker from "react-datepicker";
+import DatePicker, { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Calendar.module.scss";
 import { defineReservationsDates } from "../../utils/functions/defineReservationsDates";
@@ -12,14 +12,14 @@ export const Calendar = ({ reservations }: CalendarPropsType) => {
 
     const startDay = new Date();
 
-    const renderCustomHeader = ({ date, decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled }: any) => {
+    const renderCustomHeader = ({ date, decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled }: ReactDatePickerCustomHeaderProps) => {
         const monthName = date.toLocaleDateString("ru", { month: "long" });
         return (
             <div className={styles.customHeader}>
                 <div className={styles.legend}>
                     <div className={styles.legendItem}>
                         <div className={styles.legendSquare} />
-                        <div className={styles.legendText}> - занято</div>
+                        <div className={styles.legendText}> - занятые даты</div>
                     </div>
                 </div>
                 <div className={styles.header}>

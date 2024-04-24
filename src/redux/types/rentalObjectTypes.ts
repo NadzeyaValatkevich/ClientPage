@@ -38,6 +38,7 @@ export type RentalObject = {
     description: string,
     object_type: RentalObjectType,
     status: RentalObjectStatus,
+    max_places: number,
     images: ImageItem[],
     features: [],
     rooms: string[],
