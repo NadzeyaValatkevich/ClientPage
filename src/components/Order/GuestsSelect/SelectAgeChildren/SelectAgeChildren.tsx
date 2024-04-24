@@ -1,4 +1,4 @@
-import Select from 'react-select';
+import Select, { CSSObjectWithLabel } from 'react-select';
 import style from "./SelectAgeChildren.module.scss";
 import { OptionType } from '../GuestsSelect';
 // import 'react-select/dist/react-select.css';
@@ -24,21 +24,25 @@ export const SelectAgeChildren = ({ selectedAge, onChangeAge, options, index, er
                     defaultValue={options[0].label}
                     placeholder=""
                     className={style.select}
+                    classNamePrefix="custom-select"
                     // required
                     styles={{
-                        control: (provided: any) => ({
+                        control: (provided: CSSObjectWithLabel) => ({
                             ...provided,
                             backgroundColor: "#1855B7",
                             cursor: "pointer",
                             border: 'none',
                         }),
-                        singleValue: (provided: any) => ({
+                        singleValue: (provided: CSSObjectWithLabel) => ({
                             ...provided,
                             color: 'white',
                         }),
-                        option: (provided: any) => ({
+                        option: (provided: CSSObjectWithLabel) => ({
                             ...provided,
                             cursor: "pointer",
+                        }),
+                        menu: (provided: CSSObjectWithLabel) => ({
+                            ...provided,
                         })
                     }}
                 />

@@ -36,7 +36,7 @@
 :global(.react-datepicker__header) { 
     background-color: $text-white;
     margin-bottom: 20px;
-    padding-top: 10px;
+    // padding-top: 10px;
 }
 
 :global(.react-datepicker__month-container) {
@@ -63,6 +63,10 @@
 :global(.react-datepicker__day-name:last-child),
 :global(.react-datepicker__day-name:nth-last-child(2)) {
   color: red; 
+}
+
+:global(.react-datepicker__navigation) {
+    top: 25px;
 }
 
 :global(.react-datepicker__navigation-icon::before) {

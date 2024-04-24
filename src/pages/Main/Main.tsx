@@ -42,14 +42,6 @@ export const Main = () => {
         setModalActive(false)
     };
 
-    // const onClickOrderHandler = () => {
-    //     setModalOrderActive(true)
-    // };
-
-    // const onCloseOrderHandler = () => {
-    //     setModalOrderActive(false)
-    // };
-
     return (
         <div className={style.main}>
             <div className={styleContainer.container}>
@@ -66,9 +58,8 @@ export const Main = () => {
                                 </div>
                                 <div className={style.beds}>
                                     <p>Спальные места: </p>
-                                    <p>{countSleepingPlaces(el.total_beds)}</p>
-                                    {/* <p > 2 <img alt={"bedBig"} src={bedBig} /></p>
-                                    <p> 1 <img alt={"bed"} src={bed} /></p> */}
+                                    <p>{el.max_places}</p>
+                                    {/* <p>{countSleepingPlaces(el.total_beds)}</p> */}
                                 </div>
                             </div>
                             <div className={style.featuresBlock}>

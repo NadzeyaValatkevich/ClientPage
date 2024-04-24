@@ -21,6 +21,7 @@
         border-radius: 50%;
         border: none;
         color: $text-white;
+        cursor: pointer;
     }
 
     &-item--number {
@@ -31,5 +32,6 @@
 
     .disabled {
         background-color: $text-secondary;
+        cursor: default;
     }
 }

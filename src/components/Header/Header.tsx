@@ -10,7 +10,7 @@ export const Header = () => {
     return (
         <div className={style.header}>
             <div className={style.image}>
-                <img src={booking_photo ? booking_photo : image} alt="background" />
+                <img src={booking_photo} alt="background" />
             </div>
             <div className={style.background}></div>
             <div className={`${styleContainer.container} ${style.headerContainer}`}>

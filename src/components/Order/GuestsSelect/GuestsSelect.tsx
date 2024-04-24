@@ -6,7 +6,7 @@ import { SelectCountPeople } from "./SelectCountPeople";
 import { SelectAgeChildren } from "./SelectAgeChildren";
 import { Button } from "../../Button/Button";
 import { formatPeople } from "../../../utils/functions/formatPeople";
-import { ChildAge } from "../../../redux/types/datesGuestsTypes";
+import { ChildAge, GuestsType } from "../../../redux/types/datesGuestsTypes";
 
 export type OptionType = {
     value: number;
@@ -28,16 +28,17 @@ for (let i = 0; i <= 17; i++) {
 }
 
 type GuestsSelectPropsType = {
-    onGuestsChange: (newGuests: any) => void
+    onGuestsChange: (newGuests: GuestsType) => void,
+    value: string,
+    setFormattedValue: (value: string) => void
 }
 
-export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsType, ref: any) => {
+export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedValue }: GuestsSelectPropsType, ref: any) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [adults, setAdults] = useState(0);
     const [children, setChildren] = useState(0);
     const [childAges, setChildAges] = useState<Array<ChildAge | undefined>>([]);
-    const [formattedValue, setFormattedValue] = useState("");
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
     const modalRef = useRef<HTMLDivElement>(null);
 
@@ -107,7 +108,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
             setIsOpen(false);
         }
 
-        const guestsData: any = {
+        const guestsData: GuestsType = {
             adults: adults,
             children: children,
             childAges: childAges,
@@ -117,10 +118,10 @@ export const GuestsSelect = forwardRef(({ onGuestsChange }: GuestsSelectPropsTyp
     };
 
     return (
-        <div className={formattedValue ? `${style.customDropDown} ${style["customDropDown--selected"]}` : style.customDropDown}>
+        <div className={value ? `${style.customDropDown} ${style["customDropDown--selected"]}` : style.customDropDown}>
             <div className={style["customDropDown__item"]} onClick={toggleDropdown}>
-                <input className={style["customDropDown__item-input"]} value={formattedValue} readOnly />
-                <img className={style["customDropDown__item-image"]} src={formattedValue ? guestsIcon : guestsGrayIcon} alt="Guests" />
+                <input className={style["customDropDown__item-input"]} value={value} readOnly />
+                <img className={style["customDropDown__item-image"]} src={value ? guestsIcon : guestsGrayIcon} alt="Guests" />
             </div>
             {isOpen && (
                 <div className={style.guestsSelectBlock} ref={modalRef}>

@@ -3,16 +3,16 @@ export type ChildAge = {
     label: string
 };
 
-export type Guests = {
+export type GuestsType = {
     adults: number | null,
     children: number | null,
-    childAges: ChildAge | null[]
+    childAges: Array<ChildAge | undefined>
 };
 
 export type DatesGuestsObjectType = {
     check_in_date: Date | string,
     check_out_date: Date | string,
-    guests: Guests
+    guests: GuestsType
 }
 
 export type DatesGuestsObjectRequestType = {

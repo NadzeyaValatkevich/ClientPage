@@ -1,18 +1,42 @@
 import style from "./FullHouseCard.module.scss";
 import { features as fullFeatures } from '../HouseCard/HouseCard';
 import { Carousel } from "../Carousel";
-import bedBig from "../../assets/icons/bedBig.svg";
-import bed from "../../assets/icons/bed.svg";
+import calendar from "../../assets/icons/bigCalendar.svg";
+
 import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
 import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
 import { countRooms } from "../../utils/functions/countRooms";
+import { useEffect, useRef, useState } from "react";
+import { Calendar } from "../Calendar";
 
 export type FullHouseCardPropsType = {
     rentalObject: RentalObject
 };
 
 export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
-    const { name, images, description, rooms, total_beds } = rentalObject
+    const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+    // const [reservationDate, setReservationDate] = useState();
+
+    const { name, images, description, rooms, max_places, reservations } = rentalObject;
+
+    const datePickerRef = useRef<HTMLDivElement>(null);
+
+    const handleImgClick = () => {
+        setDatePickerVisible(prevState => !prevState)
+    };
+
+    // const handleOutsideClick = (event: MouseEvent) => {
+    //     if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
+    //         setDatePickerVisible(false);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     document.addEventListener("mousedown", handleOutsideClick);
+    //     return () => {
+    //         document.removeEventListener("mousedown", handleOutsideClick);
+    //     };
+    // }, []);
 
     const houseFullPhotosSettings = {
         slidesToShow: 1,
@@ -23,6 +47,7 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
         arrows: false,
     };
 
+    console.log(isDatePickerVisible)
 
     return (
         <div className={style.houseBlock}>
@@ -50,9 +75,8 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                     </div>
                     <div className={style.beds}>
                         <p>Спальные места: </p>
-                        <p>{countSleepingPlaces(total_beds)}</p>
-                        {/* <p className={style.bedsBlock}> 2 <img alt={"bedBig"} src={bedBig} /></p>
-                        <p className={style.bedsBlock}> 1 <img alt={"bed"} src={bed} /></p> */}
+                        <p>{max_places}</p>
+                        {/* <p>{countSleepingPlaces(total_beds)}</p>     */}
                     </div>
                 </div>
                 <div className={style.featuresBlock}>
@@ -67,6 +91,11 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                             )
                         })}
                     </div>
+                </div>
+                <div className={style.calendarBlock}>
+                    <p className={style.calendarBlockTitle}>Свободные даты:</p>
+                    <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
+                    {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} /></div>}
                 </div>
                 {/* <div className={style.pricesBlock}>
                     <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>

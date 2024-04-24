@@ -1,0 +1,108 @@
+@import "../../common/styles/sass/variables.scss";
+@import "../../common/styles/sass/mixins.scss";
+
+.datePickerDiv {
+  width: 356px;
+  height: 395px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+  position: relative;
+  top: 30px;
+  left: -35%;
+  background-color: $text-white;
+}
+
+.legendItem {
+  @include flex(row, flex-start, center, nowrap);
+
+  .legendSquare {
+  width: 20px;
+  height: 20px;
+  border-radius: 0.3rem;
+  background-color: $primary;
+  margin-right: 10px;
+}
+
+.legendText {
+  @include typography(400, 16px, 20px, rgb(10, 10, 10));
+}
+
+
+}
+.header {
+  position: relative;
+  padding-top: 0px;
+
+  .monthName {
+  @include typography(600, 20px, 32px, rgb(10, 10, 10));
+  font-family: "Inter", sans-serif;
+  margin: 0 20px 20px 20px;
+}
+  .arrowLeft, .arrowRight {
+    background: none;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    padding: 0;
+    border: none;
+    z-index: 1;
+    height: 32px;
+    width: 32px;
+    overflow: hidden;
+}
+
+.arrowRight {
+  right: 2px;
+}
+
+.arrowLeftIcon, .arrowRightIcon {
+  position: relative;
+    top: 10px;
+}
+
+.arrowLeftIcon::before, .arrowRightIcon::before {
+  content: "";
+ border-style: solid;
+ border-color: #ccc;
+    border-width: 3px 3px 0 0;
+    display: block;
+    height: 9px;
+    position: absolute;
+    width: 9px;
+
+}
+
+.arrowLeftIcon:hover::before, .arrowRightIcon:hover:before {
+  border-color: $text-secondary;
+
+}
+
+.arrowLeftIcon::before {
+  transform: rotate(225deg);
+    right: -7px;
+}
+
+.arrowRightIcon::before {
+  transform: rotate(45deg);
+    left: -7px;
+}
+}
+
+
+
+
+
+// .datePickerDiv :global(.react-datepicker__day--selected),
+// .datePickerDiv :global(.react-datepicker__day--keyboard-selected),
+// .datePickerDiv :global(.react-datepicker__day:hover) {
+//   background-color: transparent !important;
+//   color: inherit !important;
+// }
+
+:global(.react-datepicker__day--highlighted) {
+  background-color: $primary;
+}
+                

@@ -130,26 +130,59 @@
                 }
             }
             }
-            .pricesBlock {
+            .calendarBlock {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 20px;
 
-                .pricesBlockTitle {
+                .calendarBlockTitle {
                     @include typography(700, 18px, 25px, $text-primary);
-                    margin-bottom: 20px;
+                    margin-right: 20px;
+                }
+                
+                .calendarBlockImage {
+                    cursor: pointer;
+                    margin-right: 20px;
                 }
 
-                .prices {
-                    @include flex(row, flex-start, center, nowrap);
-
-                    span {
-                        @include typography(700, 24px, 34px, $text-primary);
-                        margin-left: 10px;
-                    }
+                .datePickerDiv {
+                    width: 356px;
+                    height: 395px;
+                    border-radius: 16px;
+                    box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+                    position: relative;
+                    top: 30px;
+                    left: -35%;
+                    background-color: $text-white;
                 }
-
-                .prices p:first-child {
-                    margin-right: 30px;
+                
+                .datePickerDiv :global(.react-datepicker__day--selected),
+                .datePickerDiv :global(.react-datepicker__day--keyboard-selected),
+                .datePickerDiv :global(.react-datepicker__day:hover) {
+                    background-color: transparent !important;
+                    color: inherit !important;
                 }
             }
+            // .pricesBlock {
+
+            //     .pricesBlockTitle {
+            //         @include typography(700, 18px, 25px, $text-primary);
+            //         margin-bottom: 20px;
+            //     }
+
+            //     .prices {
+            //         @include flex(row, flex-start, center, nowrap);
+
+            //         span {
+            //             @include typography(700, 24px, 34px, $text-primary);
+            //             margin-left: 10px;
+            //         }
+            //     }
+
+            //     .prices p:first-child {
+            //         margin-right: 30px;
+            //     }
+            // }
 
     }
 }
