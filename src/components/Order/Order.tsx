@@ -10,15 +10,16 @@ import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObj
 import { useAppDispatch } from "../../utils/hooks";
 import { formatDate } from "../../utils/functions/formatDate";
 import { CheckDateInput } from "./CheckInDateInput";
+import { useNavigate } from "react-router-dom";
 
 export const Order = () => {
     const [check_in_date, setCheckInDate] = useState<Date | null>(null);
     const [check_out_date, setCheckOutDate] = useState<Date | null>(null);
     const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
     const [formattedValue, setFormattedValue] = useState("");
-    const dispatch = useAppDispatch();
 
-    console.log(guests)
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();
 
@@ -45,13 +46,13 @@ export const Order = () => {
         const filteredData: DatesGuestsObjectRequestType = {
             check_in_date: formatDate(data.check_in_date),
             check_out_date: formatDate(data.check_out_date),
-            max_places: data.guests.adults + children,
+            people_amount: data.guests.adults + children,
             main_object: 2,
         };
 
         const transformedData: DatesGuestsObjectType = {
-            check_in_date: data.check_in_date,
-            check_out_date: data.check_out_date,
+            check_in_date: data.check_in_date.toISOString(),
+            check_out_date: data.check_out_date.toISOString(),
             guests: data.guests
         };
 
@@ -60,6 +61,8 @@ export const Order = () => {
         setCheckInDate(null);
         setCheckOutDate(null);
         setFormattedValue("");
+
+        navigate('/filteredRental_objects')
     };
 
     const handleCheckOutDateChange = (date: Date) => {

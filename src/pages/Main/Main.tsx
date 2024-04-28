@@ -13,8 +13,6 @@ import { Modal } from "../../components/Modal";
 import { FullHouseCard } from "../../components/FullHouseCard";
 import { useAppSelector } from "../../utils/hooks";
 import { RentalObject } from "../../redux/types/rentalObjectTypes";
-import { countRooms } from "../../utils/functions/countRooms";
-import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
 
 export const features: any = [
     { id: 1, icon: wifi, title: "Wi-Fi" },
@@ -30,7 +28,6 @@ export const features: any = [
 
 export const Main = () => {
     const { results } = useAppSelector(state => state.rentalObjects);
-
     const [modalActive, setModalActive] = useState(false);
     // const [modalOrderActive, setModalOrderActive] = useState(false);
 
@@ -46,23 +43,23 @@ export const Main = () => {
         <div className={style.main}>
             <div className={styleContainer.container}>
                 {results && results.map((el: RentalObject) => {
-                    return <CommonHouseCard key={el.id} title={el.name} images={el.images}>
-                        <div className={style["houseBlock-right"]}>
-                            <p className={style.description}>
+                    return <CommonHouseCard key={el.id} house={el}>
+                        {/* <div className={style["houseBlock-right"]}> */}
+                        {/* <p className={style.description}>
                                 {el.description}
-                            </p>
-                            <div className={style.places}>
+                            </p> */}
+                        {/* <div className={style.places}>
                                 <div className={style.rooms}>
                                     <p>Комнаты:</p>
                                     <p>{countRooms(el.rooms)}</p>
                                 </div>
                                 <div className={style.beds}>
                                     <p>Спальные места: </p>
-                                    <p>{el.max_places}</p>
-                                    {/* <p>{countSleepingPlaces(el.total_beds)}</p> */}
+                                    <p>{el.max_places}</p> */}
+                        {/* <p>{countSleepingPlaces(el.total_beds)}</p>
                                 </div>
-                            </div>
-                            <div className={style.featuresBlock}>
+                            </div> */}
+                        {/* <div className={style.featuresBlock}>
                                 <p className={style.featuresTitle}>Удобства:</p>
                                 <div className={style.features}>
                                     {features.map((el: any) => {
@@ -74,26 +71,26 @@ export const Main = () => {
                                         )
                                     })}
                                 </div>
-                            </div>
-                            {/* <div className={style.pricesBlock}>
+                            </div> */}
+                        {/* <div className={style.pricesBlock}>
                                 <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>
                                 <div className={style.prices}>
                                     <p>будни от <span>150 BYN</span></p>
                                     <p>выходные от <span>250 BYN</span></p>
                                 </div>
                             </div> */}
-                            <div className={style.btnsBlock}>
-                                {/* <Button value={"Забронировать"} className={style.btnBook} onClick={onClickOrderHandler} /> */}
-                                <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
-                            </div>
-                            {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
-                                <FullHouseCard rentalObject={el} />
-                            </Modal>}
+                        <div className={style.btnsBlock}>
+                            {/* <Button value={"Забронировать"} className={style.btnBook} onClick={onClickOrderHandler} /> */}
+                            <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
+                        </div>
+                        {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
+                            <FullHouseCard rentalObject={el} />
+                        </Modal>}
 
-                            {/* {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive} type={"bookingModal"}>
+                        {/* {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive} type={"bookingModal"}>
                                 <Booking />
                             </Modal>} */}
-                        </div>
+                        {/* </div> */}
                     </CommonHouseCard>
                 })}
             </div>

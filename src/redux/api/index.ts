@@ -16,6 +16,6 @@ export const objectsApi = {
     },
 
     getFilteredRentalObjects(data: DatesGuestsObjectRequestType) {
-        return instance.get(`/client_part/rental_objects/prices?main_object=${data.main_object}&max_places=${data.max_places}&check_in_date=${data.check_in_date}&check_out_date=${data.check_out_date}`)
+        return instance.get(`/client_part/rental_objects/prices?main_object=${data.main_object}&people_amount=${data.people_amount}&check_in_date=${data.check_in_date}&check_out_date=${data.check_out_date}`)
     }
 };

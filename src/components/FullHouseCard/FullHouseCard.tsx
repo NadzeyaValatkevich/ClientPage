@@ -4,9 +4,8 @@ import { Carousel } from "../Carousel";
 import calendar from "../../assets/icons/bigCalendar.svg";
 
 import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
-import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
 import { countRooms } from "../../utils/functions/countRooms";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 
 export type FullHouseCardPropsType = {
@@ -97,13 +96,13 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                     <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
                     {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} /></div>}
                 </div>
-                {/* <div className={style.pricesBlock}>
-                    <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>
-                    <div className={style.prices}>
-                        <p>будни от <span>150 BYN</span></p>
-                        <p>выходные от <span>250 BYN</span></p>
+                {rentalObject && rentalObject.price ?
+                    <div className={style.priceBlock}>
+                        <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
+                        <p className={style.price}>{rentalObject.price}<span>BYN</span></p>
                     </div>
-                </div> */}
+                    : null
+                }
             </div>
         </div>
 
