@@ -72,6 +72,9 @@
 
             .description {
                 @include typography(400, 20px, 28px, $text-primary);
+                max-height: 140px;
+                overflow: hidden; 
+                text-overflow: ellipsis; 
             }
         }
 
@@ -163,26 +166,27 @@
                     color: inherit !important;
                 }
             }
-            // .pricesBlock {
+            .priceBlock {
+                // margin-bottom: 30px;
 
-            //     .pricesBlockTitle {
-            //         @include typography(700, 18px, 25px, $text-primary);
-            //         margin-bottom: 20px;
-            //     }
+                .priceBlockTitle {
+                    @include typography(700, 18px, 25px, $text-primary);
+                    margin-bottom: 10px;
+                }
 
-            //     .prices {
-            //         @include flex(row, flex-start, center, nowrap);
+                .price {
+                    @include flex(row, flex-start, center, nowrap);
+                    gap: 10px;
 
-            //         span {
-            //             @include typography(700, 24px, 34px, $text-primary);
-            //             margin-left: 10px;
-            //         }
-            //     }
+                    &, span {
+                        @include typography(700, 24px, 34px, $text-primary);
+                    }
+                }
 
-            //     .prices p:first-child {
-            //         margin-right: 30px;
-            //     }
-            // }
+                .prices p:first-child {
+                    margin-right: 20px;
+                }
+            }
 
     }
 }
