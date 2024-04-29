@@ -15,16 +15,13 @@ function App() {
   useEffect(() => {
     dispatch(fetchMainObject(2))
     dispatch(fetchRentalObjects())
-
-  }, [])
-
-  console.log("App")
+  }, []);
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Main />} />
-        <Route path="/filteredRental_objects" element={<FilteredRentalObjects />} />
+        <Route path="/filteredRental_objects/*" element={<FilteredRentalObjects />} />
       </Route>
     </Routes>
   )

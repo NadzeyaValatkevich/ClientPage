@@ -62,7 +62,14 @@ export const Order = () => {
         setCheckOutDate(null);
         setFormattedValue("");
 
-        navigate('/filteredRental_objects')
+        const queryParams = new URLSearchParams({
+            check_in_date: formatDate(data.check_in_date),
+            check_out_date: formatDate(data.check_out_date),
+            people_amount: (data.guests.adults + children).toString(),
+            main_object: (2).toString(),
+        })
+
+        navigate(`/filteredRental_objects?${queryParams.toString()}`)
     };
 
     const handleCheckOutDateChange = (date: Date) => {
