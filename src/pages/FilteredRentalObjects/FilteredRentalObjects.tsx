@@ -3,8 +3,6 @@ import styleContainer from "../../common/styles/Container.module.scss";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { CommonHouseCard } from "../../components/CommonHouseCard/CommonHouseCard";
 import { RentalObject } from "../../redux/types/rentalObjectTypes";
-import { countRooms } from "../../utils/functions/countRooms";
-import { features } from "../Main/Main";
 import { Button } from "../../components/Button/Button";
 import { FullHouseCard } from "../../components/FullHouseCard";
 import { useEffect, useState } from "react";
