@@ -7,7 +7,7 @@ import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-fo
 import { ChildAge, DatesGuestsObjectRequestType, DatesGuestsObjectType, GuestsType } from "../../redux/types/datesGuestsTypes";
 import { setDatesGuestsObject } from "../../redux/reducers/datesGuestsSlice";
 import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
-import { useAppDispatch } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { formatDate } from "../../utils/functions/formatDate";
 import { CheckDateInput } from "./CheckInDateInput";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,8 @@ export const Order = () => {
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const { id } = useAppSelector(state => state.mainObject);
 
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();
 
@@ -47,7 +49,7 @@ export const Order = () => {
             check_in_date: formatDate(data.check_in_date),
             check_out_date: formatDate(data.check_out_date),
             people_amount: data.guests.adults + children,
-            main_object: 2,
+            main_object: id,
         };
 
         const transformedData: DatesGuestsObjectType = {
@@ -66,7 +68,7 @@ export const Order = () => {
             check_in_date: formatDate(data.check_in_date),
             check_out_date: formatDate(data.check_out_date),
             people_amount: (data.guests.adults + children).toString(),
-            main_object: (2).toString(),
+            main_object: (id).toString(),
         })
 
         navigate(`/filteredRental_objects?${queryParams.toString()}`)
