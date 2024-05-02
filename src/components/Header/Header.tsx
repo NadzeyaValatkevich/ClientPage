@@ -1,6 +1,5 @@
 import style from "./Header.module.scss";
 import styleContainer from "../../common/styles/Container.module.scss";
-import image from "../../assets/photo1.jpg";
 import { Logo } from "../Logo";
 import { useAppSelector } from "../../utils/hooks";
 

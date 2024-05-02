@@ -35,6 +35,8 @@ type GuestsSelectPropsType = {
 
 export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedValue }: GuestsSelectPropsType, ref: any) => {
 
+    console.log(ref)
+
     const [isOpen, setIsOpen] = useState(false);
     const [adults, setAdults] = useState(0);
     const [children, setChildren] = useState(0);

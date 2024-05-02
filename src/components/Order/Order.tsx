@@ -18,6 +18,8 @@ export const Order = () => {
     const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
     const [formattedValue, setFormattedValue] = useState("");
 
+    console.log(guests)
+
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
