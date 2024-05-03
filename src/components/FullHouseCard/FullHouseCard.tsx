@@ -5,14 +5,15 @@ import calendar from "../../assets/icons/bigCalendar.svg";
 
 import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 
 export type FullHouseCardPropsType = {
-    rentalObject: RentalObject
+    rentalObject: RentalObject,
+    modalActive: boolean
 };
 
-export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
+export const FullHouseCard = ({ rentalObject, modalActive }: FullHouseCardPropsType) => {
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
     // const [reservationDate, setReservationDate] = useState();
 
@@ -46,7 +47,18 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
         arrows: false,
     };
 
-    console.log(isDatePickerVisible)
+
+    useEffect(() => {
+        if (modalActive) {
+            document.body.classList.add('open');
+        } else {
+            document.body.classList.remove('open');
+        }
+
+        return () => {
+            document.body.classList.remove('open');
+        };
+    }, [modalActive]);
 
     return (
         <div className={style.houseBlock}>

@@ -73,7 +73,8 @@ export const Order = () => {
             main_object: (id).toString(),
         })
 
-        navigate(`/filteredRental_objects?${queryParams.toString()}`)
+        // navigate(`/filteredRental_objects?${queryParams.toString()}`)
+        navigate(`/main_object/${id}/filteredRental_objects?${queryParams.toString()}`)
     };
 
     const handleCheckOutDateChange = (date: Date) => {
