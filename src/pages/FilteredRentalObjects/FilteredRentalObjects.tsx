@@ -67,7 +67,7 @@ export const FilteredRentalObjects = () => {
                                 <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
                             </div>
                             {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
-                                <FullHouseCard rentalObject={el} />
+                                <FullHouseCard rentalObject={el} modalActive={modalActive} />
                             </Modal>}
 
                             {modalBookingActive && <Modal active={modalBookingActive} onClose={onCloseBookingHandler} setActive={setModalBookingActive} type={"bookingModal"}>
