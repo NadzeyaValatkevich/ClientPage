@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route path="/main_object/:id" element={<Layout />}>
         <Route index element={<Main />} />
-        <Route path="filteredRental_objects/*" element={<FilteredRentalObjects />} />
+        <Route path="filteredRental_objects" element={<FilteredRentalObjects />} />
       </Route>
     </Routes >
   )

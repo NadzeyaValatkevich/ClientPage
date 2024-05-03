@@ -84,7 +84,7 @@ export const Main = () => {
                             <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
                         </div>
                         {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
-                            <FullHouseCard rentalObject={el} />
+                            <FullHouseCard rentalObject={el} modalActive={modalActive} />
                         </Modal>}
 
                         {/* {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive} type={"bookingModal"}>
