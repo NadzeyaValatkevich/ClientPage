@@ -1,26 +1,25 @@
-@import "../../common/styles/sass/variables.scss";
-@import "../../common/styles/sass/mixins.scss";
+@import '../../common/styles/sass/variables.scss';
+@import '../../common/styles/sass/mixins.scss';
 
 .booking {
+  width: 100%;
+  height: auto;
+  background-color: $secondary;
+  padding: 20px;
+
+  &__comment-title {
+    @extend %titleBookingBlock;
+  }
+
+  &__comment-title::before {
+    @extend %titleBookingLine;
+  }
+
+  &__comment-text {
     width: 100%;
-    height: auto;
-    background-color: $secondary;
-    padding: 20px;
+    height: 90px;
+  }
 
-    &__comment-title {
-        @extend %titleBookingBlock;
-    }
-
-    &__comment-title::before {
-        @extend %titleBookingLine;
-    }
-
-    &__comment-text {
-        width: 100%;
-        height: 90px;
-    }
-
-    &__comment-text::placeholder {
-        
-    }
+  &__comment-text::placeholder {
+  }
 }

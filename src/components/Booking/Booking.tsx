@@ -1,14 +1,37 @@
+import { useEffect } from "react";
 import style from "./Booking.module.scss";
 import { Conditions } from "./Conditions";
 import { Contacts } from "./Contacts";
 import { InfoObject } from "./InfoObject";
 import { PersonalInfo } from "./PersonalInfo";
+import { RentalObject } from "../../redux/types/rentalObjectTypes";
 
-export const Booking = () => {
+type BookingPropsType = {
+    modalBookingActive: boolean,
+    house: RentalObject,
+    // check_in_date: Date | string | null,
+    // check_out_date: Date | string | null,
+}
+
+export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
+    const { name } = house
+
+    useEffect(() => {
+        if (modalBookingActive) {
+            document.body.classList.add('open');
+        } else {
+            document.body.classList.remove('open');
+        }
+
+        return () => {
+            document.body.classList.remove('open');
+        };
+    }, [modalBookingActive]);
+
     return (
         <div className={style.booking}>
             <form>
-                <InfoObject />
+                <InfoObject title={name} />
                 <Conditions />
                 <PersonalInfo />
                 <Contacts />

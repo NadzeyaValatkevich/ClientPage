@@ -1,85 +1,111 @@
-@import "../../../common/styles/sass/variables.scss";
-@import "../../../common/styles/sass/mixins.scss";
+@import '../../../common/styles/sass/variables.scss';
+@import '../../../common/styles/sass/mixins.scss';
 
 .infoObject {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 
-    &__title {
-        @extend %titleBookingBlock;
+  &__title {
+    @extend %titleBookingBlock;
+  }
+
+  &__title::before {
+    @extend %titleBookingLine;
+  }
+
+  &__block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 20px;
+
+    &-object input {
+      width: 100%;
+      border: $border-secondary;
+      @include typography(500, 20px, 26px, $text-primary);
+
+      &:focus {
+        outline: none;
+      }
     }
 
-    &__title::before {
-        @extend %titleBookingLine;
+    &-date {
+      @include flex(row, flex-start, flex-start, nowrap);
+      gap: 30px;
+      grid-row: 2;
+      grid-column: 1;
     }
 
-    &__block {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
-        row-gap: 10px;
-        column-gap: 20px;
-
-        &-object input {
-            width: 100%;
-    }
-    
-        &-date {
-            @include flex(row, flex-start, flex-start, nowrap);
-            gap: 30px;
-            grid-row: 2;
-            grid-column: 1;
-    }
-    
-        &-date input {
-            max-width: 130px;
-            width: 100%;
+    &-date input {
+      max-width: 200px;
+      width: 100%;
+      border: $border-secondary;
     }
 
-        &-time {
-            @include flex(row, flex-start, flex-start, nowrap);
-            gap: 21px;
-            grid-row: 2;
-            grid-column: 2;
+    &-date input:focus {
+      outline: none;
     }
 
-        &-time input {
-            max-width: 120px;
-            width: 100%;
+    // &-date input[readonly] {
+    //   /* Убираем возможность выделения текста */
+    //   user-select: none;
+    //   /* Убираем возможность изменения значения через курсор */
+    //   cursor: default;
+    //   /* Запрещаем фокусировку поля ввода */
+    //   pointer-events: none;
+    //   /* Убираем стандартный фокусный контур */
+    //   outline: none;
+    //   /* Запрещаем изменение внешнего вида при фокусировке */
+    //   border-color: transparent;
+    //   box-shadow: none;
+    // }
+
+    &-time {
+      @include flex(row, flex-start, flex-start, nowrap);
+      gap: 21px;
+      grid-row: 2;
+      grid-column: 2;
     }
 
-        &-guests {
-            grid-row: 3;
-            grid-column: 1;
+    &-time input {
+      max-width: 120px;
+      width: 100%;
     }
 
-        &-animals {
-            grid-row: 3;
-            grid-column: 2;
+    &-guests {
+      grid-row: 3;
+      grid-column: 1;
     }
 
-        &-guests input, &-animals input {
-            width: 100%;
+    &-animals {
+      grid-row: 3;
+      grid-column: 2;
     }
 
-        &-price {
-            grid-row: 4;
-            grid-column: 1/3;
-            @include flex(row, flex-start, center, nowrap);
+    &-guests input,
+    &-animals input {
+      width: 100%;
+    }
 
-            & div {
-                @include flex(row, flex-start, center, nowrap);
-                gap: 15px;
+    &-price {
+      grid-row: 4;
+      grid-column: 1/3;
+      @include flex(row, flex-start, center, nowrap);
 
-                & input {
-                    max-width: 100px;
-                    width: 100%;
-                    margin-right: 5px;
-                }
-            }
+      & div {
+        @include flex(row, flex-start, center, nowrap);
+        gap: 15px;
 
-            &--text {
-                @include typography(700, 24px, 34px, $text-primary)
-            }
+        & input {
+          max-width: 100px;
+          width: 100%;
+          margin-right: 5px;
         }
+      }
+
+      &--text {
+        @include typography(700, 24px, 34px, $text-primary);
+      }
     }
+  }
 }
