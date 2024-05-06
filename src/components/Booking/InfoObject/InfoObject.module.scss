@@ -34,31 +34,29 @@
       gap: 30px;
       grid-row: 2;
       grid-column: 1;
+
+      &--checkIn,
+      &--checkOut {
+        position: relative;
+      }
+
+      &--image {
+        position: absolute;
+        top: 60%;
+        right: 15px;
+      }
     }
 
     &-date input {
       max-width: 200px;
       width: 100%;
       border: $border-secondary;
+      @include typography(500, 20px, 26px, $text-primary);
     }
 
     &-date input:focus {
       outline: none;
     }
-
-    // &-date input[readonly] {
-    //   /* Убираем возможность выделения текста */
-    //   user-select: none;
-    //   /* Убираем возможность изменения значения через курсор */
-    //   cursor: default;
-    //   /* Запрещаем фокусировку поля ввода */
-    //   pointer-events: none;
-    //   /* Убираем стандартный фокусный контур */
-    //   outline: none;
-    //   /* Запрещаем изменение внешнего вида при фокусировке */
-    //   border-color: transparent;
-    //   box-shadow: none;
-    // }
 
     &-time {
       @include flex(row, flex-start, flex-start, nowrap);
@@ -75,6 +73,22 @@
     &-guests {
       grid-row: 3;
       grid-column: 1;
+      position: relative;
+
+      &--image {
+        position: absolute;
+        right: 15px;
+        top: 60%;
+      }
+    }
+
+    &-guests input {
+      border: $border-secondary;
+      @include typography(500, 20px, 26px, $text-primary);
+    }
+
+    &-guests input:focus {
+      outline: none;
     }
 
     &-animals {
