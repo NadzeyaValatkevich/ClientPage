@@ -5,15 +5,15 @@
   width: 100%;
   height: auto;
   background-color: $secondary;
-  padding: 20px;
+  padding: 60px 114px;
 
   &__comment-title {
     @extend %titleBookingBlock;
   }
 
-  &__comment-title::before {
-    @extend %titleBookingLine;
-  }
+  // &__comment-title::before {
+  //   @extend %titleBookingLine;
+  // }
 
   &__comment-text {
     width: 100%;

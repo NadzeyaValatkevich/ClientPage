@@ -8,118 +8,173 @@
     @extend %titleBookingBlock;
   }
 
-  &__title::before {
-    @extend %titleBookingLine;
-  }
-
   &__block {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    row-gap: 10px;
-    column-gap: 20px;
+    @include flex(column, flex-start, flex-start, nowrap);
+    gap: 20px;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    // grid-template-rows: 1fr 1fr 0.38fr;
+    // row-gap: 20px;
+    // column-gap: 20px;
+
+    &-upItem {
+      @include flex(row, flex-start, flex-start, nowrap);
+      gap: 20px;
+    }
 
     &-object input {
-      width: 100%;
+      width: 288px;
+      // max-width: 288px;
+      // width: 100%;
+    }
+
+    &-object input,
+    &-date--checkIn input,
+    &-date--checkOut input {
+      @include typography(500, 14px, 17.07px, $text-primary);
+      height: 67px;
       border: $border-secondary;
-      @include typography(500, 20px, 26px, $text-primary);
 
       &:focus {
         outline: none;
       }
     }
 
-    &-date {
-      @include flex(row, flex-start, flex-start, nowrap);
-      gap: 30px;
-      grid-row: 2;
-      grid-column: 1;
-
-      &--checkIn,
-      &--checkOut {
-        position: relative;
-      }
-
-      &--image {
-        position: absolute;
-        top: 60%;
-        right: 15px;
-      }
-    }
-
-    &-date input {
-      max-width: 200px;
-      width: 100%;
-      border: $border-secondary;
-      @include typography(500, 20px, 26px, $text-primary);
-    }
-
-    &-date input:focus {
-      outline: none;
-    }
-
-    &-time {
-      @include flex(row, flex-start, flex-start, nowrap);
-      gap: 21px;
-      grid-row: 2;
-      grid-column: 2;
-    }
-
-    &-time input {
-      max-width: 120px;
-      width: 100%;
-    }
-
-    &-guests {
-      grid-row: 3;
-      grid-column: 1;
+    &-date--checkIn,
+    &-date--checkOut {
       position: relative;
-
-      &--image {
-        position: absolute;
-        right: 15px;
-        top: 60%;
-      }
     }
 
-    &-guests input {
+    &-date--checkIn input,
+    &-date--checkOut input {
+      width: 288px;
+      // max-width: 288px;
+      // width: 100%;
+    }
+
+    &-date--image {
+      position: absolute;
+      top: 58%;
+      right: 26px;
+    }
+
+    &-time--checkIn {
+      width: 130px;
+      // height: 97px;
+    }
+
+    &-time--checkOut input {
+      width: 130px;
+      @include typography(500, 14px, 17.07px, $text-primary);
+      height: 67px;
       border: $border-secondary;
-      @include typography(500, 20px, 26px, $text-primary);
-    }
 
-    &-guests input:focus {
-      outline: none;
-    }
-
-    &-animals {
-      grid-row: 3;
-      grid-column: 2;
-    }
-
-    &-guests input,
-    &-animals input {
-      width: 100%;
-    }
-
-    &-price {
-      grid-row: 4;
-      grid-column: 1/3;
-      @include flex(row, flex-start, center, nowrap);
-
-      & div {
-        @include flex(row, flex-start, center, nowrap);
-        gap: 15px;
-
-        & input {
-          max-width: 100px;
-          width: 100%;
-          margin-right: 5px;
-        }
-      }
-
-      &--text {
-        @include typography(700, 24px, 34px, $text-primary);
+      &:focus {
+        outline: none;
       }
     }
+
+    // &-object input {
+    //   width: 100%;
+    //   border: $border-secondary;
+    //   @include typography(500, 20px, 26px, $text-primary);
+
+    //   &:focus {
+    //     outline: none;
+    //   }
+    // }
+
+    // &-date {
+    //   @include flex(row, flex-start, flex-start, nowrap);
+    //   gap: 30px;
+    //   grid-row: 2;
+    //   grid-column: 1;
+
+    //   &--checkIn,
+    //   &--checkOut {
+    //     position: relative;
+    //   }
+
+    //   &--image {
+    //     position: absolute;
+    //     top: 60%;
+    //     right: 15px;
+    //   }
+    // }
+
+    // &-date input {
+    //   max-width: 200px;
+    //   width: 100%;
+    //   border: $border-secondary;
+    //   @include typography(500, 20px, 26px, $text-primary);
+    // }
+
+    // &-date input:focus {
+    //   outline: none;
+    // }
+
+    // &-time {
+    //   @include flex(row, flex-start, flex-start, nowrap);
+    //   gap: 21px;
+    //   grid-row: 2;
+    //   grid-column: 2;
+    // }
+
+    // &-time input {
+    //   max-width: 120px;
+    //   width: 100%;
+    // }
+
+    // &-guests {
+    //   grid-row: 3;
+    //   grid-column: 1;
+    //   position: relative;
+
+    //   &--image {
+    //     position: absolute;
+    //     right: 15px;
+    //     top: 60%;
+    //   }
+    // }
+
+    // &-guests input {
+    //   border: $border-secondary;
+    //   @include typography(500, 20px, 26px, $text-primary);
+    // }
+
+    // &-guests input:focus {
+    //   outline: none;
+    // }
+
+    // &-animals {
+    //   grid-row: 3;
+    //   grid-column: 2;
+    // }
+
+    // &-guests input,
+    // &-animals input {
+    //   width: 100%;
+    // }
+
+    // &-price {
+    //   grid-row: 4;
+    //   grid-column: 1/3;
+    //   @include flex(row, flex-start, center, nowrap);
+
+    //   & div {
+    //     @include flex(row, flex-start, center, nowrap);
+    //     gap: 15px;
+
+    //     & input {
+    //       max-width: 100px;
+    //       width: 100%;
+    //       margin-right: 5px;
+    //     }
+    //   }
+
+    //   &--text {
+    //     @include typography(700, 24px, 34px, $text-primary);
+    //   }
+    // }
   }
 }

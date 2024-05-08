@@ -3,6 +3,11 @@ export type ChildAge = {
   label: string
 }
 
+export type OptionItemType = {
+  value: string
+  label: string
+}
+
 export type GuestsType = {
   adults: number | null
   children: number | null

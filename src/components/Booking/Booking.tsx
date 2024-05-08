@@ -14,7 +14,7 @@ type BookingPropsType = {
 }
 
 export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
-    const { name } = house
+    const { name, check_in_time, check_out_time } = house
 
     useEffect(() => {
         if (modalBookingActive) {
@@ -31,7 +31,7 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
     return (
         <div className={style.booking}>
             <form>
-                <InfoObject title={name} />
+                <InfoObject title={name} check_in_time={check_in_time} check_out_time={check_out_time} />
                 <Conditions />
                 <PersonalInfo />
                 <Contacts />
