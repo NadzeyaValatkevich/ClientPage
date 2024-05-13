@@ -7,7 +7,7 @@ export const generateTimeOptions = (time: string) => {
   const options: OptionsCheckInTimePropsType = []
 
   for (let hour = startHour; hour <= 23; hour++) {
-    options.push({ value: `${hour}`, label: `${hour}:00` })
+    options.push({ value: `${hour}:00`, label: `${hour}:00` })
   }
 
   options.push({ value: '23:59', label: '23:59' })

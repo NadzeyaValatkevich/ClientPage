@@ -4,7 +4,7 @@ import style from "./InfoObject.module.scss";
 import { useEffect, useState } from "react";
 import { DatesType, GuestsType } from "../../../redux/types/datesGuestsTypes";
 import users from "../../../assets/icons/users.svg";
-import calendar from "../../../assets/icons/calendar.svg";
+import calendar from "../../../assets/icons/calendarGray.svg";
 import { formatPeople } from "../../../utils/functions/formatPeople";
 import { SelectComponent } from "../../SelectComponent/SelectComponent";
 import { formatTime, generateTimeOptions } from "../../../utils/functions/generateTime";

@@ -24,16 +24,15 @@
 
     &-object input {
       width: 288px;
-      // max-width: 288px;
-      // width: 100%;
     }
 
     &-object input,
     &-date--checkIn input,
     &-date--checkOut input {
-      @include typography(500, 14px, 17.07px, $text-primary);
+      @include typography(500, 14px, 17.07px, $text-secondary);
       height: 67px;
-      border: $border-secondary;
+      border: 1px solid $text-secondary;
+      border-radius: 6px;
 
       &:focus {
         outline: none;
@@ -65,9 +64,10 @@
 
     &-time--checkOut input {
       width: 130px;
-      @include typography(500, 14px, 17.07px, $text-primary);
+      @include typography(500, 14px, 17.07px, $text-secondary);
       height: 67px;
-      border: $border-secondary;
+      border: 1px solid $text-secondary;
+      border-radius: 6px;
 
       &:focus {
         outline: none;
