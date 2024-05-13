@@ -16,6 +16,8 @@ export const FilteredRentalObjects = () => {
     const { results, count } = useAppSelector(state => state.filteredRentalObjects);
     const [modalActive, setModalActive] = useState(false);
     const [modalBookingActive, setModalBookingActive] = useState(false);
+    // const [check_in_date, setCheckInDate] = useState<Date | null | string>(null);
+    // const [check_out_date, setCheckOutDate] = useState<Date | null | string>(null);
 
     const [searchParams] = useSearchParams();
 
@@ -31,7 +33,10 @@ export const FilteredRentalObjects = () => {
             main_object: queryParams.get('main_object'),
         };
 
-        dispatch(fetchFilteredRentalObjects(queryParamsData))
+        dispatch(fetchFilteredRentalObjects(queryParamsData));
+        // setCheckInDate(queryParamsData.check_in_date);
+        // setCheckOutDate(queryParamsData.check_out_date);
+
     }, [searchParams, dispatch])
 
     const onClickHandler = () => {
@@ -71,7 +76,7 @@ export const FilteredRentalObjects = () => {
                             </Modal>}
 
                             {modalBookingActive && <Modal active={modalBookingActive} onClose={onCloseBookingHandler} setActive={setModalBookingActive} type={"bookingModal"}>
-                                <Booking />
+                                <Booking modalBookingActive={modalBookingActive} house={el} />
                             </Modal>}
 
                         </CommonHouseCard>

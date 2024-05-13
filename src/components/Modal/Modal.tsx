@@ -23,7 +23,7 @@ export const Modal = ({ active, onClose, setActive, children, type }: ModalProps
                             {type === "houseModal"
                                 ? <CloseIcon onClick={onClose} color={"#0F2664"} />
                                 : <div className={style["modalContentBooking__header"]}>
-                                    <h3 className={style["modalContentBooking__header-title"]}>Бронь</h3>
+                                    <h3 className={style["modalContentBooking__header-title"]}>Бронирование</h3>
                                     <div className={style["modalContentBooking__header-right"]}>
                                         <button className={style["modalContentBooking__header-btn"]}>Сохранить</button>
                                         <CloseIcon onClick={onClose} color={"#FFFFFF"} />

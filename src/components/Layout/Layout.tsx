@@ -14,6 +14,8 @@ export const Layout = () => {
 
     useEffect(() => {
 
+        // localStorage.clear();
+
         id && dispatch(fetchMainObject(Number(id)))
         dispatch(fetchRentalObjects())
     }, []);

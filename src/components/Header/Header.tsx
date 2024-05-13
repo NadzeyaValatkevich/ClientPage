@@ -17,6 +17,7 @@ export const Header = () => {
                     <Logo />
                 </div>
                 <h1 className={style.title}>{name ? name : "Название усадьбы"}</h1>
+                {/* <h1 className={style.title}>{"Название усадьбы bvbvbvbvb vnvnvnvnv nnvnnvvnvn hfhfhffhfh cncncncncn xgxgxgxgxg chchchchc "}</h1> */}
             </div>
         </div>
     )

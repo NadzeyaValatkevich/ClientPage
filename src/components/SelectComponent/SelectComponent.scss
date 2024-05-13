@@ -1,0 +1,60 @@
+@import '../../common/styles/sass/variables.scss';
+@import '../../common/styles/sass/mixins.scss';
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.select__label {
+  @include typography(400, 16px, 19.5px, $text-secondary);
+  margin-bottom: 10px;
+}
+
+.custom-select {
+  &__control {
+    height: 67px;
+    border-radius: 6px !important;
+  }
+
+  &__value-container {
+    cursor: text;
+  }
+
+  &__single-value {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17.07px;
+  }
+
+  &__indicator-separator {
+    display: none;
+  }
+
+  &__indicator {
+    cursor: pointer;
+    margin-right: 20px;
+    padding: 0px !important;
+
+    &:hover {
+      color: $background !important;
+    }
+  }
+
+  &__menu {
+    animation: scaleIn 0.35s easy-in-out;
+  }
+
+  &__option {
+    cursor: pointer !important;
+  }
+}

@@ -2,19 +2,20 @@ import styleContainer from "../../common/styles/Container.module.scss";
 import style from "./Order.module.scss";
 import { Button } from "../Button/Button";
 import { GuestsSelect } from "./GuestsSelect";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { ChildAge, DatesGuestsObjectRequestType, DatesGuestsObjectType, GuestsType } from "../../redux/types/datesGuestsTypes";
+import { ChildAge, DatesGuestsObjectRequestType, DatesGuestsObjectType, DatesType, GuestsType } from "../../redux/types/datesGuestsTypes";
 import { setDatesGuestsObject } from "../../redux/reducers/datesGuestsSlice";
 import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-import { formatDate } from "../../utils/functions/formatDate";
+import { formatDashDate } from "../../utils/functions/formatDate";
 import { CheckDateInput } from "./CheckInDateInput";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { formatPeople } from "../../utils/functions/formatPeople";
 
 export const Order = () => {
-    const [check_in_date, setCheckInDate] = useState<Date | null>(null);
-    const [check_out_date, setCheckOutDate] = useState<Date | null>(null);
+    const [check_in_date, setCheckInDate] = useState<Date | null | undefined>(null);
+    const [check_out_date, setCheckOutDate] = useState<Date | null | undefined>(null);
     const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
     const [formattedValue, setFormattedValue] = useState("");
 
@@ -24,6 +25,8 @@ export const Order = () => {
     const navigate = useNavigate();
 
     const { id } = useAppSelector(state => state.mainObject);
+
+    const [searchParams] = useSearchParams();
 
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();
 
@@ -38,6 +41,32 @@ export const Order = () => {
         clearErrors("check_in_date")
     };
 
+    useEffect(() => {
+
+        if (!check_in_date || !check_out_date) {
+
+            const queryParams = new URLSearchParams(searchParams);
+
+            const queryParamsData: DatesType = {
+                check_in_date: queryParams.get('check_in_date') ?? "",
+                check_out_date: queryParams.get('check_out_date') ?? "",
+            };
+
+            console.log(queryParams.get('people_amount'))
+
+            queryParamsData.check_in_date && setCheckInDate(new Date(queryParamsData.check_in_date));
+            queryParamsData.check_out_date && setCheckOutDate(new Date(queryParamsData.check_out_date));
+
+            const storedGuestsData = localStorage.getItem('guests');
+
+            if (storedGuestsData) {
+                const parsedGuestsData: GuestsType = JSON.parse(storedGuestsData);
+                queryParams.get('people_amount') && setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children))
+            }
+        }
+
+    }, [])
+
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
 
         console.log(data.check_in_date)
@@ -48,8 +77,8 @@ export const Order = () => {
         }, 0);
 
         const filteredData: DatesGuestsObjectRequestType = {
-            check_in_date: formatDate(data.check_in_date),
-            check_out_date: formatDate(data.check_out_date),
+            check_in_date: formatDashDate(data.check_in_date),
+            check_out_date: formatDashDate(data.check_out_date),
             people_amount: data.guests.adults + children,
             main_object: id,
         };
@@ -60,20 +89,18 @@ export const Order = () => {
             guests: data.guests
         };
 
+        localStorage.clear();
+
         dispatch(setDatesGuestsObject(transformedData));
+        localStorage.setItem('guests', JSON.stringify(data.guests));
         dispatch(fetchFilteredRentalObjects(filteredData));
-        setCheckInDate(null);
-        setCheckOutDate(null);
-        setFormattedValue("");
 
         const queryParams = new URLSearchParams({
-            check_in_date: formatDate(data.check_in_date),
-            check_out_date: formatDate(data.check_out_date),
+            check_in_date: formatDashDate(data.check_in_date),
+            check_out_date: formatDashDate(data.check_out_date),
             people_amount: (data.guests.adults + children).toString(),
             main_object: (id).toString(),
         })
-
-        // navigate(`/filteredRental_objects?${queryParams.toString()}`)
         navigate(`/main_object/${id}/filteredRental_objects?${queryParams.toString()}`)
     };
 
@@ -84,7 +111,6 @@ export const Order = () => {
     };
 
     const handleGuestsChange = (newGuests: GuestsType) => {
-        console.log(newGuests);
 
         setGuests((guests: GuestsType) => {
             const updatedGuests = { ...guests, ...newGuests };
@@ -110,7 +136,7 @@ export const Order = () => {
                         </div>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Дата выезда</h4>
-                            <CheckDateInput {...register("check_out_date", { required: true })} selectedDate={check_out_date} onDateChange={handleCheckOutDateChange} firstDay={check_in_date || today} />
+                            <CheckDateInput {...register("check_out_date", { required: true })} selectedDate={check_out_date} onDateChange={handleCheckOutDateChange} firstDay={check_in_date && new Date(check_in_date.getTime() + (24 * 60 * 60 * 1000)) || today} />
                         </div>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Количество гостей</h4>

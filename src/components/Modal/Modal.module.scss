@@ -1,76 +1,78 @@
-@import "../../common/styles/sass/variables.scss";
-@import "../../common/styles/sass/mixins.scss";
+@import '../../common/styles/sass/variables.scss';
+@import '../../common/styles/sass/mixins.scss';
 
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba($color-8, 0.4);
-    z-index: 1;
-    transition: 0.5s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color-8, 0.4);
+  z-index: 1;
+  transition: 0.5s;
+  overflow-y: auto;
 
-    @include flex(row, center, center, nowrap);
+  @include flex(row, center, center, nowrap);
 
-    .modalContent {
-        background-color: $secondary;
-        border-radius: $radius-secondary;
-        padding: 30px 60px 80px 60px; 
-        width: 1440px;
-        height: 860px;
+  .modalContent {
+    background-color: $secondary;
+    border-radius: $radius-secondary;
+    padding: 30px 60px 80px 60px;
+    width: 1440px;
+    height: 860px;
+  }
 
+  .modalContentBooking {
+    width: 1440px;
+    border-radius: $radius-secondary;
+    position: absolute;
+    top: 40px;
+
+    &__header {
+      width: 100%;
+      height: 80px;
+      padding-left: 20px;
+      padding-right: 20px;
+      background-color: $color-8;
+      @include flex(row, space-between, center, nowrap);
     }
 
-    .modalContentBooking {
-        width: 1440px;
-        border-radius: $radius-secondary;
-
-        &__header {
-            width: 100%;
-            height: 80px;
-            padding-left: 20px;
-            padding-right: 20px; 
-            background-color: $color-8;
-            @include flex(row, space-between, center, nowrap);
-        }
-
-        &__header-right {
-            @include flex(row, flex-end, center, nowrap);
-        }
-
-        &__header-title {
-            @include typography(600, 30px, 36.6px, $secondary);
-        }
-
-        &__header-btn {
-            padding: 16px 26px;
-            background-color: $primary;
-            border-radius: $radius-secondary;
-            border: none;
-            margin-right: 27px;
-            @include typography(500, 16px, 19.36px,  $text-white);
-            font-family: "Inter", sans-serif;
-        }
+    &__header-right {
+      @include flex(row, flex-end, center, nowrap);
     }
+
+    &__header-title {
+      @include typography(600, 30px, 36.6px, $secondary);
+    }
+
+    &__header-btn {
+      padding: 16px 26px;
+      background-color: $primary;
+      border-radius: $radius-secondary;
+      border: none;
+      margin-right: 27px;
+      @include typography(500, 16px, 19.36px, $text-white);
+      font-family: 'Inter', sans-serif;
+    }
+  }
 }
 
 .modal--entering,
 .modal--entered {
-    opacity: 1;
+  opacity: 1;
 }
 
 .modal--entering .modal-content,
 .modal--entered .modal-content {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .modal--exiting,
 .modal--exited {
-    opacity: 0;
+  opacity: 0;
 }
 
 .modal--exiting .modal-content,
 .modal--exited .modal-content {
-    transform: translateY(-100px);
+  transform: translateY(-100px);
 }

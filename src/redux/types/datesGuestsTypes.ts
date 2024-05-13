@@ -3,10 +3,20 @@ export type ChildAge = {
   label: string
 }
 
+export type OptionItemType = {
+  value: string
+  label: string
+}
+
 export type GuestsType = {
   adults: number | null
   children: number | null
   childAges: Array<ChildAge | undefined>
+}
+
+export type DatesType = {
+  check_in_date: string | undefined
+  check_out_date: string | undefined
 }
 
 export type DatesGuestsObjectType = {
