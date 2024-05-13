@@ -13,15 +13,16 @@ type InfoObjectPropsType = {
     title: string
     check_in_time: string
     check_out_time: string
+    price: number
 };
 
-export const InfoObject = ({ title, check_in_time, check_out_time }: InfoObjectPropsType) => {
+export const InfoObject = ({ title, check_in_time, check_out_time, price }: InfoObjectPropsType) => {
 
     const [check_in_date, setCheckInDate] = useState<string | undefined>('');
     const [check_out_date, setCheckOutDate] = useState<string | undefined>('');
     const [formattedGuests, setFormattedGuests] = useState('');
     const [checkIn, setCheckIn] = useState(false);
-    const [animals, setAnimals] = useState("")
+    const [animals, setAnimals] = useState("");
 
     // const [selectedValue, setSelectedValue] = useState({});
     // const [optionsCheckInTime, setOptionsCheckInTime] = useState<OptionType[]>(generateTimeOptions(check_in_time))
@@ -67,12 +68,7 @@ export const InfoObject = ({ title, check_in_time, check_out_time }: InfoObjectP
 
     const handleOnChangeAnimals = ((newValue: string) => {
         setAnimals(newValue)
-    })
-
-    // const handleSelectCheckInTime = (newSelectedValue: OptionItemType) => {
-    //     console.log(newSelectedValue)
-    //     setSelectedValue(newSelectedValue)
-    // };
+    });
 
     return (
         <div className={style.infoObject}>
@@ -117,8 +113,9 @@ export const InfoObject = ({ title, check_in_time, check_out_time }: InfoObjectP
                     </div>
                 </div>
                 <div className={style["infoObject__block-price"]}>
-                    <InputBox title={"Общая стоимость за выбранный период"} name={"price"} value={"1500"} type={'number'} />
-                    <span className={style["infoObject__block-price--text"]}>BYN</span>
+                    <p className={style["infoObject__block-price--text"]}>Общая стоимость за выбранный период</p>
+                    <input className={style["infoObject__block-price--input"]} type={"number"} value={price} readOnly />
+                    <span className={style["infoObject__block-price--currency"]}>BYN</span>
                 </div>
             </div>
         </div>
