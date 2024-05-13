@@ -1,9 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import { InputBox } from "../InputBox";
 import style from "./InfoObject.module.scss";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { DatesType, GuestsType } from "../../../redux/types/datesGuestsTypes";
-import users from "../../../assets/icons/users.svg";
+import users from "../../../assets/icons/usersGray.svg";
 import calendar from "../../../assets/icons/calendarGray.svg";
 import { formatPeople } from "../../../utils/functions/formatPeople";
 import { SelectComponent } from "../../SelectComponent/SelectComponent";
@@ -20,6 +20,9 @@ export const InfoObject = ({ title, check_in_time, check_out_time }: InfoObjectP
     const [check_in_date, setCheckInDate] = useState<string | undefined>('');
     const [check_out_date, setCheckOutDate] = useState<string | undefined>('');
     const [formattedGuests, setFormattedGuests] = useState('');
+    const [checkIn, setCheckIn] = useState(false);
+    const [animals, setAnimals] = useState("")
+
     // const [selectedValue, setSelectedValue] = useState({});
     // const [optionsCheckInTime, setOptionsCheckInTime] = useState<OptionType[]>(generateTimeOptions(check_in_time))
 
@@ -57,6 +60,15 @@ export const InfoObject = ({ title, check_in_time, check_out_time }: InfoObjectP
         }
     }, []);
 
+    const handleOnChange = () => {
+        setCheckIn(!checkIn)
+        setAnimals("")
+    };
+
+    const handleOnChangeAnimals = ((newValue: string) => {
+        setAnimals(newValue)
+    })
+
     // const handleSelectCheckInTime = (newSelectedValue: OptionItemType) => {
     //     console.log(newSelectedValue)
     //     setSelectedValue(newSelectedValue)
@@ -81,27 +93,29 @@ export const InfoObject = ({ title, check_in_time, check_out_time }: InfoObjectP
                         <InputBox title={"Время выезда*"} name={"time"} value={formatCheckOutTime} type={'datetime'} readOnly />
                     </div>
                 </div>
-                {/* <div className={style["infoObject__block-date"]}> */}
-                {/* <div className={style["infoObject__block-date--checkIn"]}>
-                        <InputBox title={"Дата заезда"} name={"date"} value={check_in_date} type={'text'} readOnly />
-                        <img className={style["infoObject__block-date--image"]} alt={"check_in_date"} src={calendar} />
-                    </div> */}
-                {/* <div className={style["infoObject__block-date--checkOut"]}>
-                        <InputBox title={"Дата выезда"} name={"date"} value={check_out_date} type={'text'} readOnly />
-                        <img className={style["infoObject__block-date--image"]} alt={"check_out_date"} src={calendar} />
-                    </div> */}
-                {/* </div> */}
-                {/* <div className={style["infoObject__block-time"]}> */}
-                {/* <SelectComponent options={optionsCheckInTime} label={"Время заезда*"} /> */}
-                {/* <InputBox title={"Время заезда*"} name={"time"} value={"c 14:00"} type={'datetime'} /> */}
-                {/* <InputBox title={"Время выезда*"} name={"time"} value={check_out_time} type={'datetime'} /> */}
-                {/* </div> */}
-                <div className={style["infoObject__block-guests"]}>
-                    <InputBox title={"Количество гостей"} name={"guests"} value={formattedGuests} type={'text'} readOnly />
-                    <img className={style["infoObject__block-guests--image"]} alt={"guests"} src={users} />
-                </div>
+                <div className={style["infoObject__block-mediumItem"]}>
+                    <div className={style["infoObject__block-guests"]}>
+                        <InputBox title={"Количество гостей*"} name={"guests"} value={formattedGuests} type={'text'} readOnly />
+                        <img className={style["infoObject__block-guests--image"]} alt={"guests"} src={users} />
+                    </div>
+                    <div className={style["infoObject__block-animals"]}>
+                        {!checkIn ?
+                            <>
+                                <input className={style["infoObject__block-animals--checkbox"]} type="checkbox" onChange={handleOnChange} />
+                                <p className={style["infoObject__block-animals--text"]}>У меня есть животные</p>
+                            </> :
+                            <div className={`${style["infoObject__block-animals--checked"]} ${animals ? style['infoObject__block-animals--checkedSelect'] : ""}`}>
+                                <InputBox title={"У меня есть животные"}
+                                    name={"animals"} value={animals} type={'text'}
+                                    placeholder={"Количество, вид, возраст"}
+                                    onChange={handleOnChangeAnimals}
+                                />
+                                <input className={style["infoObject__block-animals--checkboxChecked"]} type="checkbox" onChange={handleOnChange} checked={checkIn} />
+                            </div>
+                        }
 
-                {/* <InputBox className={style["infoObject__block-animals"]} title={"Есть ли животные?"} name={"animals"} value={"1 взрослый лабрадор"} type={'text'} /> */}
+                    </div>
+                </div>
                 <div className={style["infoObject__block-price"]}>
                     <InputBox title={"Общая стоимость за выбранный период"} name={"price"} value={"1500"} type={'number'} />
                     <span className={style["infoObject__block-price--text"]}>BYN</span>
