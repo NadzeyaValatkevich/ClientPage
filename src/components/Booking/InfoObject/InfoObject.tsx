@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { InputBox } from "../InputBox";
 import style from "./InfoObject.module.scss";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DatesType, GuestsType } from "../../../redux/types/datesGuestsTypes";
 import users from "../../../assets/icons/usersGray.svg";
 import calendar from "../../../assets/icons/calendarGray.svg";
@@ -13,7 +13,7 @@ type InfoObjectPropsType = {
     title: string
     check_in_time: string
     check_out_time: string
-    price: number
+    price: number | undefined
 };
 
 export const InfoObject = ({ title, check_in_time, check_out_time, price }: InfoObjectPropsType) => {

@@ -1,5 +1,4 @@
 import Select, { CSSObjectWithLabel, SingleValue } from 'react-select';
-// import style from "./SelectComponent.module.scss";
 import { useState } from 'react';
 import { OptionItemType } from '../../redux/types/datesGuestsTypes';
 // import 'react-select/dist/react-select.css';
@@ -13,7 +12,7 @@ type SelectComponentPropsType = {
 };
 
 
-export const SelectComponent = ({ options, label, className, error }: SelectComponentPropsType) => {
+export const SelectComponent = ({ options, label, className }: SelectComponentPropsType) => {
 
     const [currentTimeIn, setCurrentTimeIn] = useState<string | null>(null);
 
