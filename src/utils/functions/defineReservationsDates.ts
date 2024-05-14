@@ -1,4 +1,4 @@
-import { ReservationItem } from "../../redux/types/rentalObjectTypes";
+import { ReservationItem } from '../../redux/types/rentalObjectTypes'
 
 // export const defineReservationsDates = (reservationsDates: ReservationItem[]) => {
 //  const disabledDates = reservationsDates.reduce((highlightedDates: any,  reservationsDate: ReservationItem)  => {
@@ -14,9 +14,8 @@ import { ReservationItem } from "../../redux/types/rentalObjectTypes";
 //             currentDate.setDate(currentDate.getDate() + 1);
 //         }
 
-
 //         dateRange.forEach((date) => {
-//             const formattedDate = date.toISOString().slice(0, 10); 
+//             const formattedDate = date.toISOString().slice(0, 10);
 //       highlightedDates[formattedDate] = { backgroundColor: "black", color: "white" };
 //     });
 //     return highlightedDates;
@@ -54,22 +53,22 @@ import { ReservationItem } from "../../redux/types/rentalObjectTypes";
 //     return highlightedDates;
 // }
 
+export const defineReservationsDates = (
+  reservationsDates: ReservationItem[],
+) => {
+  const highlightedDates: Date[] = []
 
+  reservationsDates.forEach((reservation) => {
+    const { check_in_date, check_out_date } = reservation
 
-export const defineReservationsDates = (reservationsDates: ReservationItem[]) => {
-    const highlightedDates: Date[] = [];
+    const currentDate = new Date(check_in_date)
+    const endDate = new Date(check_out_date)
 
-    reservationsDates.forEach((reservation) => {
-        const { check_in, check_out } = reservation;
+    while (currentDate <= endDate) {
+      highlightedDates.push(new Date(currentDate))
+      currentDate.setDate(currentDate.getDate() + 1)
+    }
+  })
 
-        const currentDate = new Date(check_in);
-        const endDate = new Date(check_out);
-
-        while (currentDate <= endDate) {
-            highlightedDates.push(new Date(currentDate));
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
-    });
-
-    return highlightedDates;
+  return highlightedDates
 }
