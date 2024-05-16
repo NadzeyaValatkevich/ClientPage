@@ -64,7 +64,7 @@ export const defineReservationsDates = (
     const currentDate = new Date(check_in_date)
     const endDate = new Date(check_out_date)
 
-    while (currentDate <= endDate) {
+    while (currentDate < endDate) {
       highlightedDates.push(new Date(currentDate))
       currentDate.setDate(currentDate.getDate() + 1)
     }

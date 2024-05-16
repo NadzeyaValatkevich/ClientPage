@@ -1,0 +1,19 @@
+.prevArrow,
+.nextArrow {
+  width: 49px;
+  height: 15px;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  top: 50%;
+}
+
+.prevArrow {
+  background-image: url(../../assets/icons/leftArrow.svg);
+  left: 22px;
+}
+
+.nextArrow {
+  background-image: url(../../assets/icons/rightArrow.svg);
+  right: 22px;
+}

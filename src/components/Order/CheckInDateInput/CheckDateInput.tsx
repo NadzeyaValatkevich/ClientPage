@@ -36,6 +36,7 @@ export const CheckDateInput = ({ selectedDate, onDateChange, firstDay }: CheckDa
                 onChange={onDateChange}
                 customInput={<CustomInput />}
                 minDate={firstDay}
+                maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
             />
         </div>
     )

@@ -2,6 +2,8 @@ import style from "./Header.module.scss";
 import styleContainer from "../../common/styles/Container.module.scss";
 import { Logo } from "../Logo";
 import { useAppSelector } from "../../utils/hooks";
+import { NavLink } from "react-router-dom";
+// import BackIcon from "../../assets/icons/back.svg";
 
 export const Header = () => {
     const { name, booking_photo } = useAppSelector(state => state.mainObject);
@@ -13,11 +15,20 @@ export const Header = () => {
             </div>
             <div className={style.background}></div>
             <div className={`${styleContainer.container} ${style.headerContainer}`}>
-                <div className={style["header_logo"]}>
-                    <Logo />
+                <div className={style["headerContainer_info"]}>
+                    {/* <div className={style["headerContainer_info-backIcon"]}>
+                        <NavLink to="/main_object/2" className={style.one}>
+                            <img src={BackIcon} alt="Arrow back" />
+                        </NavLink>
+                        <p>Назад</p>
+                    </div> */}
+                    <NavLink to="/main_object/2" className={style["headerContainer_info-backIconLogo"]}>
+                        <div className={style["headerContainer_info-logo"]}>
+                            <Logo />
+                        </div>
+                    </NavLink>
                 </div>
                 <h1 className={style.title}>{name ? name : "Название усадьбы"}</h1>
-                {/* <h1 className={style.title}>{"Название усадьбы bvbvbvbvb vnvnvnvnv nnvnnvvnvn hfhfhffhfh cncncncncn xgxgxgxgxg chchchchc "}</h1> */}
             </div>
         </div>
     )

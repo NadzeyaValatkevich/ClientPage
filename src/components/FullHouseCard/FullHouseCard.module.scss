@@ -12,6 +12,7 @@
     max-width: 640px;
     height: 700px;
     cursor: pointer;
+    position: relative;
 
     .imageBlock {
       width: 100%;
@@ -28,10 +29,6 @@
       font-size: 12px;
     }
 
-    // & :global(.slick-slider) {
-
-    // & :global(.slick-slider) {
-
     & :global(.slick-list) {
       margin: 0 -20px;
       // & :global(.slick-track) {
@@ -41,9 +38,6 @@
       }
       // }
     }
-
-    // }
-    // }
   }
 
   .houseBlockRight {
@@ -145,21 +139,23 @@
       }
 
       .datePickerDiv {
-        width: 356px;
-        height: 395px;
+        // width: 356px;
+        // height: 395px;
         border-radius: 16px;
         box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
         position: relative;
         top: 30px;
         left: -35%;
         background-color: $text-white;
+        z-index: 1;
       }
 
-      .datePickerDiv :global(.react-datepicker__day--selected),
-      .datePickerDiv :global(.react-datepicker__day--keyboard-selected),
-      .datePickerDiv :global(.react-datepicker__day:hover) {
-        background-color: transparent !important;
-        color: inherit !important;
+      .datePickerDiv :global(.react-datepicker__day--highlighted) {
+        background-color: $primary;
+      }
+
+      .datePickerDiv :global(.react-datepicker__month) {
+        pointer-events: none;
       }
     }
     .priceBlock {

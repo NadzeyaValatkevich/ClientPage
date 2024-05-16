@@ -128,9 +128,9 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
             {isOpen && (
                 <div className={style.guestsSelectBlock} ref={modalRef}>
                     <SelectCountPeople title={"Количество взрослых"} value={adults} onIncrement={handleAdultIncrement}
-                        onDecrement={handleAdultDecrement} />
+                        onDecrement={handleAdultDecrement} disabled={adults === 50} />
                     <SelectCountPeople title={"Количество детей"} value={children} onIncrement={handleChildIncrement}
-                        onDecrement={handleChildDecrement} />
+                        onDecrement={handleChildDecrement} disabled={!adults || children === 20} />
                     {childAges.map((age, index) => (
                         <SelectAgeChildren key={index} selectedAge={age}
                             onChangeAge={(newAge: OptionType | undefined) => handleAgeChange(index, newAge)}
@@ -139,7 +139,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
                             error={childAgeErrors[index]}
                         />
                     ))}
-                    <Button className={style["customDropDown__btn"]} value={"Готово"} onClick={handleButtonClick} />
+                    <Button className={!adults ? `${style["customDropDown__btn"]} ${style["customDropDown__btn-disabled"]}` : style["customDropDown__btn"]} value={"Готово"} onClick={handleButtonClick} />
                 </div>
             )}
 
