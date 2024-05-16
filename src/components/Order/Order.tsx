@@ -10,7 +10,7 @@ import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObj
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { formatDashDate } from "../../utils/functions/formatDate";
 import { CheckDateInput } from "./CheckInDateInput";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { formatPeople } from "../../utils/functions/formatPeople";
 
 export const Order = () => {
@@ -25,10 +25,24 @@ export const Order = () => {
     const navigate = useNavigate();
 
     const { id } = useAppSelector(state => state.mainObject);
+    const location = useLocation();
 
     const [searchParams] = useSearchParams();
 
-    const { handleSubmit, formState: { errors }, clearErrors, setValue, register } = useForm();
+    const { handleSubmit, formState: { errors }, clearErrors, setValue, register, reset } = useForm();
+
+    useEffect(() => {
+
+        if (location.pathname === `/main_object/${id}`) {
+            reset({});
+            setCheckInDate(null);
+            setCheckOutDate(null);
+            setGuests({ adults: 0, children: 0, childAges: [] });
+            setFormattedValue("");
+        }
+    }, [id, location.pathname]);
+
+    console.log(check_in_date)
 
     const handleCheckInDateChange = (date: Date) => {
         setCheckInDate(date);
@@ -52,8 +66,6 @@ export const Order = () => {
                 check_out_date: queryParams.get('check_out_date') ?? "",
             };
 
-            console.log(queryParams.get('people_amount'))
-
             queryParamsData.check_in_date && setCheckInDate(new Date(queryParamsData.check_in_date));
             queryParamsData.check_out_date && setCheckOutDate(new Date(queryParamsData.check_out_date));
 
@@ -65,11 +77,10 @@ export const Order = () => {
             }
         }
 
-    }, [])
+    }, []);
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-
-        console.log(data.check_in_date)
+        console.log(data)
 
         const children = data.guests.childAges.reduce((accum: number, el: ChildAge) => {
             el.value >= 2 && (accum += 1);

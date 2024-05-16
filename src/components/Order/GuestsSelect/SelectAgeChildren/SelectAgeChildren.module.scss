@@ -1,28 +1,37 @@
-@import "../../../../common/styles/sass/variables.scss";
-@import "../../../../common/styles/sass/mixins.scss";
+@import '../../../../common/styles/sass/variables.scss';
+@import '../../../../common/styles/sass/mixins.scss';
 
 .age__select {
-    @include flex(row, space-between, center, nowrap);
-    border-radius: $radius-secondary;
-    border: 0.5px solid $primary;
+  @include flex(row, space-between, center, nowrap);
+  border-radius: $radius-secondary;
+  border: 0.5px solid $primary;
+  height: 38px;
+  margin-bottom: 20px;
+  overflow: visible;
+  // position: relative;
+  // z-index: 10;
+
+  & :global(.custom-select__control) {
     height: 38px;
-    margin-bottom: 20px;  
+  }
+
+  & :global(.custom-select__menu) {
+  }
 }
 
 .age__label {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .select {
-    max-width: 110px;
-    width: 100%;
+  max-width: 110px;
+  width: 100%;
 }
 
 .select span {
-    display: none;
+  display: none;
 }
 
 // .custom-select__menu {
 //   z-index: 10;
 // }
-

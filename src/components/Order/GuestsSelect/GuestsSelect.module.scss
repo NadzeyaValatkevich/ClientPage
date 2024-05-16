@@ -1,61 +1,68 @@
-@import "../../../common/styles/sass/variables.scss";
-@import "../../../common/styles/sass/mixins.scss";
+@import '../../../common/styles/sass/variables.scss';
+@import '../../../common/styles/sass/mixins.scss';
 
 .customDropDown {
-    max-width: 288px;
+  max-width: 288px;
+  width: 100%;
+  position: relative;
+  padding: 25px 20px;
+  background-color: $text-white;
+  border: solid 1px $text-secondary;
+  border-radius: $radius-secondary;
+
+  &--selected {
+    border-color: $primary;
+    box-shadow: $shadow-1;
+  }
+
+  .customDropDown__item {
+    @include flex(row, space-between, center, nowrap);
+
+    &-input {
+      border: none;
+      @include typography(500, 14px, 17.07px, $text-primary);
+    }
+
+    &-input:focus {
+      outline: none;
+    }
+
+    &-image {
+      cursor: pointer;
+    }
+  }
+
+  &__btn {
+    max-width: 122px;
     width: 100%;
-    position: relative;
-    padding: 25px 20px;
-    background-color: $text-white;
-    border: solid 1px $text-secondary;
-    border-radius: $radius-secondary;
+    padding: 16px 26px;
+    background-color: $primary;
+    align-self: flex-end;
 
-    &--selected {
-            border-color: $primary;
-            box-shadow: $shadow-1;
-        }
-
-    .customDropDown__item {
-        @include flex(row, space-between, center, nowrap);
-
-        &-input {
-            border: none;
-            @include typography(500, 14px, 17.07px, $text-primary)
-        }
-
-        &-input:focus {
-            outline: none;
-        }
-
-        &-image {
-            cursor: pointer;
-        }
+    &:not(&-disabled):hover {
+      background-color: $color-8;
+      transition: all 0.5s ease 0s;
     }
+  }
 
-    &__btn {
-        max-width: 122px;
-        width: 100%;
-        padding: 16px 26px;
-        background-color: $primary;
-        align-self: flex-end;
-    }
+  &__btn-disabled {
+    background-color: $text-secondary;
+    border: none;
+    cursor: default;
+  }
 }
 
 .guestsSelectBlock {
-    width: 356px;
-    padding: 10px 14px;
-    border-radius: $radius-primary;
-    border: 0.5px solid $text-secondary;
-    box-shadow: $shadow-1;
-    background-color: $text-white;
-    position: absolute;
-    // position: relative;
-    left: -34px;
-    top: 75px;
-    display: flex;
-    flex-direction: column;
-    max-height: 380px;
-    // overflow-y: auto;
-    overflow-y: scroll;
-    // z-index: 1;
+  width: 356px;
+  padding: 10px 14px;
+  border-radius: $radius-primary;
+  border: 0.5px solid $text-secondary;
+  box-shadow: $shadow-1;
+  background-color: $text-white;
+  position: absolute;
+  left: -34px;
+  top: 75px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
 }

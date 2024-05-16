@@ -2,7 +2,7 @@ import style from "./FullHouseCard.module.scss";
 import { features as fullFeatures } from '../HouseCard/HouseCard';
 import { Carousel } from "../Carousel";
 import calendar from "../../assets/icons/bigCalendar.svg";
-
+import { PrevArrow, NextArrow } from '../CustomArrows/CustomArrows';
 import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
 import { useEffect, useRef, useState } from "react";
@@ -25,26 +25,15 @@ export const FullHouseCard = ({ rentalObject, modalActive }: FullHouseCardPropsT
         setDatePickerVisible(prevState => !prevState)
     };
 
-    // const handleOutsideClick = (event: MouseEvent) => {
-    //     if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
-    //         setDatePickerVisible(false);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     document.addEventListener("mousedown", handleOutsideClick);
-    //     return () => {
-    //         document.removeEventListener("mousedown", handleOutsideClick);
-    //     };
-    // }, []);
-
     const houseFullPhotosSettings = {
         slidesToShow: 1,
         slidesToScroll: 1,
         speed: 900,
         dots: true,
         infinite: true,
-        arrows: false,
+        arrows: true,
+        prevArrow: <PrevArrow onClick={() => { }} />,
+        nextArrow: <NextArrow onClick={() => { }} />,
     };
 
 
@@ -106,7 +95,7 @@ export const FullHouseCard = ({ rentalObject, modalActive }: FullHouseCardPropsT
                 <div className={style.calendarBlock}>
                     <p className={style.calendarBlockTitle}>Свободные даты:</p>
                     <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
-                    {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} /></div>}
+                    {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} setDatePickerVisible={setDatePickerVisible} /></div>}
                 </div>
                 {rentalObject && rentalObject.price ?
                     <div className={style.priceBlock}>

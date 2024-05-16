@@ -5,10 +5,11 @@ import { defineReservationsDates } from "../../utils/functions/defineReservation
 import { ReservationItem } from "../../redux/types/rentalObjectTypes";
 
 type CalendarPropsType = {
-    reservations: ReservationItem[]
+    reservations: ReservationItem[],
+    setDatePickerVisible: (value: boolean) => void
 };
 
-export const Calendar = ({ reservations }: CalendarPropsType) => {
+export const Calendar = ({ reservations, setDatePickerVisible }: CalendarPropsType) => {
 
     const startDay = new Date();
 
@@ -35,16 +36,21 @@ export const Calendar = ({ reservations }: CalendarPropsType) => {
         );
     };
 
+    const disableAllDates = true;
+
     return (
         <DatePicker
             selected={startDay}
             locale={"ru"}
             minDate={new Date()}
-            maxDate={new Date(new Date().setMonth(new Date().getMonth() + 6))}
+            maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
             onChange={() => { }}
             highlightDates={defineReservationsDates(reservations)}
             className={styles.datePickerDiv}
             renderCustomHeader={renderCustomHeader}
+            onClickOutside={() => setDatePickerVisible(false)}
+            excludeDates={[]}
+            disabled={disableAllDates}
             readOnly
             inline
         />

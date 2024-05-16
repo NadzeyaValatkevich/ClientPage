@@ -5,7 +5,7 @@ type ButtonProps = {
     value?: any,
     onClick?: () => void,
     className?: string,
-    type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+    type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"],
     disabled?: boolean
 };
 
