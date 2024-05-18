@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { fetchMainObject } from "../../redux/thunks/mainObjectThunk";
 import { fetchRentalObjects } from "../../redux/thunks/rentalObjectsThunk";
 
-export const Layout = () => {
+export const Layout = ({ scrollToFilteredObjects }: any) => {
     const dispatch = useAppDispatch();
 
     const { id } = useParams();
@@ -20,7 +20,7 @@ export const Layout = () => {
     return (
         <>
             <Header />
-            <Order />
+            <Order scrollToFilteredObjects={scrollToFilteredObjects} />
             <Outlet />
             <Footer />
         </>

@@ -9,6 +9,7 @@ import tv from "../../assets/icons/tv.svg";
 import kitchen from "../../assets/icons/kitchen.svg";
 import barbecue from "../../assets/icons/barbecue.svg";
 import child from "../../assets/icons/child.svg";
+import { NextArrow, PrevArrow } from "../CustomArrows/CustomArrows";
 
 type CommonHouseCardPropsType = {
     children?: ReactNode,
@@ -37,7 +38,9 @@ export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) =
         speed: 900,
         dots: true,
         infinite: true,
-        arrows: false,
+        arrows: true,
+        prevArrow: <PrevArrow onClick={() => { }} />,
+        nextArrow: <NextArrow onClick={() => { }} />,
         // responsive: [
         //     {
         //         breakpoint: 1270,

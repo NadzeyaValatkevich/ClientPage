@@ -11,13 +11,16 @@ import { Booking } from "../../components/Booking";
 import { useSearchParams } from "react-router-dom";
 import { DatesGuestsObjectRequestType } from "../../redux/types/datesGuestsTypes";
 import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
+import React from "react";
 
-export const FilteredRentalObjects = () => {
+export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {
     const { results, count } = useAppSelector(state => state.filteredRentalObjects);
+    const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
+    const [bookingHouse, setBookingHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
     const [modalBookingActive, setModalBookingActive] = useState(false);
-    // const [check_in_date, setCheckInDate] = useState<Date | null | string>(null);
-    // const [check_out_date, setCheckOutDate] = useState<Date | null | string>(null);
+
+    console.log(props)
 
     const [searchParams] = useSearchParams();
 
@@ -34,55 +37,62 @@ export const FilteredRentalObjects = () => {
         };
 
         dispatch(fetchFilteredRentalObjects(queryParamsData));
-        // setCheckInDate(queryParamsData.check_in_date);
-        // setCheckOutDate(queryParamsData.check_out_date);
+    }, [searchParams, dispatch]);
 
-    }, [searchParams, dispatch])
-
-    const onClickHandler = () => {
-        setModalActive(true)
+    const onClickHandler = (house: RentalObject) => {
+        setActiveHouse(house);
+        setModalActive(true);
     };
 
     const onCloseHandler = () => {
-        setModalActive(false)
+        setModalActive(false);
+        setActiveHouse(null);
     };
 
-    const onClickBookingHandler = () => {
-        setModalBookingActive(true)
+    const onClickBookingHandler = (house: RentalObject) => {
+        setBookingHouse(house);
+        setModalBookingActive(true);
     };
 
     const onCloseBookingHandler = () => {
-        setModalBookingActive(false)
+        setModalBookingActive(false);
+        setBookingHouse(null);
     };
 
+    console.log(activeHouse)
+
     return (
-        <div className={style.rentalObjectsBlock}>
+        <div className={style.rentalObjectsBlock} ref={ref}>
             <div className={styleContainer.container}>
                 {count === 0 ?
                     <div className={style.infoText}>К сожалению, подходящих домиков для бронирования на выбранные даты и количество гостей не найдено.
                         Попробуйте изменить даты или количество гостей.</div>
-                    : results && results.length >= 1 && results.map((el: RentalObject) => {
-                        return <CommonHouseCard key={el.id} house={el}>
+                    : results && results.length >= 1 && results.map((el: RentalObject) => (
+                        <CommonHouseCard key={el.id} house={el}>
                             <div className={style.priceBlock}>
                                 <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
                                 <p className={style.price}>{el.price}<span>BYN</span></p>
                             </div>
                             <div className={style.btnsBlock}>
-                                <Button value={"Забронировать"} className={style.btnBook} onClick={onClickBookingHandler} />
-                                <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
+                                <Button value={"Забронировать"} className={style.btnBook} onClick={() => onClickBookingHandler(el)} />
+                                <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
                             </div>
-                            {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
-                                <FullHouseCard rentalObject={el} modalActive={modalActive} />
-                            </Modal>}
-
-                            {modalBookingActive && <Modal active={modalBookingActive} onClose={onCloseBookingHandler} setActive={setModalBookingActive} type={"bookingModal"}>
-                                <Booking modalBookingActive={modalBookingActive} house={el} />
-                            </Modal>}
-
                         </CommonHouseCard>
-                    })
+                    ))
                 }
             </div>
+
+            {modalActive && activeHouse && (
+                <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
+                    <FullHouseCard rentalObject={activeHouse} modalActive={modalActive} />
+                </Modal>
+            )}
+
+            {modalBookingActive && bookingHouse && (
+                <Modal active={modalBookingActive} onClose={onCloseBookingHandler} setActive={setModalBookingActive} type={"bookingModal"}>
+                    <Booking modalBookingActive={modalBookingActive} house={bookingHouse} />
+                </Modal>
+            )}
         </div>
-    )
-}
+    );
+});
