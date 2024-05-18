@@ -5,7 +5,7 @@ import { ru } from "date-fns/locale/ru";
 import style from "./CheckDateInput.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
 import calendarGrayIcon from "../../../assets/icons/calendarGray.svg";
-import React from "react";
+import { forwardRef } from "react";
 
 type CheckDateInputPropsType = {
     selectedDate: Date | null | undefined,
@@ -15,9 +15,9 @@ type CheckDateInputPropsType = {
 
 registerLocale("ru", ru);
 
-export const CheckDateInput = ({ selectedDate, onDateChange, firstDay }: CheckDateInputPropsType) => {
+export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsType>(({ selectedDate, onDateChange, firstDay }, ref) => {
 
-    const CustomInput = React.forwardRef((props: any, ref: any) => {
+    const CustomInput = forwardRef<HTMLInputElement, any>((props: any, ref: any) => {
         return (
             <div className={selectedDate ? `${style.customDatePickDiv} ${style["customDatePickDiv-selected"]}` : style.customDatePickDiv} onClick={props.onClick}>
                 <input className={style.customInput} ref={ref} value={props.value || props.placeholder} onChange={props.onChange} />
@@ -34,10 +34,10 @@ export const CheckDateInput = ({ selectedDate, onDateChange, firstDay }: CheckDa
                 locale={"ru"}
                 dateFormat="dd.MM.yyyy"
                 onChange={onDateChange}
-                customInput={<CustomInput />}
+                customInput={<CustomInput ref={ref} />}
                 minDate={firstDay}
                 maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
             />
         </div>
     )
-}
+})

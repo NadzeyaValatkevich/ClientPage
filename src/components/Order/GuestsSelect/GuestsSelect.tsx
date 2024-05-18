@@ -7,6 +7,8 @@ import { SelectAgeChildren } from "./SelectAgeChildren";
 import { Button } from "../../Button/Button";
 import { formatPeople } from "../../../utils/functions/formatPeople";
 import { ChildAge, GuestsType } from "../../../redux/types/datesGuestsTypes";
+import { useLocation } from "react-router-dom";
+import { useAppSelector } from "../../../utils/hooks";
 
 export type OptionType = {
     value: number;
@@ -34,6 +36,7 @@ type GuestsSelectPropsType = {
 }
 
 export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedValue }: GuestsSelectPropsType, ref: any) => {
+    const { id } = useAppSelector(state => state.mainObject);
 
     console.log(ref)
 
@@ -44,7 +47,16 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
     const modalRef = useRef<HTMLDivElement>(null);
 
-    // console.log(ref)
+    const location = useLocation();
+
+    useEffect(() => {
+
+        if (location.pathname === `/main_object/${id}`) {
+            setAdults(0);
+            setChildren(0);
+            setChildAges([])
+        }
+    }, [id, location.pathname]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

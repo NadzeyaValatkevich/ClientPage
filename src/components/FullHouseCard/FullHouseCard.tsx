@@ -14,11 +14,13 @@ export type FullHouseCardPropsType = {
 };
 
 export const FullHouseCard = ({ rentalObject, modalActive }: FullHouseCardPropsType) => {
+
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
     // const [reservationDate, setReservationDate] = useState();
 
-    const { name, images, description, rooms, max_places, reservations } = rentalObject;
+    const { name, images, description, rooms, max_places, reservations, status } = rentalObject;
 
+    // console.log(rentalObject)
     const datePickerRef = useRef<HTMLDivElement>(null);
 
     const handleImgClick = () => {
@@ -95,7 +97,7 @@ export const FullHouseCard = ({ rentalObject, modalActive }: FullHouseCardPropsT
                 <div className={style.calendarBlock}>
                     <p className={style.calendarBlockTitle}>Свободные даты:</p>
                     <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
-                    {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} setDatePickerVisible={setDatePickerVisible} /></div>}
+                    {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} setDatePickerVisible={setDatePickerVisible} status={status.title} /></div>}
                 </div>
                 {rentalObject && rentalObject.price ?
                     <div className={style.priceBlock}>

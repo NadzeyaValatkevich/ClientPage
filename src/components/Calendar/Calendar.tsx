@@ -1,15 +1,16 @@
 import DatePicker, { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Calendar.module.scss";
-import { defineReservationsDates } from "../../utils/functions/defineReservationsDates";
+import { createYearAheadDates, defineReservationsDates } from "../../utils/functions/defineReservationsDates";
 import { ReservationItem } from "../../redux/types/rentalObjectTypes";
 
 type CalendarPropsType = {
     reservations: ReservationItem[],
-    setDatePickerVisible: (value: boolean) => void
+    setDatePickerVisible: (value: boolean) => void,
+    status: string
 };
 
-export const Calendar = ({ reservations, setDatePickerVisible }: CalendarPropsType) => {
+export const Calendar = ({ reservations, setDatePickerVisible, status }: CalendarPropsType) => {
 
     const startDay = new Date();
 
@@ -36,7 +37,9 @@ export const Calendar = ({ reservations, setDatePickerVisible }: CalendarPropsTy
         );
     };
 
-    const disableAllDates = true;
+    // const disableAllDates = true;
+
+    const allDates = status === "Закрыт к бронированию" ? createYearAheadDates() : [];
 
     return (
         <DatePicker
@@ -45,12 +48,14 @@ export const Calendar = ({ reservations, setDatePickerVisible }: CalendarPropsTy
             minDate={new Date()}
             maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
             onChange={() => { }}
-            highlightDates={defineReservationsDates(reservations)}
+            // highlightDates={defineReservationsDates(reservations)}
+            highlightDates={status === "Закрыт к бронированию" ? allDates : defineReservationsDates(reservations)}
             className={styles.datePickerDiv}
             renderCustomHeader={renderCustomHeader}
             onClickOutside={() => setDatePickerVisible(false)}
-            excludeDates={[]}
-            disabled={disableAllDates}
+            // excludeDates={[]}
+            // disabled={disableAllDates}
+            excludeDates={status === "Закрыт к бронированию" ? allDates : []}
             readOnly
             inline
         />

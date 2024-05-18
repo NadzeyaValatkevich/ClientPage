@@ -154,6 +154,10 @@
         background-color: $primary;
       }
 
+      // .datePickerDiv :global(.react-datepicker__day--) {
+      //   // opacity: 50%;
+      // }
+
       .datePickerDiv :global(.react-datepicker__month) {
         pointer-events: none;
       }

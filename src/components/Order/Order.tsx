@@ -13,7 +13,7 @@ import { CheckDateInput } from "./CheckInDateInput";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { formatPeople } from "../../utils/functions/formatPeople";
 
-export const Order = () => {
+export const Order = ({ scrollToFilteredObjects }: any) => {
     const [check_in_date, setCheckInDate] = useState<Date | null | undefined>(null);
     const [check_out_date, setCheckOutDate] = useState<Date | null | undefined>(null);
     const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
@@ -32,6 +32,10 @@ export const Order = () => {
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register, reset } = useForm();
 
     useEffect(() => {
+        scrollToFilteredObjects();
+    }, [location]);
+
+    useEffect(() => {
 
         if (location.pathname === `/main_object/${id}`) {
             reset({});
@@ -40,9 +44,7 @@ export const Order = () => {
             setGuests({ adults: 0, children: 0, childAges: [] });
             setFormattedValue("");
         }
-    }, [id, location.pathname]);
-
-    console.log(check_in_date)
+    }, [id, location.pathname, reset]);
 
     const handleCheckInDateChange = (date: Date) => {
         setCheckInDate(date);
@@ -77,10 +79,9 @@ export const Order = () => {
             }
         }
 
-    }, []);
+    }, [check_in_date, check_out_date, searchParams]);
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data)
 
         const children = data.guests.childAges.reduce((accum: number, el: ChildAge) => {
             el.value >= 2 && (accum += 1);
@@ -104,6 +105,7 @@ export const Order = () => {
 
         dispatch(setDatesGuestsObject(transformedData));
         localStorage.setItem('guests', JSON.stringify(data.guests));
+
         dispatch(fetchFilteredRentalObjects(filteredData));
 
         const queryParams = new URLSearchParams({

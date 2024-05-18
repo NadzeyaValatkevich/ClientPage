@@ -28,15 +28,18 @@ export const features: any = [
 
 export const Main = () => {
     const { results } = useAppSelector(state => state.rentalObjects);
+    const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
     // const [modalOrderActive, setModalOrderActive] = useState(false);
 
-    const onClickHandler = () => {
+    const onClickHandler = (house: RentalObject) => {
+        setActiveHouse(house)
         setModalActive(true)
     };
 
     const onCloseHandler = () => {
         setModalActive(false)
+        setActiveHouse(null)
     };
 
     return (
@@ -44,56 +47,15 @@ export const Main = () => {
             <div className={styleContainer.container}>
                 {results && results.map((el: RentalObject) => {
                     return <CommonHouseCard key={el.id} house={el}>
-                        {/* <div className={style["houseBlock-right"]}> */}
-                        {/* <p className={style.description}>
-                                {el.description}
-                            </p> */}
-                        {/* <div className={style.places}>
-                                <div className={style.rooms}>
-                                    <p>Комнаты:</p>
-                                    <p>{countRooms(el.rooms)}</p>
-                                </div>
-                                <div className={style.beds}>
-                                    <p>Спальные места: </p>
-                                    <p>{el.max_places}</p> */}
-                        {/* <p>{countSleepingPlaces(el.total_beds)}</p>
-                                </div>
-                            </div> */}
-                        {/* <div className={style.featuresBlock}>
-                                <p className={style.featuresTitle}>Удобства:</p>
-                                <div className={style.features}>
-                                    {features.map((el: any) => {
-                                        return (
-                                            <div key={el.id} className={style.featuresItem}>
-                                                <img alt={el.title} src={el.icon} />
-                                                <p>{el.title}</p>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            </div> */}
-                        {/* <div className={style.pricesBlock}>
-                                <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>
-                                <div className={style.prices}>
-                                    <p>будни от <span>150 BYN</span></p>
-                                    <p>выходные от <span>250 BYN</span></p>
-                                </div>
-                            </div> */}
                         <div className={style.btnsBlock}>
-                            {/* <Button value={"Забронировать"} className={style.btnBook} onClick={onClickOrderHandler} /> */}
-                            <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
+                            <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
                         </div>
-                        {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
-                            <FullHouseCard rentalObject={el} modalActive={modalActive} />
-                        </Modal>}
-
-                        {/* {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive} type={"bookingModal"}>
-                                <Booking />
-                            </Modal>} */}
-                        {/* </div> */}
                     </CommonHouseCard>
                 })}
             </div>
+            {modalActive && activeHouse && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
+                <FullHouseCard rentalObject={activeHouse} modalActive={modalActive} />
+            </Modal>}
         </div>
     )
 }

@@ -2,11 +2,28 @@ import style from "./Header.module.scss";
 import styleContainer from "../../common/styles/Container.module.scss";
 import { Logo } from "../Logo";
 import { useAppSelector } from "../../utils/hooks";
-import { NavLink } from "react-router-dom";
-// import BackIcon from "../../assets/icons/back.svg";
+import { NavLink, useLocation, useParams } from "react-router-dom";
+import BackIcon from "../../assets/icons/back.svg";
+import { useEffect, useState } from "react";
 
 export const Header = () => {
+    const [visibilityBtnBack, setVisibilityBtnBack] = useState(false);
     const { name, booking_photo } = useAppSelector(state => state.mainObject);
+
+    const { id } = useParams();
+
+    const location = useLocation();
+
+    console.log(location.pathname)
+
+    useEffect(() => {
+
+        if (location.pathname !== `/main_object/${id}`) {
+            setVisibilityBtnBack(true)
+        } else {
+            setVisibilityBtnBack(false)
+        }
+    }, [id, location.pathname]);
 
     return (
         <div className={style.header}>
@@ -16,12 +33,12 @@ export const Header = () => {
             <div className={style.background}></div>
             <div className={`${styleContainer.container} ${style.headerContainer}`}>
                 <div className={style["headerContainer_info"]}>
-                    {/* <div className={style["headerContainer_info-backIcon"]}>
-                        <NavLink to="/main_object/2" className={style.one}>
+                    {visibilityBtnBack &&
+                        <NavLink to="/main_object/2" className={style["headerContainer_info-backIcon"]}>
                             <img src={BackIcon} alt="Arrow back" />
+                            <p className={style["headerContainer_info-text"]}>Назад</p>
                         </NavLink>
-                        <p>Назад</p>
-                    </div> */}
+                    }
                     <NavLink to="/main_object/2" className={style["headerContainer_info-backIconLogo"]}>
                         <div className={style["headerContainer_info-logo"]}>
                             <Logo />
