@@ -6,4 +6,4 @@
 // };
 
 // export const API_HOST = getEnvVar("REACT_APP_HOST");
-export const API_HOST = "localhost";
+export const API_HOST = 'https://dev.vitaem.app'
