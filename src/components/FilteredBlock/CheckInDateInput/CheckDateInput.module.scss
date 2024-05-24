@@ -34,10 +34,36 @@
   @include typography(500, 14px, 17.07px, $text-primary);
 }
 
+:global(.react-datepicker-popper) {
+  background-color: $text-white;
+  margin-bottom: 20px;
+  z-index: 10;
+}
+
 :global(.react-datepicker__header) {
   background-color: $text-white;
   margin-bottom: 20px;
   // padding-top: 10px;
+}
+
+:global(.react-datepicker__header__dropdown) {
+  margin-bottom: 10px;
+}
+
+:global(.react-datepicker__year-select),
+:global(.react-datepicker__month-select) {
+  border: 1px solid $text-secondary;
+  border-radius: 6px;
+  padding: 8px 6px 8px 10px;
+  height: 41px;
+}
+
+:global(.react-datepicker__year-select) {
+  width: 75px;
+}
+
+:global(.react-datepicker__month-select) {
+  width: 103px;
 }
 
 :global(.react-datepicker__month-container) {
@@ -47,7 +73,7 @@
 
 :global(.react-datepicker) {
   // width: 356px;
-  height: 395px;
+  min-height: 395px;
   border-radius: $radius-primary;
   box-shadow: $shadow-1;
 }
@@ -86,7 +112,7 @@
 :global(.react-datepicker__current-month) {
   @include typography(600, 20px, 32px, rgba(10, 10, 10, 1));
   font-family: 'Inter', sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 :global(.react-datepicker__day-name) {
