@@ -19,7 +19,7 @@ export const PersonalInfo = () => {
     const [errors, setErrors] = useState<{ lastName: string, name: string, surname: string }>({
         lastName: '',
         name: '',
-        surname: '',
+        surname: ''
     });
 
     // const onChangeLastName = (value: string) => {
@@ -71,11 +71,13 @@ export const PersonalInfo = () => {
             [fieldName]: value
         }));
 
+        // if (typeof value !== Date) {
         const error = validateField(fieldName, value);
         setErrors(prevState => ({
             ...prevState,
             [fieldName]: error
-        }));
+        }))
+        // }
     };
 
     const handleBlur = (fieldName: string, value: string) => {
@@ -85,8 +87,6 @@ export const PersonalInfo = () => {
             [fieldName]: error
         }));
     };
-
-
 
     return (
         <div className={style.personalInfo}>
@@ -104,12 +104,12 @@ export const PersonalInfo = () => {
                     placeholder={"Введите отчество"} onChange={(value) => handleChange('surname', value)} img={popOver} imgActive={popOverActive}
                     onBlur={() => handleBlur('surname', values.surname)} error={errors.surname} requirementsText={SURNAME_REQ}
                 />
-                <InputBox className={style.item} title={"Гражданство*"} name={"country"} value={"Республика Беларусь"} type={'text'} />
                 <div className={style.item}>
                     <h4 className={style.titleItem}>Дата рождения</h4>
-                    <CheckDateInput selectedDate={birthdayDay} onDateChange={handleChangeBirthdayDay} />
+                    <CheckDateInput selectedDate={birthdayDay} onDateChange={handleChangeBirthdayDay} type={"birthday"} />
                 </div>
-                {/* <InputBox className={style.item} title={"Дата рождения"} name={"date"} value={"18.06.1988"} type={'date'} /> */}
+                <InputBox className={style.item} title={"Гражданство*"} name={"country"} value={"Республика Беларусь"} type={'text'} />
+
 
                 <InputBox className={style.item} title={"Пол"} name={"sex"} value={"мужской"} type={'text'} />
 

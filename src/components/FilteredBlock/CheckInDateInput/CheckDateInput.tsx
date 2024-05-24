@@ -10,12 +10,15 @@ import { forwardRef } from "react";
 type CheckDateInputPropsType = {
     selectedDate: Date | null | undefined,
     onDateChange: (date: Date) => void,
-    firstDay?: Date
+    firstDay?: Date,
+    type?: string
 };
 
 registerLocale("ru", ru);
 
-export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsType>(({ selectedDate, onDateChange, firstDay }, ref) => {
+export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsType>(({ selectedDate, onDateChange, firstDay, type }, ref) => {
+
+    // const [inputValue, setInputValue] = useState<any>(selectedDate);
 
     const CustomInput = forwardRef<HTMLInputElement, any>((props: any, ref: any) => {
         return (
@@ -27,16 +30,20 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
         )
     });
 
+
     return (
         <div className={style.datePickerDiv}>
             <DatePicker
                 selected={selectedDate}
                 locale={"ru"}
                 dateFormat="dd.MM.yyyy"
-                onChange={onDateChange}
+                onChange={(date) => onDateChange(date as Date)}
                 customInput={<CustomInput ref={ref} />}
                 minDate={firstDay}
                 maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
+                showMonthDropdown={type === 'birthday'}
+                showYearDropdown={type === 'birthday'}
+                dropdownMode={(type === 'birthday') ? "select" : undefined}
             />
         </div>
     )
