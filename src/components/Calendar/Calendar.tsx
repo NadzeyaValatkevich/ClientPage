@@ -37,9 +37,7 @@ export const Calendar = ({ reservations, setDatePickerVisible, status }: Calenda
         );
     };
 
-    // const disableAllDates = true;
-
-    const allDates = status === "Закрыт к бронированию" ? createYearAheadDates() : [];
+    const allDates = status === "Техобслуживание" || status === "Закрыт к бронированию" ? createYearAheadDates() : [];
 
     return (
         <DatePicker
@@ -49,13 +47,13 @@ export const Calendar = ({ reservations, setDatePickerVisible, status }: Calenda
             maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
             onChange={() => { }}
             // highlightDates={defineReservationsDates(reservations)}
-            highlightDates={status === "Закрыт к бронированию" ? allDates : defineReservationsDates(reservations)}
+            highlightDates={status === "Закрыт к бронированию" || status === "Техобслуживание" ? allDates : defineReservationsDates(reservations)}
             className={styles.datePickerDiv}
             renderCustomHeader={renderCustomHeader}
             onClickOutside={() => setDatePickerVisible(false)}
             // excludeDates={[]}
             // disabled={disableAllDates}
-            excludeDates={status === "Закрыт к бронированию" ? allDates : []}
+            excludeDates={status === "Закрыт к бронированию" || status === "Техобслуживание" ? allDates : []}
             readOnly
             inline
         />

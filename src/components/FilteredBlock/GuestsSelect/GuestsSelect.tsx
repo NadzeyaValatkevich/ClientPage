@@ -151,7 +151,8 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
                             error={childAgeErrors[index]}
                         />
                     ))}
-                    <Button className={!adults ? `${style["customDropDown__btn"]} ${style["customDropDown__btn-disabled"]}` : style["customDropDown__btn"]} value={"Готово"} onClick={handleButtonClick} />
+                    <Button className={!adults ? `${style["customDropDown__btn"]} ${style["customDropDown__btn-disabled"]}` : style["customDropDown__btn"]}
+                        value={"Готово"} onClick={handleButtonClick} disabled={!adults} />
                 </div>
             )}
 

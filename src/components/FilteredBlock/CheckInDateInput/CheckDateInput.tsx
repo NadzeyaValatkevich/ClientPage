@@ -10,7 +10,7 @@ import { forwardRef } from "react";
 type CheckDateInputPropsType = {
     selectedDate: Date | null | undefined,
     onDateChange: (date: Date) => void,
-    firstDay: Date
+    firstDay?: Date
 };
 
 registerLocale("ru", ru);

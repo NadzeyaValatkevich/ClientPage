@@ -80,6 +80,14 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
                         </CommonHouseCard>
                     ))
                 }
+
+                {/* {!bookingHouse && (
+                    <Modal active={true} onClose={onCloseBookingHandler} setActive={setModalBookingActive} type={"bookingModal"}>
+                        <Booking modalBookingActive={modalBookingActive} house={bookingHouse} />
+                    </Modal>
+                )} */}
+
+
             </div>
 
             {modalActive && activeHouse && (

@@ -8,35 +8,42 @@
     @extend %titleBookingBlock;
   }
 
-  &__title::before {
-    // @extend %titleBookingLine;
-  }
-
   &__block {
-    @include flex(row, flex-start, flex-start, nowrap);
+    display: grid;
     gap: 20px;
-  }
-
-  &__block-left,
-  &__block-right {
-    max-width: 690px;
     width: 100%;
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  &__block-left div,
-  &__block-right div {
+  .item input {
+    width: 100%;
+
+    &:focus {
+      outline-color: $primary;
+      box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+      color: $text-primary;
+    }
+
+    &:not(:placeholder-shown) {
+      border-color: $primary;
+      box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+      color: $text-primary;
+    }
+  }
+
+  .item .titleItem {
     margin-bottom: 10px;
+    @include typography(400, 16px, 19.5px, $text-secondary);
   }
 
-  &__block input {
-    width: 100%;
-  }
+  // .item:nth-child(5),
+  // .item:nth-child(6) {
+  //   grid-column: span 1;
+  // }
+}
 
-  &__block-right--date {
-    max-width: 165px;
-  }
-
-  &__block-right--sex {
-    max-width: 120px;
+@media (max-width: 767px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

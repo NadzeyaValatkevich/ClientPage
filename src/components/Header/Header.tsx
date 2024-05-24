@@ -34,12 +34,12 @@ export const Header = () => {
             <div className={`${styleContainer.container} ${style.headerContainer}`}>
                 <div className={style["headerContainer_info"]}>
                     {visibilityBtnBack &&
-                        <NavLink to="/main_object/2" className={style["headerContainer_info-backIcon"]}>
+                        <NavLink to={`/main_object/${id}`} className={style["headerContainer_info-backIcon"]}>
                             <img src={BackIcon} alt="Arrow back" />
                             <p className={style["headerContainer_info-text"]}>Назад</p>
                         </NavLink>
                     }
-                    <NavLink to="/main_object/2" className={style["headerContainer_info-backIconLogo"]}>
+                    <NavLink to={`/main_object/${id}`} className={style["headerContainer_info-backIconLogo"]}>
                         <div className={style["headerContainer_info-logo"]}>
                             <Logo />
                         </div>
