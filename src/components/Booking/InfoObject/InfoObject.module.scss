@@ -25,10 +25,10 @@
     &-date--checkIn input,
     &-date--checkOut input,
     &-guests input {
-      @include typography(500, 14px, 17.07px, $text-secondary);
-      height: 67px;
-      border: 1px solid $text-secondary;
-      border-radius: 6px;
+      // @include typography(500, 14px, 17.07px, $text-secondary);
+      // height: 67px;
+      // border: 1px solid $text-secondary;
+      // border-radius: 6px;
 
       &:focus {
         outline: none;

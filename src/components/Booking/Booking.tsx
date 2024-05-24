@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import style from "./Booking.module.scss";
-import { Conditions } from "./Conditions";
 import { Contacts } from "./Contacts";
 import { InfoObject } from "./InfoObject";
 import { PersonalInfo } from "./PersonalInfo";
@@ -32,7 +31,7 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
         <div className={style.booking}>
             <form>
                 <InfoObject title={name} check_in_time={check_in_time} check_out_time={check_out_time} price={price} />
-                <Conditions />
+                {/* <Conditions />  */}
                 <PersonalInfo />
                 <Contacts />
                 <div className={style["booking__comment"]}>

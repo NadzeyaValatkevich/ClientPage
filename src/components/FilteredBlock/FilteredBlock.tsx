@@ -1,5 +1,5 @@
 import styleContainer from "../../common/styles/Container.module.scss";
-import style from "./Order.module.scss";
+import style from "./FilteredBlock.module.scss";
 import { Button } from "../Button/Button";
 import { GuestsSelect } from "./GuestsSelect";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ import { CheckDateInput } from "./CheckInDateInput";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { formatPeople } from "../../utils/functions/formatPeople";
 
-export const Order = ({ scrollToFilteredObjects }: any) => {
+export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     const [check_in_date, setCheckInDate] = useState<Date | null | undefined>(null);
     const [check_out_date, setCheckOutDate] = useState<Date | null | undefined>(null);
     const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
@@ -36,7 +36,6 @@ export const Order = ({ scrollToFilteredObjects }: any) => {
     }, [location]);
 
     useEffect(() => {
-
         if (location.pathname === `/main_object/${id}`) {
             reset({});
             setCheckInDate(null);
@@ -50,7 +49,7 @@ export const Order = ({ scrollToFilteredObjects }: any) => {
         setCheckInDate(date);
         setValue("check_in_date", date);
 
-        if (check_out_date && date > check_out_date) {
+        if (check_out_date && date >= check_out_date) {
             setCheckOutDate(null);
             setValue("check_out_date", null);
         }
@@ -138,11 +137,11 @@ export const Order = ({ scrollToFilteredObjects }: any) => {
     const today = new Date();
 
     return (
-        <div className={style.orderWrapper}>
-            <div className={`${styleContainer.container} ${style.orderContainer}`}>
+        <div className={style.filteredBlockWrapper}>
+            <div className={`${styleContainer.container} ${style.filteredBlockContainer}`}>
                 <h3 className={style.titleBlock}>Бронирование</h3>
                 <FormProvider {...useForm()} >
-                    <form className={style.orderBlock} onSubmit={handleSubmit(onSubmit)}>
+                    <form className={style.filteredBlock} onSubmit={handleSubmit(onSubmit)}>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Дата заезда</h4>
                             <CheckDateInput {...register("check_in_date", { required: true })} selectedDate={check_in_date} onDateChange={handleCheckInDateChange} firstDay={today} />

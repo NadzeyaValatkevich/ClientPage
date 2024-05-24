@@ -5,14 +5,43 @@
   @include flex(column, flex-start, flex-start, nowrap);
 
   &-label {
+    position: relative;
     @include typography(400, 16px, 19.5px, $text-secondary);
+    gap: 10px;
     margin-bottom: 10px;
+    @include flex(row, flex-start, center, nowrap);
+  }
+
+  &-label--image {
+    cursor: pointer;
+  }
+
+  &-label--icon {
+    position: relative;
   }
 
   &-input {
-    @include typography(500, 20px, 26px, $text-secondary);
-    padding: 8px 10px;
-    border-radius: 4px;
-    border: 0.25px solid $color-6;
+    padding: 21px 20px;
+    @include typography(500, 14px, 17.07px, $text-secondary);
+    height: 67px;
+    border: 1px solid $text-secondary;
+    border-radius: 6px;
+
+    ::placeholder {
+      @include typography(500, 14px, 17.07px, $text-secondary);
+    }
   }
+
+  &-input--error {
+    border-color: #b91212 !important;
+  }
+
+  &-input--error:focus {
+    outline-color: #b91212 !important;
+  }
+}
+
+.error {
+  margin-top: 5px;
+  @extend %error;
 }

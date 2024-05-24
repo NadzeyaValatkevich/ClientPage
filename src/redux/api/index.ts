@@ -11,8 +11,8 @@ export const objectsApi = {
     return instance.get(`/client_part/main_objects/${id}/`)
   },
 
-  getRentalObjects() {
-    return instance.get(`/client_part/rental_objects/`)
+  getRentalObjects(id: number) {
+    return instance.get(`/client_part/rental_objects/?main_object=${id}`)
   },
 
   getFilteredRentalObjects(data: DatesGuestsObjectRequestType) {

@@ -92,22 +92,18 @@
   }
 }
 
-// .datePickerDiv :global(.react-datepicker__day--selected),
-// .datePickerDiv :global(.react-datepicker__day--keyboard-selected),
-// .datePickerDiv :global(.react-datepicker__day:hover) {
-//   background-color: transparent !important;
-//   color: inherit !important;
-// }
+:global(
+    .react-datepicker__day.react-datepicker__day--disabled.react-datepicker__day--highlighted
+  ) {
+  color: $text-white;
+}
 
-// :global(.react-datepicker__day--highlighted) {
-//   background-color: $primary;
-// }
+:global(
+    .react-datepicker__day--weekend.react-datepicker__day--disabled.react-datepicker__day--highlighted
+  ) {
+  opacity: 100%;
+}
 
-// :global(.react-datepicker__day:hover) {
-//   // color: inherit !important;
-//   cursor: pointer; /* Предотвращение изменения цвета при наведении */
-// }
-
-// :global(.react-datepicker__day--selected) {
-//   color: inherit !important; /* Предотвращение изменения цвета при выборе даты */
-// }
+:global(.react-datepicker__day--weekend) {
+  color: red !important;
+}

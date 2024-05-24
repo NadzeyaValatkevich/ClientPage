@@ -26,6 +26,10 @@ $radius-secondary: 6px;
   margin-bottom: 20px;
 }
 
+%error {
+  @include typography(300, 12px, 12.19px, #b91212);
+}
+
 // %titleBookingLine {
 //   content: '';
 //   position: absolute;

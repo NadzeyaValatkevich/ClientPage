@@ -70,6 +70,7 @@
     }
     .title {
       @include h1($text-white);
+      text-align: center;
     }
   }
 }
