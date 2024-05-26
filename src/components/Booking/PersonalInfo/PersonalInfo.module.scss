@@ -36,6 +36,30 @@
     @include typography(400, 16px, 19.5px, $text-secondary);
   }
 
+  .item {
+    .genderSelect {
+      border: $border-secondary;
+      border-radius: $radius-secondary;
+      box-shadow: $shadow-1;
+      height: 67px;
+      @include flex(row, center, center, nowrap);
+
+      .genderOption {
+        width: 100%;
+        height: 100%;
+        @include flex(row, center, center, nowrap);
+        @include typography(500, 14px, 17.07px, $primary);
+        cursor: pointer;
+      }
+
+      .genderOptionSelected {
+        background-color: $primary;
+        color: $text-white;
+        cursor: default;
+      }
+    }
+  }
+
   // .item:nth-child(5),
   // .item:nth-child(6) {
   //   grid-column: span 1;

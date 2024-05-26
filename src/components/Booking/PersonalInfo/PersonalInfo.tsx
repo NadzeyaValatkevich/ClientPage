@@ -4,12 +4,10 @@ import style from "./PersonalInfo.module.scss";
 import { CheckDateInput } from "../../FilteredBlock/CheckInDateInput";
 import popOver from "../../../assets/icons/popOver.svg";
 import popOverActive from "../../../assets/icons/popOverActive.svg";
-import { LAST_NAME_ERROR, LAST_NAME_REQ, NAME_ERROR, NAME_REG, NAME_REQ, REQUIRED_FIELD_ERROR, SURNAME_ERROR, SURNAME_REG, SURNAME_REQ } from "../../../utils/constants";
+import { LAST_NAME_ERROR, LAST_NAME_REQ, NAME_ERROR, NAME_REG, NAME_REQ, REQUIRED_FIELD_ERROR, SURNAME_ERROR, SURNAME_REG, SURNAME_REQ, optionsNationality } from "../../../utils/constants";
+import { SelectComponent } from "../../SelectComponent/SelectComponent";
 
 export const PersonalInfo = () => {
-    // const [lastName, setLastName] = useState('');
-    // const [name, setName] = useState('');
-    // const [surname, setSurname] = useState('');
     const [values, setValues] = useState<{ lastName: string, name: string, surname: string }>({
         lastName: '',
         name: '',
@@ -21,18 +19,7 @@ export const PersonalInfo = () => {
         name: '',
         surname: ''
     });
-
-    // const onChangeLastName = (value: string) => {
-    //     setLastName(value)
-    // };
-
-    // const onChangeName = (value: string) => {
-    //     setName(value)
-    // };
-
-    // const onChangeSurname = (value: string) => {
-    //     setSurname(value)
-    // };
+    const [selectedGender, setSelectedGender] = useState<"m" | "f">("m");
 
     const handleChangeBirthdayDay = (value: Date) => {
         setBirthdayDay(value)
@@ -88,6 +75,10 @@ export const PersonalInfo = () => {
         }));
     };
 
+    const handleGenderSelect = (gender: "m" | "f") => {
+        setSelectedGender(gender)
+    };
+
     return (
         <div className={style.personalInfo}>
             <h4 className={style["personalInfo__title"]}>Личная информация</h4>
@@ -108,11 +99,14 @@ export const PersonalInfo = () => {
                     <h4 className={style.titleItem}>Дата рождения</h4>
                     <CheckDateInput selectedDate={birthdayDay} onDateChange={handleChangeBirthdayDay} type={"birthday"} />
                 </div>
-                <InputBox className={style.item} title={"Гражданство*"} name={"country"} value={"Республика Беларусь"} type={'text'} />
-
-
-                <InputBox className={style.item} title={"Пол"} name={"sex"} value={"мужской"} type={'text'} />
-
+                <div className={style.item}>
+                    <h4 className={style.titleItem}>Пол</h4>
+                    <div className={style.genderSelect}>
+                        <div className={`${style.genderOption} ${selectedGender === "m" ? style.genderOptionSelected : ""}`} onClick={() => handleGenderSelect("m")}>Мужской</div>
+                        <div className={`${style.genderOption} ${selectedGender === "f" ? style.genderOptionSelected : ""}`} onClick={() => handleGenderSelect("f")}>Женский</div>
+                    </div>
+                </div>
+                <SelectComponent className={style.item} options={optionsNationality} label={"Гражданство*"} />
             </div>
         </div>
     )
