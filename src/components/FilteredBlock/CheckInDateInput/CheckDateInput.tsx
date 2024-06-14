@@ -9,7 +9,8 @@ import { forwardRef, useRef, useState } from "react";
 import classNames from "classnames";
 
 type CheckDateInputPropsType = {
-    selectedDate: Date | string | undefined | null,
+    // selectedDate: Date | string | undefined | null,
+    selectedDate: any,
     onDateChange: (date: Date) => void,
     firstDay?: Date,
     type?: string
@@ -21,7 +22,7 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
-    const handleDivClick = (e) => {
+    const handleDivClick = (e: any) => {
         e.stopPropagation();
         if (inputRef.current) {
             inputRef.current.focus();

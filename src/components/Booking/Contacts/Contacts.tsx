@@ -28,7 +28,7 @@ export const Contacts = () => {
 
     const [isTelephoneValid, setIsTelephoneValid] = useState(false);
 
-    const { register, formState: { errors }, setValue, control } = useFormContext();
+    const { formState: { errors }, setValue, control } = useFormContext();
 
     const handleChangeEmail = (fieldName: string, value: string) => {
         if (!emailTouched) {

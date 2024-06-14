@@ -1,11 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import { InputBox } from "../InputBox";
 import style from "./InfoObject.module.scss";
-import { ChangeEvent, useEffect, useLayoutEffect, useState } from "react";
-import { DatesType, GuestsType } from "../../../redux/types/datesGuestsTypes";
+import { useEffect, useState } from "react";
+import { DatesType } from "../../../redux/types/datesGuestsTypes";
 import users from "../../../assets/icons/usersGray.svg";
 import calendar from "../../../assets/icons/calendarGray.svg";
-import { formatPeople } from "../../../utils/functions/formatPeople";
 import { SelectComponent } from "../../SelectComponent/SelectComponent";
 import { formatTime, generateTimeOptions } from "../../../utils/functions/generateTime";
 import { ANIMALS_ERROR, ANIMAL_INFO_REG, REQUIRED_FIELD_ERROR } from "../../../utils/constants";

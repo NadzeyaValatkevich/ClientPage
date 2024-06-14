@@ -111,7 +111,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
             check_in_date: formatDashDate(data.check_in_date),
             check_out_date: formatDashDate(data.check_out_date),
             people_amount: (data.guests.adults + children).toString(),
-            main_object: (id).toString(),
+            main_object: id ? (id).toString() : "",
         })
         navigate(`/main_object/${id}/filteredRental_objects?${queryParams.toString()}`)
     };

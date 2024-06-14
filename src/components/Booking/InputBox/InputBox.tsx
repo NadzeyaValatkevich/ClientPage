@@ -1,7 +1,6 @@
 import { ChangeEvent, useRef, useState } from "react";
 import style from "./InputBox.module.scss";
 import { Popover } from "../../Popover";
-import { GuestsType } from "../../../redux/types/datesGuestsTypes";
 import { useFormContext } from "react-hook-form";
 
 type InputBoxPropsType = {

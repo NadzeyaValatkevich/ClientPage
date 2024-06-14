@@ -10,11 +10,11 @@ export const submitBooking = createAsyncThunk<
   try {
     const response = await objectsApi.createBooking(bookingParams)
 
-    if (response.status === 201) {
-      return response.data
-    } else {
-      return thunkAPI.rejectWithValue({ errors: response.data.message })
-    }
+    // if (response.status === 201) {
+    return response.data
+    // } else {
+    //   return thunkAPI.rejectWithValue({ errors: response.data.message })
+    // }
   } catch (err: any) {
     const error: AxiosError = err
     return thunkAPI.rejectWithValue({ errors: [error.message] })
