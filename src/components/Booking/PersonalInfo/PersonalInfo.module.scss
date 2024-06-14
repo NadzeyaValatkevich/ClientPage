@@ -2,7 +2,7 @@
 @import '../../../common/styles/sass/mixins.scss';
 
 .personalInfo {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   &__title {
     @extend %titleBookingBlock;
@@ -17,16 +17,18 @@
 
   .item input {
     width: 100%;
+    outline: none;
 
     &:focus {
-      outline-color: $primary;
-      box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+      // outline-color: $primary;
+      border-color: $text-primary;
+      box-shadow: $shadow-1;
       color: $text-primary;
     }
 
     &:not(:placeholder-shown) {
       border-color: $primary;
-      box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+      box-shadow: $shadow-1;
       color: $text-primary;
     }
   }
@@ -34,6 +36,30 @@
   .item .titleItem {
     margin-bottom: 10px;
     @include typography(400, 16px, 19.5px, $text-secondary);
+  }
+
+  .item {
+    .genderSelect {
+      border: $border-secondary;
+      border-radius: $radius-secondary;
+      box-shadow: $shadow-1;
+      height: 67px;
+      @include flex(row, center, center, nowrap);
+
+      .genderOption {
+        width: 100%;
+        height: 100%;
+        @include flex(row, center, center, nowrap);
+        @include typography(500, 14px, 17.07px, $primary);
+        cursor: pointer;
+      }
+
+      .genderOptionSelected {
+        background-color: $primary;
+        color: $text-white;
+        cursor: default;
+      }
+    }
   }
 
   // .item:nth-child(5),

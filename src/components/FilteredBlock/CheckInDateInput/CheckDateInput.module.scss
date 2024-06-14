@@ -24,6 +24,15 @@
   box-shadow: $shadow-1;
 }
 
+.customDatePickDiv-focused {
+  // border: 1px solid #032d70;
+  // border: 1.5px solid aqua;
+  box-shadow: $shadow-1;
+  border-color: $text-primary;
+  // outline-color: $primary;
+  // color: $text-primary;
+}
+
 .customInput:focus {
   outline: none;
 }

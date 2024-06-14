@@ -1,64 +1,82 @@
-import Select, { CSSObjectWithLabel, SingleValue } from 'react-select';
+import Select, { CSSObjectWithLabel, ControlProps } from 'react-select';
 import { useState } from 'react';
 import { OptionItemType } from '../../redux/types/datesGuestsTypes';
 // import 'react-select/dist/react-select.css';
 import "./SelectComponent.scss";
+import { Controller, useFormContext } from 'react-hook-form';
 
 type SelectComponentPropsType = {
     options: OptionItemType[],
     error?: string,
     label: string,
-    className?: any
+    className?: string | undefined,
+    name?: string | undefined
 };
 
 
-export const SelectComponent = ({ options, label, className }: SelectComponentPropsType) => {
+export const SelectComponent = ({ options, label, className, name }: SelectComponentPropsType) => {
 
-    const [currentTimeIn, setCurrentTimeIn] = useState<string | null>(null);
+    const [currentValue, setCurrentValue] = useState<string | null>(null);
 
-    // const getValue = () => {
-    //     return currentTimeIn ? options.find((t: any) => t.value === currentTimeIn) : ""
+    // const onChange = (newValue: SingleValue<OptionItemType | string>) => {
+    //     if (newValue && typeof newValue !== 'string') {
+    //         setCurrentValue(newValue.value);
+    //     }
     // };
 
-    const onChange = (newValue: SingleValue<OptionItemType | string>) => {
-        if (newValue && typeof newValue !== 'string') {
-            setCurrentTimeIn(newValue.value);
-        }
-    };
+    const { control } = useFormContext();
 
     return (
         <>
             <div className={className}>
                 <p className="select__label">{label}</p>
-                <Select
-                    defaultValue={options[0]}
-                    options={options}
-                    // value={currentTimeIn}
-                    // value={getValue()}
-                    onChange={onChange}
-                    isSearchable={false}
-                    classNamePrefix={"custom-select"}
+                <Controller
+                    name={name ? name : ""}
+                    control={control}
+                    defaultValue={options[0].label}
+                    render={({ field }) => (
+                        <Select
+                            {...field}
+                            value={options.find(option => option.value === field.value)}
+                            // defaultValue={options[0]}
+                            placeholder={options[0].label}
+                            options={options}
+                            // onChange={onChange}
+                            onChange={(option) => {
+                                field.onChange((option as OptionItemType).value)
+                                setCurrentValue((option as OptionItemType).value)
+                            }}
+                            isSearchable={false}
+                            classNamePrefix={"custom-select"}
 
+                            styles={{
+                                control: (provided: CSSObjectWithLabel, state: ControlProps<OptionItemType, false>) => ({
+                                    ...provided,
+                                    borderColor: currentValue ? '#1855b7' : '#696f79',
+                                    boxShadow: currentValue ? '$shadow - 1' : "none",
+                                    '&:hover': {
+                                        borderColor: 'none',
+                                        boxShadow: '$shadow - 1'
+                                    },
+                                    ...(state.isFocused && {
+                                        borderColor: '$text-primary',
+                                        boxShadow: '$shadow - 1',
+                                    })
 
-                    styles={{
-                        control: (provided: CSSObjectWithLabel) => ({
-                            ...provided,
-                            borderColor: currentTimeIn ? '#1855b7' : '#696f79',
-                            boxShadow: currentTimeIn ? "0px 4px 7px 3px rgba(24, 85, 183, 0.11)" : "none",
+                                }),
+                                singleValue: (provided: CSSObjectWithLabel) => ({
+                                    ...provided,
+                                    color: currentValue ? '#0f2664' : '#696f79',
+                                }),
+                                dropdownIndicator: (provided: CSSObjectWithLabel) => ({
+                                    ...provided,
+                                    color: currentValue ? '#1855b7' : '#696f79',
+                                })
+                            }}
+                        />
 
-                        }),
-                        singleValue: (provided: CSSObjectWithLabel) => ({
-                            ...provided,
-                            color: currentTimeIn ? '#0f2664' : '#696f79',
-                        }),
-                        dropdownIndicator: (provided: CSSObjectWithLabel) => ({
-                            ...provided,
-                            color: currentTimeIn ? '#1855b7' : '#696f79',
-                        })
-                    }}
-                />
+                    )} />
             </div>
-            {/* {error && <p style={{ color: 'red', marginTop: '-20px' }}>{error}</p>} */}
         </>
     )
 }

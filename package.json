@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.2",
+    "@types/intl-tel-input": "^18.1.4",
     "@types/react-datepicker": "^6.2.0",
     "@types/react-redux": "^7.1.33",
     "@types/react-transition-group": "^4.4.10",
     "axios": "^1.6.8",
+    "intl-tel-input": "18.1.8",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-datepicker": "^6.6.0",

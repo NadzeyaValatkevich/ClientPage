@@ -1,13 +1,19 @@
 type AddressType = {
-    region: string;
-    locality: string;
-    address: string
-};
+  region: string
+  locality: string
+  address: string
+}
+
+type CountryItemType = {
+  countryCode: string
+  countryLabel: string
+}
 
 export type MainObjectType = {
-    id: number;
-    name: string;
-    booking_photo: string;
-    full_address: AddressType | null;
-    country: string | null;
+  id: number | null
+  name: string
+  booking_photo: string
+  full_address: AddressType | null
+  country: string | null
+  countriesList: CountryItemType[]
 }

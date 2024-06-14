@@ -5,10 +5,12 @@ import { ru } from "date-fns/locale/ru";
 import style from "./CheckDateInput.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
 import calendarGrayIcon from "../../../assets/icons/calendarGray.svg";
-import { forwardRef } from "react";
+import { forwardRef, useRef, useState } from "react";
+import classNames from "classnames";
 
 type CheckDateInputPropsType = {
-    selectedDate: Date | null | undefined,
+    // selectedDate: Date | string | undefined | null,
+    selectedDate: any,
     onDateChange: (date: Date) => void,
     firstDay?: Date,
     type?: string
@@ -17,19 +19,46 @@ type CheckDateInputPropsType = {
 registerLocale("ru", ru);
 
 export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsType>(({ selectedDate, onDateChange, firstDay, type }, ref) => {
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-    // const [inputValue, setInputValue] = useState<any>(selectedDate);
+    const handleDivClick = (e: any) => {
+        e.stopPropagation();
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+        setIsCalendarOpen(true);
+    };
 
     const CustomInput = forwardRef<HTMLInputElement, any>((props: any, ref: any) => {
         return (
-            <div className={selectedDate ? `${style.customDatePickDiv} ${style["customDatePickDiv-selected"]}` : style.customDatePickDiv} onClick={props.onClick}>
-                <input className={style.customInput} ref={ref} value={props.value || props.placeholder} onChange={props.onChange} />
-                <img className={style.image} src={selectedDate ? calendarIcon : calendarGrayIcon} alt="Calendar" onClick={props.onClick} />
+            <div
+                className={classNames(style.customDatePickDiv, {
+                    [style["customDatePickDiv-selected"]]: selectedDate,
+                    [style["customDatePickDiv-focused"]]: isCalendarOpen
+                })}
+                onMouseDown={handleDivClick}
+            >
+                <input
+                    className={style.customInput}
+                    ref={(elem) => {
+                        inputRef.current = elem;
+                        if (typeof ref === 'function') {
+                            ref(elem);
+                        } else if (ref) {
+                            (ref as React.MutableRefObject<HTMLInputElement | null>).current = elem;
+                        }
+                    }}
+                    value={props.value || props.placeholder}
+                    onChange={props.onChange}
+                    onFocus={(e) => {
+                        props.onFocus(e);
+                    }}
+                />
+                <img className={style.image} src={selectedDate ? calendarIcon : calendarGrayIcon} alt="Calendar" onClick={handleDivClick} />
             </div>
-
-        )
+        );
     });
-
 
     return (
         <div className={style.datePickerDiv}>
@@ -44,7 +73,9 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
                 showMonthDropdown={type === 'birthday'}
                 showYearDropdown={type === 'birthday'}
                 dropdownMode={(type === 'birthday') ? "select" : undefined}
+                onCalendarOpen={() => setIsCalendarOpen(true)}
+                onCalendarClose={() => setIsCalendarOpen(false)}
             />
         </div>
-    )
-})
+    );
+});

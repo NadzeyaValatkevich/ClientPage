@@ -4,116 +4,165 @@ import style from "./PersonalInfo.module.scss";
 import { CheckDateInput } from "../../FilteredBlock/CheckInDateInput";
 import popOver from "../../../assets/icons/popOver.svg";
 import popOverActive from "../../../assets/icons/popOverActive.svg";
-import { LAST_NAME_ERROR, LAST_NAME_REQ, NAME_ERROR, NAME_REG, NAME_REQ, REQUIRED_FIELD_ERROR, SURNAME_ERROR, SURNAME_REG, SURNAME_REQ } from "../../../utils/constants";
+import { FIRST_NAME_REQ, LAST_NAME_REQ, REQUIRED_FIELD_ERROR, SECOND_NAME_REQ, optionsNationality } from "../../../utils/constants";
+import { SelectComponent } from "../../SelectComponent/SelectComponent";
+import { validateField } from "../../../utils/functions/validateField";
+import { Controller, useFormContext } from "react-hook-form";
+import { formatDashDate } from "../../../utils/functions/formatDate";
 
 export const PersonalInfo = () => {
-    // const [lastName, setLastName] = useState('');
-    // const [name, setName] = useState('');
-    // const [surname, setSurname] = useState('');
-    const [values, setValues] = useState<{ lastName: string, name: string, surname: string }>({
-        lastName: '',
-        name: '',
-        surname: '',
+    const [values, setValues] = useState<{ first_name: string, second_name: string, last_name: string }>({
+        first_name: '',
+        second_name: '',
+        last_name: '',
     });
-    const [birthdayDay, setBirthdayDay] = useState<null | Date>(null);
-    const [errors, setErrors] = useState<{ lastName: string, name: string, surname: string }>({
-        lastName: '',
-        name: '',
-        surname: ''
+    const [valuesTouched, setValuesTouched] = useState<{ [key: string]: boolean }>({
+        first_name: false,
+        second_name: false,
+        last_name: false,
     });
+    const [errorsName, setErrors] = useState<{ first_name: string, second_name: string, last_name: string }>({
+        first_name: '',
+        second_name: '',
+        last_name: ''
+    });
+    const [selectedGender, setSelectedGender] = useState<"mal" | "fem">("mal");
 
-    // const onChangeLastName = (value: string) => {
-    //     setLastName(value)
-    // };
+    const [birthdayDay, setBirthdayDay] = useState("");
 
-    // const onChangeName = (value: string) => {
-    //     setName(value)
-    // };
-
-    // const onChangeSurname = (value: string) => {
-    //     setSurname(value)
-    // };
+    const { register, setValue, formState: { errors }, control } = useFormContext();
 
     const handleChangeBirthdayDay = (value: Date) => {
-        setBirthdayDay(value)
-    };
-
-    const validateField = (fieldName: string, value: string) => {
-        let error = '';
-        if (!value.trim()) {
-            error = REQUIRED_FIELD_ERROR;
-        } else {
-            let regex;
-            switch (fieldName) {
-                case 'lastName':
-                    regex = NAME_REG;
-                    error = !regex.test(value) ? LAST_NAME_ERROR : '';
-                    break;
-                case 'name':
-                    regex = NAME_REG;
-                    error = !regex.test(value) ? NAME_ERROR : '';
-                    break;
-                case 'surname':
-                    regex = SURNAME_REG;
-                    error = !regex.test(value) ? SURNAME_ERROR : '';
-                    break;
-                default:
-                    regex = null;
-                    break;
-            }
-        }
-        return error;
+        setValue("birth_day", formatDashDate(value))
+        setBirthdayDay(formatDashDate(value))
     };
 
     const handleChange = (fieldName: string, value: string) => {
+        if (!valuesTouched[fieldName]) {
+            setValuesTouched(prevState => ({
+                ...prevState,
+                [fieldName]: true,
+            }))
+        }
+
         setValues(prevState => ({
             ...prevState,
             [fieldName]: value
         }));
 
-        // if (typeof value !== Date) {
-        const error = validateField(fieldName, value);
-        setErrors(prevState => ({
-            ...prevState,
-            [fieldName]: error
-        }))
-        // }
+        if (valuesTouched[fieldName]) {
+            setValue(fieldName, value, { shouldValidate: true })
+            const error = validateField(fieldName, value);
+            setErrors(prevState => ({
+                ...prevState,
+                [fieldName]: error
+            }))
+        }
+
     };
 
-    const handleBlur = (fieldName: string, value: string) => {
+    const handleOnBlur = (fieldName: string, value: string) => {
+        if (!valuesTouched[fieldName]) {
+            setValuesTouched(prevState => ({
+                ...prevState,
+                [fieldName]: true,
+            }))
+        }
+
+        setValue(fieldName, value, { shouldValidate: true })
         const error = validateField(fieldName, value);
         setErrors(prevState => ({
             ...prevState,
             [fieldName]: error
         }));
+    };
+
+    const handleGenderSelect = (gender: "mal" | "fem") => {
+        setSelectedGender(gender)
     };
 
     return (
         <div className={style.personalInfo}>
             <h4 className={style["personalInfo__title"]}>Личная информация</h4>
             <div className={style["personalInfo__block"]}>
-                <InputBox className={style.item} title={"Фамилия*"} name={"lastName"} value={values.lastName}
-                    type={'text'} placeholder={"Введите фамилию"} onChange={(value) => handleChange('lastName', value)}
-                    img={popOver} imgActive={popOverActive}
-                    onBlur={() => handleBlur('lastName', values.lastName)} error={errors.lastName} requirementsText={LAST_NAME_REQ} />
-                <InputBox className={style.item} title={"Имя*"} name={"name"} value={values.name} type={'text'}
-                    placeholder={"Введите имя"} onChange={(value) => handleChange('name', value)} img={popOver} imgActive={popOverActive}
-                    onBlur={() => handleBlur('name', values.name)} error={errors.name} requirementsText={NAME_REQ}
+                <InputBox
+                    className={style.item}
+                    title={"Фамилия*"}
+                    name={"last_name"}
+                    value={values.last_name}
+                    type={'text'}
+                    placeholder={"Введите фамилию"}
+                    onChange={(value) => handleChange('last_name', value)}
+                    img={popOver}
+                    imgActive={popOverActive}
+                    onBlur={() => handleOnBlur('last_name', values.last_name)}
+                    error={errorsName.last_name || errors["last_name"]?.message}
+                    requirementsText={LAST_NAME_REQ}
+                    requiredMessage={REQUIRED_FIELD_ERROR}
                 />
-                <InputBox className={style.item} title={"Отчество"} name={"surname"} value={values.surname} type={'text'}
-                    placeholder={"Введите отчество"} onChange={(value) => handleChange('surname', value)} img={popOver} imgActive={popOverActive}
-                    onBlur={() => handleBlur('surname', values.surname)} error={errors.surname} requirementsText={SURNAME_REQ}
+                <InputBox
+                    className={style.item}
+                    title={"Имя*"}
+                    name={"first_name"}
+                    value={values.first_name}
+                    type={'text'}
+                    placeholder={"Введите имя"}
+                    onChange={(value) => handleChange('first_name', value)}
+                    img={popOver} imgActive={popOverActive}
+                    onBlur={() => handleOnBlur('first_name', values.first_name)}
+                    error={errorsName.first_name || errors["first_name"]?.message}
+                    requirementsText={FIRST_NAME_REQ}
+                    requiredMessage={REQUIRED_FIELD_ERROR}
+                />
+                <InputBox
+                    className={style.item}
+                    title={"Отчество"}
+                    name={"second_name"}
+                    value={values.second_name}
+                    type={'text'}
+                    placeholder={"Введите отчество"}
+                    onChange={(value) => handleChange('second_name', value)}
+                    img={popOver} imgActive={popOverActive}
+                    onBlur={() => handleOnBlur('second_name', values.second_name)}
+                    error={errorsName.second_name}
+                    requirementsText={SECOND_NAME_REQ}
                 />
                 <div className={style.item}>
                     <h4 className={style.titleItem}>Дата рождения</h4>
-                    <CheckDateInput selectedDate={birthdayDay} onDateChange={handleChangeBirthdayDay} type={"birthday"} />
+                    <CheckDateInput {...register("birth_day")} selectedDate={birthdayDay} onDateChange={handleChangeBirthdayDay} type={"birthday"} />
                 </div>
-                <InputBox className={style.item} title={"Гражданство*"} name={"country"} value={"Республика Беларусь"} type={'text'} />
+                <div className={style.item}>
+                    <h4 className={style.titleItem}>Пол</h4>
+                    <Controller
+                        control={control}
+                        name="sex"
+                        defaultValue={selectedGender}
+                        render={({ field }) => (
+                            <div className={style.genderSelect}>
+                                <div className={`${style.genderOption} ${field.value === "mal" ? style.genderOptionSelected : ""}`}
+                                    onClick={() => {
+                                        field.onChange("mal")
+                                        handleGenderSelect("mal")
+                                    }}
+                                >Мужской</div>
+                                <div className={`${style.genderOption} ${field.value === "fem" ? style.genderOptionSelected : ""}`}
+                                    onClick={() => {
+                                        field.onChange("fem")
+                                        handleGenderSelect("fem")
+                                    }}
+                                >Женский</div>
+                            </div>
 
-
-                <InputBox className={style.item} title={"Пол"} name={"sex"} value={"мужской"} type={'text'} />
-
+                        )}
+                    />
+                </div>
+                <SelectComponent
+                    className={style.item}
+                    options={optionsNationality}
+                    label={"Гражданство*"}
+                    name={"nationality"}
+                />
             </div>
-        </div>
+        </div >
     )
 }

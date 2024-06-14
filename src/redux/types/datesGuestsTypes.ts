@@ -9,7 +9,7 @@ export type OptionItemType = {
 }
 
 export type GuestsType = {
-  adults: number | null
+  adults: number
   children: number | null
   childAges: Array<ChildAge | undefined>
 }

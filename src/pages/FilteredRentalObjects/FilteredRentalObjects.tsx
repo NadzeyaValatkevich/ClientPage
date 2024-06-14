@@ -14,7 +14,9 @@ import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObj
 import React from "react";
 
 export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {
+
     const { results, count } = useAppSelector(state => state.filteredRentalObjects);
+
     const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [bookingHouse, setBookingHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
@@ -58,8 +60,6 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
         setModalBookingActive(false);
         setBookingHouse(null);
     };
-
-    console.log(activeHouse)
 
     return (
         <div className={style.rentalObjectsBlock} ref={ref}>

@@ -2,30 +2,33 @@
 @import '../../../common/styles/sass/mixins.scss';
 
 .contacts {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   &__title {
     @extend %titleBookingBlock;
   }
 
-  &__title::before {
-    // @extend %titleBookingLine;
-  }
-
   &__block {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    column-gap: 20px;
-    row-gap: 10px;
-
-    &-telegram {
-      grid-column: 1;
-      grid-row: 2;
-    }
+    gap: 20px;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
 
     & input {
       width: 100%;
+      outline: none;
+
+      &:focus {
+        border-color: $text-primary;
+        box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+        color: $text-primary;
+      }
+
+      &:not(:placeholder-shown) {
+        border-color: $primary;
+        box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+        color: $text-primary;
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
 @import '../../../common/styles/sass/mixins.scss';
 
 .infoObject {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   &__title {
     @extend %titleBookingBlock;
@@ -76,7 +76,7 @@
       gap: 20px;
     }
     &-animals {
-      height: 96.5px;
+      min-height: 96.5px;
       width: 288px;
       position: relative;
       // @include flex(column, center, flex-start, nowrap);
@@ -86,6 +86,7 @@
         height: 20px;
         position: absolute;
         bottom: 23.5px;
+        cursor: pointer;
       }
 
       &--text {
@@ -100,6 +101,7 @@
       }
 
       &--checked > * input {
+        outline: none;
         height: 67px;
         border-radius: 6px;
         width: 288px;
@@ -112,13 +114,12 @@
       }
 
       &--checked input:focus {
-        outline-color: $primary;
-        box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+        @extend %focusInput;
       }
 
       &--checkedSelect > * input {
         border-color: $primary;
-        box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+        box-shadow: $shadow-1;
         color: $text-primary;
       }
 
@@ -127,8 +128,7 @@
         position: absolute;
         top: 0px;
         left: 196px;
-        // width: 20px;
-        // height: 20px;
+        z-index: 1;
 
         &::before {
           content: '';

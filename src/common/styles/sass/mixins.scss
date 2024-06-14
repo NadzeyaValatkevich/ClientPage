@@ -1,47 +1,54 @@
 @mixin adaptive-value($property, $startSize, $minSize, $minWidth, $maxWidth) {
-    $addSize: $startSize - $minSize;
-    #{$property}: $property + px;
-    #{$property}: calc(
-      #{$minSize + px} + #{$addSize} * ((100vw - #{$minWidth + px}) / ($maxWidth - $minWidth))
-    )
-  };
+  $addSize: $startSize - $minSize;
+  #{$property}: $property + px;
+  #{$property}: calc(
+    #{$minSize + px} + #{$addSize} *
+      ((100vw - #{$minWidth + px}) / ($maxWidth - $minWidth))
+  );
+}
 
-   @mixin media-query($break-point) {
-    @if $break-point == lg {
-      @media (max-width: 1440px) { @content }
+@mixin media-query($break-point) {
+  @if $break-point == lg {
+    @media (max-width: 1440px) {
+      @content;
     }
-    @if $break-point == md {
-      @media (max-width: 768px) { @content }
+  }
+  @if $break-point == md {
+    @media (max-width: 768px) {
+      @content;
     }
-    @if $break-point == sm {
-      @media (max-width: 361px) { @content }
-    }  
-  };
+  }
+  @if $break-point == sm {
+    @media (max-width: 361px) {
+      @content;
+    }
+  }
+}
 
-  @mixin flex($direction, $justifyContent, $alignItems, $wrap) {
-    display: flex;
-    flex-direction: $direction;
-    justify-content: $justifyContent;
-    align-items: $alignItems;
-    flex-wrap: $wrap;
-  };
+@mixin flex($direction, $justifyContent, $alignItems, $wrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-wrap: $wrap;
+}
 
-  @mixin typography($fw, $fs, $lh, $color) {
-  font-family: "Montserrat", sans-serif;
+@mixin typography($fw, $fs, $lh, $color) {
+  font-family: 'Montserrat', sans-serif;
   font-weight: $fw;
   font-size: $fs;
   line-height: $lh;
   color: $color;
-};
+}
 
 @mixin h1($color: $text-white) {
   @include typography(500, 66px, 80.45px, $color);
-};
+}
 
 @mixin h2($color: $text-primary) {
   @include typography(600, 40px, 48.76px, $color);
-};
+}
 
 @mixin h3($color: $text-primary) {
   @include typography(600, 30px, 36.57px, $color);
-};
+}
