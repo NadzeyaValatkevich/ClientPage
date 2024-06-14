@@ -10,7 +10,7 @@ export const generateTimeOptions = (time: string) => {
     options.push({ value: `${hour}:00`, label: `${hour}:00` })
   }
 
-  options.push({ value: '23:59', label: '23:59' })
+  // options.push({ value: '23:59', label: '23:59' })
 
   return options
 }

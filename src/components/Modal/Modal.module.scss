@@ -24,35 +24,20 @@
 
   .modalContentBooking {
     width: 1440px;
-    border-radius: $radius-secondary;
+    border-radius: $radius-primary;
     position: absolute;
+    padding: 60px 114px;
     top: 40px;
+    background-color: $secondary;
 
     &__header {
       width: 100%;
-      height: 80px;
-      padding-left: 20px;
-      padding-right: 20px;
-      background-color: $color-8;
+      margin-bottom: 20px;
       @include flex(row, space-between, center, nowrap);
     }
 
-    &__header-right {
-      @include flex(row, flex-end, center, nowrap);
-    }
-
     &__header-title {
-      @include typography(600, 30px, 36.6px, $secondary);
-    }
-
-    &__header-btn {
-      padding: 16px 26px;
-      background-color: $primary;
-      border-radius: $radius-secondary;
-      border: none;
-      margin-right: 27px;
-      @include typography(500, 16px, 19.36px, $text-white);
-      font-family: 'Inter', sans-serif;
+      @include h3();
     }
   }
 }
