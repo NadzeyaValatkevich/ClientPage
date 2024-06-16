@@ -12,3 +12,10 @@
 //     CLOSE = "Закрыт к бронированию",
 //     SERVICE = "Техобслуживание",
 // }
+
+export enum RequestStatusType {
+  idle,
+  loading,
+  succeeded,
+  failed,
+}

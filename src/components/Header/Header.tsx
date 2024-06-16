@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export const Header = () => {
     const [visibilityBtnBack, setVisibilityBtnBack] = useState(false);
-    const { name, booking_photo } = useAppSelector(state => state.mainObject);
+    const { name, booking_photo } = useAppSelector(state => state.mainObject.data);
 
     const { id } = useParams();
 

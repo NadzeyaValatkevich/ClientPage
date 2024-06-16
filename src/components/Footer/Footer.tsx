@@ -7,7 +7,7 @@ import { YMaps, Map, Placemark, GeolocationControl, FullscreenControl } from "re
 import { useAppSelector } from "../../utils/hooks";
 
 export const Footer = () => {
-    const { country, full_address } = useAppSelector(state => state.mainObject);
+    const { country, full_address } = useAppSelector(state => state.mainObject.data);
     const region = full_address?.region;
     const locality = full_address?.locality;
     const address = full_address?.address;

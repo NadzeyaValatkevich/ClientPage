@@ -12,10 +12,13 @@ import { useSearchParams } from "react-router-dom";
 import { DatesGuestsObjectRequestType } from "../../redux/types/datesGuestsTypes";
 import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
 import React from "react";
+import { RequestStatusType } from "../../common/enums/enums";
+import { BeatLoader } from "react-spinners";
 
 export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {
 
-    const { results, count } = useAppSelector(state => state.filteredRentalObjects);
+    const { results, count } = useAppSelector(state => state.filteredRentalObjects.data);
+    const { status } = useAppSelector(state => state.filteredRentalObjects);
 
     const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [bookingHouse, setBookingHouse] = useState<RentalObject | null>(null);
@@ -61,10 +64,34 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
         setBookingHouse(null);
     };
 
+    const Loader = () => {
+        return <div style={{ marginBottom: "80px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <BeatLoader color="#1855b7" />
+        </div>
+    }
+
     return (
         <div className={style.rentalObjectsBlock} ref={ref}>
             <div className={styleContainer.container}>
-                {count === 0 ?
+                {status === RequestStatusType.loading ?
+                    < Loader /> :
+                    count === 0 ?
+                        <div className={style.infoText}>К сожалению, подходящих домиков для бронирования на выбранные даты и количество гостей не найдено.
+                            Попробуйте изменить даты или количество гостей.</div>
+                        : results && results.length >= 1 && results.map((el: RentalObject) => (
+                            <CommonHouseCard key={el.id} house={el}>
+                                <div className={style.priceBlock}>
+                                    <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
+                                    <p className={style.price}>{el.price}<span>BYN</span></p>
+                                </div>
+                                <div className={style.btnsBlock}>
+                                    <Button value={"Забронировать"} className={style.btnBook} onClick={() => onClickBookingHandler(el)} />
+                                    <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
+                                </div>
+                            </CommonHouseCard>
+                        ))
+                }
+                {/* {count === 0 ?
                     <div className={style.infoText}>К сожалению, подходящих домиков для бронирования на выбранные даты и количество гостей не найдено.
                         Попробуйте изменить даты или количество гостей.</div>
                     : results && results.length >= 1 && results.map((el: RentalObject) => (
@@ -79,14 +106,7 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
                             </div>
                         </CommonHouseCard>
                     ))
-                }
-
-                {/* {!bookingHouse && (
-                    <Modal active={true} onClose={onCloseBookingHandler} setActive={setModalBookingActive} type={"bookingModal"}>
-                        <Booking modalBookingActive={modalBookingActive} house={bookingHouse} />
-                    </Modal>
-                )} */}
-
+                } */}
 
             </div>
 

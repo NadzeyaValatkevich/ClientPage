@@ -24,7 +24,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const { id } = useAppSelector(state => state.mainObject);
+    const { id } = useAppSelector(state => state.mainObject.data);
     const location = useLocation();
 
     const [searchParams] = useSearchParams();

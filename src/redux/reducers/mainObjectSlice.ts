@@ -1,14 +1,17 @@
-import {
-  PayloadAction,
-  Slice,
-  createSelector,
-  createSlice,
-} from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { fetchMainObject } from '../thunks/mainObjectThunk'
 import { MainObjectType } from '../types/mainObjectTypes'
 import { RootState } from '../store'
+import { RequestStatusType } from '../../common/enums/enums'
+import { PayloadAction } from '@reduxjs/toolkit'
 
-const initialState: MainObjectType = {
+type initialStateType = {
+  data: MainObjectType
+  status: RequestStatusType
+  error: null | string
+}
+
+const mainObject: MainObjectType = {
   id: null,
   name: '',
   booking_photo: '',
@@ -32,34 +35,62 @@ const initialState: MainObjectType = {
     { countryCode: 'pl', countryLabel: 'Республика Польша' },
   ],
 }
-const mainObjectSlice: Slice<MainObjectType> = createSlice({
+
+const initialState: initialStateType = {
+  data: mainObject,
+  status: RequestStatusType.idle as RequestStatusType,
+  error: null,
+}
+
+const mainObjectSlice = createSlice({
   name: 'mainObject',
   initialState,
-  reducers: {},
+  reducers: {
+    setStatus: (
+      state,
+      action: PayloadAction<{ status: RequestStatusType }>,
+    ) => {
+      state.status = action.payload.status
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(
-      fetchMainObject.fulfilled,
-      (state, action: PayloadAction<MainObjectType>) => {
-        // return action.payload
-        return {
-          ...state,
-          ...action.payload,
-          countriesList: state.countriesList,
-        }
-      },
-    )
+    builder
+      .addCase(fetchMainObject.pending, (state) => {
+        state.status = RequestStatusType.loading
+      })
+      .addCase(
+        fetchMainObject.fulfilled,
+        (state, action: PayloadAction<MainObjectType>) => {
+          state.status = RequestStatusType.succeeded
+          state.data = {
+            ...action.payload,
+            countriesList: state.data.countriesList,
+          }
+          // return action.payload
+          // return {
+          //   ...state,
+          //   ...action.payload,
+          //   countriesList: state.countriesList,
+          // }
+        },
+      )
+      .addCase(fetchMainObject.rejected, (state, action) => {
+        state.status = RequestStatusType.failed
+        state.error = action.error.message || 'Something went wrong'
+      })
   },
 })
 
-const getCountriesList = (state: RootState) => state.mainObject.countriesList
+export const { setStatus } = mainObjectSlice.actions
+
+const getCountriesList = (state: RootState) =>
+  state.mainObject.data.countriesList
 
 export const getSortedCountriesList = createSelector(
   [getCountriesList],
   (list) => {
     const listCopy = [...list]
-    return listCopy.sort((a, b: any) =>
-      a.countryLabel.localeCompare(b.countryLabel),
-    )
+    return listCopy.sort((a, b) => a.countryLabel.localeCompare(b.countryLabel))
   },
 )
 
