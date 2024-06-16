@@ -21,11 +21,11 @@ export type FormValues = {
   check_out_time: string
   guests: GuestsType
   has_animals: boolean
-  animals_info: string
+  animals_info?: string | null
   first_name: string
   second_name: string
   last_name: string
-  birth_day: string
+  birth_day?: string | null
   sex: 'mal' | 'fem'
   nationality: string
   email: string

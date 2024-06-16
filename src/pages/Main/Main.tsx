@@ -13,6 +13,8 @@ import { Modal } from "../../components/Modal";
 import { FullHouseCard } from "../../components/FullHouseCard";
 import { useAppSelector } from "../../utils/hooks";
 import { RentalObject } from "../../redux/types/rentalObjectTypes";
+import { RequestStatusType } from "../../common/enums/enums";
+import { BeatLoader } from "react-spinners";
 
 export const features: any = [
     { id: 1, icon: wifi, title: "Wi-Fi" },
@@ -27,7 +29,8 @@ export const features: any = [
 ];
 
 export const Main = () => {
-    const { results } = useAppSelector(state => state.rentalObjects);
+    const { results } = useAppSelector(state => state.rentalObjects.data);
+    const { status } = useAppSelector(state => state.rentalObjects);
     const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
     // const [modalOrderActive, setModalOrderActive] = useState(false);
@@ -41,6 +44,12 @@ export const Main = () => {
         setModalActive(false)
         setActiveHouse(null)
     };
+
+    if (status === RequestStatusType.loading) {
+        return <div style={{ width: "100vw", marginBottom: "120px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <BeatLoader color="#1855b7" />
+        </div>
+    }
 
     return (
         <div className={style.main}>

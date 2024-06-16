@@ -100,7 +100,7 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
         has_animals: false,
         animals_info: "",
         second_name: "",
-        birth_day: "",
+        birth_day: null,
         sex: "mal",
         nationality: optionsNationality[0].value,
         telegram: "",
@@ -116,7 +116,7 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
 
-        // console.log(data)
+        console.log(data)
 
         const childAges = data.guests.childAges.map((item: ChildAge | undefined) => item?.value);
 
@@ -127,7 +127,8 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
             check_in_time: data.check_in_time,
             adult: data.guests.adults,
             has_animals: data.has_animals,
-            animals_info: data.animals_info,
+            ...(data.has_animals && { animals_info: data.animals_info ? data.animals_info : null }),
+            // animals_info: data.animals_info,
             first_name: data.first_name,
             second_name: data.second_name,
             last_name: data.last_name,
@@ -144,6 +145,8 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
             comment: data.comment,
             children: childAges,
         };
+        console.log(transformData.animals_info)
+
 
         dispatch(submitBooking(transformData))
 

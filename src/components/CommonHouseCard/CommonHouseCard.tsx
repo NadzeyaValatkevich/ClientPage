@@ -36,9 +36,9 @@ export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) =
         slidesToShow: 1,
         slidesToScroll: 1,
         speed: 900,
-        dots: true,
-        infinite: true,
-        arrows: true,
+        dots: house.images.length > 1,
+        infinite: house.images.length > 1,
+        arrows: house.images.length > 1,
         prevArrow: <PrevArrow onClick={() => { }} />,
         nextArrow: <NextArrow onClick={() => { }} />,
         // responsive: [
