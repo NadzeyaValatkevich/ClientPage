@@ -36,7 +36,7 @@ type GuestsSelectPropsType = {
 }
 
 export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedValue }: GuestsSelectPropsType, ref: any) => {
-    const { id } = useAppSelector(state => state.mainObject);
+    const { id } = useAppSelector(state => state.mainObject.data);
 
     console.log(ref)
 
