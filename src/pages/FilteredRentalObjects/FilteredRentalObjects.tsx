@@ -14,6 +14,8 @@ import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObj
 import React from "react";
 import { RequestStatusType } from "../../common/enums/enums";
 import { BeatLoader } from "react-spinners";
+import App from './../../App';
+import { appActions } from "../../redux/commonActions/appActions";
 
 export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {
 
@@ -60,6 +62,8 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
     };
 
     const onCloseBookingHandler = () => {
+        dispatch(appActions.setError({ error: null }))
+        dispatch(appActions.setStatus({ status: RequestStatusType.idle }))
         setModalBookingActive(false);
         setBookingHouse(null);
     };

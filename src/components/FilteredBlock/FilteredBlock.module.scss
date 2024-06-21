@@ -104,6 +104,9 @@
             margin-top: 0px;
           }
         }
+        .disabled {
+          background-color: red;
+        }
 
         .btnSearch:hover {
           background-color: $primary;

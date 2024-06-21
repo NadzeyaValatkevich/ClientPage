@@ -12,8 +12,10 @@ import { formatPeople } from "../../utils/functions/formatPeople";
 import { optionsNationality } from "../../utils/constants";
 import classNames from "classnames";
 import { FormValues, FormValuesDefault, TransformedFormValues } from "../../redux/types/@types";
-import { useAppDispatch } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { submitBooking } from "../../redux/thunks/bookingThunk";
+import { PopUp } from "../PopUp";
+import { RequestStatusType } from "../../common/enums/enums";
 
 type BookingPropsType = {
     modalBookingActive: boolean,
@@ -43,6 +45,11 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
     const { id, name, check_in_time, check_out_time, price } = house;
 
     const dispatch = useAppDispatch();
+    const { error, status } = useAppSelector(state => state.app);
+
+
+
+    console.log(status)
 
     const [formattedGuests] = useState(getFormattedGuestsFromLocalStorage);
     const [guests] = useState<GuestsType>(getGuestsFromLocalStorage);
@@ -52,20 +59,33 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
 
     const [comment, setComment] = useState("");
     const [commentError, setCommentError] = useState("");
+    const [openModal, setOpenModal] = useState(false);
+    const [modalContent, setModalContent] = useState<string | null>("");
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    useEffect(() => {
-        if (modalBookingActive) {
-            document.body.classList.add('open');
-        } else {
-            document.body.classList.remove('open');
-        }
+    // useEffect(() => {
+    //     if (modalBookingActive) {
+    //         document.body.classList.add('open');
+    //     } else {
+    //         document.body.classList.remove('open');
+    //     }
 
-        return () => {
-            document.body.classList.remove('open');
-        };
-    }, [modalBookingActive]);
+    //     return () => {
+    //         document.body.classList.remove('open');
+    //     };
+    // }, [modalBookingActive]);
+
+    useEffect(() => {
+        setOpenModal(false);
+        if (status === RequestStatusType.succeeded) {
+            setModalContent(`Заявка отправлена. В ближайшее время мы свяжемся с Вами для уточнения деталей брони. Спасибо что Вы с нами.`);
+            setOpenModal(true);
+        } else if (status === RequestStatusType.failed) {
+            setModalContent(error);
+            setOpenModal(true);
+        }
+    }, [status, error]);
 
     useEffect(() => {
         if (textareaRef.current) {
@@ -114,7 +134,7 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
 
     const { handleSubmit, register, setValue } = methods;
 
-    const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const onSubmit: SubmitHandler<FormValues> = async (data) => {
 
         console.log(data)
 
@@ -146,7 +166,6 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
             children: childAges,
         };
         console.log(transformData.animals_info)
-
 
         dispatch(submitBooking(transformData))
 
@@ -188,9 +207,17 @@ export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
                         </textarea>
                         {commentError && <p className={style.commentError}>{commentError}</p>}
                     </div>
-                    <Button className={style["booking__btn"]} type="submit" value={"Сохранить"} />
+                    <Button
+                        className={style["booking__btn"]}
+                        type="submit"
+                        value={"Сохранить"}
+                        disabled={status === RequestStatusType.loading}
+                    />
                 </form>
             </FormProvider>
+            {openModal &&
+                <PopUp content={modalContent} />
+            }
 
         </div>
 

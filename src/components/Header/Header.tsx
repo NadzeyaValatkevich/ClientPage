@@ -41,7 +41,7 @@ export const Header = () => {
                     }
                     <NavLink to={`/main_object/${id}`} className={style["headerContainer_info-backIconLogo"]}>
                         <div className={style["headerContainer_info-logo"]}>
-                            <Logo />
+                            {/* <Logo /> */}
                         </div>
                     </NavLink>
                 </div>
