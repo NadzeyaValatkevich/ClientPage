@@ -31,6 +31,7 @@ export const features: any = [
 export const Main = () => {
     const { results } = useAppSelector(state => state.rentalObjects.data);
     const { status } = useAppSelector(state => state.rentalObjects);
+    const { error } = useAppSelector(state => state.mainObject);
     const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
     // const [modalOrderActive, setModalOrderActive] = useState(false);
@@ -49,6 +50,20 @@ export const Main = () => {
         return <div style={{ width: "100vw", marginBottom: "120px", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <BeatLoader color="#1855b7" />
         </div>
+    }
+
+    if (error) {
+        return <div style={{
+            width: "100vw",
+            marginBottom: "120px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "20px",
+            fontWeight: "600"
+        }} >
+            {error}
+        </div >
     }
 
     return (

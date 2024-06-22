@@ -57,6 +57,7 @@ const mainObjectSlice = createSlice({
     builder
       .addCase(fetchMainObject.pending, (state) => {
         state.status = RequestStatusType.loading
+        state.error = null
       })
       .addCase(
         fetchMainObject.fulfilled,
@@ -76,7 +77,7 @@ const mainObjectSlice = createSlice({
       )
       .addCase(fetchMainObject.rejected, (state, action) => {
         state.status = RequestStatusType.failed
-        state.error = action.error.message || 'Something went wrong'
+        state.error = action.payload as string
       })
   },
 })
