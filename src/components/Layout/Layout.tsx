@@ -16,9 +16,7 @@ export const Layout = ({ scrollToFilteredObjects }: any) => {
     const { id } = useParams();
 
     useEffect(() => {
-
         id && dispatch(fetchMainObject(Number(id)))
-        // dispatch(fetchRentalObjects(Number(id)))
     }, [])
 
     if (status === RequestStatusType.loading) {

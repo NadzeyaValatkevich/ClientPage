@@ -20,7 +20,7 @@ import { appActions } from "../../redux/commonActions/appActions";
 export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {
 
     const { results, count } = useAppSelector(state => state.filteredRentalObjects.data);
-    const { status } = useAppSelector(state => state.filteredRentalObjects);
+    const { status, error } = useAppSelector(state => state.filteredRentalObjects);
 
     const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [bookingHouse, setBookingHouse] = useState<RentalObject | null>(null);
@@ -72,6 +72,20 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
         return <div style={{ marginBottom: "80px", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <BeatLoader color="#1855b7" />
         </div>
+    }
+
+    if (error) {
+        return <div style={{
+            width: "100vw",
+            marginBottom: "120px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "20px",
+            fontWeight: "600"
+        }} >
+            {error}
+        </div >
     }
 
     return (

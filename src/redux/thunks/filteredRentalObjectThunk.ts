@@ -3,6 +3,7 @@ import { AxiosError } from 'axios'
 import { objectsApi } from '../api'
 import { DatesGuestsObjectRequestType } from '../types/datesGuestsTypes'
 import { RentalObjectsResponseData } from '../types/rentalObjectTypes'
+import { handleAsyncServerNetworkError } from '../../utils/error-utils'
 
 export const fetchFilteredRentalObjects = createAsyncThunk<
   RentalObjectsResponseData,
@@ -15,12 +16,10 @@ export const fetchFilteredRentalObjects = createAsyncThunk<
 
       if (response.status === 200) {
         return response.data
-      } else {
-        return thunkAPI.rejectWithValue({ errors: response.data.message })
       }
-    } catch (err: any) {
-      const error: AxiosError = err
-      return thunkAPI.rejectWithValue({ errors: [error.message] })
+    } catch (error: any) {
+      const errorMessage = handleAsyncServerNetworkError(error, thunkAPI, false)
+      return thunkAPI.rejectWithValue(errorMessage)
     }
   },
 )

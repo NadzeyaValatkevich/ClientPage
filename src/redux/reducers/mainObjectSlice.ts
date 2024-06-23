@@ -62,17 +62,11 @@ const mainObjectSlice = createSlice({
       .addCase(
         fetchMainObject.fulfilled,
         (state, action: PayloadAction<MainObjectType>) => {
-          state.status = RequestStatusType.succeeded
           state.data = {
             ...action.payload,
             countriesList: state.data.countriesList,
           }
-          // return action.payload
-          // return {
-          //   ...state,
-          //   ...action.payload,
-          //   countriesList: state.countriesList,
-          // }
+          state.status = RequestStatusType.succeeded
         },
       )
       .addCase(fetchMainObject.rejected, (state, action) => {

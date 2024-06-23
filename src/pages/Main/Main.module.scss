@@ -5,6 +5,11 @@
   width: 100%;
   padding-bottom: 80px;
 }
+
+.infoText {
+  @extend %infoText;
+}
+
 .btnsBlock {
   @include flex(row, flex-start, center, nowrap);
 
@@ -13,11 +18,6 @@
     font-family: 'Inter', sans-serif;
     padding: 16px 26px;
   }
-
-  // .btnBook {
-  //     background-color: $color-8;
-  //     margin-right: 20px;
-  // }
 
   .btnDetails {
     padding: 16px 50px;

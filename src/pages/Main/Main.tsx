@@ -31,6 +31,7 @@ export const features: any = [
 export const Main = () => {
     const { results } = useAppSelector(state => state.rentalObjects.data);
     const { status } = useAppSelector(state => state.rentalObjects);
+    const errorRental = useAppSelector(state => state.rentalObjects.error);
     const { error } = useAppSelector(state => state.mainObject);
     const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
@@ -52,7 +53,7 @@ export const Main = () => {
         </div>
     }
 
-    if (error) {
+    if (error || errorRental) {
         return <div style={{
             width: "100vw",
             marginBottom: "120px",
@@ -62,9 +63,12 @@ export const Main = () => {
             fontSize: "20px",
             fontWeight: "600"
         }} >
-            {error}
+            {error || errorRental}
         </div >
     }
+
+    console.log(error)
+    console.log(results)
 
     return (
         <div className={style.main}>
@@ -76,6 +80,15 @@ export const Main = () => {
                         </div>
                     </CommonHouseCard>
                 })}
+                {results && results.length ?
+                    results.map((el: RentalObject) => {
+                        return <CommonHouseCard key={el.id} house={el}>
+                            <div className={style.btnsBlock}>
+                                <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
+                            </div>
+                        </CommonHouseCard>
+                    }) :
+                    <div className={style.infoText}>В ближайшее время здесь появятся сдаваемые объекты</div>}
             </div>
             {modalActive && activeHouse && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
                 <FullHouseCard rentalObject={activeHouse} modalActive={modalActive} />

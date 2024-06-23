@@ -41,3 +41,9 @@ $radius-secondary: 6px;
   border: 1px solid $primary;
   box-shadow: $shadow-1;
 }
+
+%infoText {
+  margin-bottom: 80px;
+  text-align: center;
+  @include typography(600, 20px, 24.38px, $text-primary);
+}
