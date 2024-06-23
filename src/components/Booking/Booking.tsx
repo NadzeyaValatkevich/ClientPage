@@ -40,7 +40,7 @@ const getFormattedGuestsFromLocalStorage = () => {
 };
 
 
-export const Booking = ({ modalBookingActive, house }: BookingPropsType) => {
+export const Booking = ({ house }: BookingPropsType) => {
 
     const { id, name, check_in_time, check_out_time, price } = house;
 

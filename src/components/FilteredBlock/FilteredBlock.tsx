@@ -5,7 +5,7 @@ import { GuestsSelect } from "./GuestsSelect";
 import { useEffect, useState } from "react";
 import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { ChildAge, DatesGuestsObjectRequestType, DatesGuestsObjectType, DatesType, GuestsType } from "../../redux/types/datesGuestsTypes";
-import { setDatesGuestsObject, setStatus } from "../../redux/reducers/datesGuestsSlice";
+import { setDatesGuestsObject } from "../../redux/reducers/datesGuestsSlice";
 import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { formatDashDate } from "../../utils/functions/formatDate";

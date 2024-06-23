@@ -4,7 +4,6 @@ import { Header } from "../Header";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { useEffect } from "react";
 import { fetchMainObject } from "../../redux/thunks/mainObjectThunk";
-import { fetchRentalObjects } from "../../redux/thunks/rentalObjectsThunk";
 import { FilteredBlock } from "../FilteredBlock";
 import { RequestStatusType } from "../../common/enums/enums";
 import { BeatLoader } from "react-spinners";

@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AxiosError } from 'axios'
 import { objectsApi } from '../api'
 import { ResponseBookingData, TransformedFormValues } from '../types/@types'
 import { appActions } from '../commonActions/appActions'

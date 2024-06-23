@@ -5,7 +5,7 @@ import calendar from "../../assets/icons/bigCalendar.svg";
 import { PrevArrow, NextArrow } from '../CustomArrows/CustomArrows';
 import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 
 export type FullHouseCardPropsType = {
@@ -13,7 +13,7 @@ export type FullHouseCardPropsType = {
     modalActive: boolean
 };
 
-export const FullHouseCard = ({ rentalObject, modalActive }: FullHouseCardPropsType) => {
+export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
 
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
     // const [reservationDate, setReservationDate] = useState();

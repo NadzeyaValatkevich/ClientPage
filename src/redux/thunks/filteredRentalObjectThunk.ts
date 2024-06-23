@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AxiosError } from 'axios'
 import { objectsApi } from '../api'
 import { DatesGuestsObjectRequestType } from '../types/datesGuestsTypes'
 import { RentalObjectsResponseData } from '../types/rentalObjectTypes'
