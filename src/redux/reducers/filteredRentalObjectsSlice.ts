@@ -23,6 +23,7 @@ const filteredRentalObjectsSlice = createSlice({
     builder
       .addCase(fetchFilteredRentalObjects.pending, (state) => {
         state.status = RequestStatusType.loading
+        state.error = null
       })
       .addCase(
         fetchFilteredRentalObjects.fulfilled,
@@ -33,7 +34,7 @@ const filteredRentalObjectsSlice = createSlice({
       )
       .addCase(fetchFilteredRentalObjects.rejected, (state, action) => {
         state.status = RequestStatusType.failed
-        state.error = action.error.message || 'Something went wrong'
+        state.error = action.payload as string
       })
   },
 })

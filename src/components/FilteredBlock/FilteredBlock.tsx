@@ -12,6 +12,7 @@ import { formatDashDate } from "../../utils/functions/formatDate";
 import { CheckDateInput } from "./CheckInDateInput";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { formatPeople } from "../../utils/functions/formatPeople";
+import { RequestStatusType } from "../../common/enums/enums";
 
 export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     const [check_in_date, setCheckInDate] = useState<Date | null | undefined>(null);
@@ -25,11 +26,13 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     const navigate = useNavigate();
 
     const { id } = useAppSelector(state => state.mainObject.data);
+    const { status } = useAppSelector(state => state.filteredRentalObjects);
     const location = useLocation();
 
     const [searchParams] = useSearchParams();
 
-    const { handleSubmit, formState: { errors }, clearErrors, setValue, register, reset } = useForm();
+    const methods = useForm();
+    const { handleSubmit, formState: { errors }, clearErrors, setValue, register, reset } = methods;
 
     useEffect(() => {
         scrollToFilteredObjects();
@@ -46,14 +49,24 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     }, [id, location.pathname, reset]);
 
     const handleCheckInDateChange = (date: Date) => {
-        setCheckInDate(date);
-        setValue("check_in_date", date);
 
         if (check_out_date && date >= check_out_date) {
+            console.log(date >= check_out_date)
             setCheckOutDate(null);
             setValue("check_out_date", null);
         }
+
+        setCheckInDate(date);
+        setValue("check_in_date", date);
+
         clearErrors("check_in_date")
+    };
+
+    const handleCheckOutDateChange = (date: Date) => {
+        setCheckOutDate(date);
+        setValue("check_out_date", date);
+
+        clearErrors("check_out_date");
     };
 
     useEffect(() => {
@@ -67,18 +80,35 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
                 check_out_date: queryParams.get('check_out_date') ?? "",
             };
 
-            queryParamsData.check_in_date && setCheckInDate(new Date(queryParamsData.check_in_date));
-            queryParamsData.check_out_date && setCheckOutDate(new Date(queryParamsData.check_out_date));
+            // queryParamsData.check_in_date && setCheckInDate(new Date(queryParamsData.check_in_date));
+            // queryParamsData.check_out_date && setCheckOutDate(new Date(queryParamsData.check_out_date));
+
+            if (queryParamsData.check_in_date) {
+                const checkInDate = new Date(queryParamsData.check_in_date);
+                setCheckInDate(checkInDate);
+                setValue("check_in_date", checkInDate);
+            }
+            if (queryParamsData.check_out_date) {
+                const checkOutDate = new Date(queryParamsData.check_out_date);
+                setCheckOutDate(checkOutDate);
+                setValue("check_out_date", checkOutDate);
+            }
 
             const storedGuestsData = localStorage.getItem('guests');
 
             if (storedGuestsData) {
                 const parsedGuestsData: GuestsType = JSON.parse(storedGuestsData);
-                queryParams.get('people_amount') && setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children))
+                // queryParams.get('people_amount') && setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children))
+                if (queryParams.get('people_amount')) {
+                    setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children));
+                    setValue("guests", parsedGuestsData);
+                    setGuests(parsedGuestsData);
+                }
+
             }
         }
 
-    }, [check_in_date, check_out_date, searchParams]);
+    }, [searchParams]);
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
 
@@ -114,12 +144,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
             main_object: id ? (id).toString() : "",
         })
         navigate(`/main_object/${id}/filteredRental_objects?${queryParams.toString()}`)
-    };
 
-    const handleCheckOutDateChange = (date: Date) => {
-        setCheckOutDate(date);
-        setValue("check_out_date", date);
-        clearErrors("check_out_date");
     };
 
     const handleGuestsChange = (newGuests: GuestsType) => {
@@ -140,7 +165,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
         <div className={style.filteredBlockWrapper}>
             <div className={`${styleContainer.container} ${style.filteredBlockContainer}`}>
                 <h3 className={style.titleBlock}>Бронирование</h3>
-                <FormProvider {...useForm()} >
+                <FormProvider {...methods} >
                     <form className={style.filteredBlock} onSubmit={handleSubmit(onSubmit)}>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Дата заезда</h4>
@@ -156,7 +181,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
                         </div>
                         <div className={style.btnBlock}>
                             <Button className={style.btnSearch} type="submit" value={"Подобрать"}
-                                disabled={Object.keys(errors).length > 0}
+                                disabled={Object.keys(errors).length > 0 || status === RequestStatusType.loading}
                             />
                         </div>
                     </form>

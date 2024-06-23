@@ -5,7 +5,7 @@ import calendar from "../../assets/icons/bigCalendar.svg";
 import { PrevArrow, NextArrow } from '../CustomArrows/CustomArrows';
 import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 
 export type FullHouseCardPropsType = {
@@ -13,7 +13,7 @@ export type FullHouseCardPropsType = {
     modalActive: boolean
 };
 
-export const FullHouseCard = ({ rentalObject, modalActive }: FullHouseCardPropsType) => {
+export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
 
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
     // const [reservationDate, setReservationDate] = useState();
@@ -31,25 +31,25 @@ export const FullHouseCard = ({ rentalObject, modalActive }: FullHouseCardPropsT
         slidesToShow: 1,
         slidesToScroll: 1,
         speed: 900,
-        dots: true,
-        infinite: true,
-        arrows: true,
+        dots: images.length > 1,
+        infinite: images.length > 1,
+        arrows: images.length > 1,
         prevArrow: <PrevArrow onClick={() => { }} />,
         nextArrow: <NextArrow onClick={() => { }} />,
     };
 
 
-    useEffect(() => {
-        if (modalActive) {
-            document.body.classList.add('open');
-        } else {
-            document.body.classList.remove('open');
-        }
+    // useEffect(() => {
+    //     if (modalActive) {
+    //         document.body.classList.add('open');
+    //     } else {
+    //         document.body.classList.remove('open');
+    //     }
 
-        return () => {
-            document.body.classList.remove('open');
-        };
-    }, [modalActive]);
+    //     return () => {
+    //         document.body.classList.remove('open');
+    //     };
+    // }, [modalActive]);
 
     return (
         <div className={style.houseBlock}>

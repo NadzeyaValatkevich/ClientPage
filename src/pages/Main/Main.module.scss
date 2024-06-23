@@ -1,37 +1,42 @@
-@import "../../common/styles/sass/variables.scss";
-@import "../../common/styles/sass/mixins.scss";
+@import '../../common/styles/sass/variables.scss';
+@import '../../common/styles/sass/mixins.scss';
 
 .main {
-    width: 100%;
-    padding-bottom: 80px;
-} 
-            .btnsBlock {
-                @include flex(row, flex-start, center, nowrap);
+  width: 100%;
+  padding-bottom: 80px;
+}
 
-                button {
-                    @include typography(500, 16px, 19.36px,  $text-white);
-                    font-family: "Inter", sans-serif;
-                    padding: 16px 26px;
-                }
+.infoText {
+  @extend %infoText;
+}
 
-                // .btnBook {
-                //     background-color: $color-8;
-                //     margin-right: 20px;
-                // }
+.btnsBlock {
+  @include flex(row, flex-start, center, nowrap);
 
-                .btnDetails {
-                    padding: 16px 50px;
-                    color: $text-primary;
-                    box-shadow: $shadow-2;
-                    border: none;
-                    background-color: $text-white;
-                }
+  button {
+    @include typography(500, 16px, 19.36px, $text-white);
+    font-family: 'Inter', sans-serif;
+    padding: 16px 26px;
+  }
 
-                .btnDetails:hover {
-                    color: $text-white;
-                    background-color: $primary;
-                    transition: all 0.5s ease 0s;
-                }
+  .btnDetails {
+    padding: 16px 50px;
+    color: $text-primary;
+    box-shadow: $shadow-2;
+    border: none;
+    background-color: $text-white;
+  }
 
-            }
-        
+  .btnDetails:hover {
+    color: $text-white;
+    background-color: $primary;
+    transition: all 0.5s ease 0s;
+  }
+}
+
+// .errorText {
+//   width: '100vw';
+//   margin-bottom: '120px';
+//   @include typography(600, 20px, 24.38px, $text-primary);
+//   margin: 0 auto;
+// }
