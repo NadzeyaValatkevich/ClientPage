@@ -24,8 +24,6 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
 
     const [check_in_date, setCheckInDate] = useState<string | undefined>("");
     const [check_out_date, setCheckOutDate] = useState<string | undefined>("");
-    // const [formattedGuests, setFormattedGuests] = useState("");
-    // const [guests, setGuests] = useState<GuestsType | string>("");
     const [checkIn, setCheckIn] = useState(false);
 
     const [animals, setAnimals] = useState("");
@@ -57,16 +55,6 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
 
     }, [searchParams]);
 
-    // useLayoutEffect(() => {
-    //     const storedGuestsData = localStorage.getItem('guests');
-
-    //     if (storedGuestsData) {
-    //         const parsedGuestsData: GuestsType = JSON.parse(storedGuestsData);
-    //         setGuests(parsedGuestsData)
-    //         setFormattedGuests(formatPeople(parsedGuestsData.adults, parsedGuestsData.children))
-    //     }
-    // }, []);
-
     const validateAnimals = (value: string) => {
         if (!value.trim()) {
             return REQUIRED_FIELD_ERROR;
@@ -75,7 +63,7 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
             return ANIMALS_ERROR;
         }
         return "";
-    }
+    };
 
     const handleOnChange = () => {
         setCheckIn(!checkIn)

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState, KeyboardEvent } from "react";
 import style from "./Booking.module.scss";
 import { Contacts } from "./Contacts";
 import { InfoObject } from "./InfoObject";
@@ -47,10 +47,6 @@ export const Booking = ({ house }: BookingPropsType) => {
     const dispatch = useAppDispatch();
     const { error, status } = useAppSelector(state => state.app);
 
-
-
-    console.log(status)
-
     const [formattedGuests] = useState(getFormattedGuestsFromLocalStorage);
     const [guests] = useState<GuestsType>(getGuestsFromLocalStorage);
 
@@ -63,18 +59,6 @@ export const Booking = ({ house }: BookingPropsType) => {
     const [modalContent, setModalContent] = useState<string | null>("");
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-    // useEffect(() => {
-    //     if (modalBookingActive) {
-    //         document.body.classList.add('open');
-    //     } else {
-    //         document.body.classList.remove('open');
-    //     }
-
-    //     return () => {
-    //         document.body.classList.remove('open');
-    //     };
-    // }, [modalBookingActive]);
 
     useEffect(() => {
         setOpenModal(false);
@@ -110,6 +94,13 @@ export const Booking = ({ house }: BookingPropsType) => {
         }
         adjustTextareaHeight(event.target);
     };
+
+    const handleOnKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === ' ' && e.currentTarget.value === '') {
+            e.preventDefault();
+        }
+    };
+
 
     const defaultValues: DefaultValues<FormValuesDefault> = {
         rental_object: id,
@@ -168,9 +159,7 @@ export const Booking = ({ house }: BookingPropsType) => {
         console.log(transformData.animals_info)
 
         dispatch(submitBooking(transformData))
-
     }
-
 
     return (
         <div className={style.booking}>
@@ -203,6 +192,7 @@ export const Booking = ({ house }: BookingPropsType) => {
                             onChange={handleOnChangeComment}
                             value={comment}
                             maxLength={500}
+                            onKeyDown={handleOnKeyDown}
                         >
                         </textarea>
                         {commentError && <p className={style.commentError}>{commentError}</p>}
