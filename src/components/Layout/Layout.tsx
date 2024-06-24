@@ -29,7 +29,7 @@ export const Layout = ({ scrollToFilteredObjects }: any) => {
             <Header />
             <FilteredBlock scrollToFilteredObjects={scrollToFilteredObjects} />
             <Outlet />
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }
