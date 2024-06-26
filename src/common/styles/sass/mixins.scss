@@ -19,7 +19,7 @@
     }
   }
   @if $break-point == sm {
-    @media (max-width: 361px) {
+    @media (max-width: 360px) {
       @content;
     }
   }

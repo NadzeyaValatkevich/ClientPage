@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState, KeyboardEvent } from "react";
 import style from "./InputBox.module.scss";
 import { Popover } from "../../Popover";
 import { useFormContext } from "react-hook-form";
@@ -52,9 +52,20 @@ export const InputBox = (props: InputBoxPropsType) => {
     const imgRef = useRef<HTMLImageElement>(null);
 
     const handleOnChange = ((e: ChangeEvent<HTMLInputElement>) => {
+        console.log(e.currentTarget.value.charAt(0) === ' ')
+        if (e.currentTarget.value.charAt(0) === ' ') {
+            return
+        }
         setValue(e.currentTarget.value);
         onChange && onChange(e.currentTarget.value)
     });
+
+    const handleOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (type === 'email' && e.key === ' ') {
+            e.preventDefault();
+        }
+
+    };
 
     const onHandlerImgClick = () => {
         // setShowPopover(true)
@@ -94,6 +105,7 @@ export const InputBox = (props: InputBoxPropsType) => {
                 placeholder={placeholder}
                 onChange={handleOnChange}
                 onBlur={onBlur}
+                onKeyDown={handleOnKeyDown}
             />
             {error && <p className={style.error}>{error}</p>}
         </div >

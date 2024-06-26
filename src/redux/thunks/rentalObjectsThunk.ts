@@ -5,7 +5,7 @@ import { handleAsyncServerNetworkError } from '../../utils/error-utils'
 
 export const fetchRentalObjects = createAsyncThunk<
   RentalObjectsResponseData,
-  number
+  string
 >('rentalObjects/fetchRentalObjects', async (id, thunkAPI) => {
   try {
     const response = await objectsApi.getRentalObjects(id)

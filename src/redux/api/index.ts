@@ -8,11 +8,11 @@ const instance = axios.create({
 })
 
 export const objectsApi = {
-  getMainObject(id: number) {
+  getMainObject(id: string) {
     return instance.get(`/client_part/main_objects/${id}/`)
   },
 
-  getRentalObjects(id: number) {
+  getRentalObjects(id: string) {
     return instance.get(`/client_part/rental_objects/?main_object=${id}`)
   },
 

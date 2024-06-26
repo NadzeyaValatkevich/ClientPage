@@ -5,12 +5,15 @@ import facebook from "../../assets/iconsSocial/f.svg";
 import instagram from "../../assets/iconsSocial/insta.svg";
 import { YMaps, Map, Placemark, GeolocationControl, FullscreenControl } from "react-yandex-maps";
 import { useAppSelector } from "../../utils/hooks";
+import { getCountCountry } from "../../utils/functions/getCountCountry";
 
 export const Footer = () => {
     const { country, full_address } = useAppSelector(state => state.mainObject.data);
     const region = full_address?.region;
     const locality = full_address?.locality;
     const address = full_address?.address;
+
+    console.log(country)
 
     return (
         <div className={style.footer}>
@@ -22,7 +25,7 @@ export const Footer = () => {
                         <img alt={"instagram"} src={instagram} />
                     </div>
                     <p className={style.address}>
-                        {`${country ? country : "страна"}, ${region ? region : "регион"}, ${locality ? locality : "населенный пункт"}, ${address ? address : "адрес"}`}
+                        {`${country ? getCountCountry(country) : "страна"}, ${region ? region : "регион"}, ${locality ? locality : "населенный пункт"}, ${address ? address : "адрес"}`}
                     </p>
                     <div className={style.phone}>+375 (29) 853-25-10</div>
                     <div className={style.email}>info@gmail.com</div>

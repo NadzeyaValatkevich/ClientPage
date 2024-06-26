@@ -10,6 +10,7 @@ import { validateField } from "../../../utils/functions/validateField";
 import { Controller, useFormContext } from "react-hook-form";
 
 export const Contacts = () => {
+
     const [telephoneError, setTelephoneError] = useState("");
     const [telephone, setTelephone] = useState<TelephoneType>({
         country_code: "",
@@ -136,7 +137,7 @@ export const Contacts = () => {
                     value={email}
                     type={"email"}
                     placeholder={"Введите электронную почту"}
-                    onChange={(value) => { handleChangeEmail("email", value) }}
+                    onChange={(value) => { handleChangeEmail("email", value.trim()) }}
                     onBlur={() => handleOnBlur("email", email)}
                     error={emailError || errors["email"]?.message}
                     requiredMessage={REQUIRED_FIELD_ERROR}
@@ -147,7 +148,7 @@ export const Contacts = () => {
                     value={telegram}
                     type={'text'}
                     placeholder={"Введите ссылку или никнейм"}
-                    onChange={(value) => { handleChangeTelegram("telegram", value) }}
+                    onChange={(value) => { handleChangeTelegram("telegram", value.trim()) }}
                     onBlur={() => handleOnBlur("telegram", telegram)}
                     error={telegramError}
                     img={popOver}

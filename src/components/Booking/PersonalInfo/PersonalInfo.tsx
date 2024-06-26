@@ -62,6 +62,7 @@ export const PersonalInfo = () => {
     };
 
     const handleOnBlur = (fieldName: string, value: string) => {
+
         if (!valuesTouched[fieldName]) {
             setValuesTouched(prevState => ({
                 ...prevState,
@@ -92,7 +93,7 @@ export const PersonalInfo = () => {
                     value={values.last_name}
                     type={'text'}
                     placeholder={"Введите фамилию"}
-                    onChange={(value) => handleChange('last_name', value)}
+                    onChange={(value) => handleChange('last_name', value.trim())}
                     img={popOver}
                     imgActive={popOverActive}
                     onBlur={() => handleOnBlur('last_name', values.last_name)}
@@ -107,7 +108,7 @@ export const PersonalInfo = () => {
                     value={values.first_name}
                     type={'text'}
                     placeholder={"Введите имя"}
-                    onChange={(value) => handleChange('first_name', value)}
+                    onChange={(value) => handleChange('first_name', value.trim())}
                     img={popOver} imgActive={popOverActive}
                     onBlur={() => handleOnBlur('first_name', values.first_name)}
                     error={errorsName.first_name || errors["first_name"]?.message}
@@ -121,7 +122,7 @@ export const PersonalInfo = () => {
                     value={values.second_name}
                     type={'text'}
                     placeholder={"Введите отчество"}
-                    onChange={(value) => handleChange('second_name', value)}
+                    onChange={(value) => handleChange('second_name', value.trim())}
                     img={popOver} imgActive={popOverActive}
                     onBlur={() => handleOnBlur('second_name', values.second_name)}
                     error={errorsName.second_name}

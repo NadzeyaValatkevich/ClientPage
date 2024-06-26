@@ -4,13 +4,13 @@ import { MainObjectType } from '../types/mainObjectTypes'
 import { handleAsyncServerNetworkError } from '../../utils/error-utils'
 import { fetchRentalObjects } from './rentalObjectsThunk'
 
-export const fetchMainObject = createAsyncThunk<MainObjectType, number>(
+export const fetchMainObject = createAsyncThunk<MainObjectType, string>(
   'mainObject/fetchMainObject',
   async (id, thunkAPI) => {
     try {
       const response = await objectsApi.getMainObject(id)
 
-      thunkAPI.dispatch(fetchRentalObjects(Number(id)))
+      thunkAPI.dispatch(fetchRentalObjects(id))
 
       return response.data
     } catch (error: any) {

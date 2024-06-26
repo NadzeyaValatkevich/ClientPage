@@ -2,13 +2,23 @@
 @import '../../../common/styles/sass/mixins.scss';
 
 .customDropDown {
-  max-width: 288px;
+  // max-width: 288px;
   width: 100%;
   position: relative;
   padding: 25px 20px;
   background-color: $text-white;
   border: solid 1px $text-secondary;
   border-radius: $radius-secondary;
+
+  @include media-query(md) {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  @include media-query(sm) {
+    padding-top: 11.5px;
+    padding-bottom: 11.5px;
+  }
 
   &--selected {
     border-color: $primary;
@@ -19,6 +29,7 @@
     @include flex(row, space-between, center, nowrap);
 
     &-input {
+      width: 100%;
       border: none;
       @include typography(500, 14px, 17.07px, $text-primary);
     }

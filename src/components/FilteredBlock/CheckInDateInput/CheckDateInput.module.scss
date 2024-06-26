@@ -6,13 +6,23 @@
 }
 
 .customDatePickDiv {
-  width: 288px;
-  // width: 100%;
+  // max-width: 288px;
+  width: 100%;
   padding: 25px 20px;
   background-color: $text-white;
   border: solid 1px $text-secondary;
   border-radius: $radius-secondary;
   @include flex(row, space-between, center, nowrap);
+
+  @include media-query(md) {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  @include media-query(sm) {
+    padding-top: 11.5px;
+    padding-bottom: 11.5px;
+  }
 
   .image {
     cursor: pointer;
@@ -38,9 +48,14 @@
 }
 
 .customInput {
+  width: 100%;
   border: none;
   box-shadow: none !important;
   @include typography(500, 14px, 17.07px, $text-primary);
+}
+
+:global(.react-datepicker-wrapper) {
+  display: block;
 }
 
 :global(.react-datepicker-popper) {
