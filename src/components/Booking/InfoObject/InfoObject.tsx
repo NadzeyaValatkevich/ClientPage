@@ -104,7 +104,7 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
                 <div className={style["infoObject__block-upItem"]}>
                     <InputBox
                         className={style["infoObject__block-object"]}
-                        title={"Объект*"}
+                        title={"Объект"}
                         name={"rental_object"}
                         value={title}
                         type={'text'}
@@ -113,7 +113,7 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
                     />
                     <div className={style["infoObject__block-date--checkIn"]}>
                         <InputBox
-                            title={"Дата заезда*"}
+                            title={"Дата заезда"}
                             name={"check_in_date"}
                             value={check_in_date}
                             type={'text'}
@@ -128,7 +128,7 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
                         label={"Время заезда*"} />
                     <div className={style["infoObject__block-date--checkOut"]}>
                         <InputBox
-                            title={"Дата выезда*"}
+                            title={"Дата выезда"}
                             name={"check_out_date"}
                             value={check_out_date}
                             type={'text'}
@@ -138,7 +138,7 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
                     </div>
                     <div className={style["infoObject__block-time--checkOut"]}>
                         <InputBox
-                            title={"Время выезда*"}
+                            title={"Время выезда"}
                             name={"check_out_time"}
                             value={formatCheckOutTime}
                             type={'datetime'}
@@ -149,7 +149,7 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
                 <div className={style["infoObject__block-mediumItem"]}>
                     <div className={style["infoObject__block-guests"]}>
                         <InputBox
-                            title={"Количество гостей*"}
+                            title={"Количество гостей"}
                             name={"guests"}
                             value={guests}
                             displayValue={formattedGuests}

@@ -10,7 +10,7 @@ type CountryItemType = {
 }
 
 export type MainObjectType = {
-  id: number | null
+  id: string | null
   name: string
   booking_photo: string
   full_address: AddressType | null
