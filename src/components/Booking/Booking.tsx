@@ -139,7 +139,6 @@ export const Booking = ({ house }: BookingPropsType) => {
             adult: data.guests.adults,
             has_animals: data.has_animals,
             ...(data.has_animals && { animals_info: data.animals_info ? data.animals_info : null }),
-            // animals_info: data.animals_info,
             first_name: data.first_name,
             second_name: data.second_name,
             last_name: data.last_name,
