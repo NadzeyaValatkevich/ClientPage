@@ -14,7 +14,7 @@ import classNames from "classnames";
 import { FormValues, FormValuesDefault, TransformedFormValues } from "../../redux/types/@types";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { submitBooking } from "../../redux/thunks/bookingThunk";
-import { PopUp } from "../PopUp";
+import { Popup } from "../Popup";
 import { RequestStatusType } from "../../common/enums/enums";
 
 type BookingPropsType = {
@@ -63,7 +63,9 @@ export const Booking = ({ house }: BookingPropsType) => {
     useEffect(() => {
         setOpenModal(false);
         if (status === RequestStatusType.succeeded) {
-            setModalContent(`Заявка отправлена. В ближайшее время мы свяжемся с Вами для уточнения деталей брони. Спасибо что Вы с нами.`);
+            setModalContent(`Ваша бронь отправлена успешно.  
+Данные бронирования отправлены вам на указанный в форме электронный адрес.
+Ожидайте подтверждения брони.`);
             setOpenModal(true);
         } else if (status === RequestStatusType.failed) {
             setModalContent(error);
@@ -205,7 +207,7 @@ export const Booking = ({ house }: BookingPropsType) => {
                 </form>
             </FormProvider>
             {openModal &&
-                <PopUp content={modalContent} />
+                <Popup content={modalContent} setOpenModal={setOpenModal} />
             }
 
         </div>
