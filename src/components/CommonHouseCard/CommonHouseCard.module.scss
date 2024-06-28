@@ -96,12 +96,16 @@
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
           grid-template-rows: 1fr 1fr;
+          row-gap: 20px;
+          column-gap: 40px;
 
           .featuresItem {
-            @include flex(row, flex-start, center, nowrap);
+            @include flex(row, flex-start, flex-start, nowrap);
 
-            img {
-              margin-right: 20px;
+            &_title {
+              margin-left: 5px;
+              @include typography(400, 18px, 24px, $text-primary);
+              font-family: 'Commissioner', sans-serif;
             }
           }
         }

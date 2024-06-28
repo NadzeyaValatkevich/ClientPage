@@ -3,7 +3,8 @@ import styles from "./Popup.module.scss"
 
 type PopupPropsType = {
     content: string | null,
-    setOpenModal: (value: boolean) => void
+    setOpenModal: (value: boolean) => void,
+    setModalBookingActive: (value: boolean) => void
 }
 
 export const Popup = ({ content, setOpenModal }: PopupPropsType) => {
@@ -16,6 +17,7 @@ export const Popup = ({ content, setOpenModal }: PopupPropsType) => {
 
     const handleOnClosePopup = () => {
         setOpenModal(false)
+        // setModalBookingActive(false)
     }
 
     return <div className={styles["popup-overlay"]}>

@@ -73,13 +73,6 @@ export const Main = () => {
     return (
         <div className={style.main}>
             <div className={styleContainer.container}>
-                {results && results.map((el: RentalObject) => {
-                    return <CommonHouseCard key={el.id} house={el}>
-                        <div className={style.btnsBlock}>
-                            <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
-                        </div>
-                    </CommonHouseCard>
-                })}
                 {results && results.length ?
                     results.map((el: RentalObject) => {
                         return <CommonHouseCard key={el.id} house={el}>
