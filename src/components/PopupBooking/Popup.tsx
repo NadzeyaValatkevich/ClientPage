@@ -7,7 +7,7 @@ type PopupPropsType = {
     setModalBookingActive: (value: boolean) => void
 }
 
-export const Popup = ({ content, setOpenModal, setModalBookingActive }: PopupPropsType) => {
+export const Popup = ({ content, setOpenModal }: PopupPropsType) => {
 
     const splitContentIntoSentences = (text: string | null) => {
         return text?.match(/[^\.!\?]+[\.!\?]+/g)
