@@ -1,7 +1,8 @@
 export const FIRST_NAME_REG = /^[A-Za-z]+(-[A-Za-z]+)?$|^[А-ЯЁа-яё]+(-[А-ЯЁа-яё]+)?$/;
 export const SECOND_NAME_REG = /^([A-Za-z]+)$|^([А-ЯЁа-яё]+)$/;
 export const EMAIL_REG = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
-export const TELEGRAM_REG = /^(https:\/\/t\.me\/[a-zA-Z0-9_]{5,32}|@[a-zA-Z0-9_]{5,32})$/;
+// export const TELEGRAM_REG = /^(https:\/\/t\.me\/[a-zA-Z0-9_]{5,32}|@[a-zA-Z0-9_]{5,32})$/;
+export const TELEGRAM_REG = /^(https:\/\/t\.me\/[\S]{5,32}|@[\S]{5,32})$/;;
 
 export const ANIMAL_INFO_REG = {
     isLetter: /[A-Za-zА-ЯЁа-яё]/,

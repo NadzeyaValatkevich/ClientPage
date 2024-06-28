@@ -1,13 +1,32 @@
-import styles from "./PopUp.module.scss"
+import { CloseIcon } from "../../assets/icons/Close"
+import styles from "./Popup.module.scss"
 
 type PopUpPropsType = {
-    content: string | null
+    content: string | null,
+    setOpenModal: (value: boolean) => void
 }
 
-export const PopUp = ({ content }: PopUpPropsType) => {
+export const Popup = ({ content, setOpenModal }: PopUpPropsType) => {
 
-    return <div className={styles.popUp}>
-        <p>{content}</p>
+    const splitContentIntoSentences = (text: string | null) => {
+        return text?.match(/[^\.!\?]+[\.!\?]+/g)
+    };
+
+    const sentences = splitContentIntoSentences(content);
+
+    const handleOnClosePopup = () => {
+        setOpenModal(false)
+    }
+
+    return <div className={styles["popup-overlay"]}>
+        <div className={styles["popup-content"]}>
+            <CloseIcon onClick={handleOnClosePopup} color={"#0F2664"} />
+
+            {sentences?.map((sentence: string, index: number) => (
+                <p key={index}>{sentence.trim()}</p>
+            )
+            )}
+        </div>
     </div>
 
 }
