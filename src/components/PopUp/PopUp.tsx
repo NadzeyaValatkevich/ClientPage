@@ -1,12 +1,12 @@
 import { CloseIcon } from "../../assets/icons/Close"
 import styles from "./Popup.module.scss"
 
-type PopUpPropsType = {
+type PopupPropsType = {
     content: string | null,
     setOpenModal: (value: boolean) => void
 }
 
-export const Popup = ({ content, setOpenModal }: PopUpPropsType) => {
+export const Popup = ({ content, setOpenModal }: PopupPropsType) => {
 
     const splitContentIntoSentences = (text: string | null) => {
         return text?.match(/[^\.!\?]+[\.!\?]+/g)
