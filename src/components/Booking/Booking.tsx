@@ -20,6 +20,7 @@ import { Popup } from "../PopupBooking";
 type BookingPropsType = {
     modalBookingActive: boolean,
     house: RentalObject,
+    setModalBookingActive: (value: boolean) => void,
 }
 
 const getGuestsFromLocalStorage = () => {
@@ -40,7 +41,7 @@ const getFormattedGuestsFromLocalStorage = () => {
 };
 
 
-export const Booking = ({ house }: BookingPropsType) => {
+export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
 
     const { id, name, check_in_time, check_out_time, price } = house;
 
@@ -207,7 +208,7 @@ export const Booking = ({ house }: BookingPropsType) => {
                 </form>
             </FormProvider>
             {openModal &&
-                <Popup content={modalContent} setOpenModal={setOpenModal} />
+                <Popup content={modalContent} setOpenModal={setOpenModal} setModalBookingActive={setModalBookingActive} />
             }
 
         </div>

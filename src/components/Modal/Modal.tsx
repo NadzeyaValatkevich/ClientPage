@@ -23,7 +23,6 @@ export const Modal = ({ active, onClose, setActive, children, type }: ModalProps
                                 ? <CloseIcon onClick={onClose} color={"#0F2664"} />
                                 : <div className={style["modalContentBooking__header"]}>
                                     <h3 className={style["modalContentBooking__header-title"]}>Бронирование</h3>
-                                    {/* <button className={style["modalContentBooking__header-btn"]}>Сохранить</button> */}
                                     <CloseIcon onClick={onClose} color={"#0F2664"} />
                                 </div>
                             }

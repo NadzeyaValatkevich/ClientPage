@@ -108,22 +108,6 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
                             </CommonHouseCard>
                         ))
                 }
-                {/* {count === 0 ?
-                    <div className={style.infoText}>К сожалению, подходящих домиков для бронирования на выбранные даты и количество гостей не найдено.
-                        Попробуйте изменить даты или количество гостей.</div>
-                    : results && results.length >= 1 && results.map((el: RentalObject) => (
-                        <CommonHouseCard key={el.id} house={el}>
-                            <div className={style.priceBlock}>
-                                <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
-                                <p className={style.price}>{el.price}<span>BYN</span></p>
-                            </div>
-                            <div className={style.btnsBlock}>
-                                <Button value={"Забронировать"} className={style.btnBook} onClick={() => onClickBookingHandler(el)} />
-                                <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
-                            </div>
-                        </CommonHouseCard>
-                    ))
-                } */}
 
             </div>
 
@@ -135,7 +119,7 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
 
             {modalBookingActive && bookingHouse && (
                 <Modal active={modalBookingActive} onClose={onCloseBookingHandler} setActive={setModalBookingActive} type={"bookingModal"}>
-                    <Booking modalBookingActive={modalBookingActive} house={bookingHouse} />
+                    <Booking modalBookingActive={modalBookingActive} setModalBookingActive={setModalBookingActive} house={bookingHouse} />
                 </Modal>
             )}
         </div>

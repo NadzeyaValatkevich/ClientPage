@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { fetchRentalObjects } from '../thunks/rentalObjectsThunk'
 import { RentalObjectsResponseData } from '../types/rentalObjectTypes'
 import { RequestStatusType } from '../../common/enums/enums'
+import { features } from './../../components/HouseCard/HouseCard'
 
 type initialStateType = {
   data: RentalObjectsResponseData

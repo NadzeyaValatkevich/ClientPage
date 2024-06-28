@@ -1,12 +1,12 @@
 import style from "./FullHouseCard.module.scss";
-import { features as fullFeatures } from '../HouseCard/HouseCard';
 import { Carousel } from "../Carousel";
 import calendar from "../../assets/icons/bigCalendar.svg";
 import { PrevArrow, NextArrow } from '../CustomArrows/CustomArrows';
-import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
+import { ImageItem, RentalObject, TransformFeatureItem } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
 import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
+import { getCountFeatures } from "../../utils/functions/getCountFeatures";
 
 export type FullHouseCardPropsType = {
     rentalObject: RentalObject,
@@ -16,11 +16,10 @@ export type FullHouseCardPropsType = {
 export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
 
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-    // const [reservationDate, setReservationDate] = useState();
 
-    const { name, images, description, rooms, max_places, reservations, status } = rentalObject;
+    const { name, images, description, rooms, max_places, reservations, status, features } = rentalObject;
 
-    // console.log(rentalObject)
+    const transformedFeatures = getCountFeatures(features)
     const datePickerRef = useRef<HTMLDivElement>(null);
 
     const handleImgClick = () => {
@@ -37,19 +36,6 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
         prevArrow: <PrevArrow onClick={() => { }} />,
         nextArrow: <NextArrow onClick={() => { }} />,
     };
-
-
-    // useEffect(() => {
-    //     if (modalActive) {
-    //         document.body.classList.add('open');
-    //     } else {
-    //         document.body.classList.remove('open');
-    //     }
-
-    //     return () => {
-    //         document.body.classList.remove('open');
-    //     };
-    // }, [modalActive]);
 
     return (
         <div className={style.houseBlock}>
@@ -78,17 +64,16 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                     <div className={style.beds}>
                         <p>Спальные места: </p>
                         <p>{max_places}</p>
-                        {/* <p>{countSleepingPlaces(total_beds)}</p>     */}
                     </div>
                 </div>
                 <div className={style.featuresBlock}>
                     <p className={style.title}>Удобства:</p>
                     <div className={style.features}>
-                        {fullFeatures.map((el: any) => {
+                        {transformedFeatures.map((el: TransformFeatureItem | null, index: number) => {
                             return (
-                                <div key={el.id} className={style.featuresBlock}>
-                                    <img alt={el.title} src={el.icon} />
-                                    <p>{el.title}</p>
+                                <div key={index} className={style.featuresItem}>
+                                    {el?.logo}
+                                    <p className={style["featuresItem_title"]}>{el?.title}</p>
                                 </div>
                             )
                         })}

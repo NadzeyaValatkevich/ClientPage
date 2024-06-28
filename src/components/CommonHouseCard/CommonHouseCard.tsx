@@ -1,36 +1,19 @@
 import { Carousel } from "../Carousel";
 import style from "./CommonHouseCard.module.scss";
 import { ReactNode } from 'react';
-import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
+import { ImageItem, RentalObject, TransformFeatureItem } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
-import wifi from "../../assets/icons/wifi.svg";
-import alcove from "../../assets/icons/alcove.svg";
-import tv from "../../assets/icons/tv.svg";
-import kitchen from "../../assets/icons/kitchen.svg";
-import barbecue from "../../assets/icons/barbecue.svg";
-import child from "../../assets/icons/child.svg";
 import { NextArrow, PrevArrow } from "../CustomArrows/CustomArrows";
+import { getCountFeatures } from "../../utils/functions/getCountFeatures"
 
 type CommonHouseCardPropsType = {
     children?: ReactNode,
     house: RentalObject,
-    // title: string,
-    // images: ImageItem[],
 };
 
-export const features: any = [
-    { id: 1, icon: wifi, title: "Wi-Fi" },
-    { id: 2, icon: alcove, title: "Беседка" },
-    { id: 3, icon: tv, title: "TV" },
-    { id: 4, icon: kitchen, title: "Кухня" },
-    { id: 5, icon: barbecue, title: "Барбекю" },
-    { id: 6, icon: child, title: "Детская площадка" },
-    // { id: 7, icon: kitchen, title: "Кухня" },
-    // { id: 8, icon: barbecue, title: "Барбекю" },
-    // { id: 9, icon: child, title: "Детская площадка" },
-];
-
 export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) => {
+
+    const features = getCountFeatures(house.features).slice(0, 6);
 
     const housePhotosSettings = {
         slidesToShow: 1,
@@ -83,11 +66,11 @@ export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) =
                     <div className={style.featuresBlock}>
                         <p className={style.featuresTitle}>Удобства:</p>
                         <div className={style.features}>
-                            {features.map((el: any) => {
+                            {features.map((el: TransformFeatureItem | null, index: number) => {
                                 return (
-                                    <div key={el.id} className={style.featuresItem}>
-                                        <img alt={el.title} src={el.icon} />
-                                        <p>{el.title}</p>
+                                    <div key={index} className={style.featuresItem}>
+                                        <>{el?.logo}</>
+                                        <p className={style["featuresItem_title"]}>{el?.title}</p>
                                     </div>
                                 )
                             })}
@@ -96,6 +79,6 @@ export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) =
                     {children && children}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

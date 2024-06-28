@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { ResponseData } from './@types'
 
 export type RentalObjectsTypes =
@@ -21,6 +22,17 @@ export type RentalObjectType = {
 export type RentalObjectStatus = {
   id: number
   title: RentalObjectStatuses
+}
+
+export type FeatureItem = {
+  name: string
+  logo: string
+}
+
+export type TransformFeatureItem = {
+  name: string
+  logo: ReactNode
+  title: string
 }
 
 export type ImageItem = {
@@ -48,7 +60,7 @@ export type RentalObject = {
   status: RentalObjectStatus
   max_places: number
   images: ImageItem[]
-  features: []
+  features: FeatureItem[]
   rooms: string[]
   total_beds: TotalBeds
   check_in_time: string
