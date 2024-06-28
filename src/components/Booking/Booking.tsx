@@ -15,7 +15,7 @@ import { FormValues, FormValuesDefault, TransformedFormValues } from "../../redu
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { submitBooking } from "../../redux/thunks/bookingThunk";
 import { RequestStatusType } from "../../common/enums/enums";
-import { Popup } from "../Popup";
+import { Popup } from "../PopupBooking";
 
 type BookingPropsType = {
     modalBookingActive: boolean,
