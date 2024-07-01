@@ -62,3 +62,13 @@
 .commentError {
   @extend %error;
 }
+
+.loaderBlock {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include flex(row, center, center, nowrap);
+}

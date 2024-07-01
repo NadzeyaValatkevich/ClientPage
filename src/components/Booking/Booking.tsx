@@ -16,6 +16,8 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { submitBooking } from "../../redux/thunks/bookingThunk";
 import { RequestStatusType } from "../../common/enums/enums";
 import { Popup } from "../PopupBooking";
+import { appActions } from "../../redux/commonActions/appActions";
+import { BeatLoader } from "react-spinners";
 
 type BookingPropsType = {
     modalBookingActive: boolean,
@@ -60,6 +62,10 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
     const [modalContent, setModalContent] = useState<string | null>("");
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const resetStatus = () => {
+        dispatch(appActions.setStatus({ status: RequestStatusType.idle }))
+    }
 
     useEffect(() => {
         setOpenModal(false);
@@ -130,8 +136,6 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
 
-        console.log(data)
-
         const childAges = data.guests.childAges.map((item: ChildAge | undefined) => item?.value);
 
         const transformData: TransformedFormValues = {
@@ -161,7 +165,11 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
         console.log(transformData.animals_info)
 
         dispatch(submitBooking(transformData))
-    }
+    };
+
+    // if (status === RequestStatusType.loading) {
+    //     <BeatLoader color="#1855b7" />
+    // }
 
     return (
         <div className={style.booking}>
@@ -208,10 +216,20 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
                 </form>
             </FormProvider>
             {openModal &&
-                <Popup content={modalContent} setOpenModal={setOpenModal} setModalBookingActive={setModalBookingActive} />
+                <Popup
+                    content={modalContent}
+                    setModalContent={setModalContent}
+                    setOpenModal={setOpenModal}
+                    setModalBookingActive={setModalBookingActive}
+                    resetStatus={resetStatus}
+                />
             }
-
-        </div>
+            {status === RequestStatusType.loading &&
+                <div className={style.loaderBlock}>
+                    <BeatLoader color="#1855b7" />
+                </div>
+            }
+        </div >
 
     )
 }

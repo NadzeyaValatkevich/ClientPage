@@ -5,9 +5,11 @@ type PopupPropsType = {
     content: string | null,
     setOpenModal: (value: boolean) => void,
     setModalBookingActive: (value: boolean) => void
+    setModalContent: (value: string | null) => void
+    resetStatus: () => void
 }
 
-export const Popup = ({ content, setOpenModal }: PopupPropsType) => {
+export const Popup = ({ content, setOpenModal, setModalBookingActive, setModalContent, resetStatus }: PopupPropsType) => {
 
     const splitContentIntoSentences = (text: string | null) => {
         return text?.match(/[^\.!\?]+[\.!\?]+/g)
@@ -17,7 +19,9 @@ export const Popup = ({ content, setOpenModal }: PopupPropsType) => {
 
     const handleOnClosePopup = () => {
         setOpenModal(false)
-        // setModalBookingActive(false)
+        setModalBookingActive(false)
+        setModalContent(null)
+        resetStatus()
     }
 
     return <div className={styles["popup-overlay"]}>
