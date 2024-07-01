@@ -10,7 +10,8 @@ export const TELEGRAM_REG = /^(https:\/\/t\.me\/[A-Za-z0-9!"#$%&'()*+,\-./:;<=>?
 
 export const ANIMAL_INFO_REG = {
     isLetter: /[A-Za-zА-ЯЁа-яё]/,
-    length: /^[A-Za-zА-ЯЁа-яё0-9\s!\?@#\$%\^&\*\(\)\[\]{}<>,\._'\+=\|\/"-]{0,100}$/,
+    // length: /^[A-Za-zА-ЯЁа-яё0-9\s!\?@#\$%\^&\*\(\)\[\]{}<>,\._'\+=\|\/"-]{0,100}$/,
+    length: /^.{0,100}$/
 };
 
 //ERRORS
@@ -69,25 +70,25 @@ export const optionsNationality = [
 
 export const FEATURES_OPTIONS = [
     { value: "kitchen", label: <KitchenIcon />, title: "Кухня" },
-    { value: "dishes", label: <DishesIcon />, title: "Блюда" },
-    { value: "plate", label: <PlateIcon />, title: "Тарелки" },
+    { value: "dishes", label: <DishesIcon />, title: "Посуда" },
+    { value: "plate", label: <PlateIcon />, title: "Плита" },
     { value: "fridge", label: <FridgeIcon />, title: "Холодильник" },
     { value: "microwave", label: <MicrowaveIcon />, title: "Микроволновая печь" },
     { value: "dishwasher", label: <DishwasherIcon />, title: "Посудомоечная машина" },
     { value: "wifi", label: <WifiIcon />, title: "Wi-Fi" },
     { value: "conditioner", label: <СonditionerIcon />, title: "Кондиционер" },
     { value: "balcony", label: <BalconyIcon />, title: "Балкон" },
-    { value: "parking", label: <ParkingIcon />, title: "Стоянка" },
+    { value: "parking", label: <ParkingIcon />, title: "Парковка" },
     { value: "flatiron", label: <FlatironIcon />, title: "Утюг" },
     { value: "furnitureForInfants", label: <FurnitureForInfantsIcon />, title: "Детская кроватка" },
     { value: "grill", label: <GrillIcon />, title: "Мангал" },
     { value: "hairdryer", label: <HairdryerIcon />, title: "Фен" },
     { value: "noSmoking", label: <NoSmokingIcon />, title: "Не курить" },
-    { value: "patio", label: <PatioIcon />, title: "Внутренний дворик" },
+    { value: "patio", label: <PatioIcon />, title: "Патио" },
     { value: "pier", label: <PierIcon />, title: "Пирс" },
     { value: "shower", label: <ShowerIcon />, title: "Душ" },
     { value: "terrace", label: <TerraceIcon />, title: "Терраса" },
-    { value: "tv", label: <TVIcon />, title: "TV" },
+    { value: "tv", label: <TVIcon />, title: "Телевизор" },
     { value: "washingMachine", label: <WashingMachineIcon />, title: "Cтиральная машина" },
 ];
 
