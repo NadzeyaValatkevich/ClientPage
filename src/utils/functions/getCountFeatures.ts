@@ -8,7 +8,7 @@ export const getCountFeatures = (features: FeatureItem[]) => {
   return features
     .map((featuresItem: FeatureItem) => {
       const featureOption = FEATURES_OPTIONS.find((option: any) => {
-        return option.value === featuresItem.name
+        return option.value === featuresItem.logo
       })
 
       if (featureOption) {
