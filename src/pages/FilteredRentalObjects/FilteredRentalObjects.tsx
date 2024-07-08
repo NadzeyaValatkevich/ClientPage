@@ -15,6 +15,8 @@ import React from "react";
 import { RequestStatusType } from "../../common/enums/enums";
 import { BeatLoader } from "react-spinners";
 import { appActions } from "../../redux/commonActions/appActions";
+import { Pagination } from "../../components/Pagination";
+import { LIMIT_OBJECTS } from "../../utils/constants";
 
 export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {
 
@@ -25,6 +27,8 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
     const [bookingHouse, setBookingHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
     const [modalBookingActive, setModalBookingActive] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+
 
     console.log(props)
 
@@ -67,6 +71,14 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
         setBookingHouse(null);
     };
 
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const startIndex = (currentPage - 1) * LIMIT_OBJECTS;
+    const endIndex = startIndex + LIMIT_OBJECTS;
+    const currentResults = results && results.slice(startIndex, endIndex);
+
     const Loader = () => {
         return <div style={{ marginBottom: "80px", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <BeatLoader color="#1855b7" />
@@ -95,7 +107,7 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
                     count === 0 ?
                         <div className={style.infoText}>К сожалению, подходящих домиков для бронирования на выбранные даты и количество гостей не найдено.
                             Попробуйте изменить даты или количество гостей.</div>
-                        : results && results.length >= 1 && results.map((el: RentalObject) => (
+                        : currentResults && currentResults.length >= 1 && currentResults.map((el: RentalObject) => (
                             <CommonHouseCard key={el.id} house={el}>
                                 <div className={style.priceBlock}>
                                     <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
@@ -108,6 +120,7 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
                             </CommonHouseCard>
                         ))
                 }
+                <Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"free"} />
 
             </div>
 

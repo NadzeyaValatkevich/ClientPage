@@ -1,5 +1,4 @@
 export const getCountCountry = (code: string) => {
-  console.log(code === 'by')
   switch (code) {
     case 'by':
       return 'Республика Беларусь'

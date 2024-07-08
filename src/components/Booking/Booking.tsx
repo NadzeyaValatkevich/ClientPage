@@ -183,7 +183,6 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
                         price={price}
                         guests={guests}
                         formattedGuests={formattedGuests}
-
                     />
                     <PersonalInfo />
                     <Contacts />
