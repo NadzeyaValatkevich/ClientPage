@@ -4,15 +4,17 @@ import { GrillIcon } from "../assets/features_icons/GrillIcon";
 export const FIRST_NAME_REG = /^[A-Za-z]+(-[A-Za-z]+)?$|^[А-ЯЁа-яё]+(-[А-ЯЁа-яё]+)?$/;
 export const SECOND_NAME_REG = /^([A-Za-z]+)$|^([А-ЯЁа-яё]+)$/;
 export const EMAIL_REG = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
-// export const TELEGRAM_REG = /^(https:\/\/t\.me\/[a-zA-Z0-9_]{5,32}|@[a-zA-Z0-9_]{5,32})$/;
-// export const TELEGRAM_REG = /^(https:\/\/t\.me\/[\S]{5,32}|@[\S]{5,32})$/;
-export const TELEGRAM_REG = /^(https:\/\/t\.me\/[A-Za-z0-9!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]{5,32}|@[A-Za-z0-9!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]{5,32})$/
+export const TELEGRAM_REG = /^(https:\/\/t\.me\/[A-Za-z0-9!"#$%&№'()*+,\-./:;<=>?@[\\\]^_`{|}~]{5,32}|@[A-Za-z0-9!"#$%&№'()*+,\-./:;<=>?@[\\\]^_`{|}~]{5,32})$/
 
 export const ANIMAL_INFO_REG = {
     isLetter: /[A-Za-zА-ЯЁа-яё]/,
     // length: /^[A-Za-zА-ЯЁа-яё0-9\s!\?@#\$%\^&\*\(\)\[\]{}<>,\._'\+=\|\/"-]{0,100}$/,
     length: /^.{0,100}$/
 };
+
+export const LIMIT_OBJECTS = 10;
+
+export const LIMIT_OBJECTS_MOBILE = 5;
 
 //ERRORS
 const getFieldError = (fieldName: string) => {
@@ -28,7 +30,7 @@ export const TELEGRAM_ERROR = getFieldError("Telegram");
 export const TELEPHONE_ERROR = "Не соответствует формату мобильного телефона";
 
 export const EMAIL_ERROR = "Не соответствует формату электронной почты";
-export const ANIMALS_ERROR = " Максимальное число символов - 100";
+export const ANIMALS_ERROR = "Максимальное число символов - 100";
 
 
 // REQUIREMENTS

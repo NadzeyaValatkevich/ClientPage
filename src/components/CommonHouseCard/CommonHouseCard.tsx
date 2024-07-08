@@ -14,7 +14,6 @@ type CommonHouseCardPropsType = {
 export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) => {
 
     const features = getCountFeatures(house.features).slice(0, 6);
-    console.log(house.features)
 
     const housePhotosSettings = {
         slidesToShow: 1,

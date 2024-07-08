@@ -19,8 +19,6 @@ export const Modal = ({ active, onClose, children, type }: ModalPropsType) => {
         } else {
             document.body.style.overflow = 'auto';
         }
-
-        // Очистка эффекта при размонтировании компонента
         return () => {
             document.body.style.overflow = 'auto';
         };

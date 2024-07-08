@@ -13,8 +13,6 @@ export const Footer = () => {
     const locality = full_address?.locality;
     const address = full_address?.address;
 
-    console.log(country)
-
     return (
         <div className={style.footer}>
             <div className={`${styleContainer.container} ${style.headerContainer}`}>
