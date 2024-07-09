@@ -7,7 +7,7 @@ import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-fo
 import { ChildAge, DatesGuestsObjectRequestType, DatesGuestsObjectType, DatesType, GuestsType } from "../../redux/types/datesGuestsTypes";
 import { setDatesGuestsObject } from "../../redux/reducers/datesGuestsSlice";
 import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks/hooks";
 import { formatDashDate } from "../../utils/functions/formatDate";
 import { CheckDateInput } from "./CheckInDateInput";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";

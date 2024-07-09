@@ -8,7 +8,7 @@ import { Button } from "../../Button/Button";
 import { formatPeople } from "../../../utils/functions/formatPeople";
 import { ChildAge, GuestsType } from "../../../redux/types/datesGuestsTypes";
 import { useLocation } from "react-router-dom";
-import { useAppSelector } from "../../../utils/hooks";
+import { useAppSelector } from "../../../utils/hooks/hooks";
 
 export type OptionType = {
     value: number;

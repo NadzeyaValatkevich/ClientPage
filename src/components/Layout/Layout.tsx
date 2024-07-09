@@ -1,7 +1,7 @@
 import { Outlet, useParams } from "react-router-dom";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks/hooks";
 import { useEffect } from "react";
 import { fetchMainObject } from "../../redux/thunks/mainObjectThunk";
 import { FilteredBlock } from "../FilteredBlock";

@@ -4,7 +4,7 @@ import { Logo } from "../Logo";
 import facebook from "../../assets/iconsSocial/f.svg";
 import instagram from "../../assets/iconsSocial/insta.svg";
 import { YMaps, Map, Placemark, GeolocationControl, FullscreenControl } from "react-yandex-maps";
-import { useAppSelector } from "../../utils/hooks";
+import { useAppSelector } from "../../utils/hooks/hooks";
 import { getCountCountry } from "../../utils/functions/getCountCountry";
 
 export const Footer = () => {

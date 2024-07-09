@@ -1,6 +1,6 @@
 import style from "./Header.module.scss";
 import styleContainer from "../../common/styles/Container.module.scss";
-import { useAppSelector } from "../../utils/hooks";
+import { useAppSelector } from "../../utils/hooks/hooks";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import BackIcon from "../../assets/icons/back.svg";
 import { useEffect, useState } from "react";

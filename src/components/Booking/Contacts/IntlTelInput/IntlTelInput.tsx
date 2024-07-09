@@ -4,7 +4,7 @@ import "intl-tel-input/build/css/intlTelInput.css";
 import "./IntlTeLInput.scss";
 import classNames from "classnames";
 import { TelephoneType } from "../../../../redux/types/@types";
-import { useAppSelector } from "../../../../utils/hooks";
+import { useAppSelector } from "../../../../utils/hooks/hooks";
 import { getSortedCountriesList } from "../../../../redux/reducers/mainObjectSlice";
 import { useFormContext } from "react-hook-form";
 
