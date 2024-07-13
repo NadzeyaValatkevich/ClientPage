@@ -1,5 +1,15 @@
-@import "../../common//styles/sass/variables.scss";
+@import '../../common//styles/sass/variables.scss';
+@import '../../common//styles/sass/mixins.scss';
 
 .logoBlock {
-    // margin-top: 30px;    
+  @include flex(column, center, center, nowrap);
+
+  svg {
+    width: auto;
+    height: 100px;
+
+    @include media-query(lg) {
+      height: clamp(30px, 15.7152px + 4.464vw, 80px);
+    }
+  }
 }

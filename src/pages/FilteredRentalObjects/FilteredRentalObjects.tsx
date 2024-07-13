@@ -16,7 +16,7 @@ import { RequestStatusType } from "../../common/enums/enums";
 import { BeatLoader } from "react-spinners";
 import { appActions } from "../../redux/commonActions/appActions";
 import { Pagination } from "../../components/Pagination";
-import { LIMIT_OBJECTS, LIMIT_OBJECTS_DESKTOP, LIMIT_OBJECTS_MOBILE } from "../../utils/constants";
+import { LIMIT_OBJECTS_DESKTOP, LIMIT_OBJECTS_MOBILE } from "../../utils/constants";
 import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
 
 export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {

@@ -19,6 +19,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     const [check_out_date, setCheckOutDate] = useState<Date | null | undefined>(null);
     const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
     const [formattedValue, setFormattedValue] = useState("");
+    const [dateError, setDateError] = useState<string | null>(null);
 
     console.log(guests)
 
@@ -112,6 +113,18 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
 
+        const checkInDate = new Date(data.check_in_date);
+        const checkOutDate = new Date(data.check_out_date);
+        const diffTime = Math.abs(checkOutDate.getTime() - checkInDate.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays > 180) {
+            setDateError("Максимально возможное количество дней для брони - 180 дней");
+            return;
+        } else {
+            setDateError(null);
+        }
+
         const children = data.guests.childAges.reduce((accum: number, el: ChildAge) => {
             el.value >= 2 && (accum += 1);
             return accum
@@ -186,6 +199,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
                         </div>
                     </form>
                 </FormProvider>
+                {dateError && <p className={style.error}>{dateError}</p>}
                 {Object.keys(errors).length > 0 && <p className={style.error}>Все поля должны быть заполнены</p>}
             </div>
         </div >

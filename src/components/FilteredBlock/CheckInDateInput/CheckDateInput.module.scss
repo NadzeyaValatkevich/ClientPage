@@ -59,20 +59,34 @@
 }
 
 :global(.react-datepicker-popper) {
+  border-radius: $radius-secondary;
   background-color: $text-white;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   z-index: 10;
 }
 
 :global(.react-datepicker__header) {
   background-color: $text-white;
-  margin-bottom: 20px;
+  border-bottom: none;
+  position: relative;
+  // margin-bottom: 20px;
   // padding-top: 10px;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 1px solid #aeaeae;
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+  }
 }
 
-:global(.react-datepicker__header__dropdown) {
-  margin-bottom: 10px;
-}
+// :global(.react-datepicker__header__dropdown) {
+//   margin-bottom: 10px;
+// }
 
 :global(.react-datepicker__year-select),
 :global(.react-datepicker__month-select) {
@@ -91,14 +105,14 @@
 }
 
 :global(.react-datepicker__month-container) {
-  padding: 10px;
+  // padding: 10px;
   float: none;
 }
 
 :global(.react-datepicker) {
   // width: 356px;
-  min-height: 395px;
-  border-radius: $radius-primary;
+  // min-height: 395px;
+  // border-radius: $radius-primary;
   box-shadow: $shadow-1;
 }
 
@@ -118,7 +132,7 @@
 }
 
 :global(.react-datepicker__navigation) {
-  top: 25px;
+  top: 16px;
 }
 
 :global(.react-datepicker__navigation-icon::before) {
@@ -131,16 +145,34 @@
   font-weight: 400;
   line-height: 40px;
   width: 2.7rem;
+
+  @include media-query(md) {
+    font-size: 16px;
+    line-height: 30px;
+    width: 2rem;
+  }
 }
 
 :global(.react-datepicker__current-month) {
   @include typography(600, 20px, 32px, rgba(10, 10, 10, 1));
   font-family: 'Inter', sans-serif;
   margin-bottom: 10px;
+
+  @include media-query(md) {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
 }
 
 :global(.react-datepicker__day-name) {
   @include typography(600, 18px, 24px, rgba(10, 10, 10, 1));
   font-family: 'Inter', sans-serif;
   width: 2.7rem;
+
+  @include media-query(md) {
+    font-size: 14px;
+    line-height: 20px;
+    width: 2rem;
+  }
 }
