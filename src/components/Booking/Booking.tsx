@@ -12,7 +12,7 @@ import { formatPeople } from "../../utils/functions/formatPeople";
 import { optionsNationality } from "../../utils/constants";
 import classNames from "classnames";
 import { FormValues, FormValuesDefault, TransformedFormValues } from "../../redux/types/@types";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks/hooks";
 import { submitBooking } from "../../redux/thunks/bookingThunk";
 import { RequestStatusType } from "../../common/enums/enums";
 import { Popup } from "../PopupBooking";

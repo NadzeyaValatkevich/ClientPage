@@ -12,7 +12,7 @@ export const ANIMAL_INFO_REG = {
     length: /^.{0,100}$/
 };
 
-export const LIMIT_OBJECTS = 10;
+export const LIMIT_OBJECTS_DESKTOP = 10;
 
 export const LIMIT_OBJECTS_MOBILE = 5;
 

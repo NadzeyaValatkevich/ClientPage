@@ -5,12 +5,13 @@ import style from "./Main.module.scss";
 import { Button } from "../../components/Button/Button";
 import { Modal } from "../../components/Modal";
 import { FullHouseCard } from "../../components/FullHouseCard";
-import { useAppSelector } from "../../utils/hooks";
+import { useAppSelector } from "../../utils/hooks/hooks";
 import { RentalObject } from "../../redux/types/rentalObjectTypes";
 import { RequestStatusType } from "../../common/enums/enums";
 import { BeatLoader } from "react-spinners";
 import { Pagination } from "../../components/Pagination";
-import { LIMIT_OBJECTS } from "../../utils/constants";
+import { LIMIT_OBJECTS_DESKTOP, LIMIT_OBJECTS_MOBILE } from "../../utils/constants";
+import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
 
 export const Main = () => {
     const { results } = useAppSelector(state => state.rentalObjects.data);
@@ -20,6 +21,10 @@ export const Main = () => {
     const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const windowWidth = useWindowWidth();
+
+    const LIMIT_OBJECTS = windowWidth <= 360 ? LIMIT_OBJECTS_MOBILE : LIMIT_OBJECTS_DESKTOP;
 
     const onClickHandler = (house: RentalObject) => {
         setActiveHouse(house)

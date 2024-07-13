@@ -19,7 +19,7 @@
     }
   }
   @if $break-point == sm {
-    @media (max-width: 360px) {
+    @media (max-width: 320px) {
       @content;
     }
   }
@@ -42,7 +42,7 @@
 }
 
 @mixin h1($color: $text-white) {
-  @include typography(500, 66px, 80.45px, $color);
+  @include typography(500, 66px, 1.2, $color);
 }
 
 @mixin h2($color: $text-primary) {

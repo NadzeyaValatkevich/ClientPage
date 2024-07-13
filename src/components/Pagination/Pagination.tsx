@@ -1,9 +1,10 @@
 import { FC } from "react";
 import style from "./Pagination.module.scss"
 import { generatePageNumbers } from "../../utils/functions/generatePageNumbers";
-import { useAppSelector } from "../../utils/hooks";
-import { LIMIT_OBJECTS } from "../../utils/constants";
+import { useAppSelector } from "../../utils/hooks/hooks";
+import { LIMIT_OBJECTS_DESKTOP, LIMIT_OBJECTS_MOBILE } from "../../utils/constants";
 import classNames from "classnames";
+import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
 
 type PaginationPropsType = {
     currentPage: number,
@@ -15,6 +16,10 @@ export const Pagination: FC<PaginationPropsType> = ({ currentPage, onPageChange,
 
     const countAll = useAppSelector(state => state.rentalObjects.data.count);
     const countFree = useAppSelector(state => state.filteredRentalObjects.data.count);
+
+    const windowWidth = useWindowWidth();
+
+    const LIMIT_OBJECTS = windowWidth <= 360 ? LIMIT_OBJECTS_MOBILE : LIMIT_OBJECTS_DESKTOP;
 
     const totalPages = Math.ceil((type === "all" ? countAll : countFree) / LIMIT_OBJECTS);
 

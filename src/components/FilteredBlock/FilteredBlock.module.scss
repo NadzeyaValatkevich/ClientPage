@@ -4,7 +4,7 @@
 .filteredBlockWrapper {
   width: 100%;
   position: relative;
-  min-height: 206px;
+  min-height: 262px;
   display: flex;
   justify-content: center;
   margin-bottom: 80px;
@@ -18,19 +18,21 @@
     border-radius: $radius-primary;
     height: auto;
 
-    @media (max-width: 1000px) {
-      top: 0%;
-    }
-
     @media (max-width: 1600px) {
       padding: 40px;
     }
 
+    @media (max-width: 950px) {
+      top: -30%;
+    }
+
     @include media-query(md) {
+      top: -50px;
       padding: 30px 24px;
     }
 
     @include media-query(sm) {
+      top: -40px;
       padding: 20px 8px;
     }
 
@@ -132,7 +134,20 @@
     @extend %error;
     z-index: 1;
     position: absolute;
-    right: 110px;
-    margin-top: 20px;
+    right: 114px;
+    margin-top: 10px;
+    text-align: end;
+
+    @media (max-width: 1600px) {
+      right: 40px;
+    }
+
+    @include media-query(md) {
+      right: 24px;
+    }
+
+    @include media-query(sm) {
+      right: 8px;
+    }
   }
 }
