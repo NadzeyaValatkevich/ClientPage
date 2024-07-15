@@ -113,7 +113,7 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
                         <div className={style.infoText}>К сожалению, подходящих домиков для бронирования на выбранные даты и количество гостей не найдено.
                             Попробуйте изменить даты или количество гостей.</div>
                         : currentResults && currentResults.length >= 1 && currentResults.map((el: RentalObject) => (
-                            <CommonHouseCard key={el.id} house={el}>
+                            <CommonHouseCard key={el.id} house={el} type={"withPrice"}>
                                 <div className={style.priceBlock}>
                                     <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
                                     <p className={style.price}>{el.price}<span>BYN</span></p>
@@ -125,7 +125,7 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
                             </CommonHouseCard>
                         ))
                 }
-                <Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"free"} />
+                {status !== RequestStatusType.loading && < Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"free"} />}
 
             </div>
 

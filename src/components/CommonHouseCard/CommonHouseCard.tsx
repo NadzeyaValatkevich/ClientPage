@@ -9,9 +9,10 @@ import { getCountFeatures } from "../../utils/functions/getCountFeatures"
 type CommonHouseCardPropsType = {
     children?: ReactNode,
     house: RentalObject,
+    type: "withPrice" | "withoutPrice",
 };
 
-export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) => {
+export const CommonHouseCard = ({ children, house, type }: CommonHouseCardPropsType) => {
 
     const features = getCountFeatures(house.features).slice(0, 6);
 
@@ -24,14 +25,14 @@ export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) =
         arrows: house.images.length > 1,
         prevArrow: <PrevArrow onClick={() => { }} />,
         nextArrow: <NextArrow onClick={() => { }} />,
-        // responsive: [
-        //     {
-        //         breakpoint: 1270,
-        //         settings: {
-        //             arrows: false,
-        //         },
-        //     },
-        // ],
+        responsive: [
+            {
+                breakpoint: 450,
+                settings: {
+                    arrows: false,
+                },
+            },
+        ],
     };
 
     return (
@@ -53,7 +54,7 @@ export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) =
                     <p className={style.description}>
                         {house.description}
                     </p>
-                    <div className={style.places}>
+                    <div className={type === "withPrice" ? `${style.places} ${style.placesWithPrice} ` : `${style.places} ${style.placesWithoutPrice}`}>
                         <div className={style.rooms}>
                             <p>Комнаты:</p>
                             <p>{countRooms(house.rooms)}</p>
@@ -63,7 +64,7 @@ export const CommonHouseCard = ({ children, house }: CommonHouseCardPropsType) =
                             <p>{house.max_places}</p>
                         </div>
                     </div>
-                    <div className={style.featuresBlock}>
+                    <div className={type === "withPrice" ? `${style.featuresBlock} ${style.featuresBlockWithPrice} ` : `${style.featuresBlock} ${style.featuresBlockWithoutPrice}`}>
                         <p className={style.featuresTitle}>Удобства:</p>
                         <div className={style.features}>
                             {features.map((el: TransformFeatureItem | null, index: number) => {

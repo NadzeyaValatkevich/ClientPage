@@ -6,7 +6,6 @@
 }
 
 .customDatePickDiv {
-  // max-width: 288px;
   width: 100%;
   padding: 25px 20px;
   background-color: $text-white;
@@ -35,12 +34,8 @@
 }
 
 .customDatePickDiv-focused {
-  // border: 1px solid #032d70;
-  // border: 1.5px solid aqua;
   box-shadow: $shadow-1;
   border-color: $text-primary;
-  // outline-color: $primary;
-  // color: $text-primary;
 }
 
 .customInput:focus {
@@ -61,7 +56,6 @@
 :global(.react-datepicker-popper) {
   border-radius: $radius-secondary;
   background-color: $text-white;
-  // margin-bottom: 20px;
   z-index: 10;
 }
 
@@ -69,8 +63,6 @@
   background-color: $text-white;
   border-bottom: none;
   position: relative;
-  // margin-bottom: 20px;
-  // padding-top: 10px;
 
   &::after {
     content: '';
@@ -83,10 +75,6 @@
     left: 5%;
   }
 }
-
-// :global(.react-datepicker__header__dropdown) {
-//   margin-bottom: 10px;
-// }
 
 :global(.react-datepicker__year-select),
 :global(.react-datepicker__month-select) {
@@ -105,14 +93,10 @@
 }
 
 :global(.react-datepicker__month-container) {
-  // padding: 10px;
   float: none;
 }
 
 :global(.react-datepicker) {
-  // width: 356px;
-  // min-height: 395px;
-  // border-radius: $radius-primary;
   box-shadow: $shadow-1;
 }
 
@@ -143,8 +127,8 @@
   font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: 400;
-  line-height: 40px;
-  width: 2.7rem;
+  line-height: 35px;
+  width: 2.3rem;
 
   @include media-query(md) {
     font-size: 16px;
@@ -166,9 +150,9 @@
 }
 
 :global(.react-datepicker__day-name) {
-  @include typography(600, 18px, 24px, rgba(10, 10, 10, 1));
+  @include typography(600, 18px, 22px, rgba(10, 10, 10, 1));
   font-family: 'Inter', sans-serif;
-  width: 2.7rem;
+  width: 2.3rem;
 
   @include media-query(md) {
     font-size: 14px;

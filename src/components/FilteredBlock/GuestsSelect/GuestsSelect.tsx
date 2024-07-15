@@ -61,7 +61,13 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-                setIsOpen(false)
+                if (
+                    event.clientX >= document.documentElement.clientWidth ||
+                    event.clientY >= document.documentElement.clientHeight
+                ) {
+                    return;
+                }
+                setIsOpen(false);
             }
         };
 
