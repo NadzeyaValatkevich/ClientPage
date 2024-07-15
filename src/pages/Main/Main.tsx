@@ -57,8 +57,9 @@ export const Main = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "20px",
-            fontWeight: "600"
+            fontSize: "18px",
+            fontWeight: "600",
+            textAlign: "center"
         }} >
             {error || errorRental}
         </div >
@@ -69,7 +70,7 @@ export const Main = () => {
             <div className={styleContainer.container}>
                 {currentResults && currentResults.length ?
                     currentResults.map((el: RentalObject) => {
-                        return <CommonHouseCard key={el.id} house={el}>
+                        return <CommonHouseCard key={el.id} house={el} type={"withoutPrice"}>
                             <div className={style.btnsBlock}>
                                 <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
                             </div>

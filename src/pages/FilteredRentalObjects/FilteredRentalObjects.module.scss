@@ -3,25 +3,52 @@
 
 .rentalObjectsBlock {
   width: 100%;
-  padding-bottom: 80px;
+  padding-bottom: 160px;
+
+  @include media-query(lg) {
+    padding-bottom: 100px;
+  }
+
+  @include media-query(md) {
+    padding-bottom: 80px;
+  }
+
+  @media (max-width: 571px) {
+    padding-bottom: 60px;
+  }
 
   .infoText {
     @extend %infoText;
   }
 
   .priceBlock {
+    margin-bottom: 20px;
     .priceBlockTitle {
       @include typography(700, 18px, 25px, $text-primary);
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+
+      @include media-query(sm) {
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
     }
 
     .price {
+      @include typography(700, 24px, 34px, $text-primary);
       @include flex(row, flex-start, center, nowrap);
       gap: 10px;
+
+      @include media-query(sm) {
+        font-size: 20px;
+      }
 
       &,
       span {
         @include typography(700, 24px, 34px, $text-primary);
+
+        @include media-query(sm) {
+          font-size: 20px;
+        }
       }
     }
 
@@ -32,6 +59,22 @@
   .btnsBlock {
     @include flex(row, flex-start, center, nowrap);
 
+    @media (max-width: 1050px) {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    @include media-query(md) {
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    @media (max-width: 450px) {
+      width: 100%;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     button {
       @include typography(500, 16px, 19.36px, $text-white);
       font-family: 'Inter', sans-serif;
@@ -41,6 +84,22 @@
     .btnBook {
       background-color: $color-8;
       margin-right: 20px;
+
+      @media (max-width: 1050px) {
+        width: 100%;
+        // max-width: 375px;
+        margin-right: 0px;
+        margin-bottom: 10px;
+      }
+
+      @include media-query(md) {
+        margin-bottom: 0px;
+      }
+
+      @include media-query(sm) {
+        font-weight: 600;
+        padding: 10px 0px;
+      }
     }
 
     .btnBook:hover {
@@ -54,6 +113,18 @@
       box-shadow: $shadow-2;
       border: none;
       background-color: $text-white;
+
+      @media (max-width: 1050px) {
+        padding: 16px 0px;
+        width: 100%;
+        // max-width: 375px;
+      }
+
+      @include media-query(sm) {
+        font-weight: 600;
+        width: 100%;
+        padding: 10px 0px;
+      }
     }
 
     .btnDetails:hover {

@@ -2,7 +2,6 @@
 @import '../../../common/styles/sass/mixins.scss';
 
 .customDropDown {
-  // max-width: 288px;
   width: 100%;
   position: relative;
   padding: 25px 20px;
@@ -50,6 +49,10 @@
     background-color: $primary;
     align-self: flex-end;
 
+    @media (max-width: 390px) {
+      padding: 12px 22px;
+    }
+
     &:not(&-disabled):hover {
       background-color: $color-8;
       transition: all 0.5s ease 0s;
@@ -76,4 +79,14 @@
   display: flex;
   flex-direction: column;
   z-index: 2;
+
+  @media (max-width: 390px) {
+    width: 280px;
+    right: 0;
+    left: 0;
+  }
+
+  @include media-query(sm) {
+    top: 50px;
+  }
 }

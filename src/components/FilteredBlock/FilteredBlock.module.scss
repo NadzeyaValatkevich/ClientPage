@@ -7,7 +7,30 @@
   min-height: 262px;
   display: flex;
   justify-content: center;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
+
+  @include media-query(lg) {
+    min-height: 221px;
+    margin-bottom: 0px;
+  }
+
+  @media (max-width: 1251px) {
+    margin-bottom: 100px;
+  }
+
+  @include media-query(md) {
+    margin-bottom: 80px;
+  }
+
+  @media (max-width: 571px) {
+    margin-bottom: 8px;
+    min-height: 491px;
+  }
+
+  @include media-query(sm) {
+    min-height: 400px;
+    margin-bottom: 20px;
+  }
 
   .filteredBlockContainer {
     height: 100%;
