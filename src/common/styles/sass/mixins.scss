@@ -9,7 +9,7 @@
 
 @mixin media-query($break-point) {
   @if $break-point == lg {
-    @media (max-width: 1440px) {
+    @media (max-width: 1490px) {
       @content;
     }
   }

@@ -7,6 +7,7 @@ import { countRooms } from "../../utils/functions/countRooms";
 import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 import { getCountFeatures } from "../../utils/functions/getCountFeatures";
+import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
 
 export type FullHouseCardPropsType = {
     rentalObject: RentalObject,
@@ -22,6 +23,8 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
     const transformedFeatures = getCountFeatures(features)
     const datePickerRef = useRef<HTMLDivElement>(null);
 
+    const windowWidth = useWindowWidth();
+
     const handleImgClick = () => {
         setDatePickerVisible(prevState => !prevState)
     };
@@ -35,64 +38,82 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
         arrows: images.length > 1,
         prevArrow: <PrevArrow onClick={() => { }} />,
         nextArrow: <NextArrow onClick={() => { }} />,
+        responsive: [
+            {
+                breakpoint: 450,
+                settings: {
+                    arrows: false,
+                },
+            },
+        ],
     };
 
     return (
-        <div className={style.houseBlock}>
-            <div className={style.houseBlockLeft}>
-                <Carousel settings={houseFullPhotosSettings}>
-                    {images.map((el: ImageItem) => {
-                        return (
-                            <div key={el.id} className={style.imageBlock}>
-                                <img className={style.image} src={el.image} alt={"housePhoto"} />
-                            </div>
-                        )
-                    })}
-                </Carousel>
-            </div>
-            <div className={style.houseBlockRight}>
-                <div className={style.houseBlockTitle}>{name}</div>
-                <div className={style.houseBlockDescription}>
-                    <p className={style.title}>Описание:</p>
-                    <p className={style.description}>{description}</p>
-                </div>
-                <div className={style.places}>
-                    <div className={style.rooms}>
-                        <p>Комнаты: </p>
-                        <p>{countRooms(rooms)}</p>
-                    </div>
-                    <div className={style.beds}>
-                        <p>Спальные места: </p>
-                        <p>{max_places}</p>
-                    </div>
-                </div>
-                <div className={style.featuresBlock}>
-                    <p className={style.title}>Удобства:</p>
-                    <div className={style.features}>
-                        {transformedFeatures.map((el: TransformFeatureItem | null, index: number) => {
+        <>
+            {windowWidth <= 1670 && (
+                <>
+                    <div className={style.houseBlockTitle}>{name}</div>
+                    {windowWidth > 768 && <div className={style.houseBlockDescription}>
+                        <p className={style.title}>Описание:</p>
+                        <p className={style.description}>{description}</p>
+                    </div>}
+                </>
+            )}
+            <div className={style.houseBlock}>
+                <div className={style.houseBlockLeft}>
+                    <Carousel settings={houseFullPhotosSettings}>
+                        {images.map((el: ImageItem) => {
                             return (
-                                <div key={index} className={style.featuresItem}>
-                                    {el?.logo}
-                                    <p className={style["featuresItem_title"]}>{el?.title}</p>
+                                <div key={el.id} className={style.imageBlock}>
+                                    <img className={style.image} src={el.image} alt={"housePhoto"} />
                                 </div>
                             )
                         })}
-                    </div>
+                    </Carousel>
                 </div>
-                <div className={style.calendarBlock}>
-                    <p className={style.calendarBlockTitle}>Свободные даты:</p>
-                    <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
-                    {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} setDatePickerVisible={setDatePickerVisible} status={status.title} /></div>}
-                </div>
-                {rentalObject && rentalObject.price ?
-                    <div className={style.priceBlock}>
-                        <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
-                        <p className={style.price}>{rentalObject.price}<span>BYN</span></p>
+                <div className={style.houseBlockRight}>
+                    {windowWidth > 1670 && <div className={style.houseBlockTitle}>{name}</div>}
+                    {(windowWidth > 1670 || windowWidth <= 768) && <div className={style.houseBlockDescription}>
+                        <p className={style.title}>Описание:</p>
+                        <p className={style.description}>{description}</p>
+                    </div>}
+                    <div className={style.places}>
+                        <div className={style.rooms}>
+                            <p>Комнаты: </p>
+                            <p>{countRooms(rooms)}</p>
+                        </div>
+                        <div className={style.beds}>
+                            <p>Спальные места: </p>
+                            <p>{max_places}</p>
+                        </div>
                     </div>
-                    : null
-                }
+                    <div className={style.featuresBlock}>
+                        <p className={style.title}>Удобства:</p>
+                        <div className={style.features}>
+                            {transformedFeatures.map((el: TransformFeatureItem | null, index: number) => {
+                                return (
+                                    <div key={index} className={style.featuresItem}>
+                                        {el?.logo}
+                                        <p className={style["featuresItem_title"]}>{el?.title}</p>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <div className={style.calendarBlock}>
+                        <p className={style.calendarBlockTitle}>Свободные даты:</p>
+                        <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
+                        {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} setDatePickerVisible={setDatePickerVisible} status={status.title} /></div>}
+                    </div>
+                    {rentalObject && rentalObject.price ?
+                        <div className={style.priceBlock}>
+                            <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
+                            <p className={style.price}>{rentalObject.price}<span>BYN</span></p>
+                        </div>
+                        : null
+                    }
+                </div>
             </div>
-        </div>
-
+        </>
     )
 }

@@ -7,16 +7,59 @@
   @include flex(row, space-between, flex-start, nowrap);
   gap: 40px;
 
+  @include media-query(md) {
+    height: auto;
+    @include flex(column, flex-start, flex-start, nowrap);
+    gap: 36px;
+  }
+
   .houseBlockLeft {
-    width: 100%;
-    max-width: 640px;
-    height: 700px;
+    width: 49%;
+    height: clamp(
+      494px,
+      calc(494px + (720 - 494) * ((100vw - 1670px) / (1920 - 1670))),
+      720px
+    );
     cursor: pointer;
     position: relative;
 
+    @include media-query(lg) {
+      width: 440px;
+    }
+
+    @media (max-width: 1100px) {
+      width: 49%;
+      height: auto;
+      aspect-ratio: 1;
+    }
+
+    @include media-query(md) {
+      margin: 0 auto;
+      width: 288px;
+      height: 240px;
+    }
+
+    @media (max-width: 400px) {
+      width: 100%;
+    }
+
     .imageBlock {
       width: 100%;
-      height: 700px;
+      height: clamp(
+        494px,
+        calc(494px + (720 - 494) * ((100vw - 1670px) / (1920 - 1670))),
+        720px
+      );
+
+      @media (max-width: 1100px) {
+        width: 49%;
+        height: auto;
+        aspect-ratio: 1;
+      }
+
+      @include media-query(md) {
+        height: 240px;
+      }
 
       .image {
         width: 100%;
@@ -27,16 +70,18 @@
 
     & :global(.slick-dots li button:before) {
       font-size: 12px;
+
+      @include media-query(md) {
+        font-size: 9px;
+      }
     }
 
     & :global(.slick-list) {
       margin: 0 -20px;
-      // & :global(.slick-track) {
 
       & :global(.slick-slide) {
         padding: 0 20px;
       }
-      // }
     }
   }
 
@@ -46,83 +91,148 @@
     height: 100%;
     @include flex(column, space-between, flex-start, nowrap);
     gap: 30px;
-    padding-bottom: 15px;
+    // padding-bottom: 15px;
 
-    .houseBlockTitle {
-      @include h3;
-      // margin-bottom: 30px;
-    }
-
-    .houseBlockDescription {
-      // margin-bottom: 30px;
-
-      .title {
-        @include typography(700, 20px, 26px, $text-primary);
-        margin-bottom: 20px;
-      }
-
-      .description {
-        @include typography(400, 20px, 28px, $text-primary);
-        max-height: 140px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+    @include media-query(sm) {
+      gap: 0px;
     }
 
     .places {
       width: 100%;
       @include flex(row, space-between, center, nowrap);
 
+      @media (max-width: 1250px) {
+        @include flex(column, flex-start, flex-start, nowrap);
+      }
+
+      @include media-query(md) {
+        @include flex(row, space-between, flex-start, nowrap);
+      }
+
+      @media (max-width: 450px) {
+        @include flex(column, flex-start, flex-start, nowrap);
+        gap: 8px;
+      }
+
+      @include media-query(sm) {
+        margin-bottom: 16px;
+      }
+
       .rooms {
-        @include flex(row, space-between, center, nowrap);
+        @include flex(row, space-between, flex-start, nowrap);
+
+        @media (max-width: 1250px) {
+          margin-bottom: 20px;
+        }
+
+        @include media-query(sm) {
+          margin-bottom: 0px;
+        }
       }
 
       .beds {
-        @include flex(row, space-between, center, nowrap);
+        @include flex(row, space-between, flex-start, nowrap);
 
-        .bedsBlock {
-          @include flex(row, space-between, center, nowrap);
-          margin-right: 18px;
+        // .bedsBlock {
+        //   @include flex(row, space-between, center, nowrap);
+        //   margin-right: 18px;
 
-          & img {
-            margin-left: 4px;
-          }
-        }
+        //   & img {
+        //     margin-left: 4px;
+        //   }
+        // }
       }
 
       .rooms p:first-child,
       .beds p:first-child {
         @include typography(700, 18px, 25px, $text-primary);
         margin-right: 20px;
+        font-family: 'Commissioner', sans-serif;
+
+        @include media-query(sm) {
+          font-size: 16px;
+          // margin-bottom: 25px;
+        }
       }
 
       .rooms > p,
       .beds > p {
         @include typography(400, 18px, 24px, $text-primary);
+        font-family: 'Commissioner', sans-serif;
+
+        @include media-query(sm) {
+          font-size: 16px;
+        }
       }
     }
 
     .featuresBlock {
+      @include media-query(sm) {
+        margin-bottom: 30px;
+      }
       .title {
         @include typography(700, 20px, 26px, $text-primary);
+        font-family: 'Commissioner', sans-serif;
         margin-bottom: 20px;
+
+        @include media-query(lg) {
+          font-size: 18px;
+        }
+
+        @include media-query(sm) {
+          font-size: 16px;
+          line-height: 25px;
+          margin-bottom: 12px;
+        }
       }
 
       .features {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        // grid-template-rows: 1fr 1fr;
         row-gap: 20px;
         row-gap: 20px;
-        column-gap: 40px;
+        // column-gap: 40px;
+        column-gap: 6.4%;
+
+        @media (max-width: 1250px) {
+          grid-template-columns: 1fr 1fr;
+          row-gap: 15px;
+          column-gap: 5px;
+        }
+
+        @include media-query(md) {
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-rows: 1fr 1fr;
+        }
+
+        @media (max-width: 555px) {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          row-gap: 12px;
+          column-gap: 12px;
+          // display: block;
+          // column-count: 2;
+          // column-gap: 12px;
+        }
 
         .featuresItem {
           @include flex(row, flex-start, flex-start, nowrap);
+          gap: 10px;
+
+          @media (max-width: 555px) {
+            gap: 5px;
+            // break-inside: avoid;
+          }
 
           &_title {
-            margin-left: 5px;
+            // margin-left: 5px;
             @include typography(400, 18px, 24px, $text-primary);
             font-family: 'Commissioner', sans-serif;
+
+            @include media-query(sm) {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -135,6 +245,10 @@
       .calendarBlockTitle {
         @include typography(700, 18px, 25px, $text-primary);
         margin-right: 20px;
+
+        @include media-query(sm) {
+          font-size: 16px;
+        }
       }
 
       .calendarBlockImage {
@@ -173,21 +287,88 @@
       .priceBlockTitle {
         @include typography(700, 18px, 25px, $text-primary);
         margin-bottom: 10px;
+
+        @include media-query(sm) {
+          font-size: 16px;
+        }
       }
 
       .price {
         @include flex(row, flex-start, center, nowrap);
+        @include typography(700, 24px, 34px, $text-primary);
+
+        @include media-query(sm) {
+          font-size: 20px;
+        }
         gap: 10px;
 
         &,
         span {
           @include typography(700, 24px, 34px, $text-primary);
+
+          @include media-query(sm) {
+            font-size: 20px;
+          }
         }
       }
 
       .prices p:first-child {
         margin-right: 20px;
       }
+    }
+  }
+}
+
+.houseBlockTitle {
+  @include h3;
+  // margin-bottom: 30px;
+
+  @media (max-width: 1670px) {
+    margin-bottom: 20px;
+  }
+
+  @include media-query(sm) {
+    font-size: 20px;
+    line-height: 24.38px;
+  }
+}
+
+.houseBlockDescription {
+  @media (max-width: 1670px) {
+    margin-bottom: 20px;
+  }
+
+  @include media-query(md) {
+    margin-bottom: 0px;
+  }
+
+  @include media-query(sm) {
+    margin-bottom: 12px;
+  }
+
+  .title {
+    @include typography(700, 20px, 26px, $text-primary);
+    margin-bottom: 20px;
+    font-family: 'Commissioner', sans-serif;
+
+    @include media-query(md) {
+      display: none;
+    }
+  }
+
+  .description {
+    @include typography(400, 20px, 28px, $text-primary);
+    // max-height: 140px;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+
+    @include media-query(lg) {
+      font-size: 18px;
+    }
+
+    @include media-query(sm) {
+      font-size: 14px;
+      line-height: 25px;
     }
   }
 }
