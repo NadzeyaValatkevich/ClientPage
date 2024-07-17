@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
-/* body.open {
+body.modal-open {
   overflow: hidden;
-} */
+  /* padding-right: 17px; */
+}

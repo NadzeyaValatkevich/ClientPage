@@ -13,16 +13,31 @@ type ModalPropsType = {
 
 export const Modal = ({ active, onClose, children, type }: ModalPropsType) => {
 
+    const hasVerticalScrollbar = () => {
+        return document.documentElement.scrollHeight > window.innerHeight;
+    };
+
     useEffect(() => {
+        console.log(window.innerHeight)
+        console.log(document.body.scrollHeight)
+        console.log(document.documentElement.clientWidth)
         if (active) {
-            document.body.style.overflow = 'hidden';
+            if (document.body.scrollHeight > window.innerHeight) {
+                console.log(hasVerticalScrollbar())
+                document.body.style.paddingRight = '17px';
+            }
+            document.body.classList.add('modal-open');
         } else {
-            document.body.style.overflow = 'auto';
+            document.body.classList.remove('modal-open');
+            document.body.style.paddingRight = 'none';
         }
         return () => {
-            document.body.style.overflow = 'auto';
+            document.body.classList.remove('modal-open');
+            document.body.style.paddingRight = 'none';
         };
     }, [active]);
+
+    if (!active) return null;
 
     return (
         <>

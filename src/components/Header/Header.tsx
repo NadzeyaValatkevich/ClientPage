@@ -13,8 +13,6 @@ export const Header = () => {
 
     const location = useLocation();
 
-    console.log(location.pathname)
-
     useEffect(() => {
 
         if (location.pathname !== `/main_object/${id}`) {
