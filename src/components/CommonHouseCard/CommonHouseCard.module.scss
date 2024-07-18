@@ -60,6 +60,10 @@
       gap: 36px;
     }
 
+    @media (max-width: 320px) {
+      gap: 16px;
+    }
+
     .houseBlock-left {
       width: 100%;
       max-width: 560px;
@@ -120,8 +124,16 @@
       }
       & :global(.slick-list) {
         margin: 0 -20px;
+
+        @media (max-width: 400px) {
+          margin: 0 -10px;
+        }
         & :global(.slick-slide) {
           padding: 0 20px;
+
+          @media (max-width: 400px) {
+            padding: 0 10px;
+          }
         }
       }
     }

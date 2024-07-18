@@ -15,15 +15,12 @@
   @include flex(column, flex-start, center, nowrap);
 
   .modalContent {
-    // margin: 0 auto;
     margin: 100px 0px;
     background-color: $secondary;
     border-radius: $radius-secondary;
     padding: 30px 60px 60px 60px;
     width: 75%;
-    // height: 860px;
-    // width: 1440px;
-    // height: 860px;
+    position: relative;
 
     @include media-query(lg) {
       width: 83%;
