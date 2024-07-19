@@ -103,7 +103,7 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                     <div className={style.calendarBlock}>
                         <p className={style.calendarBlockTitle}>Свободные даты:</p>
                         <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
-                        {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} setDatePickerVisible={setDatePickerVisible} status={status.title} /></div>}
+                        {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} status={status.title} /></div>}
                     </div>
                     {rentalObject && rentalObject.price ?
                         <div className={style.priceBlock}>

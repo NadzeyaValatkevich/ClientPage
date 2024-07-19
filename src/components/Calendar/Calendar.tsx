@@ -6,11 +6,11 @@ import { ReservationItem } from "../../redux/types/rentalObjectTypes";
 
 type CalendarPropsType = {
     reservations: ReservationItem[],
-    setDatePickerVisible: (value: boolean) => void,
+    // setDatePickerVisible: (value: boolean) => void,
     status: string
 };
 
-export const Calendar = ({ reservations, setDatePickerVisible, status }: CalendarPropsType) => {
+export const Calendar = ({ reservations, status }: CalendarPropsType) => {
 
     const startDay = new Date();
 
@@ -50,10 +50,11 @@ export const Calendar = ({ reservations, setDatePickerVisible, status }: Calenda
             highlightDates={status === "Закрыт к бронированию" || status === "Техобслуживание" ? allDates : defineReservationsDates(reservations)}
             className={styles.datePickerDiv}
             renderCustomHeader={renderCustomHeader}
-            onClickOutside={() => setDatePickerVisible(false)}
+            // onClickOutside={() => setDatePickerVisible(false)}
             // excludeDates={[]}
             // disabled={disableAllDates}
             excludeDates={status === "Закрыт к бронированию" || status === "Техобслуживание" ? allDates : []}
+            // onCalendarClose={() => setDatePickerVisible(false)}
             readOnly
             inline
         />

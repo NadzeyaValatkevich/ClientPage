@@ -102,7 +102,6 @@
     height: 100%;
     @include flex(column, space-between, flex-start, nowrap);
     gap: 30px;
-    // padding-bottom: 15px;
 
     @include media-query(sm) {
       gap: 0px;
@@ -153,7 +152,6 @@
 
         @include media-query(sm) {
           font-size: 16px;
-          // margin-bottom: 25px;
         }
       }
 
@@ -233,7 +231,6 @@
     .calendarBlock {
       display: flex;
       align-items: flex-start;
-      // margin-bottom: 20px;
 
       @include media-query(sm) {
         margin-bottom: 30px;
@@ -254,8 +251,6 @@
       }
 
       .datePickerDiv {
-        // width: 370px;
-        // height: 395px;
         border-radius: 16px;
         box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
         position: relative;
@@ -279,8 +274,6 @@
       }
     }
     .priceBlock {
-      // margin-bottom: 30px;
-
       .priceBlockTitle {
         @include typography(700, 18px, 25px, $text-primary);
         margin-bottom: 20px;
@@ -355,9 +348,6 @@
 
   .description {
     @include typography(400, 20px, 28px, $text-primary);
-    // max-height: 140px;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
 
     @include media-query(lg) {
       font-size: 18px;
@@ -391,4 +381,8 @@
   @include media-query(sm) {
     color: $text-white;
   }
+}
+
+:global(.slick-dots li) {
+  margin: 0px;
 }
