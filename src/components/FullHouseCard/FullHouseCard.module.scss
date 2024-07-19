@@ -3,7 +3,6 @@
 
 .houseBlock {
   width: 100%;
-  // height: 96.8%;
   @include flex(row, space-between, flex-start, nowrap);
   gap: 40px;
 
@@ -11,6 +10,10 @@
     height: auto;
     @include flex(column, flex-start, flex-start, nowrap);
     gap: 36px;
+  }
+
+  @media (max-width: 320px) {
+    gap: 16px;
   }
 
   .houseBlockLeft {
@@ -79,8 +82,16 @@
     & :global(.slick-list) {
       margin: 0 -20px;
 
-      & :global(.slick-slide) {
-        padding: 0 20px;
+      @media (max-width: 400px) {
+        margin: 0 -10px;
+      }
+    }
+
+    & :global(.slick-slide) {
+      padding: 0 20px;
+
+      @media (max-width: 400px) {
+        padding: 0 10px;
       }
     }
   }
@@ -91,7 +102,6 @@
     height: 100%;
     @include flex(column, space-between, flex-start, nowrap);
     gap: 30px;
-    // padding-bottom: 15px;
 
     @include media-query(sm) {
       gap: 0px;
@@ -132,15 +142,6 @@
 
       .beds {
         @include flex(row, space-between, flex-start, nowrap);
-
-        // .bedsBlock {
-        //   @include flex(row, space-between, center, nowrap);
-        //   margin-right: 18px;
-
-        //   & img {
-        //     margin-left: 4px;
-        //   }
-        // }
       }
 
       .rooms p:first-child,
@@ -151,7 +152,6 @@
 
         @include media-query(sm) {
           font-size: 16px;
-          // margin-bottom: 25px;
         }
       }
 
@@ -189,10 +189,7 @@
       .features {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        // grid-template-rows: 1fr 1fr;
         row-gap: 20px;
-        row-gap: 20px;
-        // column-gap: 40px;
         column-gap: 6.4%;
 
         @media (max-width: 1250px) {
@@ -208,12 +205,8 @@
 
         @media (max-width: 555px) {
           grid-template-columns: 1fr 1fr;
-          grid-template-rows: 1fr 1fr 1fr;
           row-gap: 12px;
           column-gap: 12px;
-          // display: block;
-          // column-count: 2;
-          // column-gap: 12px;
         }
 
         .featuresItem {
@@ -222,11 +215,9 @@
 
           @media (max-width: 555px) {
             gap: 5px;
-            // break-inside: avoid;
           }
 
           &_title {
-            // margin-left: 5px;
             @include typography(400, 18px, 24px, $text-primary);
             font-family: 'Commissioner', sans-serif;
 
@@ -240,7 +231,10 @@
     .calendarBlock {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 20px;
+
+      @include media-query(sm) {
+        margin-bottom: 30px;
+      }
 
       .calendarBlockTitle {
         @include typography(700, 18px, 25px, $text-primary);
@@ -257,8 +251,6 @@
       }
 
       .datePickerDiv {
-        // width: 370px;
-        // height: 395px;
         border-radius: 16px;
         box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
         position: relative;
@@ -282,14 +274,13 @@
       }
     }
     .priceBlock {
-      // margin-bottom: 30px;
-
       .priceBlockTitle {
         @include typography(700, 18px, 25px, $text-primary);
-        margin-bottom: 10px;
+        margin-bottom: 20px;
 
         @include media-query(sm) {
           font-size: 16px;
+          margin-bottom: 12px;
         }
       }
 
@@ -321,14 +312,13 @@
 
 .houseBlockTitle {
   @include h3;
-  // margin-bottom: 30px;
+  font-size: clamp(20px, 1.25vw + 13px, 30px);
 
-  @media (max-width: 1670px) {
+  @media (max-width: 1671px) {
     margin-bottom: 20px;
   }
 
   @include media-query(sm) {
-    font-size: 20px;
     line-height: 24.38px;
   }
 }
@@ -358,9 +348,6 @@
 
   .description {
     @include typography(400, 20px, 28px, $text-primary);
-    // max-height: 140px;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
 
     @include media-query(lg) {
       font-size: 18px;
@@ -371,4 +358,31 @@
       line-height: 25px;
     }
   }
+}
+
+:global(.slick-dots) {
+  @include media-query(sm) {
+    position: relative;
+    bottom: 35px;
+  }
+}
+
+:global(.slick-dots li.slick-active button:before) {
+  color: $color-6;
+  opacity: 1;
+  @include media-query(sm) {
+    color: $text-white;
+  }
+}
+
+:global(.slick-dots li button:before) {
+  color: $color-6;
+  opacity: 0.4;
+  @include media-query(sm) {
+    color: $text-white;
+  }
+}
+
+:global(.slick-dots li) {
+  margin: 0px;
 }

@@ -1,72 +1,223 @@
-@import "../../common/styles/sass/mixins.scss";
-@import "../../common/styles/sass/variables.scss";
+@import '../../common/styles/sass/mixins.scss';
+@import '../../common/styles/sass/variables.scss';
 
 .footer {
-    width: 100%;
-    background-color: $primary;
+  flex: 1 0 auto;
+  width: 100%;
+  background-color: $primary;
 
-    .headerContainer {
-        padding: 100px 0px; 
-        @include flex(row, flex-start, flex-start, nowrap);
-        gap: 142px;
-        height: 672px;
+  .footerContainer {
+    padding: 100px 0px;
+    @include flex(column, flex-start, flex-start, nowrap);
+    gap: 50px;
 
-        .footerBlock-left {
-            @include flex(column, space-between, flex-start, nowrap);
-            height: 100%;
-
-            // & p:first-child {
-            //     text-align: left;
-            //     line-height: 70px;
-            // }
-
-            .social {
-                @include flex(row, flex-start, flex-start, nowrap);
-                gap: 20px;
-            }
-
-            .address {
-                @include typography(400, 24px, 40px, $text-white);
-            }
-
-            .phone, .email {
-                @include typography(600, 24px, 29.26px, $text-white);
-            }
-
-            .footerLeftInfo {
-                @include flex(row, space-between, flex-start, nowrap);
-                gap: 20px;
-
-                .infoDescription {
-                    @include typography(400, 14px, 17.07px, $secondary);
-                }
-                
-                & span:first-child {
-                    font-weight: 500;
-                }
-            }
-
-        }
-
-        .footerBlock-right {
-            height: 100%;
-            @include flex(column, space-between, flex-start, nowrap);
-
-                .map {
-                width: 588px;
-                height: 400px;
-                border-radius: $radius-primary;
-                -webkit-border-radius: 16px  16px 16px 16px;
-                -moz-border-radius: 16px  16px 16px 16px;
-                overflow: hidden;
-                position: relative;
-            }
-            
-            .footerRightInfo {
-                @include typography(500, 14px, 17.07px, $secondary);
-                align-self: flex-end;
-            }
-        }
-
+    @include media-query(lg) {
+      padding-bottom: 70px;
+      gap: 13px;
     }
+
+    @include media-query(md) {
+      padding: 50px 0px;
+    }
+
+    @media (max-width: 500px) {
+      padding: 30px 0px;
+    }
+
+    .footerInfo {
+      width: 100%;
+      @include flex(row, space-between, flex-start, nowrap);
+      gap: 20px;
+
+      @include media-query(md) {
+        @include flex(column, flex-start, flex-start, nowrap);
+      }
+
+      @include media-query(sm) {
+        gap: 16px;
+      }
+
+      .footerInfo-left {
+        @include flex(column, flex-start, flex-start, nowrap);
+
+        .footerLogo {
+          margin-bottom: 20px;
+        }
+
+        .social {
+          margin-bottom: 40px;
+          @include flex(row, flex-start, flex-start, wrap);
+          gap: 20px;
+
+          @include media-query(md) {
+            gap: 16px;
+          }
+
+          @include media-query(sm) {
+            margin-bottom: 20px;
+          }
+
+          img {
+            @include media-query(md) {
+              width: 44px;
+              height: 44px;
+            }
+          }
+        }
+
+        .address {
+          @include typography(400, 24px, 40px, $text-white);
+          margin-bottom: 30px;
+
+          @include media-query(md) {
+            order: 5;
+            font-size: 18px;
+            line-height: 30px;
+            margin-bottom: 0px;
+          }
+
+          @include media-query(sm) {
+            font-size: 16px;
+            line-height: 19.5px;
+          }
+        }
+
+        .phones {
+          margin-bottom: 20px;
+          @include flex(row, flex-start, flex-start, nowrap);
+          gap: 20px;
+
+          @media (max-width: 1310px) {
+            flex-direction: column;
+          }
+
+          @include media-query(md) {
+            flex-direction: row;
+          }
+
+          @media (max-width: 365px) {
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+          }
+        }
+
+        .phones,
+        .email {
+          @include typography(600, 24px, 29.26px, $text-white);
+
+          @include media-query(md) {
+            font-size: 18px;
+            line-height: 25px;
+          }
+
+          @media (max-width: 405px) {
+            font-size: 16px;
+            line-height: 19.5px;
+          }
+        }
+
+        .email {
+          @include media-query(md) {
+            margin-bottom: 20px;
+          }
+        }
+      }
+      .footerInfo-right {
+        @media (max-width: 1310px) {
+          align-self: center;
+        }
+
+        .map {
+          width: 588px;
+          height: 400px;
+          border-radius: $radius-primary;
+          -webkit-border-radius: 16px 16px 16px 16px;
+          -moz-border-radius: 16px 16px 16px 16px;
+          overflow: hidden;
+          position: relative;
+
+          @media (max-width: 1100px) {
+            width: 440px;
+            height: 300px;
+          }
+
+          @media (max-width: 500px) {
+            width: 350px;
+          }
+
+          @media (max-width: 405px) {
+            width: 304px;
+            height: 304px;
+          }
+        }
+      }
+    }
+
+    .footerContent {
+      width: 100%;
+      @include flex(row, space-between, flex-start, nowrap);
+      gap: 20px;
+
+      @media (max-width: 590px) {
+        @include flex(column, flex-start, flex-start, nowrap);
+      }
+
+      .footerContent-left {
+        @include flex(row, space-between, flex-start, nowrap);
+        gap: 30px;
+
+        @include media-query(lg) {
+          display: grid;
+          grid-template-rows: 1fr 1fr;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+        }
+
+        @media (max-width: 365px) {
+          @include flex(column, flex-start, flex-start, nowrap);
+          gap: 12px;
+        }
+
+        .footerContentTitle {
+          @include typography(500, 14px, 17.07px, $secondary);
+          margin-right: 10px;
+
+          @media (max-width: 365px) {
+            margin-right: 0px;
+            margin-bottom: 4px;
+          }
+        }
+
+        .footerContent-politics,
+        .footerContent-agree {
+          @include typography(400, 14px, 17.07px, $text-white);
+          opacity: 0.6;
+        }
+
+        .footerContent-politics {
+          grid-row: 2;
+          grid-column: 1;
+        }
+
+        .footerContent-agree {
+          grid-row: 2;
+          grid-column: 2;
+        }
+      }
+
+      .footerContent-right {
+        align-self: flex-end;
+        max-width: 588px;
+        text-align: end;
+        @include typography(500, 14px, 17.07px, $secondary);
+        opacity: 0.8;
+
+        @media (max-width: 590px) {
+          align-self: flex-start;
+          text-align: start;
+        }
+      }
+    }
+  }
 }
