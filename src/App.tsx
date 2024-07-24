@@ -17,7 +17,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/main_object/:id" element={<Layout scrollToFilteredObjects={scrollToFilteredObjects} />}>
+      <Route path="/:id" element={<Layout scrollToFilteredObjects={scrollToFilteredObjects} />}>
         <Route index element={<Main />} />
         <Route path="filteredRental_objects" element={<FilteredRentalObjects ref={filteredObjectsRef} />} />
       </Route>

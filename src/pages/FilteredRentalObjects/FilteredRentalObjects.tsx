@@ -8,7 +8,7 @@ import { FullHouseCard } from "../../components/FullHouseCard";
 import { useEffect, useState } from "react";
 import { Modal } from "../../components/Modal";
 import { Booking } from "../../components/Booking";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { DatesGuestsObjectRequestType } from "../../redux/types/datesGuestsTypes";
 import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
 import React from "react";
@@ -38,6 +38,7 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
     console.log(props)
 
     const [searchParams] = useSearchParams();
+    const { id } = useParams();
 
     const dispatch = useAppDispatch();
 
@@ -48,7 +49,8 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
             check_in_date: queryParams.get('check_in_date'),
             check_out_date: queryParams.get('check_out_date'),
             people_amount: queryParams.get('people_amount'),
-            main_object: queryParams.get('main_object'),
+            // main_object: queryParams.get('main_object'),
+            main_object: id ? id : "",
         };
 
         dispatch(fetchFilteredRentalObjects(queryParamsData));

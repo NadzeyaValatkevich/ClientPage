@@ -15,7 +15,7 @@ export const Header = () => {
 
     useEffect(() => {
 
-        if (location.pathname !== `/main_object/${id}`) {
+        if (location.pathname !== `/${id}`) {
             setVisibilityBtnBack(true)
         } else {
             setVisibilityBtnBack(false)
