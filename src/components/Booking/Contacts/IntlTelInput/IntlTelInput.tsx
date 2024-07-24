@@ -136,28 +136,28 @@ export const IntlTelInput: FC<InputProps> = ({
                     <p className="intlTelInput__title">{title}</p>
                 </div>
             )}
-            <div
+            {/* <div
                 className={classNames({
                     "intlTelInput__input-hide": !isLoaded,
                 })}
-            >
-                <input
-                    {...register("phone", { required: requiredMessage })}
-                    value={value.phone_number}
-                    className={classNames("intlTelInput__input", className, {
-                        "intlTelInput__input-active": value.phone_number.length > 0,
-                        "intlTelInput__input-error": errText,
-                        "intlTelInput__input-disabled": disabled,
-                    })}
-                    id={id}
-                    type="tel"
-                    placeholder={placeholder}
-                    onChange={onChangeText}
-                    onBlur={onBlur}
-                    disabled={disabled}
-                    onKeyDown={onKeyDown}
-                />
-            </div>
+            > */}
+            <input
+                {...register("phone", { required: requiredMessage })}
+                value={value.phone_number}
+                className={classNames("intlTelInput__input", className, {
+                    "intlTelInput__input-active": value.phone_number.length > 0,
+                    "intlTelInput__input-error": errText,
+                    "intlTelInput__input-disabled": disabled,
+                })}
+                id={id}
+                type="tel"
+                placeholder={placeholder}
+                onChange={onChangeText}
+                onBlur={onBlur}
+                disabled={disabled}
+                onKeyDown={onKeyDown}
+            />
+            {/* </div> */}
             {errText && <p className="intlTelInput__errText">{errText}</p>}
         </div>
     );

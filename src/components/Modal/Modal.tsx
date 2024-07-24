@@ -18,12 +18,8 @@ export const Modal = ({ active, onClose, children, type }: ModalPropsType) => {
     };
 
     useEffect(() => {
-        console.log(window.innerHeight)
-        console.log(document.body.scrollHeight)
-        console.log(document.documentElement.clientWidth)
         if (active) {
             if (document.body.scrollHeight > window.innerHeight) {
-                console.log(hasVerticalScrollbar())
                 document.body.style.paddingRight = '17px';
             }
             document.body.classList.add('modal-open');
@@ -45,7 +41,7 @@ export const Modal = ({ active, onClose, children, type }: ModalPropsType) => {
                 {(state) => (
                     // <div className={`${style.modal} ${style[`modal--${state}`]}`} onClick={() => setActive(false)}>
                     <div className={`${style.modal} ${style[`modal--${state}`]}`}>
-                        <div className={type === "houseModal" ? `${style.modalContent} ` : `${style.modalContentBooking}`} onClick={e => e.stopPropagation()}>
+                        <div className={type === "houseModal" ? `${style.modalContent} ` : `${style.modalContentBooking}`}>
                             {type === "houseModal"
                                 ? <CloseIcon onClick={onClose} color={"#0F2664"} />
                                 : <div className={style["modalContentBooking__header"]}>

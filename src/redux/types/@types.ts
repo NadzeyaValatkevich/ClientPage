@@ -8,8 +8,8 @@ export type ResponseData<T> = {
 }
 
 export type TelephoneType = {
-  country_code: string
-  phone_code: string
+  country_code: string | undefined
+  phone_code: string | undefined
   phone_number: string
 }
 

@@ -18,6 +18,7 @@ export const Contacts = () => {
         phone_number: "",
     });
     const [telephoneTouched, setTelephoneTouched] = useState(false);
+    const [isTelephoneValid, setIsTelephoneValid] = useState(false);
 
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
@@ -26,8 +27,6 @@ export const Contacts = () => {
     const [telegram, setTelegram] = useState("");
     const [telegramError, setTelegramError] = useState("");
     const [telegramTouched, setTelegramTouched] = useState(false);
-
-    const [isTelephoneValid, setIsTelephoneValid] = useState(false);
 
     const { formState: { errors }, setValue, control } = useFormContext();
 
@@ -117,7 +116,8 @@ export const Contacts = () => {
                     rules={{ required: true }}
                     render={({ field }) => (
                         <IntlTelInput
-                            id="MobilePhone"
+                            // id="MobilePhone"
+                            id="phone"
                             title="Мобильный телефон*"
                             // value={telephone}
                             value={field.value || { country_code: '', phone_code: '', phone_number: '' }}
