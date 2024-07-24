@@ -30,6 +30,19 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
         setIsCalendarOpen(true);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === ' ') {
+            event.preventDefault();
+        }
+    };
+
+    // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const value = event.target.value;
+    //     if (!value) {
+    //         onDateChange(null);
+    //     }
+    // };
+
     const CustomInput = forwardRef<HTMLInputElement, any>((props: any, ref: any) => {
         return (
             <div
@@ -54,6 +67,8 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
                     onFocus={(e) => {
                         props.onFocus(e);
                     }}
+                    onKeyDown={handleKeyDown}
+                    readOnly
                 />
                 <img className={style.image} src={selectedDate ? calendarIcon : calendarGrayIcon} alt="Calendar" onClick={handleDivClick} />
             </div>
@@ -69,7 +84,7 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
                 onChange={(date) => onDateChange(date as Date)}
                 customInput={<CustomInput ref={ref} />}
                 minDate={firstDay}
-                maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
+                maxDate={type === "birthday" ? new Date() : new Date(new Date().setMonth(new Date().getMonth() + 12))}
                 showMonthDropdown={type === 'birthday'}
                 showYearDropdown={type === 'birthday'}
                 dropdownMode={(type === 'birthday') ? "select" : undefined}

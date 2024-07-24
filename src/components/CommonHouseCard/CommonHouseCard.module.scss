@@ -6,14 +6,14 @@
   border-radius: $radius-primary;
   border: $border-primary;
   background-color: $secondary;
-  padding: 60px 114px 60px 80px;
+  padding: 40px 60px 60px;
   margin-bottom: 80px;
   @include flex(column, flex-start, flex-start, nowrap);
   gap: 30px;
 
   @include media-query(lg) {
     margin-bottom: 60px;
-    padding: 40px;
+    padding: 30px 30px 40px;
     gap: 20px;
   }
 

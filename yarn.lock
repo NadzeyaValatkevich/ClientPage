@@ -1592,10 +1592,10 @@ inherits@2:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-intl-tel-input@18.1.8:
-  version "18.1.8"
-  resolved "https://registry.yarnpkg.com/intl-tel-input/-/intl-tel-input-18.1.8.tgz#7ea7f03dae08624a01b608a8a7edef7584bfb2d0"
-  integrity sha512-dPrCYwmjkjJOMw0XfyET+jSvbS+GFh6sOAFV5NpHK+jQXoXz8xsQLAoLmzjGktl2o3QhgBhyLTaNGyN0ZEx3cA==
+intl-tel-input@^18.2.1:
+  version "18.5.3"
+  resolved "https://registry.yarnpkg.com/intl-tel-input/-/intl-tel-input-18.5.3.tgz#20b18431cb802d33c118f52e332e218e641ec09b"
+  integrity sha512-ncFqSpkdGf2YC/FvAiwBH44KAeRG8L7aqDODEpOvMAT3ZpBtvc/WtwaQ/6X4+HKDTlGkobdBjr6P3nAMwO8jtA==
 
 is-arrayish@^0.2.1:
   version "0.2.1"

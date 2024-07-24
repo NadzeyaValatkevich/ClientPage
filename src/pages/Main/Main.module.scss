@@ -4,10 +4,10 @@
 .main {
   // flex: 1 1 0 auto;
   width: 100%;
-  padding-bottom: 160px;
+  padding-bottom: 80px;
 
   @include media-query(lg) {
-    padding-bottom: 100px;
+    padding-bottom: 60px;
   }
 
   @include media-query(md) {

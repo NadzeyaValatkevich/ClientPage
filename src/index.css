@@ -4,13 +4,13 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   height: 100%;
 }
 
 body.modal-open {
   overflow: hidden;
+  /* height: 100%; */
 }
 
 #root {

@@ -1,11 +1,6 @@
 @import '../../../../common/styles/sass/mixins.scss';
 @import '../../../../common/styles/sass/variables.scss';
 
-// .iti {
-//   --iti-path-flags-1x: url('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/img/flags.png');
-//   --iti-path-flags-2x: url('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/img/flags@2x.png');
-// }
-
 .iti__flag {
   background-image: url('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/img/flags.png');
 }
@@ -66,20 +61,20 @@
       outline-color: #b91212 !important;
     }
 
-    &-hide {
-      position: relative;
-      &::before {
-        content: '';
-        width: calc(100% - 2px);
-        height: 65px;
-        background-color: $text-white;
-        // border-radius: $radius;
-        position: absolute;
-        left: 1px;
-        top: 1px;
-        z-index: 2;
-      }
-    }
+    // &-hide {
+    //   position: relative;
+    //   &::before {
+    //     content: '';
+    //     width: calc(100% - 2px);
+    //     height: 65px;
+    //     background-color: $text-white;
+    //     // border-radius: $radius;
+    //     position: absolute;
+    //     left: 1px;
+    //     top: 1px;
+    //     z-index: 2;
+    //   }
+    // }
   }
 
   &__errText {
@@ -90,7 +85,7 @@
 
 .iti {
   width: 100%;
-  // position: relative !important;
+  //   // position: relative !important;
 
   &__selected-flag {
     width: 86px;
@@ -100,15 +95,24 @@
     background-color: unset !important;
   }
 
-  &__country-list {
-    width: auto !important;
-  }
+  // &__country-list {
+  //   // width: auto !important;
+  //   height: 300px;
+  //   position: absolute;
+  //   top: 97px;
+  // }
 
-  &--container {
+  &--fullscreen-popup {
     position: absolute !important;
     height: 300px;
     top: 97px !important;
     left: 0px !important;
+    background-color: inherit !important;
+  }
+
+  &__dropdown-content {
+    position: absolute !important;
+    left: 0px;
   }
 
   &__highlight {
@@ -145,3 +149,7 @@
     // @include h4($text-secondary);
   }
 }
+
+// .iti__search-input {
+//   display: none;
+// }
