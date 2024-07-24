@@ -50,7 +50,7 @@ export const IntlTelInput: FC<InputProps> = ({
         countriesList.map((item) => [item.countryCode, item.countryLabel])
     );
 
-    const [isLoaded, setIsLoaded] = useState(false);
+    // const [isLoaded, setIsLoaded] = useState(false);
     // const [intlTel, setIntlTel] = useState<intlTelInput.Plugin>();
     const [intlTel, setIntlTel] = useState<any>();
     const { register } = useFormContext();
@@ -84,7 +84,7 @@ export const IntlTelInput: FC<InputProps> = ({
         });
 
         iti.promise.then(() => {
-            setIsLoaded(true);
+            // setIsLoaded(true);
             setIntlTel(iti);
             onChange({
                 ...value,

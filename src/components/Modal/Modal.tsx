@@ -13,9 +13,9 @@ type ModalPropsType = {
 
 export const Modal = ({ active, onClose, children, type }: ModalPropsType) => {
 
-    const hasVerticalScrollbar = () => {
-        return document.documentElement.scrollHeight > window.innerHeight;
-    };
+    // const hasVerticalScrollbar = () => {
+    //     return document.documentElement.scrollHeight > window.innerHeight;
+    // };
 
     useEffect(() => {
         if (active) {
