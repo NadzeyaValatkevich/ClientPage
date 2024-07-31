@@ -2,7 +2,17 @@
 @import '../../../common/styles/sass/mixins.scss';
 
 .input__box {
+  width: 288px;
   @include flex(column, flex-start, flex-start, nowrap);
+
+  @include media-query(lg) {
+    width: 267px;
+  }
+
+  @media (max-width: 680px) {
+    max-width: 552px;
+    width: 100%;
+  }
 
   &-label {
     position: relative;
@@ -26,6 +36,10 @@
     height: 67px;
     border: 1px solid $text-secondary;
     border-radius: 6px;
+
+    @media (max-width: 400px) {
+      height: 40px;
+    }
 
     ::placeholder {
       @include typography(500, 14px, 17.07px, $text-secondary);

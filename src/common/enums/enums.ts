@@ -7,11 +7,11 @@
 //     PARKINGSPACE = "Стояночное место автодома"
 // }
 
-// export enum RentalObjectStatuses {
-//     OPEN = "Доступен к бронированию",
-//     CLOSE = "Закрыт к бронированию",
-//     SERVICE = "Техобслуживание",
-// }
+export enum RentalObjectStatuses {
+  OPEN = 'afb',
+  CLOSE = 'cfb',
+  SERVICE = 'mnt',
+}
 
 export enum RequestStatusType {
   idle,

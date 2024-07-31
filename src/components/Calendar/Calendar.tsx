@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Calendar.module.scss";
 import { createYearAheadDates, defineReservationsDates } from "../../utils/functions/defineReservationsDates";
 import { ReservationItem } from "../../redux/types/rentalObjectTypes";
+import { RentalObjectStatuses } from "../../common/enums/enums";
 
 type CalendarPropsType = {
     reservations: ReservationItem[],
@@ -37,7 +38,7 @@ export const Calendar = ({ reservations, status }: CalendarPropsType) => {
         );
     };
 
-    const allDates = status === "Техобслуживание" || status === "Закрыт к бронированию" ? createYearAheadDates() : [];
+    const allDates = status === RentalObjectStatuses.SERVICE || status === RentalObjectStatuses.CLOSE ? createYearAheadDates() : [];
 
     return (
         <DatePicker
@@ -46,15 +47,10 @@ export const Calendar = ({ reservations, status }: CalendarPropsType) => {
             minDate={new Date()}
             maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
             onChange={() => { }}
-            // highlightDates={defineReservationsDates(reservations)}
-            highlightDates={status === "Закрыт к бронированию" || status === "Техобслуживание" ? allDates : defineReservationsDates(reservations)}
+            highlightDates={status === RentalObjectStatuses.CLOSE || RentalObjectStatuses.SERVICE ? allDates : defineReservationsDates(reservations)}
             className={styles.datePickerDiv}
             renderCustomHeader={renderCustomHeader}
-            // onClickOutside={() => setDatePickerVisible(false)}
-            // excludeDates={[]}
-            // disabled={disableAllDates}
-            excludeDates={status === "Закрыт к бронированию" || status === "Техобслуживание" ? allDates : []}
-            // onCalendarClose={() => setDatePickerVisible(false)}
+            excludeDates={status === RentalObjectStatuses.CLOSE || status === RentalObjectStatuses.SERVICE ? allDates : []}
             readOnly
             inline
         />

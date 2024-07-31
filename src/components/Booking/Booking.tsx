@@ -167,10 +167,6 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
         dispatch(submitBooking(transformData))
     };
 
-    // if (status === RequestStatusType.loading) {
-    //     <BeatLoader color="#1855b7" />
-    // }
-
     return (
         <div className={style.booking}>
             <FormProvider {...methods} >

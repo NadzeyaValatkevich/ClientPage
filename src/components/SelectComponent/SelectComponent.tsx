@@ -53,6 +53,7 @@ export const SelectComponent = ({ options, label, className, name }: SelectCompo
                                 control: (provided: CSSObjectWithLabel, state: ControlProps<OptionItemType, false>) => ({
                                     ...provided,
                                     borderColor: currentValue ? '#1855b7' : '#696f79',
+                                    paddingLeft: "12px",
                                     boxShadow: currentValue ? '$shadow - 1' : "none",
                                     '&:hover': {
                                         borderColor: 'none',

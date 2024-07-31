@@ -26,6 +26,18 @@ $radius-secondary: 6px;
   position: relative;
   @include typography(600, 20px, 24.38px, $text-primary);
   margin-bottom: 20px;
+
+  @include media-query(lg) {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21.94px;
+  }
+
+  @include media-query(sm) {
+    font-size: 16px;
+    line-height: 19.5px;
+    margin-bottom: 16px;
+  }
 }
 
 %error {

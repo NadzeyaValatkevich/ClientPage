@@ -2,6 +2,7 @@ import { Transition } from 'react-transition-group';
 import { CloseIcon } from "../../assets/icons/Close";
 import style from "../Modal/Modal.module.scss";
 import { ReactNode, useEffect } from 'react';
+import classNames from "classnames";
 
 type ModalPropsType = {
     active: boolean,
@@ -39,9 +40,12 @@ export const Modal = ({ active, onClose, children, type }: ModalPropsType) => {
         <>
             <Transition in={active} timeout={350} unmountOnExit>
                 {(state) => (
-                    // <div className={`${style.modal} ${style[`modal--${state}`]}`} onClick={() => setActive(false)}>
                     <div className={`${style.modal} ${style[`modal--${state}`]}`}>
-                        <div className={type === "houseModal" ? `${style.modalContent} ` : `${style.modalContentBooking}`}>
+                        {/* <div className={type === "houseModal" ? `${style.modalContent} ` : `${style.modalContentBooking}`}> */}
+                        <div className={classNames(style.modalContent, {
+                            [style.modalContentHouse]: type === "houseModal",
+                            [style.modalContentBooking]: type === "bookingModal",
+                        })}>
                             {type === "houseModal"
                                 ? <CloseIcon onClick={onClose} color={"#0F2664"} />
                                 : <div className={style["modalContentBooking__header"]}>

@@ -25,11 +25,41 @@ export const Footer = () => {
                             <Logo />
                         </div>
                         <div className={style.social}>
-                            <img alt={"facebook"} src={facebook} />
-                            <img alt={"instagram"} src={instagram} />
-                            <img alt={"telegram"} src={telegram} />
-                            <img alt={"viber"} src={viber} />
-                            <img alt={"vk"} src={vk} />
+                            <a
+                                href={"https://www.facebook.com/"}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img alt={"facebook"} src={facebook} />
+                            </a>
+                            <a
+                                href={"https://www.instagram.com/"}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img alt={"instagram"} src={instagram} />
+                            </a>
+                            <a
+                                href={"https://web.telegram.org/"}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img alt={"telegram"} src={telegram} />
+                            </a>
+                            <a
+                                href={"https://www.viber.com/"}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img alt={"viber"} src={viber} />
+                            </a>
+                            <a
+                                href={"https://vk.com/"}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img alt={"vk"} src={vk} />
+                            </a>
                         </div>
                         <p className={style.address}>
                             {`${country ? getCountCountry(country) : "страна"}, ${region ? region : "регион"}, ${locality ? locality : "населенный пункт"}, ${address ? address : "адрес"}`}

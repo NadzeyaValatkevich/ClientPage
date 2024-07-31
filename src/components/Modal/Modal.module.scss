@@ -16,16 +16,30 @@
 
   .modalContent {
     margin: 100px 0px;
-    background-color: $secondary;
-    border-radius: $radius-secondary;
-    padding: 30px 60px 60px 60px;
     width: 75%;
+    background-color: $secondary;
+    border-radius: $radius-primary;
     position: relative;
 
     @include media-query(lg) {
       width: 83%;
-      padding: 30px 40px 50px;
       margin: 50px 0px;
+    }
+
+    @include media-query(md) {
+      width: 90%;
+    }
+
+    @include media-query(sm) {
+      width: 95%;
+    }
+  }
+
+  .modalContentHouse {
+    padding: 30px 60px 60px 60px;
+
+    @include media-query(lg) {
+      padding: 30px 40px 50px;
     }
 
     @media (max-width: 1250px) {
@@ -34,31 +48,45 @@
 
     @include media-query(md) {
       padding: 30px 30px;
-      width: 90%;
     }
 
     @include media-query(sm) {
-      width: 95%;
       padding: 20px 6px 30px 8px;
     }
   }
 
   .modalContentBooking {
-    width: 1440px;
-    border-radius: $radius-primary;
-    position: absolute;
     padding: 60px 114px;
-    top: 40px;
-    background-color: $secondary;
+
+    @include media-query(lg) {
+      padding: 40px;
+    }
+
+    @include media-query(md) {
+      padding: 30px;
+    }
+
+    @include media-query(sm) {
+      padding: 20px 8px;
+    }
 
     &__header {
       width: 100%;
       margin-bottom: 20px;
       @include flex(row, space-between, center, nowrap);
+
+      @include media-query(sm) {
+        margin-bottom: 16px;
+      }
     }
 
     &__header-title {
       @include h3();
+
+      @include media-query(lg) {
+        font-size: 20px;
+        line-height: 24.38px;
+      }
     }
   }
 }

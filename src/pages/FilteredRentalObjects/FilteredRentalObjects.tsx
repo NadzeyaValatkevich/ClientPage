@@ -87,21 +87,13 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
     const currentResults = results && results.slice(startIndex, endIndex);
 
     const Loader = () => {
-        return <div style={{ marginBottom: "80px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        return <div className={style.loader}>
             <BeatLoader color="#1855b7" />
-        </div>
+        </div >
     }
 
     if (error) {
-        return <div style={{
-            width: "100vw",
-            marginBottom: "120px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "20px",
-            fontWeight: "600"
-        }} >
+        return <div className={style.error} >
             {error}
         </div >
     }
@@ -127,7 +119,7 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
                             </CommonHouseCard>
                         ))
                 }
-                {status !== RequestStatusType.loading && < Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"free"} />}
+                {status !== RequestStatusType.loading && count !== 0 && < Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"free"} />}
 
             </div>
 

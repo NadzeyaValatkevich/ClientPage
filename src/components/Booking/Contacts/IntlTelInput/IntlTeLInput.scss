@@ -12,7 +12,17 @@
 }
 
 .intlTelInput {
+  width: 288px;
   position: relative;
+
+  @include media-query(lg) {
+    width: 267px;
+  }
+
+  @media (max-width: 680px) {
+    max-width: 552px;
+    width: 100%;
+  }
 
   &__title {
     &-wrapper {
@@ -22,6 +32,10 @@
     }
 
     @include typography(400, 16px, 19.5px, $text-secondary);
+  }
+
+  &__input:placeholder-shown {
+    text-overflow: ellipsis;
   }
 
   &__input {
@@ -35,6 +49,10 @@
     width: 100%;
     @include typography(500, 14px, 17.07px, $text-primary);
 
+    @media (max-width: 400px) {
+      height: 43.6px;
+    }
+
     &:focus {
       // border-color: $color-8;
       box-shadow: $shadow-1;
@@ -43,6 +61,7 @@
 
     &::placeholder {
       color: $text-secondary;
+      width: 100%;
     }
 
     &-active {

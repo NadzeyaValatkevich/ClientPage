@@ -2,7 +2,11 @@
 @import '../../../common/styles/sass/mixins.scss';
 
 .infoObject {
+  width: 100%;
   margin-bottom: 40px;
+  @include media-query(md) {
+    margin-bottom: 32px;
+  }
 
   &__title {
     @extend %titleBookingBlock;
@@ -12,13 +16,31 @@
     @include flex(column, flex-start, flex-start, nowrap);
     gap: 20px;
 
+    @include media-query(md) {
+      gap: 16px;
+    }
+
     &-upItem {
-      @include flex(row, flex-start, flex-start, nowrap);
+      width: 100%;
+      @include flex(row, flex-start, flex-start, wrap);
       gap: 20px;
+
+      @include media-query(md) {
+        gap: 16px;
+      }
     }
 
     &-object input {
       width: 288px;
+      // width: 100%;
+
+      @include media-query(lg) {
+        width: 267px;
+      }
+
+      @media (max-width: 680px) {
+        width: 100%;
+      }
     }
 
     &-object input,
@@ -39,12 +61,24 @@
     &-date--checkOut,
     &-guests {
       position: relative;
+      @media (max-width: 680px) {
+        max-width: 552px;
+        width: 100%;
+      }
     }
 
     &-date--checkIn input,
     &-date--checkOut input,
     &-guests input {
       width: 288px;
+
+      @include media-query(lg) {
+        width: 267px;
+      }
+
+      @media (max-width: 680px) {
+        width: 100%;
+      }
     }
 
     &-date--image,
@@ -54,10 +88,19 @@
       right: 26px;
     }
 
-    &-time--checkIn {
+    &-time--checkIn,
+    &-time--checkOut {
       width: 130px;
-      // height: 97px;
+
+      @media (max-width: 680px) {
+        // max-width: 552px;
+        width: 100%;
+      }
     }
+
+    // &-time--checkOut {
+    //   width: 130px;
+    // }
 
     &-time--checkOut input {
       width: 130px;
@@ -66,20 +109,42 @@
       border: 1px solid $text-secondary;
       border-radius: 6px;
 
+      @media (max-width: 680px) {
+        width: 100%;
+      }
+
+      @media (max-width: 400px) {
+        height: 40px;
+      }
+
       &:focus {
         outline: none;
       }
     }
 
     &-mediumItem {
-      @include flex(row, flex-start, flex-start, nowrap);
+      @include flex(row, flex-start, flex-start, wrap);
       gap: 20px;
+
+      @media (max-width: 680px) {
+        width: 100%;
+      }
     }
     &-animals {
       min-height: 96.5px;
       width: 288px;
       position: relative;
       // @include flex(column, center, flex-start, nowrap);
+
+      @include media-query(lg) {
+        width: 267px;
+        // min-height: 73.1px;
+      }
+
+      @media (max-width: 680px) {
+        min-height: 73.1px;
+        width: 100%;
+      }
 
       &--checkbox {
         width: 20px;
@@ -107,6 +172,19 @@
         width: 288px;
         border: 1px solid $text-secondary;
         @include typography(500, 14px, 17.07px, $text-secondary);
+
+        @include media-query(lg) {
+          width: 267px;
+        }
+
+        @media (max-width: 680px) {
+          // max-width: 552px;
+          width: 100%;
+        }
+
+        @media (max-width: 400px) {
+          height: 40px;
+        }
       }
 
       &--checked input::placeholder {

@@ -4,6 +4,10 @@
 .contacts {
   margin-bottom: 40px;
 
+  @include media-query(md) {
+    margin-bottom: 32px;
+  }
+
   &__title {
     @extend %titleBookingBlock;
   }
@@ -12,7 +16,21 @@
     display: grid;
     gap: 20px;
     width: 100%;
-    grid-template-columns: repeat(4, 1fr);
+    // grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+
+    @include media-query(lg) {
+      grid-template-columns: repeat(auto-fill, minmax(267px, 1fr));
+    }
+
+    @include media-query(md) {
+      gap: 16px;
+    }
+
+    @media (max-width: 680px) {
+      grid-template-columns: 1fr;
+      // grid-template-rows: repeat(3, 1fr);
+    }
 
     & input {
       width: 100%;
