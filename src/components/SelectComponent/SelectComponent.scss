@@ -24,6 +24,10 @@
   &__control {
     height: 67px;
     border-radius: 6px !important;
+
+    @media (max-width: 400px) {
+      height: 40px;
+    }
   }
 
   &__value-container {
@@ -31,6 +35,12 @@
   }
 
   &__single-value {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17.07px;
+  }
+
+  &__placeholder {
     font-weight: 500;
     font-size: 14px;
     line-height: 17.07px;

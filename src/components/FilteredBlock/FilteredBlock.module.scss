@@ -15,20 +15,24 @@
   }
 
   @media (max-width: 1251px) {
-    margin-bottom: 100px;
+    margin-bottom: 120px;
+  }
+
+  @media (max-width: 950px) {
+    margin-bottom: 180px;
   }
 
   @include media-query(md) {
-    margin-bottom: 80px;
+    margin-bottom: 140px;
   }
 
   @media (max-width: 571px) {
-    margin-bottom: 8px;
-    min-height: 491px;
+    margin-bottom: 60px;
+    min-height: 451px;
   }
 
   @include media-query(sm) {
-    min-height: 400px;
+    min-height: 360px;
     margin-bottom: 20px;
   }
 

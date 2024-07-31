@@ -7,24 +7,40 @@
 
 .customDatePickDiv {
   width: 100%;
-  padding: 25px 20px;
+  padding: 24px 20px;
   background-color: $text-white;
   border: solid 1px $text-secondary;
   border-radius: $radius-secondary;
   @include flex(row, space-between, center, nowrap);
 
   @include media-query(md) {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 17px;
+    padding-bottom: 17px;
   }
 
+  // @media (max-width: 400px) {
+  //   padding-top: 11.5px;
+  //   padding-bottom: 11.5px;
+  // }
+
   @include media-query(sm) {
-    padding-top: 11.5px;
-    padding-bottom: 11.5px;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   .image {
     cursor: pointer;
+  }
+}
+
+.customDatePickDiv-birthday {
+  @include media-query(md) {
+    padding: 24px 20px;
+  }
+
+  @media (max-width: 400px) {
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 }
 

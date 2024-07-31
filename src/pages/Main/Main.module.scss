@@ -10,12 +10,12 @@
     padding-bottom: 60px;
   }
 
-  @include media-query(md) {
-    padding-bottom: 80px;
-  }
+  // @include media-query(md) {
+  //   padding-bottom: 80px;
+  // }
 
   @media (max-width: 571px) {
-    padding-bottom: 60px;
+    padding-bottom: 40px;
   }
 }
 

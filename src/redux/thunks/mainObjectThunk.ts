@@ -14,6 +14,7 @@ export const fetchMainObject = createAsyncThunk<MainObjectType, string>(
 
       return response.data
     } catch (error: any) {
+      console.log(error)
       const errorMessage = handleAsyncServerNetworkError(error, thunkAPI, false)
       return thunkAPI.rejectWithValue(errorMessage)
     }

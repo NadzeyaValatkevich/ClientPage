@@ -4,7 +4,7 @@ import calendar from "../../assets/icons/bigCalendar.svg";
 import { PrevArrow, NextArrow } from '../CustomArrows/CustomArrows';
 import { ImageItem, RentalObject, TransformFeatureItem } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 import { getCountFeatures } from "../../utils/functions/getCountFeatures";
 import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
@@ -47,6 +47,24 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
             },
         ],
     };
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
+            setDatePickerVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isDatePickerVisible) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isDatePickerVisible]);
+
 
     return (
         <>
@@ -103,7 +121,7 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                     <div className={style.calendarBlock}>
                         <p className={style.calendarBlockTitle}>Свободные даты:</p>
                         <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
-                        {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} status={status.title} /></div>}
+                        {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} status={status} /></div>}
                     </div>
                     {rentalObject && rentalObject.price ?
                         <div className={style.priceBlock}>

@@ -70,7 +70,6 @@ export const IntlTelInput: FC<InputProps> = ({
 
     useEffect(() => {
         const input: any = document.querySelector(`#${id}`);
-        console.log(id)
         const inputParent = input.parentNode;
         const iti = intlTelInput(input, {
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/utils.js",

@@ -48,7 +48,8 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
             <div
                 className={classNames(style.customDatePickDiv, {
                     [style["customDatePickDiv-selected"]]: selectedDate,
-                    [style["customDatePickDiv-focused"]]: isCalendarOpen
+                    [style["customDatePickDiv-focused"]]: isCalendarOpen,
+                    [style["customDatePickDiv-birthday"]]: type === "birthday",
                 })}
                 onMouseDown={handleDivClick}
             >
