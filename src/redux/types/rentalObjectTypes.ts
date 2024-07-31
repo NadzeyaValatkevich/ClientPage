@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { ResponseData } from './@types'
+import { RentalObjectStatuses } from '../../common/enums/enums'
 
 export type RentalObjectsTypes =
   | 'Домик'
@@ -9,19 +10,14 @@ export type RentalObjectsTypes =
   | 'Место под палатку'
   | 'Стояночное место автодома'
 
-export type RentalObjectStatuses =
-  | 'Доступен к бронированию'
-  | 'Закрыт к бронированию'
-  | 'Техобслуживание'
+// export type RentalObjectStatuses =
+//   | 'Доступен к бронированию'
+//   | 'Закрыт к бронированию'
+//   | 'Техобслуживание'
 
 export type RentalObjectType = {
   id: number
   title: RentalObjectsTypes
-}
-
-export type RentalObjectStatus = {
-  id: number
-  title: RentalObjectStatuses
 }
 
 export type FeatureItem = {
@@ -57,7 +53,7 @@ export type RentalObject = {
   name: string
   description: string
   object_type: RentalObjectType
-  status: RentalObjectStatus
+  status: RentalObjectStatuses
   max_places: number
   images: ImageItem[]
   features: FeatureItem[]

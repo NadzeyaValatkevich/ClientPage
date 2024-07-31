@@ -8,12 +8,12 @@ import { RentalObjectStatuses } from "../../common/enums/enums";
 type CalendarPropsType = {
     reservations: ReservationItem[],
     // setDatePickerVisible: (value: boolean) => void,
-    status: string
+    status: RentalObjectStatuses
 };
 
 export const Calendar = ({ reservations, status }: CalendarPropsType) => {
 
-    const startDay = new Date();
+    // const startDay = new Date();
 
     const renderCustomHeader = ({ date, decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled }: ReactDatePickerCustomHeaderProps) => {
         const monthName = date.toLocaleDateString("ru", { month: "long" });
@@ -42,7 +42,7 @@ export const Calendar = ({ reservations, status }: CalendarPropsType) => {
 
     return (
         <DatePicker
-            selected={startDay}
+            // selected={startDay}
             locale={"ru"}
             minDate={new Date()}
             maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}

@@ -254,14 +254,11 @@
         border-radius: 16px;
         box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
         position: relative;
-        top: 30px;
+        // top: 30px;
+        bottom: 320px;
         left: -35%;
         background-color: $text-white;
         z-index: 1;
-      }
-
-      .datePickerDiv :global(.react-datepicker__day--highlighted) {
-        background-color: $primary;
       }
 
       .datePickerDiv :global(.react-datepicker) {
@@ -271,6 +268,15 @@
 
       .datePickerDiv :global(.react-datepicker__month) {
         pointer-events: none;
+      }
+
+      .datePickerDiv :global(.react-datepicker__day--keyboard-selected) {
+        background-color: transparent;
+        // color: inherit;
+      }
+
+      .datePickerDiv :global(.react-datepicker__day--highlighted) {
+        background-color: $primary;
       }
     }
     .priceBlock {
