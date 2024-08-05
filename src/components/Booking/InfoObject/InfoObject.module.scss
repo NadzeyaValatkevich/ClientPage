@@ -236,7 +236,10 @@
       }
 
       &--input {
-        width: 58px;
+        width: auto;
+        min-width: 58px;
+        max-width: 100px;
+        box-sizing: content-box;
         height: 37px;
         border-radius: 4px;
         border: 0.25px solid $color-6;
