@@ -121,6 +121,14 @@
   //   top: 97px;
   // }
 
+  &--container {
+    position: absolute !important;
+    height: 300px;
+    top: 97px !important;
+    left: 0px !important;
+    background-color: inherit !important;
+  }
+
   &--fullscreen-popup {
     position: absolute !important;
     height: 300px;
