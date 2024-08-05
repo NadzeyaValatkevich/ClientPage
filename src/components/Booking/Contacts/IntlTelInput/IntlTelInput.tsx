@@ -164,6 +164,8 @@ export const IntlTelInput: FC<InputProps> = ({
                 onBlur={onBlur}
                 disabled={disabled}
                 onKeyDown={onKeyDown}
+                autoComplete="off"
+                autoCorrect="off"
             />
             {/* </div> */}
             {errText && <p className="intlTelInput__errText">{errText}</p>}

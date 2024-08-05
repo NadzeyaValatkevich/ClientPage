@@ -98,7 +98,7 @@
 
   .houseBlockRight {
     width: 100%;
-    max-width: 640px;
+    max-width: 700px;
     height: 100%;
     @include flex(column, space-between, flex-start, nowrap);
     gap: 30px;
@@ -167,6 +167,7 @@
     }
 
     .featuresBlock {
+      width: 100%;
       @include media-query(sm) {
         margin-bottom: 30px;
       }
@@ -221,7 +222,7 @@
             @include typography(400, 18px, 24px, $text-primary);
             font-family: 'Commissioner', sans-serif;
 
-            @include media-query(sm) {
+            @media (max-width: 410px) {
               font-size: 14px;
             }
           }
@@ -256,14 +257,27 @@
         position: relative;
         // top: 30px;
         bottom: 320px;
-        left: -35%;
+        // left: -35%;
+        left: -60%;
         background-color: $text-white;
         z-index: 1;
+
+        @media (max-width: 1150px) {
+          left: -100%;
+        }
+
+        @include media-query(lg) {
+          bottom: 310px;
+        }
       }
 
       .datePickerDiv :global(.react-datepicker) {
         position: absolute;
-        left: -130px;
+        // left: -130px;
+
+        // @media (max-width: 1050px) {
+        //   left: -200px;
+        // }
       }
 
       .datePickerDiv :global(.react-datepicker__month) {
@@ -319,13 +333,14 @@
 .houseBlockTitle {
   @include h3;
   font-size: clamp(20px, 1.25vw + 13px, 30px);
+  line-height: normal;
 
   @media (max-width: 1671px) {
     margin-bottom: 20px;
   }
 
   @include media-query(sm) {
-    line-height: 24.38px;
+    // line-height: 24.38px;
   }
 }
 
