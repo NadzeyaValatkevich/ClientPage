@@ -24,6 +24,11 @@
     top: 30px;
   }
 
+  @media (max-width: 410px) {
+    top: 20px;
+    right: 5px;
+  }
+
   @include media-query(sm) {
     top: 20px;
     right: 6px;

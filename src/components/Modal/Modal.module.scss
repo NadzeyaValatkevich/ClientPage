@@ -50,7 +50,7 @@
       padding: 30px 30px;
     }
 
-    @include media-query(sm) {
+    @media (max-width: 410px) {
       padding: 20px 6px 30px 8px;
     }
   }

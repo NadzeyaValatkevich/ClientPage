@@ -6,7 +6,7 @@
   height: 700px;
   position: relative;
 
-  @media (max-width: 1490px) {
+  @include media-query(lg) {
     height: clamp(150px, 46.54vw, 660px);
   }
 

@@ -139,7 +139,7 @@
     }
     .houseBlock-right {
       width: 100%;
-      max-width: 626px;
+      max-width: 680px;
       min-width: 0;
       height: 100%;
       padding-bottom: 15px;
@@ -150,7 +150,7 @@
         max-height: 150px;
         display: -webkit-box;
         overflow: hidden;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         margin-bottom: 20px;
 
@@ -172,6 +172,7 @@
       .places {
         width: 100%;
         @include flex(row, space-between, flex-start, nowrap);
+        gap: 10px;
 
         @media (max-width: 1200px) {
           margin-bottom: 30px;
@@ -245,6 +246,7 @@
       }
 
       .featuresBlock {
+        width: 100%;
         // margin-bottom: 60px;
 
         @media (max-width: 1200px) {
@@ -270,7 +272,7 @@
           grid-template-columns: 1fr 1fr 1fr;
           grid-template-rows: 1fr 1fr;
           row-gap: 20px;
-          column-gap: 6.4%;
+          column-gap: 10px;
 
           @media (max-width: 1200px) {
             grid-template-columns: 1fr 1fr;
