@@ -56,15 +56,20 @@ export const IntlTelInput: FC<InputProps> = ({
     const { register } = useFormContext();
 
     const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
-        const phoneNumber = e.target.value.replace(/\D/g, "")
+        const phoneNumber = e.target.value.replace(/\D/g, "");
+        const cursorPosition = e.target.selectionStart;
         onChange({
             ...value,
             phone_number: phoneNumber,
-        });
+        })
+        // };
 
         if (intlTel) {
             // setValue("phone", phoneNumber, { shouldValidate: true })
             intlTel.setNumber(phoneNumber);
+            setTimeout(() => {
+                e.target.setSelectionRange(cursorPosition, cursorPosition);
+            }, 0);
         }
     };
 
@@ -102,6 +107,7 @@ export const IntlTelInput: FC<InputProps> = ({
         };
 
         input.addEventListener("countrychange", countryChangeHandler);
+        // setIsValidate(iti.isValidNumber())
 
         return () => {
             input.removeEventListener("countrychange", countryChangeHandler);
@@ -117,11 +123,14 @@ export const IntlTelInput: FC<InputProps> = ({
     useEffect(() => {
         if (intlTel) {
             setIsValidate(intlTel.isValidNumber());
+            // setValue("phone", value.phone_number, { shouldValidate: true });
+            // trigger("phone");
         }
     }, [intlTel, value.phone_number]);
 
     useEffect(() => {
-        if (preloadedData && intlTel) {
+        const isValidCountry = countryCodeList.find(item => item === preloadedData?.country_code)
+        if (preloadedData && intlTel && isValidCountry) {
             intlTel.setCountry(preloadedData.country_code)
             onChange(preloadedData)
         }
