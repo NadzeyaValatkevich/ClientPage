@@ -138,20 +138,25 @@
       }
     }
     .houseBlock-right {
-      width: 100%;
       max-width: 680px;
+      width: 100%;
       min-width: 0;
       height: 100%;
       padding-bottom: 15px;
       @include flex(column, center, flex-start, nowrap);
 
       .description {
+        max-width: 680px;
+        width: 100%;
+        // width: auto;
         @include typography(400, 20px, 25px, $text-primary);
         max-height: 150px;
         display: -webkit-box;
         overflow: hidden;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+        white-space: normal;
+        word-wrap: break-word;
         margin-bottom: 20px;
 
         @include media-query(md) {

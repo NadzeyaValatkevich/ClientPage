@@ -22,11 +22,15 @@
 
     &-upItem {
       width: 100%;
-      @include flex(row, flex-start, flex-start, wrap);
+      @include flex(row, space-between, flex-start, wrap);
       gap: 20px;
 
-      @include media-query(md) {
-        gap: 16px;
+      @media (max-width: 1290px) {
+        justify-content: flex-start;
+      }
+
+      @media (max-width: 950px) {
+        justify-content: space-between;
       }
     }
 

@@ -51,9 +51,9 @@ export const CommonHouseCard = ({ children, house, type }: CommonHouseCardPropsT
                     </Carousel>
                 </div>
                 <div className={style["houseBlock-right"]}>
-                    <p className={style.description}>
+                    <div className={style.description}>
                         {house.description}
-                    </p>
+                    </div>
                     <div className={type === "withPrice" ? `${style.places} ${style.placesWithPrice} ` : `${style.places} ${style.placesWithoutPrice}`}>
                         <div className={style.rooms}>
                             <p>Комнаты:</p>

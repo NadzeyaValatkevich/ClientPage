@@ -26,11 +26,11 @@ export const Modal = ({ active, onClose, children, type }: ModalPropsType) => {
             document.body.classList.add('modal-open');
         } else {
             document.body.classList.remove('modal-open');
-            document.body.style.paddingRight = 'none';
+            document.body.style.paddingRight = '';
         }
         return () => {
             document.body.classList.remove('modal-open');
-            document.body.style.paddingRight = 'none';
+            document.body.style.paddingRight = '';
         };
     }, [active]);
 
