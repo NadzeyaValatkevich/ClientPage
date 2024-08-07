@@ -368,6 +368,9 @@
   }
 
   .description {
+    max-width: 100%;
+    white-space: normal;
+    word-wrap: break-word;
     @include typography(400, 20px, 28px, $text-primary);
 
     @include media-query(lg) {
