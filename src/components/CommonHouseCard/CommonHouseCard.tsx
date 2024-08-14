@@ -1,10 +1,11 @@
 import { Carousel } from "../Carousel";
 import style from "./CommonHouseCard.module.scss";
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { ImageItem, RentalObject, TransformFeatureItem } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
 import { NextArrow, PrevArrow } from "../CustomArrows/CustomArrows";
 import { getCountFeatures } from "../../utils/functions/getCountFeatures"
+import { handleImageLoad } from "../../utils/functions/handleImageLoad";
 
 type CommonHouseCardPropsType = {
     children?: ReactNode,
@@ -13,6 +14,8 @@ type CommonHouseCardPropsType = {
 };
 
 export const CommonHouseCard = ({ children, house, type }: CommonHouseCardPropsType) => {
+
+    const [imageClass, setImageClass] = useState<string[]>([]);
 
     const features = getCountFeatures(house.features).slice(0, 6);
 
@@ -44,7 +47,11 @@ export const CommonHouseCard = ({ children, house, type }: CommonHouseCardPropsT
                         {house.images.map((el: ImageItem) => {
                             return (
                                 <div key={el.id} className={style.imageBlock}>
-                                    <img className={style.image} src={el.image} alt={"house image"} />
+                                    <img
+                                        className={`${style.image} ${imageClass[el.id] || ''}`}
+                                        src={el.image}
+                                        alt={"house image"}
+                                        onLoad={(event) => handleImageLoad(el.id, event, setImageClass, style)} />
                                 </div>
                             )
                         })}
@@ -70,7 +77,7 @@ export const CommonHouseCard = ({ children, house, type }: CommonHouseCardPropsT
                             {features.map((el: TransformFeatureItem | null, index: number) => {
                                 return (
                                     <div key={index} className={style.featuresItem}>
-                                        <>{el?.logo}</>
+                                        <div className={style["featuresItem_icon"]}>{el?.logo}</div>
                                         <p className={style["featuresItem_title"]}>{el?.title}</p>
                                     </div>
                                 )
