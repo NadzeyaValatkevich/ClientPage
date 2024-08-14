@@ -15,7 +15,12 @@ export const getCountFeatures = (features: FeatureItem[]) => {
         return {
           name: featuresItem.name,
           logo: featureOption.label,
-          title: featureOption.title,
+          title:
+            featuresItem.logo === 'star' || featuresItem.logo === 'diamond'
+              ? featuresItem.name &&
+                featuresItem.name[0]?.toUpperCase() + featuresItem.name.slice(1)
+              : // featuresItem.name
+                featureOption.title,
         }
       }
 

@@ -1,4 +1,4 @@
-import { BalconyIcon, DishesIcon, DishwasherIcon, FlatironIcon, FridgeIcon, FurnitureForInfantsIcon, HairdryerIcon, KitchenIcon, MicrowaveIcon, NoSmokingIcon, ParkingIcon, PatioIcon, PierIcon, PlateIcon, ShowerIcon, TVIcon, TerraceIcon, WashingMachineIcon, WifiIcon, СonditionerIcon } from "../assets/features_icons";
+import { BalconyIcon, DiamondIcon, DishesIcon, DishwasherIcon, FlatironIcon, FridgeIcon, FurnitureForInfantsIcon, HairdryerIcon, KitchenIcon, MicrowaveIcon, NoSmokingIcon, ParkingIcon, PatioIcon, PierIcon, PlateIcon, ShowerIcon, StarIcon, TVIcon, TerraceIcon, WashingMachineIcon, WifiIcon, СonditionerIcon } from "../assets/features_icons";
 import { GrillIcon } from "../assets/features_icons/GrillIcon";
 
 export const FIRST_NAME_REG = /^[A-Za-z]+(-[A-Za-z]+)?$|^[А-ЯЁа-яё]+(-[А-ЯЁа-яё]+)?$/;
@@ -92,5 +92,7 @@ export const FEATURES_OPTIONS = [
     { value: "terrace", label: <TerraceIcon />, title: "Терраса" },
     { value: "tv", label: <TVIcon />, title: "Телевизор" },
     { value: "washingMachine", label: <WashingMachineIcon />, title: "Cтиральная машина" },
+    { value: "star", label: <StarIcon />, title: "" },
+    { value: "diamond", label: <DiamondIcon />, title: "" },
 ];
 

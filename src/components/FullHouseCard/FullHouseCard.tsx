@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 import { getCountFeatures } from "../../utils/functions/getCountFeatures";
 import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
+import { handleImageLoad } from "../../utils/functions/handleImageLoad";
 
 export type FullHouseCardPropsType = {
     rentalObject: RentalObject,
@@ -17,6 +18,7 @@ export type FullHouseCardPropsType = {
 export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
 
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+    const [imageClass, setImageClass] = useState<string[]>([]);
 
     const { name, images, description, rooms, max_places, reservations, status, features } = rentalObject;
 
@@ -83,7 +85,12 @@ export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
                         {images.map((el: ImageItem) => {
                             return (
                                 <div key={el.id} className={style.imageBlock}>
-                                    <img className={style.image} src={el.image} alt={"housePhoto"} />
+                                    <img
+                                        className={`${style.image} ${imageClass[el.id] || ''}`}
+                                        src={el.image}
+                                        alt={"housePhoto"}
+                                        onLoad={(event) => handleImageLoad(el.id, event, setImageClass, style)}
+                                    />
                                 </div>
                             )
                         })}

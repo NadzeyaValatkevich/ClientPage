@@ -52,7 +52,7 @@ export const Main = () => {
 
     if (error || errorRental) {
         return <div style={{
-            width: "100vw",
+            width: "100%",
             marginBottom: "120px",
             display: "flex",
             alignItems: "center",
