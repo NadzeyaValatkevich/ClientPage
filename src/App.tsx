@@ -4,7 +4,7 @@ import { Layout } from './components/Layout/Layout'
 import { Main } from './pages/Main';
 import { FilteredRentalObjects } from './pages/FilteredRentalObjects';
 import { useRef } from 'react';
-
+import { NotFound } from './pages/NotFound';
 
 function App() {
   const filteredObjectsRef = useRef<HTMLDivElement>(null);
@@ -21,6 +21,7 @@ function App() {
         <Route index element={<Main />} />
         <Route path="filteredRental_objects" element={<FilteredRentalObjects ref={filteredObjectsRef} />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes >
   )
 }
