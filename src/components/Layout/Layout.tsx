@@ -7,10 +7,12 @@ import { fetchMainObject } from "../../redux/thunks/mainObjectThunk";
 import { FilteredBlock } from "../FilteredBlock";
 import { RequestStatusType } from "../../common/enums/enums";
 import { BeatLoader } from "react-spinners";
+import { NotFound } from "../../pages/NotFound";
 
 export const Layout = ({ scrollToFilteredObjects }: any) => {
     const dispatch = useAppDispatch();
     const { status } = useAppSelector(state => state.mainObject);
+    const { error } = useAppSelector(state => state.mainObject);
 
     const { id } = useParams();
 
@@ -26,10 +28,16 @@ export const Layout = ({ scrollToFilteredObjects }: any) => {
 
     return (
         <>
-            <Header />
-            <FilteredBlock scrollToFilteredObjects={scrollToFilteredObjects} />
-            <Outlet />
-            <Footer />
+            {(error) ?
+                <NotFound />
+                :
+                <>
+                    <Header />
+                    <FilteredBlock scrollToFilteredObjects={scrollToFilteredObjects} />
+                    <Outlet />
+                    <Footer />
+                </>
+            }
         </>
     )
 }
