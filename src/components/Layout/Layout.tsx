@@ -7,7 +7,9 @@ import { fetchMainObject } from "../../redux/thunks/mainObjectThunk";
 import { FilteredBlock } from "../FilteredBlock";
 import { RequestStatusType } from "../../common/enums/enums";
 import { BeatLoader } from "react-spinners";
-import { NotFound } from "../../pages/NotFound";
+import { NETWORK_ERROR, NOTFOUND_ERROR } from "../../utils/constants";
+import { ErrorPage } from "../../pages/ErrorPage";
+import { SmileIcon } from "../../assets/icons/Smile";
 
 export const Layout = ({ scrollToFilteredObjects }: any) => {
     const dispatch = useAppDispatch();
@@ -26,10 +28,19 @@ export const Layout = ({ scrollToFilteredObjects }: any) => {
         </div>
     }
 
+    if (error && error === NETWORK_ERROR) {
+        return (
+            <ErrorPage text={NETWORK_ERROR} />
+        )
+        // <div style={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        //     {NETWORK_ERROR}
+        // </div>
+    }
+
     return (
         <>
-            {(error) ?
-                <NotFound />
+            {(error && error === NOTFOUND_ERROR) ?
+                <ErrorPage text={NOTFOUND_ERROR} image={<SmileIcon />} />
                 :
                 <>
                     <Header />

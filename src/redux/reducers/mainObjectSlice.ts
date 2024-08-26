@@ -34,6 +34,8 @@ const mainObject: MainObjectType = {
     { countryCode: 'lt', countryLabel: 'Литовская Республика' },
     { countryCode: 'pl', countryLabel: 'Республика Польша' },
   ],
+  contacts: null,
+  phone: null,
 }
 
 const initialState: initialStateType = {

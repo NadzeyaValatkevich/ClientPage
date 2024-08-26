@@ -57,7 +57,7 @@
             margin-bottom: 20px;
           }
 
-          img {
+          svg {
             @include media-query(md) {
               width: 44px;
               height: 44px;

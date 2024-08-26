@@ -1,5 +1,11 @@
 import { BalconyIcon, DiamondIcon, DishesIcon, DishwasherIcon, FlatironIcon, FridgeIcon, FurnitureForInfantsIcon, HairdryerIcon, KitchenIcon, MicrowaveIcon, NoSmokingIcon, ParkingIcon, PatioIcon, PierIcon, PlateIcon, ShowerIcon, StarIcon, TVIcon, TerraceIcon, WashingMachineIcon, WifiIcon, СonditionerIcon } from "../assets/features_icons";
 import { GrillIcon } from "../assets/features_icons/GrillIcon";
+import { FacebookIcon } from "../assets/iconsSocial/FacebookIcon";
+import { InstagramIcon } from "../assets/iconsSocial/InstagramIcon";
+import { TelegramIcon } from "../assets/iconsSocial/TelegramIcon";
+import { VKIcon } from "../assets/iconsSocial/VKIcon";
+import { ViberIcon } from "../assets/iconsSocial/ViberIcon";
+import { SocialNetworkType } from "../common/enums/enums";
 
 export const FIRST_NAME_REG = /^[A-Za-z]+(-[A-Za-z]+)?$|^[А-ЯЁа-яё]+(-[А-ЯЁа-яё]+)?$/;
 export const SECOND_NAME_REG = /^([A-Za-z]+)$|^([А-ЯЁа-яё]+)$/;
@@ -31,6 +37,9 @@ export const TELEPHONE_ERROR = "Не соответствует формату �
 
 export const EMAIL_ERROR = "Не соответствует формату электронной почты";
 export const ANIMALS_ERROR = "Максимальное число символов - 100";
+
+export const NETWORK_ERROR = 'Ошибка сети. Проверьте подключение к Интернету и повторите попытку';
+export const NOTFOUND_ERROR = 'Страница по этому адресу недоступна';
 
 
 // REQUIREMENTS
@@ -94,5 +103,13 @@ export const FEATURES_OPTIONS = [
     { value: "washingMachine", label: <WashingMachineIcon />, title: "Cтиральная машина" },
     { value: "star", label: <StarIcon />, title: "" },
     { value: "diamond", label: <DiamondIcon />, title: "" },
+];
+
+export const SOCIAL_OPTIONS = [
+    { type: SocialNetworkType.FACEBOOK, icon: <FacebookIcon /> },
+    { type: SocialNetworkType.INSTAGRAM, icon: <InstagramIcon /> },
+    { type: SocialNetworkType.TELEGRAM, icon: <TelegramIcon /> },
+    { type: SocialNetworkType.VIBER, icon: <ViberIcon /> },
+    { type: SocialNetworkType.ВКОНТАКТЕ, icon: <VKIcon /> },
 ];
 

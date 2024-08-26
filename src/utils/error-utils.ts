@@ -1,5 +1,6 @@
 import { RequestStatusType } from '../common/enums/enums'
 import { appActions } from '../redux/commonActions/appActions'
+import { NETWORK_ERROR, NOTFOUND_ERROR } from './constants'
 
 type ThunkAPIType = {
   dispatch: (action: any) => any
@@ -16,12 +17,11 @@ export const handleAsyncServerNetworkError = (
   if (error.response) {
     if (error.response.status >= 500) {
       errorMessage = 'Ошибка сервера. Пожалуйста, повторите попытку позже'
-    } else if (error.response.status == 404) {
-      errorMessage = 'Страница не найдена'
+    } else if (error.response.status === 404) {
+      errorMessage = NOTFOUND_ERROR
     }
   } else if (error.request) {
-    errorMessage =
-      'Ошибка сети. Проверьте подключение к Интернету и повторите попытку'
+    errorMessage = NETWORK_ERROR
   } else {
     errorMessage = error.message ? error.message : errorMessage
   }
