@@ -19,3 +19,11 @@ export enum RequestStatusType {
   succeeded,
   failed,
 }
+
+export enum SocialNetworkType {
+  ВКОНТАКТЕ = 'ВКонтакте',
+  VIBER = 'Viber',
+  TELEGRAM = 'Telegram',
+  INSTAGRAM = 'Instagram',
+  FACEBOOK = 'Facebook',
+}

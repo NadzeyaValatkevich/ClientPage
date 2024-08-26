@@ -1,81 +1,85 @@
 import style from "./Footer.module.scss";
 import styleContainer from "../../common/styles/Container.module.scss";
-import { Logo } from "../Logo";
-import facebook from "../../assets/iconsSocial/f.svg";
-import instagram from "../../assets/iconsSocial/insta.svg";
-import telegram from "../../assets/iconsSocial/tg.svg";
-import viber from "../../assets/iconsSocial/viber.svg";
-import vk from "../../assets/iconsSocial/vk.svg";
 import { YMaps, Map, Placemark, GeolocationControl, FullscreenControl } from "react-yandex-maps";
 import { useAppSelector } from "../../utils/hooks/hooks";
 import { getCountCountry } from "../../utils/functions/getCountCountry";
+import { SocialNetworkItemType } from "../../redux/types/mainObjectTypes";
+import { SOCIAL_OPTIONS } from "../../utils/constants";
+import { getPhone } from "../../utils/functions/getPhone";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Footer = () => {
-    const { country, full_address } = useAppSelector(state => state.mainObject.data);
+    const { country, full_address, contacts } = useAppSelector(state => state.mainObject.data);
     const region = full_address?.region;
     const locality = full_address?.locality;
     const address = full_address?.address;
+
+    const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
+
+    useEffect(() => {
+        if (address) {
+            const fullAddress = `${country ? getCountCountry(country) : ""}, ${region ? region : ""}, ${locality ? locality : ""}, ${address}`;
+            // const encodedAddress = encodeURIComponent(fullAddress);
+            axios.get(`https://nominatim.openstreetmap.org/search`, {
+                params: {
+                    q: fullAddress,
+                    format: 'json',
+                    limit: 1
+                }
+            }).then(response => {
+                if (response.data.length > 0) {
+                    const { lat, lon } = response.data[0];
+                    setCoordinates([parseFloat(lat), parseFloat(lon)]);
+                }
+            }).catch(error => {
+                console.error("Error fetching coordinates:", error);
+            });
+        }
+    }, [country, region, locality, address]);
 
     return (
         <div className={style.footer}>
             <div className={`${styleContainer.container} ${style.footerContainer}`}>
                 <div className={style.footerInfo}>
                     <div className={style["footerInfo-left"]}>
-                        <div className={style.footerLogo}>
+                        {/* <div className={style.footerLogo}>
                             <Logo />
-                        </div>
+                        </div> */}
                         <div className={style.social}>
-                            <a
-                                href={"https://www.facebook.com/"}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img alt={"facebook"} src={facebook} />
-                            </a>
-                            <a
-                                href={"https://www.instagram.com/"}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img alt={"instagram"} src={instagram} />
-                            </a>
-                            <a
-                                href={"https://web.telegram.org/"}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img alt={"telegram"} src={telegram} />
-                            </a>
-                            <a
-                                href={"https://www.viber.com/"}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img alt={"viber"} src={viber} />
-                            </a>
-                            <a
-                                href={"https://vk.com/"}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img alt={"vk"} src={vk} />
-                            </a>
+                            {contacts?.social_networks.map((social_network: SocialNetworkItemType) => {
+                                const socialOption = SOCIAL_OPTIONS.find((option: any) => {
+                                    return option.type === social_network.social_network_type
+                                })
+
+                                if (socialOption) {
+                                    return (
+                                        <a
+                                            href={social_network.account}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            {socialOption.icon}
+
+                                        </a>)
+                                }
+                            })}
                         </div>
                         <p className={style.address}>
                             {`${country ? getCountCountry(country) : "страна"}, ${region ? region : "регион"}, ${locality ? locality : "населенный пункт"}, ${address ? address : "адрес"}`}
                         </p>
                         <div className={style.phones}>
-                            <p>+375 (29) 853-25-10</p>
-                            <p>+375 (29) 853-25-10</p>
+                            <p>{contacts && getPhone(contacts.phone)}</p>
+                            {/* <p>+375 (29) 853-25-10</p> */}
                         </div>
-                        <div className={style.email}>info@gmail.com</div>
+                        <div className={style.email}>{contacts?.email}</div>
 
                     </div>
                     <div className={style["footerInfo-right"]}>
                         <YMaps>
                             <Map
                                 defaultState={{
-                                    center: [53.913699, 27.612626],
+                                    center: coordinates || [53.913699, 27.612626],
                                     zoom: 14,
                                     controls: [],
                                 }}
@@ -83,7 +87,7 @@ export const Footer = () => {
                             >
                                 <GeolocationControl options={{ float: "right", borderRadius: '16px' }} />
                                 <FullscreenControl />
-                                <Placemark geometry={[53.913699, 27.612626]} />
+                                {coordinates && <Placemark geometry={[53.913699, 27.612626]} />}
                             </Map>
                         </YMaps>
                     </div>

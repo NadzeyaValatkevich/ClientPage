@@ -4,7 +4,9 @@ import { Layout } from './components/Layout/Layout'
 import { Main } from './pages/Main';
 import { FilteredRentalObjects } from './pages/FilteredRentalObjects';
 import { useRef } from 'react';
-import { NotFound } from './pages/NotFound';
+import { ErrorPage } from './pages/ErrorPage';
+import { NOTFOUND_ERROR } from './utils/constants';
+import { SmileIcon } from './assets/icons/Smile';
 
 function App() {
   const filteredObjectsRef = useRef<HTMLDivElement>(null);
@@ -21,7 +23,7 @@ function App() {
         <Route index element={<Main />} />
         <Route path="filteredRental_objects" element={<FilteredRentalObjects ref={filteredObjectsRef} />} />
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<ErrorPage text={NOTFOUND_ERROR} image={<SmileIcon />} />} />
     </Routes >
   )
 }
