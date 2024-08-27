@@ -106,6 +106,8 @@ export const InputBox = (props: InputBoxPropsType) => {
                 onChange={handleOnChange}
                 onBlur={onBlur}
                 onKeyDown={handleOnKeyDown}
+                autoComplete={name}
+            // autoComplete="off"
             />
             {error && <p className={style.error}>{error}</p>}
         </div >

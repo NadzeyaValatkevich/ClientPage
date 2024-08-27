@@ -63,6 +63,8 @@ export const PersonalInfo = () => {
 
     const handleOnBlur = (fieldName: string, value: string) => {
 
+        // methods.trigger(fieldName)
+
         if (!valuesTouched[fieldName]) {
             setValuesTouched(prevState => ({
                 ...prevState,
