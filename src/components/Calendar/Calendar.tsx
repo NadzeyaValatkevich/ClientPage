@@ -38,7 +38,9 @@ export const Calendar = ({ reservations, status }: CalendarPropsType) => {
         );
     };
 
-    const allDates = status === RentalObjectStatuses.SERVICE || status === RentalObjectStatuses.CLOSE ? createYearAheadDates() : [];
+    // const allDates = status === RentalObjectStatuses.SERVICE || status === RentalObjectStatuses.CLOSE ? createYearAheadDates() : [];
+    const allDates = status === RentalObjectStatuses.SERVICE || status === RentalObjectStatuses.CLOSE ? createYearAheadDates() : defineReservationsDates(reservations);
+
 
     return (
         <DatePicker
@@ -47,7 +49,8 @@ export const Calendar = ({ reservations, status }: CalendarPropsType) => {
             minDate={new Date()}
             maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
             onChange={() => { }}
-            highlightDates={status === RentalObjectStatuses.CLOSE || RentalObjectStatuses.SERVICE ? allDates : defineReservationsDates(reservations)}
+            // highlightDates={(status === RentalObjectStatuses.CLOSE || RentalObjectStatuses.SERVICE) ? allDates : defineReservationsDates(reservations)}
+            highlightDates={allDates}
             className={styles.datePickerDiv}
             renderCustomHeader={renderCustomHeader}
             excludeDates={status === RentalObjectStatuses.CLOSE || status === RentalObjectStatuses.SERVICE ? allDates : []}

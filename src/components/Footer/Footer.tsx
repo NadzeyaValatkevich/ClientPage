@@ -19,13 +19,16 @@ export const Footer = () => {
 
     useEffect(() => {
         if (address) {
-            const fullAddress = `${country ? getCountCountry(country) : ""}, ${region ? region : ""}, ${locality ? locality : ""}, ${address}`;
+            // const fullAddress = `${country ? getCountCountry(country) : ""}, ${region ? region : ""}, ${locality ? locality : ""}, ${address}`;
             // const encodedAddress = encodeURIComponent(fullAddress);
+
+            const fullAddress = `18, улица Победы, Ганцевичи, Брестская область, Республика Беларусь`;
             axios.get(`https://nominatim.openstreetmap.org/search`, {
                 params: {
                     q: fullAddress,
                     format: 'json',
-                    limit: 1
+                    limit: 1,
+                    addressdetails: 1
                 }
             }).then(response => {
                 if (response.data.length > 0) {
@@ -47,7 +50,7 @@ export const Footer = () => {
                             <Logo />
                         </div> */}
                         <div className={style.social}>
-                            {contacts?.social_networks.map((social_network: SocialNetworkItemType) => {
+                            {contacts?.social_networks.map((social_network: SocialNetworkItemType, index: number) => {
                                 const socialOption = SOCIAL_OPTIONS.find((option: any) => {
                                     return option.type === social_network.social_network_type
                                 })
@@ -55,6 +58,7 @@ export const Footer = () => {
                                 if (socialOption) {
                                     return (
                                         <a
+                                            key={index}
                                             href={social_network.account}
                                             target="_blank"
                                             rel="noreferrer"
@@ -87,7 +91,8 @@ export const Footer = () => {
                             >
                                 <GeolocationControl options={{ float: "right", borderRadius: '16px' }} />
                                 <FullscreenControl />
-                                {coordinates && <Placemark geometry={[53.913699, 27.612626]} />}
+                                {coordinates && <Placemark geometry={coordinates} />}
+                                {/* {coordinates && <Placemark geometry={[52.7581445, 26.4245277]} />} */}
                             </Map>
                         </YMaps>
                     </div>

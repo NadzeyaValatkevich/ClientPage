@@ -17,11 +17,9 @@ import { RequestStatusType } from "../../common/enums/enums";
 export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     const [check_in_date, setCheckInDate] = useState<Date | null | undefined>(null);
     const [check_out_date, setCheckOutDate] = useState<Date | null | undefined>(null);
-    const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
+    // const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
     const [formattedValue, setFormattedValue] = useState("");
     const [dateError, setDateError] = useState<string | null>(null);
-
-    console.log(guests)
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -44,7 +42,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
             reset({});
             setCheckInDate(null);
             setCheckOutDate(null);
-            setGuests({ adults: 0, children: 0, childAges: [] });
+            // setGuests({ adults: 0, children: 0, childAges: [] });
             setFormattedValue("");
         }
     }, [id, location.pathname, reset]);
@@ -103,7 +101,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
                 if (queryParams.get('people_amount')) {
                     setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children));
                     setValue("guests", parsedGuestsData);
-                    setGuests(parsedGuestsData);
+                    // setGuests(parsedGuestsData);
                 }
 
             }
@@ -161,12 +159,7 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     };
 
     const handleGuestsChange = (newGuests: GuestsType) => {
-
-        setGuests((guests: GuestsType) => {
-            const updatedGuests = { ...guests, ...newGuests };
-            setValue("guests", updatedGuests);
-            return updatedGuests
-        });
+        setValue("guests", newGuests);
 
         clearErrors("guests");
 
