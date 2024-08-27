@@ -34,11 +34,10 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
 
     const LIMIT_OBJECTS = windowWidth <= 360 ? LIMIT_OBJECTS_MOBILE : LIMIT_OBJECTS_DESKTOP;
 
-
-    console.log(props)
-
     const [searchParams] = useSearchParams();
     const { id } = useParams();
+
+    console.log(props)
 
     const dispatch = useAppDispatch();
 
