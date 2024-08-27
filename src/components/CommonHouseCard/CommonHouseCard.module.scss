@@ -1,67 +1,349 @@
-@import "../../common/styles/sass/variables.scss";
-@import "../../common/styles/sass/mixins.scss";
+@import '../../common/styles/sass/variables.scss';
+@import '../../common/styles/sass/mixins.scss';
 
 .card {
-    width: 100%;
-    height: 686px;
-    border-radius: $radius-primary;
-    border: $border-primary;
-    background-color: $secondary;
-    padding: 60px 114px 70px 80px;
-    margin-bottom: 80px;
-    @include flex(column, flex-start, flex-start, no-wrap);
-    gap: 30px;
+  width: 100%;
+  border-radius: $radius-primary;
+  border: $border-primary;
+  background-color: $secondary;
+  padding: 40px 60px 60px;
+  margin-bottom: 80px;
+  @include flex(column, flex-start, flex-start, nowrap);
+  gap: 30px;
 
-    .cardTitle {
-        @include h2;
+  @include media-query(lg) {
+    margin-bottom: 60px;
+    padding: 30px 30px 40px;
+    gap: 20px;
+  }
+
+  @include media-query(md) {
+    margin-bottom: 45px;
+    padding: 30px;
+  }
+
+  @media (max-width: 571px) {
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 450px) {
+    padding: 20px 8px;
+    gap: 16px;
+  }
+
+  .cardTitle {
+    @include h2;
+
+    @include media-query(md) {
+      font-size: 28px;
+      line-height: 34.12px;
     }
 
-    .houseBlock {
+    @include media-query(sm) {
+      font-size: 20px;
+      line-height: 24.38px;
+    }
+  }
+
+  .houseBlock {
+    width: 100%;
+    @include flex(row, space-between, flex-start, nowrap);
+    gap: 60px;
+
+    @include media-query(lg) {
+      gap: 40px;
+    }
+
+    @include media-query(md) {
+      height: auto;
+      @include flex(column, flex-start, flex-start, nowrap);
+      gap: 36px;
+    }
+
+    @media (max-width: 320px) {
+      gap: 16px;
+    }
+
+    .houseBlock-left {
+      width: 100%;
+      max-width: 560px;
+      min-width: 0;
+      height: 100%;
+      cursor: pointer;
+
+      @include media-query(lg) {
         width: 100%;
-        height: 480px;
+        max-width: 467px;
+      }
+
+      @media (max-width: 1200px) {
+        width: 100%;
+        height: auto;
+        max-width: 467px;
+        aspect-ratio: 1;
+      }
+
+      @include media-query(md) {
+        margin: 0 auto;
+        width: 288px;
+        height: 240px;
+
+        @media (max-width: 400px) {
+          width: 100%;
+        }
+      }
+
+      .imageBlock {
+        max-width: 100%;
+        height: 467px;
+
+        @media (max-width: 1200px) {
+          width: 100%;
+          max-width: 467px;
+          height: auto;
+          aspect-ratio: 1;
+        }
+
+        @include media-query(md) {
+          height: 240px;
+        }
+
+        .image {
+          width: 100%;
+          height: 100%;
+        }
+        .cover {
+          object-fit: cover;
+        }
+        .contain {
+          object-fit: contain;
+        }
+      }
+
+      & :global(.slick-dots li button:before) {
+        font-size: 12px;
+
+        @include media-query(md) {
+          font-size: 9px;
+        }
+      }
+      & :global(.slick-list) {
+        margin: 0 -20px;
+
+        @media (max-width: 400px) {
+          margin: 0 -10px;
+        }
+        & :global(.slick-slide) {
+          padding: 0 20px;
+
+          @media (max-width: 400px) {
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+    .houseBlock-right {
+      max-width: 680px;
+      width: 100%;
+      min-width: 0;
+      height: 100%;
+      padding-bottom: 15px;
+      @include flex(column, center, flex-start, nowrap);
+
+      .description {
+        max-width: 680px;
+        width: 100%;
+        // width: auto;
+        @include typography(400, 20px, 25px, $text-primary);
+        max-height: 150px;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+        word-wrap: break-word;
+        margin-bottom: 20px;
+
+        @include media-query(md) {
+          font-size: 16px;
+          margin-bottom: 15px;
+        }
+
+        @media (max-width: 450px) {
+          -webkit-line-clamp: 3;
+        }
+
+        @include media-query(sm) {
+          font-size: 14px;
+          margin-bottom: 12px;
+        }
+      }
+
+      .places {
+        width: 100%;
         @include flex(row, space-between, flex-start, nowrap);
-        gap: 60px;
+        gap: 10px;
 
-        .houseBlock-left {
-            width: 100%;
-            max-width: 560px;
-            min-width: 0;
-            height: 100%;
+        @media (max-width: 1200px) {
+          margin-bottom: 30px;
+        }
 
-            .imageBlock {
-                width: 100%;
-                height: 460px;
-                
-                .image {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
+        @media (max-width: 1000px) {
+          @include flex(column, flex-start, flex-start, nowrap);
+        }
+
+        @include media-query(md) {
+          @include flex(row, space-between, flex-start, nowrap);
+        }
+
+        @media (max-width: 450px) {
+          @include flex(column, flex-start, flex-start, nowrap);
+          gap: 8px;
+        }
+
+        @include media-query(sm) {
+          margin-bottom: 16px;
+        }
+
+        .rooms {
+          @include flex(row, space-between, flex-start, nowrap);
+        }
+
+        .beds {
+          @include flex(row, space-between, flex-start, nowrap);
+        }
+
+        .rooms p:first-child,
+        .beds p:first-child {
+          @include typography(700, 18px, 25px, $text-primary);
+          margin-right: 20px;
+          font-family: 'Commissioner', sans-serif;
+
+          @include media-query(sm) {
+            font-size: 16px;
+            margin-right: 10px;
+          }
+        }
+
+        .rooms > p,
+        .beds > p {
+          @include typography(400, 18px, 24px, $text-primary);
+          font-family: 'Commissioner', sans-serif;
+
+          @include media-query(sm) {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .placesWithoutPrice {
+        margin-bottom: 40px;
+        @include media-query(sm) {
+          margin-bottom: 16px;
+        }
+      }
+
+      .placesWithPrice {
+        margin-bottom: 18px;
+      }
+
+      .featuresBlockWithPrice {
+        margin-bottom: 40px;
+      }
+
+      .featuresBlockWithoutPrice {
+        margin-bottom: 40px;
+      }
+
+      .featuresBlock {
+        width: 100%;
+        // margin-bottom: 60px;
+
+        @media (max-width: 1200px) {
+          margin-bottom: 40px;
+        }
+
+        @include media-query(sm) {
+          margin-bottom: 30px;
+        }
+
+        .featuresTitle {
+          @include typography(700, 18px, 25px, $text-primary);
+          margin-bottom: 20px;
+
+          @include media-query(sm) {
+            font-size: 16px;
+            margin-bottom: 12px;
+          }
+        }
+
+        .features {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          // grid-template-columns: auto auto auto;
+          // grid-template-rows: auto auto;
+          row-gap: 20px;
+          column-gap: 10px;
+
+          @media (max-width: 1330px) {
+            grid-template-columns: auto auto;
+            // grid-template-rows: 1fr 1fr 1fr;
+            row-gap: 15px;
+            column-gap: 15px;
+          }
+
+          @include media-query(md) {
+            grid-template-columns: 1fr 1fr 1fr;
+            // grid-template-rows: 1fr 1fr;
+          }
+
+          @media (max-width: 555px) {
+            grid-template-columns: 1fr 1fr;
+            // grid-template-rows: 1fr 1fr 1fr;
+            row-gap: 12px;
+            column-gap: 12px;
+          }
+
+          .featuresItem {
+            // max-width: 221px;
+            @include flex(row, flex-start, flex-start, nowrap);
+            gap: 10px;
+
+            @media (max-width: 555px) {
+              gap: 5px;
             }
 
-            & :global(.slick-dots li button:before) {
-                        font-size: 12px;
-                    }
-
-            // & :global(.slick-slider) {
-            
-                
-
-                // & :global(.slick-slider) {
-                    
-                    & :global(.slick-list) {
-                        margin: 0 -20px;
-                        // & :global(.slick-track) {
-
-                            & :global(.slick-slide) {
-                                padding: 0 20px;
-                            }
-                        // }
-                    }
-
-
-                // }
+            // &_title {
+            //   svg {
+            //     width: 100%;
+            //     height: 100%;
+            //   }
             // }
+
+            &_title {
+              max-width: 186px;
+              min-width: 0px;
+              width: 100%;
+              @include typography(400, 18px, 24px, $text-primary);
+              font-family: 'Commissioner', sans-serif;
+              display: block;
+              overflow: hidden;
+              -webkit-box-orient: vertical;
+              white-space: normal;
+              word-wrap: break-word;
+              word-break: break-word;
+
+              @include media-query(md) {
+                font-size: 16px;
+              }
+
+              @media (max-width: 370px) {
+                font-size: 14px;
+              }
+            }
+          }
         }
+      }
     }
+  }
 }

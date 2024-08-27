@@ -1,0 +1,180 @@
+@import '../../common/styles/sass/variables.scss';
+@import '../../common/styles/sass/mixins.scss';
+
+.filteredBlockWrapper {
+  width: 100%;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  // margin-bottom: 30px;
+
+  @include media-query(lg) {
+    min-height: 160px;
+    margin-bottom: 0px;
+  }
+
+  @media (max-width: 1251px) {
+    margin-bottom: 120px;
+  }
+
+  @media (max-width: 950px) {
+    margin-bottom: 180px;
+  }
+
+  @include media-query(md) {
+    margin-bottom: 140px;
+  }
+
+  @media (max-width: 571px) {
+    margin-bottom: 60px;
+    min-height: 451px;
+  }
+
+  @include media-query(sm) {
+    min-height: 360px;
+    margin-bottom: 20px;
+  }
+
+  .filteredBlockContainer {
+    height: 100%;
+    position: absolute;
+    top: -70%;
+    background-color: $secondary;
+    padding: 60px 114px;
+    border-radius: $radius-primary;
+    height: auto;
+
+    @media (max-width: 1600px) {
+      padding: 40px;
+    }
+
+    @media (max-width: 950px) {
+      top: -30%;
+    }
+
+    @include media-query(md) {
+      top: -50px;
+      padding: 30px 24px;
+    }
+
+    @include media-query(sm) {
+      top: -40px;
+      padding: 20px 8px;
+    }
+
+    .titleBlock {
+      margin-bottom: 20px;
+      @include typography(600, 20px, 24.38px, $text-primary);
+
+      @include media-query(lg) {
+        margin-bottom: 22px;
+      }
+
+      @include media-query(md) {
+        margin-bottom: 19px;
+        font-size: 18px;
+        line-height: 22px;
+      }
+
+      @include media-query(sm) {
+        margin-bottom: 16px;
+        @include typography(500, 16px, 19.5px, $text-primary);
+      }
+    }
+
+    .filteredBlock {
+      width: 100%;
+      @include flex(row, space-between, flex-end, nowrap);
+      gap: 20px;
+
+      @media (max-width: 1251px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+
+      @include media-query(md) {
+        gap: 18px;
+      }
+
+      @media (max-width: 571px) {
+        grid-template-columns: 1fr;
+      }
+
+      @include media-query(sm) {
+        gap: 16px;
+      }
+
+      .titleItemBlock {
+        width: 100%;
+
+        .titleItem {
+          margin-bottom: 10px;
+          @include typography(400, 16px, 19.5px, $text-secondary);
+
+          @include media-query(sm) {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .btnBlock {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        @media (max-width: 571px) {
+          margin-top: 29.5px;
+        }
+
+        @include media-query(sm) {
+          margin-top: 22px;
+        }
+
+        .btnSearch {
+          background-color: $color-8;
+          height: 68px;
+
+          @include media-query(md) {
+            height: 54px;
+          }
+
+          @include media-query(sm) {
+            height: 40px;
+          }
+        }
+        .disabled {
+          background-color: red;
+        }
+
+        .btnSearch:hover {
+          background-color: $primary;
+          transition: all 0.5s ease 0s;
+        }
+      }
+    }
+  }
+  .error {
+    @extend %error;
+    z-index: 1;
+    position: absolute;
+    right: 114px;
+    margin-top: 10px;
+    text-align: end;
+
+    @media (max-width: 1600px) {
+      right: 40px;
+    }
+
+    @include media-query(md) {
+      right: 24px;
+    }
+
+    @include media-query(sm) {
+      right: 8px;
+    }
+  }
+}

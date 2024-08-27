@@ -1,30 +1,30 @@
 import './App.scss'
-import { useEffect } from 'react';
-import { fetchMainObject } from './redux/thunks/mainObjectThunk'
-import { useAppDispatch } from './utils/hooks'
-import { fetchRentalObjects } from './redux/thunks/rentalObjectsThunk'
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout/Layout'
-
+import { Main } from './pages/Main';
+import { FilteredRentalObjects } from './pages/FilteredRentalObjects';
+import { useRef } from 'react';
+import { ErrorPage } from './pages/ErrorPage';
+import { NOTFOUND_ERROR } from './utils/constants';
+import { SmileIcon } from './assets/icons/Smile';
 
 function App() {
-  const dispatch = useAppDispatch();
+  const filteredObjectsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    dispatch(fetchMainObject(2))
-    dispatch(fetchRentalObjects())
-
-  }, [])
-
-  console.log("App")
+  const scrollToFilteredObjects = () => {
+    if (filteredObjectsRef.current) {
+      filteredObjectsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/rental_objects" element={""} />
+      <Route path="/:id" element={<Layout scrollToFilteredObjects={scrollToFilteredObjects} />}>
+        <Route index element={<Main />} />
+        <Route path="filteredRental_objects" element={<FilteredRentalObjects ref={filteredObjectsRef} />} />
       </Route>
-
-    </Routes>
+      <Route path="*" element={<ErrorPage text={NOTFOUND_ERROR} image={<SmileIcon />} />} />
+    </Routes >
   )
 }
 

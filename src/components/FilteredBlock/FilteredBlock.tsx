@@ -1,0 +1,200 @@
+import styleContainer from "../../common/styles/Container.module.scss";
+import style from "./FilteredBlock.module.scss";
+import { Button } from "../Button/Button";
+import { GuestsSelect } from "./GuestsSelect";
+import { useEffect, useState } from "react";
+import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { ChildAge, DatesGuestsObjectRequestType, DatesGuestsObjectType, DatesType, GuestsType } from "../../redux/types/datesGuestsTypes";
+import { setDatesGuestsObject } from "../../redux/reducers/datesGuestsSlice";
+import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks/hooks";
+import { formatDashDate } from "../../utils/functions/formatDate";
+import { CheckDateInput } from "./CheckInDateInput";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { formatPeople } from "../../utils/functions/formatPeople";
+import { RequestStatusType } from "../../common/enums/enums";
+
+export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
+    const [check_in_date, setCheckInDate] = useState<Date | null | undefined>(null);
+    const [check_out_date, setCheckOutDate] = useState<Date | null | undefined>(null);
+    // const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
+    const [formattedValue, setFormattedValue] = useState("");
+    const [dateError, setDateError] = useState<string | null>(null);
+
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const { id } = useAppSelector(state => state.mainObject.data);
+    const { status } = useAppSelector(state => state.filteredRentalObjects);
+    const location = useLocation();
+
+    const [searchParams] = useSearchParams();
+
+    const methods = useForm();
+    const { handleSubmit, formState: { errors }, clearErrors, setValue, register, reset } = methods;
+
+    useEffect(() => {
+        scrollToFilteredObjects();
+    }, [location]);
+
+    useEffect(() => {
+        if (location.pathname === `/${id}`) {
+            reset({});
+            setCheckInDate(null);
+            setCheckOutDate(null);
+            // setGuests({ adults: 0, children: 0, childAges: [] });
+            setFormattedValue("");
+        }
+    }, [id, location.pathname, reset]);
+
+    const handleCheckInDateChange = (date: Date) => {
+
+        if (check_out_date && date >= check_out_date) {
+            console.log(date >= check_out_date)
+            setCheckOutDate(null);
+            setValue("check_out_date", null);
+        }
+
+        setCheckInDate(date);
+        setValue("check_in_date", date);
+
+        clearErrors("check_in_date")
+    };
+
+    const handleCheckOutDateChange = (date: Date) => {
+        setCheckOutDate(date);
+        setValue("check_out_date", date);
+
+        clearErrors("check_out_date");
+    };
+
+    useEffect(() => {
+
+        if (!check_in_date || !check_out_date) {
+
+            const queryParams = new URLSearchParams(searchParams);
+
+            const queryParamsData: DatesType = {
+                check_in_date: queryParams.get('check_in_date') ?? "",
+                check_out_date: queryParams.get('check_out_date') ?? "",
+            };
+
+            // queryParamsData.check_in_date && setCheckInDate(new Date(queryParamsData.check_in_date));
+            // queryParamsData.check_out_date && setCheckOutDate(new Date(queryParamsData.check_out_date));
+
+            if (queryParamsData.check_in_date) {
+                const checkInDate = new Date(queryParamsData.check_in_date);
+                setCheckInDate(checkInDate);
+                setValue("check_in_date", checkInDate);
+            }
+            if (queryParamsData.check_out_date) {
+                const checkOutDate = new Date(queryParamsData.check_out_date);
+                setCheckOutDate(checkOutDate);
+                setValue("check_out_date", checkOutDate);
+            }
+
+            const storedGuestsData = localStorage.getItem('guests');
+
+            if (storedGuestsData) {
+                const parsedGuestsData: GuestsType = JSON.parse(storedGuestsData);
+                // queryParams.get('people_amount') && setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children))
+                if (queryParams.get('people_amount')) {
+                    setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children));
+                    setValue("guests", parsedGuestsData);
+                    // setGuests(parsedGuestsData);
+                }
+
+            }
+        }
+
+    }, [searchParams]);
+
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+
+        const checkInDate = new Date(data.check_in_date);
+        const checkOutDate = new Date(data.check_out_date);
+        const diffTime = Math.abs(checkOutDate.getTime() - checkInDate.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays > 180) {
+            setDateError("Максимально возможное количество дней для брони - 180 дней");
+            return;
+        } else {
+            setDateError(null);
+        }
+
+        const children = data.guests.childAges.reduce((accum: number, el: ChildAge) => {
+            el.value >= 2 && (accum += 1);
+            return accum
+        }, 0);
+
+        const filteredData: DatesGuestsObjectRequestType = {
+            check_in_date: formatDashDate(data.check_in_date),
+            check_out_date: formatDashDate(data.check_out_date),
+            people_amount: data.guests.adults + children,
+            main_object: id,
+        };
+
+        const transformedData: DatesGuestsObjectType = {
+            check_in_date: data.check_in_date.toISOString(),
+            check_out_date: data.check_out_date.toISOString(),
+            guests: data.guests
+        };
+
+        localStorage.clear();
+
+        dispatch(setDatesGuestsObject(transformedData));
+        localStorage.setItem('guests', JSON.stringify(data.guests));
+
+        dispatch(fetchFilteredRentalObjects(filteredData));
+
+        const queryParams = new URLSearchParams({
+            check_in_date: formatDashDate(data.check_in_date),
+            check_out_date: formatDashDate(data.check_out_date),
+            people_amount: (data.guests.adults + children).toString(),
+            // main_object: id ? (id).toString() : "",
+        })
+        navigate(`/${id}/filteredRental_objects?${queryParams.toString()}`)
+
+    };
+
+    const handleGuestsChange = (newGuests: GuestsType) => {
+        setValue("guests", newGuests);
+
+        clearErrors("guests");
+
+    };
+
+    const today = new Date();
+
+    return (
+        <div className={style.filteredBlockWrapper}>
+            <div className={`${styleContainer.container} ${style.filteredBlockContainer}`}>
+                <h3 className={style.titleBlock}>Бронирование</h3>
+                <FormProvider {...methods} >
+                    <form className={style.filteredBlock} onSubmit={handleSubmit(onSubmit)}>
+                        <div className={style.titleItemBlock}>
+                            <h4 className={style.titleItem}>Дата заезда</h4>
+                            <CheckDateInput {...register("check_in_date", { required: true })} selectedDate={check_in_date} onDateChange={handleCheckInDateChange} firstDay={today} />
+                        </div>
+                        <div className={style.titleItemBlock}>
+                            <h4 className={style.titleItem}>Дата выезда</h4>
+                            <CheckDateInput {...register("check_out_date", { required: true })} selectedDate={check_out_date} onDateChange={handleCheckOutDateChange} firstDay={check_in_date && new Date(check_in_date.getTime() + (24 * 60 * 60 * 1000)) || today} />
+                        </div>
+                        <div className={style.titleItemBlock}>
+                            <h4 className={style.titleItem}>Количество гостей</h4>
+                            <GuestsSelect {...register("guests", { required: true })} onGuestsChange={handleGuestsChange} value={formattedValue} setFormattedValue={setFormattedValue} />
+                        </div>
+                        <div className={style.btnBlock}>
+                            <Button className={style.btnSearch} type="submit" value={"Подобрать"}
+                                disabled={Object.keys(errors).length > 0 || status === RequestStatusType.loading}
+                            />
+                        </div>
+                    </form>
+                </FormProvider>
+                {dateError && <p className={style.error}>{dateError}</p>}
+                {Object.keys(errors).length > 0 && <p className={style.error}>Все поля должны быть заполнены</p>}
+            </div>
+        </div >
+    )
+}

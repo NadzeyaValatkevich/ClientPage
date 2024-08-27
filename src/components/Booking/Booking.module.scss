@@ -1,26 +1,82 @@
-@import "../../common/styles/sass/variables.scss";
-@import "../../common/styles/sass/mixins.scss";
+@import '../../common/styles/sass/variables.scss';
+@import '../../common/styles/sass/mixins.scss';
 
 .booking {
+  width: 100%;
+  height: auto;
+
+  &__comment {
+    margin-bottom: 40px;
+
+    @include media-query(md) {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__comment-title {
+    @extend %titleBookingBlock;
+  }
+
+  &__comment-label {
+    @include typography(400, 16px, 19.5px, $text-secondary);
+  }
+
+  &__comment-text {
     width: 100%;
-    height: auto;
-    background-color: $secondary;
-    padding: 20px;
+    min-height: 67px;
+    border: 1px solid $text-secondary;
+    border-radius: $radius-secondary;
+    padding: 21px 20px;
+    margin-top: 10px;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+    @include typography(500, 14px, 17.07px, $text-primary);
 
-    &__comment-title {
-        @extend %titleBookingBlock;
+    @media (max-width: 400px) {
+      min-height: 108px;
     }
 
-    &__comment-title::before {
-        @extend %titleBookingLine;
+    &:focus {
+      border-color: $text-primary !important;
+      box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
     }
 
-    &__comment-text {
-        width: 100%;
-        height: 90px;
+    &:not(:placeholder-shown) {
+      border-color: $primary;
+      box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
     }
 
-    &__comment-text::placeholder {
-        
+    &--error {
+      border-color: $error !important;
     }
+
+    &--error:focus {
+      border-color: $error !important;
+    }
+  }
+
+  &__comment-text::placeholder {
+    @include typography(500, 14px, 17.07px, $text-secondary);
+  }
+
+  &__btn {
+    @include typography(500, 14px, 17.07px, $text-white);
+    background-color: $primary;
+    padding: 10px 20px;
+  }
+}
+
+.commentError {
+  @extend %error;
+}
+
+.loaderBlock {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include flex(row, center, center, nowrap);
 }

@@ -2,10 +2,11 @@ import { FC } from "react";
 import style from "../Button/Button.module.scss";
 
 type ButtonProps = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value?: any,
     onClick?: () => void,
     className?: string,
-    type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+    type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"],
     disabled?: boolean
 };
 

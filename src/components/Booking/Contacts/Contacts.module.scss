@@ -1,32 +1,52 @@
-@import "../../../common/styles/sass/variables.scss";
-@import "../../../common/styles/sass/mixins.scss";
+@import '../../../common/styles/sass/variables.scss';
+@import '../../../common/styles/sass/mixins.scss';
 
 .contacts {
-    margin-bottom: 20px;
+  margin-bottom: 40px;
 
-    &__title {
-        @extend %titleBookingBlock;
+  @include media-query(md) {
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    @extend %titleBookingBlock;
+  }
+
+  &__block {
+    display: grid;
+    gap: 20px;
+    width: 100%;
+    // grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+
+    @include media-query(lg) {
+      grid-template-columns: repeat(auto-fill, minmax(267px, 1fr));
     }
 
-    &__title::before {
-        @extend %titleBookingLine;
+    @include media-query(md) {
+      gap: 16px;
     }
 
-    &__block {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        column-gap: 20px;
-        row-gap: 10px;
-
-        &-telegram {
-            grid-column: 1;
-            grid-row: 2;
-        }
-
-        & input {
-            width: 100%;
-        }
+    @media (max-width: 680px) {
+      grid-template-columns: 1fr;
+      // grid-template-rows: repeat(3, 1fr);
     }
 
+    & input {
+      width: 100%;
+      outline: none;
+
+      &:focus {
+        border-color: $text-primary;
+        box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+        color: $text-primary;
+      }
+
+      &:not(:placeholder-shown) {
+        border-color: $primary;
+        box-shadow: 0px 4px 7px 3px rgba(24, 85, 183, 0.11);
+        color: $text-primary;
+      }
+    }
+  }
 }

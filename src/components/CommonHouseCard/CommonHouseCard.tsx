@@ -1,60 +1,92 @@
 import { Carousel } from "../Carousel";
 import style from "./CommonHouseCard.module.scss";
-import { ReactNode } from 'react';
-import { ImageItem } from "../../redux/types/rentalObjectTypes";
+import { ReactNode, useState } from 'react';
+import { ImageItem, RentalObject, TransformFeatureItem } from "../../redux/types/rentalObjectTypes";
+import { countRooms } from "../../utils/functions/countRooms";
+import { NextArrow, PrevArrow } from "../CustomArrows/CustomArrows";
+import { getCountFeatures } from "../../utils/functions/getCountFeatures"
+import { handleImageLoad } from "../../utils/functions/handleImageLoad";
 
 type CommonHouseCardPropsType = {
-    children: ReactNode,
-    title: string,
-    images: ImageItem[],
+    children?: ReactNode,
+    house: RentalObject,
+    type: "withPrice" | "withoutPrice",
 };
 
-// export const photos: any = [
-//     { id: 1, src: photo1, title: "photo1" },
-//     { id: 2, src: photo2, title: "photo2" },
-//     { id: 3, src: photo3, title: "photo3" },
-//     { id: 4, src: photo4, title: "photo4" },
-// ];
+export const CommonHouseCard = ({ children, house, type }: CommonHouseCardPropsType) => {
 
-export const CommonHouseCard = ({ children, title, images }: CommonHouseCardPropsType) => {
+    const [imageClass, setImageClass] = useState<string[]>([]);
+
+    const features = getCountFeatures(house.features).slice(0, 6);
 
     const housePhotosSettings = {
         slidesToShow: 1,
         slidesToScroll: 1,
         speed: 900,
-        dots: true,
-        infinite: true,
-        arrows: false,
-        // responsive: [
-        //     {
-        //         breakpoint: 1270,
-        //         settings: {
-        //             arrows: false,
-        //         },
-        //     },
-        // ],
+        dots: house.images.length > 1,
+        infinite: house.images.length > 1,
+        arrows: house.images.length > 1,
+        prevArrow: <PrevArrow onClick={() => { }} />,
+        nextArrow: <NextArrow onClick={() => { }} />,
+        responsive: [
+            {
+                breakpoint: 450,
+                settings: {
+                    arrows: false,
+                },
+            },
+        ],
     };
 
     return (
         <div className={style.card}>
-            <h2 className={style.cardTitle}>{title}</h2>
+            <h2 className={style.cardTitle}>{house.name}</h2>
             <div className={style.houseBlock}>
                 <div className={style["houseBlock-left"]}>
                     <Carousel settings={housePhotosSettings}>
-                        {images.map((el: ImageItem) => {
+                        {house.images.map((el: ImageItem) => {
                             return (
                                 <div key={el.id} className={style.imageBlock}>
-                                    <img className={style.image} src={el.image} alt={"house image"} />
+                                    <img
+                                        className={`${style.image} ${imageClass[el.id] || ''}`}
+                                        src={el.image}
+                                        alt={"house image"}
+                                        onLoad={(event) => handleImageLoad(el.id, event, setImageClass, style)} />
                                 </div>
                             )
                         })}
                     </Carousel>
                 </div>
-                {children}
-
+                <div className={style["houseBlock-right"]}>
+                    <div className={style.description}>
+                        {house.description}
+                    </div>
+                    <div className={type === "withPrice" ? `${style.places} ${style.placesWithPrice} ` : `${style.places} ${style.placesWithoutPrice}`}>
+                        <div className={style.rooms}>
+                            <p>Комнаты:</p>
+                            <p>{countRooms(house.rooms)}</p>
+                        </div>
+                        <div className={style.beds}>
+                            <p>Спальные места: </p>
+                            <p>{house.max_places}</p>
+                        </div>
+                    </div>
+                    <div className={type === "withPrice" ? `${style.featuresBlock} ${style.featuresBlockWithPrice} ` : `${style.featuresBlock} ${style.featuresBlockWithoutPrice}`}>
+                        <p className={style.featuresTitle}>Удобства:</p>
+                        <div className={style.features}>
+                            {features.map((el: TransformFeatureItem | null, index: number) => {
+                                return (
+                                    <div key={index} className={style.featuresItem}>
+                                        <div className={style["featuresItem_icon"]}>{el?.logo}</div>
+                                        <p className={style["featuresItem_title"]}>{el?.title}</p>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    {children && children}
+                </div>
             </div>
-
-        </div>
-
+        </div >
     )
 }

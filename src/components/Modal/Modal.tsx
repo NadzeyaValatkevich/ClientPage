@@ -1,7 +1,8 @@
 import { Transition } from 'react-transition-group';
 import { CloseIcon } from "../../assets/icons/Close";
 import style from "../Modal/Modal.module.scss";
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
+import classNames from "classnames";
 
 type ModalPropsType = {
     active: boolean,
@@ -11,28 +12,49 @@ type ModalPropsType = {
     type: string
 };
 
-export const Modal = ({ active, onClose, setActive, children, type }: ModalPropsType) => {
+export const Modal = ({ active, onClose, children, type }: ModalPropsType) => {
+
+    // const hasVerticalScrollbar = () => {
+    //     return document.documentElement.scrollHeight > window.innerHeight;
+    // };
+
+    useEffect(() => {
+        if (active) {
+            if (document.body.scrollHeight > window.innerHeight) {
+                document.body.style.paddingRight = '17px';
+            }
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+            document.body.style.paddingRight = '';
+        }
+        return () => {
+            document.body.classList.remove('modal-open');
+            document.body.style.paddingRight = '';
+        };
+    }, [active]);
+
+    if (!active) return null;
 
     return (
         <>
             <Transition in={active} timeout={350} unmountOnExit>
                 {(state) => (
-                    <div className={`${style.modal} ${style[`modal--${state}`]}`} onClick={() => setActive(false)}>
-                        {/* <div className="modalWrapper"> */}
-                        <div className={type === "houseModal" ? `${style.modalContent} ` : `${style.modalContentBooking}`} onClick={e => e.stopPropagation()}>
+                    <div className={`${style.modal} ${style[`modal--${state}`]}`}>
+                        {/* <div className={type === "houseModal" ? `${style.modalContent} ` : `${style.modalContentBooking}`}> */}
+                        <div className={classNames(style.modalContent, {
+                            [style.modalContentHouse]: type === "houseModal",
+                            [style.modalContentBooking]: type === "bookingModal",
+                        })}>
                             {type === "houseModal"
                                 ? <CloseIcon onClick={onClose} color={"#0F2664"} />
                                 : <div className={style["modalContentBooking__header"]}>
-                                    <h3 className={style["modalContentBooking__header-title"]}>Бронь</h3>
-                                    <div className={style["modalContentBooking__header-right"]}>
-                                        <button className={style["modalContentBooking__header-btn"]}>Сохранить</button>
-                                        <CloseIcon onClick={onClose} color={"#FFFFFF"} />
-                                    </div>
+                                    <h3 className={style["modalContentBooking__header-title"]}>Бронирование</h3>
+                                    <CloseIcon onClick={onClose} color={"#0F2664"} />
                                 </div>
                             }
                             {children}
                         </div>
-                        {/* </div> */}
                     </div>
                 )}
 

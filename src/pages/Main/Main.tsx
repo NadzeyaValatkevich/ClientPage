@@ -2,110 +2,86 @@ import { useState } from "react";
 import styleContainer from "../../common/styles/Container.module.scss";
 import { CommonHouseCard } from "../../components/CommonHouseCard/CommonHouseCard";
 import style from "./Main.module.scss";
-import wifi from "../../assets/icons/wifi.svg";
-import alcove from "../../assets/icons/alcove.svg";
-import tv from "../../assets/icons/tv.svg";
-import kitchen from "../../assets/icons/kitchen.svg";
-import barbecue from "../../assets/icons/barbecue.svg";
-import child from "../../assets/icons/child.svg";
 import { Button } from "../../components/Button/Button";
 import { Modal } from "../../components/Modal";
 import { FullHouseCard } from "../../components/FullHouseCard";
-import { useAppSelector } from "../../utils/hooks";
+import { useAppSelector } from "../../utils/hooks/hooks";
 import { RentalObject } from "../../redux/types/rentalObjectTypes";
-import { countRooms } from "../../utils/functions/countRooms";
-import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
-
-export const features: any = [
-    { id: 1, icon: wifi, title: "Wi-Fi" },
-    { id: 2, icon: alcove, title: "Беседка" },
-    { id: 3, icon: tv, title: "TV" },
-    { id: 4, icon: kitchen, title: "Кухня" },
-    { id: 5, icon: barbecue, title: "Барбекю" },
-    { id: 6, icon: child, title: "Детская площадка" },
-    // { id: 7, icon: kitchen, title: "Кухня" },
-    // { id: 8, icon: barbecue, title: "Барбекю" },
-    // { id: 9, icon: child, title: "Детская площадка" },
-];
+import { RequestStatusType } from "../../common/enums/enums";
+import { BeatLoader } from "react-spinners";
+import { Pagination } from "../../components/Pagination";
+import { LIMIT_OBJECTS_DESKTOP, LIMIT_OBJECTS_MOBILE } from "../../utils/constants";
+import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
 
 export const Main = () => {
-    const { results } = useAppSelector(state => state.rentalObjects);
-
+    const { results } = useAppSelector(state => state.rentalObjects.data);
+    const { status } = useAppSelector(state => state.rentalObjects);
+    const errorRental = useAppSelector(state => state.rentalObjects.error);
+    const { error } = useAppSelector(state => state.mainObject);
+    const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
     const [modalActive, setModalActive] = useState(false);
-    // const [modalOrderActive, setModalOrderActive] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const onClickHandler = () => {
+    const windowWidth = useWindowWidth();
+
+    const LIMIT_OBJECTS = windowWidth <= 360 ? LIMIT_OBJECTS_MOBILE : LIMIT_OBJECTS_DESKTOP;
+
+    const onClickHandler = (house: RentalObject) => {
+        setActiveHouse(house)
         setModalActive(true)
     };
 
     const onCloseHandler = () => {
         setModalActive(false)
+        setActiveHouse(null)
     };
 
-    // const onClickOrderHandler = () => {
-    //     setModalOrderActive(true)
-    // };
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
 
-    // const onCloseOrderHandler = () => {
-    //     setModalOrderActive(false)
-    // };
+    const startIndex = (currentPage - 1) * LIMIT_OBJECTS;
+    const endIndex = startIndex + LIMIT_OBJECTS;
+    const currentResults = results && results.slice(startIndex, endIndex);
+
+    if (status === RequestStatusType.loading) {
+        return <div style={{ width: "100vw", marginBottom: "120px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <BeatLoader color="#1855b7" />
+        </div>
+    }
+
+    if (error || errorRental) {
+        return <div style={{
+            width: "100%",
+            marginBottom: "120px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "18px",
+            fontWeight: "600",
+            textAlign: "center"
+        }} >
+            {error || errorRental}
+        </div >
+    }
 
     return (
         <div className={style.main}>
             <div className={styleContainer.container}>
-                {results && results.map((el: RentalObject) => {
-                    return <CommonHouseCard key={el.id} title={el.name} images={el.images}>
-                        <div className={style["houseBlock-right"]}>
-                            <p className={style.description}>
-                                {el.description}
-                            </p>
-                            <div className={style.places}>
-                                <div className={style.rooms}>
-                                    <p>Комнаты:</p>
-                                    <p>{countRooms(el.rooms)}</p>
-                                </div>
-                                <div className={style.beds}>
-                                    <p>Спальные места: </p>
-                                    <p>{countSleepingPlaces(el.total_beds)}</p>
-                                    {/* <p > 2 <img alt={"bedBig"} src={bedBig} /></p>
-                                    <p> 1 <img alt={"bed"} src={bed} /></p> */}
-                                </div>
-                            </div>
-                            <div className={style.featuresBlock}>
-                                <p className={style.featuresTitle}>Удобства:</p>
-                                <div className={style.features}>
-                                    {features.map((el: any) => {
-                                        return (
-                                            <div key={el.id} className={style.featuresItem}>
-                                                <img alt={el.title} src={el.icon} />
-                                                <p>{el.title}</p>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            </div>
-                            {/* <div className={style.pricesBlock}>
-                                <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>
-                                <div className={style.prices}>
-                                    <p>будни от <span>150 BYN</span></p>
-                                    <p>выходные от <span>250 BYN</span></p>
-                                </div>
-                            </div> */}
+                {currentResults && currentResults.length ?
+                    currentResults.map((el: RentalObject) => {
+                        return <CommonHouseCard key={el.id} house={el} type={"withoutPrice"}>
                             <div className={style.btnsBlock}>
-                                {/* <Button value={"Забронировать"} className={style.btnBook} onClick={onClickOrderHandler} /> */}
-                                <Button value={"Подробнее"} className={style.btnDetails} onClick={onClickHandler} />
+                                <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
                             </div>
-                            {modalActive && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
-                                <FullHouseCard rentalObject={el} />
-                            </Modal>}
-
-                            {/* {modalOrderActive && <Modal active={modalOrderActive} onClose={onCloseOrderHandler} setActive={setModalOrderActive} type={"bookingModal"}>
-                                <Booking />
-                            </Modal>} */}
-                        </div>
-                    </CommonHouseCard>
-                })}
+                        </CommonHouseCard>
+                    }) :
+                    <div className={style.infoText}>В ближайшее время здесь появятся сдаваемые объекты</div>}
             </div>
+            <Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"all"} />
+            {modalActive && activeHouse && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
+                <FullHouseCard rentalObject={activeHouse} modalActive={modalActive} />
+            </Modal>}
         </div>
     )
 }

@@ -1,23 +1,48 @@
 import style from "./Header.module.scss";
 import styleContainer from "../../common/styles/Container.module.scss";
-import image from "../../assets/photo1.jpg";
-import { Logo } from "../Logo";
-import { useAppSelector } from "../../utils/hooks";
+import { useAppSelector } from "../../utils/hooks/hooks";
+import { NavLink, useLocation, useParams } from "react-router-dom";
+import BackIcon from "../../assets/icons/back.svg";
+import { useEffect, useState } from "react";
 
 export const Header = () => {
-    const { name, booking_photo } = useAppSelector(state => state.mainObject);
+    const [visibilityBtnBack, setVisibilityBtnBack] = useState(false);
+    const { name, booking_photo } = useAppSelector(state => state.mainObject.data);
+
+    const { id } = useParams();
+
+    const location = useLocation();
+
+    useEffect(() => {
+
+        if (location.pathname !== `/${id}`) {
+            setVisibilityBtnBack(true)
+        } else {
+            setVisibilityBtnBack(false)
+        }
+    }, [id, location.pathname]);
 
     return (
         <div className={style.header}>
             <div className={style.image}>
-                <img src={booking_photo ? booking_photo : image} alt="background" />
+                <img src={booking_photo} alt="background" />
             </div>
             <div className={style.background}></div>
             <div className={`${styleContainer.container} ${style.headerContainer}`}>
-                <div className={style["header_logo"]}>
-                    <Logo />
+                <div className={style["headerContainer_info"]}>
+                    {visibilityBtnBack &&
+                        <NavLink to={`/${id}`} className={style["headerContainer_info-backIcon"]}>
+                            <img src={BackIcon} alt="Arrow back" />
+                            <p className={style["headerContainer_info-text"]}>Назад</p>
+                        </NavLink>
+                    }
+                    <NavLink to={`/${id}`} className={style["headerContainer_info-backIconLogo"]}>
+                        <div className={style["headerContainer_info-logo"]}>
+                            {/* <Logo /> */}
+                        </div>
+                    </NavLink>
                 </div>
-                <h1 className={style.title}>{name ? name : "Название усадьбы"}</h1>
+                <h1 className={style.title}>{name ? name : "Название объекта"}</h1>
             </div>
         </div>
     )

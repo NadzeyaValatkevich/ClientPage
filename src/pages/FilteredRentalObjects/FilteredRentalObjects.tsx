@@ -1,0 +1,138 @@
+import style from "./FilteredRentalObjects.module.scss";
+import styleContainer from "../../common/styles/Container.module.scss";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks/hooks";
+import { CommonHouseCard } from "../../components/CommonHouseCard/CommonHouseCard";
+import { RentalObject } from "../../redux/types/rentalObjectTypes";
+import { Button } from "../../components/Button/Button";
+import { FullHouseCard } from "../../components/FullHouseCard";
+import { useEffect, useState } from "react";
+import { Modal } from "../../components/Modal";
+import { Booking } from "../../components/Booking";
+import { useParams, useSearchParams } from "react-router-dom";
+import { DatesGuestsObjectRequestType } from "../../redux/types/datesGuestsTypes";
+import { fetchFilteredRentalObjects } from "../../redux/thunks/filteredRentalObjectThunk";
+import React from "react";
+import { RequestStatusType } from "../../common/enums/enums";
+import { BeatLoader } from "react-spinners";
+import { appActions } from "../../redux/commonActions/appActions";
+import { Pagination } from "../../components/Pagination";
+import { LIMIT_OBJECTS_DESKTOP, LIMIT_OBJECTS_MOBILE } from "../../utils/constants";
+import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
+
+export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {
+
+    const { results, count } = useAppSelector(state => state.filteredRentalObjects.data);
+    const { status, error } = useAppSelector(state => state.filteredRentalObjects);
+
+    const [activeHouse, setActiveHouse] = useState<RentalObject | null>(null);
+    const [bookingHouse, setBookingHouse] = useState<RentalObject | null>(null);
+    const [modalActive, setModalActive] = useState(false);
+    const [modalBookingActive, setModalBookingActive] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const windowWidth = useWindowWidth();
+
+    const LIMIT_OBJECTS = windowWidth <= 360 ? LIMIT_OBJECTS_MOBILE : LIMIT_OBJECTS_DESKTOP;
+
+    const [searchParams] = useSearchParams();
+    const { id } = useParams();
+
+    console.log(props)
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(searchParams);
+
+        const queryParamsData: DatesGuestsObjectRequestType = {
+            check_in_date: queryParams.get('check_in_date'),
+            check_out_date: queryParams.get('check_out_date'),
+            people_amount: queryParams.get('people_amount'),
+            // main_object: queryParams.get('main_object'),
+            main_object: id ? id : "",
+        };
+
+        dispatch(fetchFilteredRentalObjects(queryParamsData));
+    }, [searchParams, dispatch]);
+
+    const onClickHandler = (house: RentalObject) => {
+        setActiveHouse(house);
+        setModalActive(true);
+    };
+
+    const onCloseHandler = () => {
+        setModalActive(false);
+        setActiveHouse(null);
+    };
+
+    const onClickBookingHandler = (house: RentalObject) => {
+        setBookingHouse(house);
+        setModalBookingActive(true);
+    };
+
+    const onCloseBookingHandler = () => {
+        dispatch(appActions.setError({ error: null }))
+        dispatch(appActions.setStatus({ status: RequestStatusType.idle }))
+        setModalBookingActive(false);
+        setBookingHouse(null);
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const startIndex = (currentPage - 1) * LIMIT_OBJECTS;
+    const endIndex = startIndex + LIMIT_OBJECTS;
+    const currentResults = results && results.slice(startIndex, endIndex);
+
+    const Loader = () => {
+        return <div className={style.loader}>
+            <BeatLoader color="#1855b7" />
+        </div >
+    }
+
+    if (error) {
+        return <div className={style.error} >
+            {error}
+        </div >
+    }
+
+    return (
+        <div className={style.rentalObjectsBlock} ref={ref}>
+            <div className={styleContainer.container}>
+                {status === RequestStatusType.loading ?
+                    < Loader /> :
+                    count === 0 ?
+                        <div className={style.infoText}>К сожалению, подходящих домиков для бронирования на выбранные даты и количество гостей не найдено.
+                            Попробуйте изменить даты или количество гостей.</div>
+                        : currentResults && currentResults.length >= 1 && currentResults.map((el: RentalObject) => (
+                            <CommonHouseCard key={el.id} house={el} type={"withPrice"}>
+                                <div className={style.priceBlock}>
+                                    <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
+                                    <p className={style.price}>{el.price}<span>BYN</span></p>
+                                </div>
+                                <div className={style.btnsBlock}>
+                                    <Button value={"Забронировать"} className={style.btnBook} onClick={() => onClickBookingHandler(el)} />
+                                    <Button value={"Подробнее"} className={style.btnDetails} onClick={() => onClickHandler(el)} />
+                                </div>
+                            </CommonHouseCard>
+                        ))
+                }
+                {status !== RequestStatusType.loading && count !== 0 && < Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"free"} />}
+
+            </div>
+
+            {modalActive && activeHouse && (
+                <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
+                    <FullHouseCard rentalObject={activeHouse} modalActive={modalActive} />
+                </Modal>
+            )}
+
+            {modalBookingActive && bookingHouse && (
+                <Modal active={modalBookingActive} onClose={onCloseBookingHandler} setActive={setModalBookingActive} type={"bookingModal"}>
+                    <Booking modalBookingActive={modalBookingActive} setModalBookingActive={setModalBookingActive} house={bookingHouse} />
+                </Modal>
+            )}
+        </div>
+    );
+});

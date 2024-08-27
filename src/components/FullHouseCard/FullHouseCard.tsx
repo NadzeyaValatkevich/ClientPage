@@ -1,82 +1,144 @@
 import style from "./FullHouseCard.module.scss";
-import { features as fullFeatures } from '../HouseCard/HouseCard';
 import { Carousel } from "../Carousel";
-import bedBig from "../../assets/icons/bedBig.svg";
-import bed from "../../assets/icons/bed.svg";
-import { ImageItem, RentalObject } from "../../redux/types/rentalObjectTypes";
-import { countSleepingPlaces } from "../../utils/functions/countSleepingPlaces";
+import calendar from "../../assets/icons/bigCalendar.svg";
+import { PrevArrow, NextArrow } from '../CustomArrows/CustomArrows';
+import { ImageItem, RentalObject, TransformFeatureItem } from "../../redux/types/rentalObjectTypes";
 import { countRooms } from "../../utils/functions/countRooms";
+import { useEffect, useRef, useState } from "react";
+import { Calendar } from "../Calendar";
+import { getCountFeatures } from "../../utils/functions/getCountFeatures";
+import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
+import { handleImageLoad } from "../../utils/functions/handleImageLoad";
 
 export type FullHouseCardPropsType = {
-    rentalObject: RentalObject
+    rentalObject: RentalObject,
+    modalActive: boolean
 };
 
 export const FullHouseCard = ({ rentalObject }: FullHouseCardPropsType) => {
-    const { name, images, description, rooms, total_beds } = rentalObject
+
+    const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+    const [imageClass, setImageClass] = useState<string[]>([]);
+
+    const { name, images, description, rooms, max_places, reservations, status, features } = rentalObject;
+
+    const transformedFeatures = getCountFeatures(features)
+    const datePickerRef = useRef<HTMLDivElement>(null);
+
+    const windowWidth = useWindowWidth();
+
+    const handleImgClick = () => {
+        setDatePickerVisible(prevState => !prevState)
+    };
 
     const houseFullPhotosSettings = {
         slidesToShow: 1,
         slidesToScroll: 1,
         speed: 900,
-        dots: true,
-        infinite: true,
-        arrows: false,
+        dots: images.length > 1,
+        infinite: images.length > 1,
+        arrows: images.length > 1,
+        prevArrow: <PrevArrow onClick={() => { }} />,
+        nextArrow: <NextArrow onClick={() => { }} />,
+        responsive: [
+            {
+                breakpoint: 450,
+                settings: {
+                    arrows: false,
+                },
+            },
+        ],
     };
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
+            setDatePickerVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isDatePickerVisible) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isDatePickerVisible]);
 
 
     return (
-        <div className={style.houseBlock}>
-            <div className={style.houseBlockLeft}>
-                <Carousel settings={houseFullPhotosSettings}>
-                    {images.map((el: ImageItem) => {
-                        return (
-                            <div key={el.id} className={style.imageBlock}>
-                                <img className={style.image} src={el.image} alt={"housePhoto"} />
-                            </div>
-                        )
-                    })}
-                </Carousel>
-            </div>
-            <div className={style.houseBlockRight}>
-                <div className={style.houseBlockTitle}>{name}</div>
-                <div className={style.houseBlockDescription}>
-                    <p className={style.title}>Описание:</p>
-                    <p className={style.description}>{description}</p>
-                </div>
-                <div className={style.places}>
-                    <div className={style.rooms}>
-                        <p>Комнаты: </p>
-                        <p>{countRooms(rooms)}</p>
-                    </div>
-                    <div className={style.beds}>
-                        <p>Спальные места: </p>
-                        <p>{countSleepingPlaces(total_beds)}</p>
-                        {/* <p className={style.bedsBlock}> 2 <img alt={"bedBig"} src={bedBig} /></p>
-                        <p className={style.bedsBlock}> 1 <img alt={"bed"} src={bed} /></p> */}
-                    </div>
-                </div>
-                <div className={style.featuresBlock}>
-                    <p className={style.title}>Удобства:</p>
-                    <div className={style.features}>
-                        {fullFeatures.map((el: any) => {
+        <>
+            {windowWidth <= 1670 && (
+                <>
+                    <div className={style.houseBlockTitle}>{name}</div>
+                    {windowWidth > 768 && <div className={style.houseBlockDescription}>
+                        <p className={style.title}>Описание:</p>
+                        <p className={style.description}>{description}</p>
+                    </div>}
+                </>
+            )}
+            <div className={style.houseBlock}>
+                <div className={style.houseBlockLeft}>
+                    <Carousel settings={houseFullPhotosSettings}>
+                        {images.map((el: ImageItem) => {
                             return (
-                                <div key={el.id} className={style.featuresBlock}>
-                                    <img alt={el.title} src={el.icon} />
-                                    <p>{el.title}</p>
+                                <div key={el.id} className={style.imageBlock}>
+                                    <img
+                                        className={`${style.image} ${imageClass[el.id] || ''}`}
+                                        src={el.image}
+                                        alt={"housePhoto"}
+                                        onLoad={(event) => handleImageLoad(el.id, event, setImageClass, style)}
+                                    />
                                 </div>
                             )
                         })}
-                    </div>
+                    </Carousel>
                 </div>
-                {/* <div className={style.pricesBlock}>
-                    <p className={style.pricesBlockTitle}>Стоимость в сутки:</p>
-                    <div className={style.prices}>
-                        <p>будни от <span>150 BYN</span></p>
-                        <p>выходные от <span>250 BYN</span></p>
+                <div className={style.houseBlockRight}>
+                    {windowWidth > 1670 && <div className={style.houseBlockTitle}>{name}</div>}
+                    {(windowWidth > 1670 || windowWidth <= 768) && <div className={style.houseBlockDescription}>
+                        <p className={style.title}>Описание:</p>
+                        <p className={style.description}>{description}</p>
+                    </div>}
+                    <div className={style.places}>
+                        <div className={style.rooms}>
+                            <p>Комнаты: </p>
+                            <p>{countRooms(rooms)}</p>
+                        </div>
+                        <div className={style.beds}>
+                            <p>Спальные места: </p>
+                            <p>{max_places}</p>
+                        </div>
                     </div>
-                </div> */}
+                    <div className={style.featuresBlock}>
+                        <p className={style.title}>Удобства:</p>
+                        <div className={style.features}>
+                            {transformedFeatures.map((el: TransformFeatureItem | null, index: number) => {
+                                return (
+                                    <div key={index} className={style.featuresItem}>
+                                        {el?.logo}
+                                        <p className={style["featuresItem_title"]}>{el?.title}</p>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <div className={style.calendarBlock}>
+                        <p className={style.calendarBlockTitle}>Свободные даты:</p>
+                        <img className={style.calendarBlockImage} src={calendar} alt={"Calendar"} onClick={handleImgClick} />
+                        {isDatePickerVisible && <div className={style.datePickerDiv} ref={datePickerRef}><Calendar reservations={reservations} status={status} /></div>}
+                    </div>
+                    {rentalObject && rentalObject.price ?
+                        <div className={style.priceBlock}>
+                            <p className={style.priceBlockTitle}>Общая стоимость за весь период проживания:</p>
+                            <p className={style.price}>{rentalObject.price}<span>BYN</span></p>
+                        </div>
+                        : null
+                    }
+                </div>
             </div>
-        </div>
-
+        </>
     )
 }

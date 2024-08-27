@@ -1,0 +1,178 @@
+@import '../../common/styles/sass/variables.scss';
+@import '../../common/styles/sass/mixins.scss';
+
+.rentalObjectsBlock {
+  width: 100%;
+  padding-bottom: 80px;
+
+  @include media-query(lg) {
+    padding-bottom: 60px;
+  }
+
+  @media (max-width: 571px) {
+    padding-bottom: 40px;
+  }
+
+  .infoText {
+    @extend %infoText;
+
+    @include media-query(md) {
+      margin-bottom: 0px;
+      font-size: 16px;
+    }
+  }
+
+  .priceBlock {
+    margin-bottom: 20px;
+    .priceBlockTitle {
+      @include typography(700, 18px, 25px, $text-primary);
+      margin-bottom: 20px;
+
+      @include media-query(sm) {
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+    }
+
+    .price {
+      @include typography(700, 24px, 34px, $text-primary);
+      @include flex(row, flex-start, center, nowrap);
+      gap: 10px;
+
+      @include media-query(sm) {
+        font-size: 20px;
+      }
+
+      &,
+      span {
+        @include typography(700, 24px, 34px, $text-primary);
+
+        @include media-query(sm) {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .prices p:first-child {
+      margin-right: 20px;
+    }
+  }
+  .btnsBlock {
+    @include flex(row, flex-start, center, nowrap);
+
+    @media (max-width: 1050px) {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    @include media-query(md) {
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    @media (max-width: 450px) {
+      width: 100%;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    button {
+      @include typography(500, 16px, 19.36px, $text-white);
+      font-family: 'Inter', sans-serif;
+      padding: 16px 26px;
+    }
+
+    .btnBook {
+      background-color: $color-8;
+      margin-right: 20px;
+
+      @media (max-width: 1050px) {
+        width: 100%;
+        // max-width: 375px;
+        margin-right: 0px;
+        margin-bottom: 10px;
+      }
+
+      @include media-query(md) {
+        margin-bottom: 0px;
+      }
+
+      @include media-query(sm) {
+        font-weight: 600;
+        padding: 10px 0px;
+      }
+    }
+
+    .btnBook:hover {
+      background-color: $primary;
+      transition: all 0.5s ease 0s;
+    }
+
+    .btnDetails {
+      padding: 16px 50px;
+      color: $text-primary;
+      box-shadow: $shadow-2;
+      border: none;
+      background-color: $text-white;
+
+      @media (max-width: 1050px) {
+        padding: 16px 0px;
+        width: 100%;
+        // max-width: 375px;
+      }
+
+      @include media-query(sm) {
+        font-weight: 600;
+        width: 100%;
+        padding: 10px 0px;
+      }
+    }
+
+    .btnDetails:hover {
+      color: $text-white;
+      background-color: $primary;
+      transition: all 0.5s ease 0s;
+    }
+  }
+}
+
+.error {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+
+  @media (max-width: 950px) {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 18px;
+  }
+
+  @media (max-width: 550px) {
+    margin-top: 0px;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+}
+
+.loader {
+  margin-bottom: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 950px) {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  @media (max-width: 550px) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
