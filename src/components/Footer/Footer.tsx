@@ -16,6 +16,7 @@ export const Footer = () => {
     const address = full_address?.address;
 
     const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
+    // console.log(contacts?.phone)
 
     useEffect(() => {
         if (address) {
@@ -73,7 +74,7 @@ export const Footer = () => {
                             {`${country ? getCountCountry(country) : "страна"}, ${region ? region : "регион"}, ${locality ? locality : "населенный пункт"}, ${address ? address : "адрес"}`}
                         </p>
                         <div className={style.phones}>
-                            <p>{contacts && getPhone(contacts.phone)}</p>
+                            <p>{contacts?.phone ? getPhone(contacts.phone) : ""}</p>
                             {/* <p>+375 (29) 853-25-10</p> */}
                         </div>
                         <div className={style.email}>{contacts?.email}</div>
@@ -110,6 +111,6 @@ export const Footer = () => {
                     <div className={style["footerContent-right"]}>Разработано студией TravelWeb | Система бронирования Vitaem</div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
