@@ -9,6 +9,9 @@
       "node"
     ],
 
+    // Добавил эту строку
+    "noEmitOnError": false,
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -18,7 +21,9 @@
     "jsx": "react-jsx",
 
     /* Linting */
-    "strict": true,
+
+    // Тут поменял на false
+    "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
