@@ -70,9 +70,9 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
     useEffect(() => {
         setOpenModal(false);
         if (status === RequestStatusType.succeeded) {
-            setModalContent(`Ваша бронь отправлена успешно.  
-Данные бронирования отправлены вам на указанный в форме электронный адрес.
-Ожидайте подтверждения брони.`);
+            setModalContent(`Заявка на бронирование отправлена успешно.  
+Данные по заявке высланы на указанный вами электронный адрес.
+Ожидайте подтверждения.`);
             setOpenModal(true);
         } else if (status === RequestStatusType.failed) {
             setModalContent(error);
