@@ -158,6 +158,10 @@
         cursor: pointer;
       }
 
+      &--checkboxChecked {
+        cursor: pointer;
+      }
+
       &--text {
         @include typography(400, 16px, 19.5px, $text-secondary);
         position: absolute;

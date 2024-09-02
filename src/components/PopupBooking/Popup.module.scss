@@ -17,5 +17,13 @@
     background-color: $secondary;
     padding: 20px 20px 40px 20px;
     border-radius: $radius-primary;
+
+    @include media-query(md) {
+      width: 90%;
+    }
+
+    @include media-query(sm) {
+      padding: 15px 15px 30px;
+    }
   }
 }

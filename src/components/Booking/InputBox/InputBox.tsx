@@ -52,7 +52,6 @@ export const InputBox = (props: InputBoxPropsType) => {
     const imgRef = useRef<HTMLImageElement>(null);
 
     const handleOnChange = ((e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.currentTarget.value.charAt(0) === ' ')
         if (e.currentTarget.value.charAt(0) === ' ') {
             return
         }
@@ -92,9 +91,16 @@ export const InputBox = (props: InputBoxPropsType) => {
             </div>
 
             <input
-                {...register(name, { required: requiredMessage })}
+                // {...register(name, { required: requiredMessage })}
+                {...register(name, {
+                    required: requiredMessage,
+                    onChange: (e) => {
+                        handleOnChange(e);
+                    },
+                })}
                 className={error ? `${style["input__box-input"]} ${style["input__box-input--error"]}` : style["input__box-input"]} id={name}
-                type={type} name={name}
+                type={type}
+                name={name}
                 // value={value ? value : newValue}
                 // value={value}
 
@@ -103,10 +109,11 @@ export const InputBox = (props: InputBoxPropsType) => {
                 readOnly={readOnly}
                 tabIndex={tabindex}
                 placeholder={placeholder}
-                onChange={handleOnChange}
+                // onChange={handleOnChange}
                 onBlur={onBlur}
                 onKeyDown={handleOnKeyDown}
-                autoComplete={name}
+
+            // autoComplete={name}
             // autoComplete="off"
             />
             {error && <p className={style.error}>{error}</p>}

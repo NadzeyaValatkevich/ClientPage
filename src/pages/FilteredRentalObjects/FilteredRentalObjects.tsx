@@ -19,7 +19,7 @@ import { Pagination } from "../../components/Pagination";
 import { LIMIT_OBJECTS_DESKTOP, LIMIT_OBJECTS_MOBILE } from "../../utils/constants";
 import { useWindowWidth } from "../../utils/hooks/useWindowWidth";
 
-export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => {
+export const FilteredRentalObjects = React.forwardRef((_, ref: any) => {
 
     const { results, count } = useAppSelector(state => state.filteredRentalObjects.data);
     const { status, error } = useAppSelector(state => state.filteredRentalObjects);
@@ -36,8 +36,6 @@ export const FilteredRentalObjects = React.forwardRef((props: any, ref: any) => 
 
     const [searchParams] = useSearchParams();
     const { id } = useParams();
-
-    console.log(props)
 
     const dispatch = useAppDispatch();
 

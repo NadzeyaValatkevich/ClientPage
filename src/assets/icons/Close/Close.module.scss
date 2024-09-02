@@ -5,32 +5,32 @@
   cursor: pointer;
   text-align: right;
 
-  @media (max-width: 1670px) {
-    position: absolute;
-    top: 30px;
-    right: 60px;
-  }
+  // @media (max-width: 1670px) {
+  //   position: absolute;
+  //   top: 30px;
+  //   right: 60px;
+  // }
 
-  @include media-query(lg) {
-    top: 40px;
-    right: 50px;
-  }
+  // @include media-query(lg) {
+  //   top: 40px;
+  //   right: 50px;
+  // }
 
-  @media (max-width: 1250px) {
-    right: 30px;
-  }
+  // @media (max-width: 1250px) {
+  //   right: 30px;
+  // }
 
-  @include media-query(md) {
-    top: 30px;
-  }
+  // @include media-query(md) {
+  //   top: 30px;
+  // }
 
-  @media (max-width: 410px) {
-    top: 20px;
-    right: 5px;
-  }
+  // @media (max-width: 410px) {
+  //   top: 20px;
+  //   right: 5px;
+  // }
 
-  @include media-query(sm) {
-    top: 20px;
-    right: 6px;
-  }
+  // @include media-query(sm) {
+  //   top: 20px;
+  //   right: 6px;
+  // }
 }

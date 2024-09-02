@@ -50,8 +50,6 @@ export const IntlTelInput: FC<InputProps> = ({
         countriesList.map((item) => [item.countryCode, item.countryLabel])
     );
 
-    // const [isLoaded, setIsLoaded] = useState(false);
-    // const [intlTel, setIntlTel] = useState<intlTelInput.Plugin>();
     const [intlTel, setIntlTel] = useState<any>();
     const { register } = useFormContext();
 
@@ -62,10 +60,8 @@ export const IntlTelInput: FC<InputProps> = ({
             ...value,
             phone_number: phoneNumber,
         })
-        // };
 
         if (intlTel) {
-            // setValue("phone", phoneNumber, { shouldValidate: true })
             intlTel.setNumber(phoneNumber);
             setTimeout(() => {
                 e.target.setSelectionRange(cursorPosition, cursorPosition);
@@ -88,7 +84,6 @@ export const IntlTelInput: FC<InputProps> = ({
         });
 
         iti.promise.then(() => {
-            // setIsLoaded(true);
             setIntlTel(iti);
             onChange({
                 ...value,
@@ -107,7 +102,6 @@ export const IntlTelInput: FC<InputProps> = ({
         };
 
         input.addEventListener("countrychange", countryChangeHandler);
-        // setIsValidate(iti.isValidNumber())
 
         return () => {
             input.removeEventListener("countrychange", countryChangeHandler);
@@ -123,8 +117,6 @@ export const IntlTelInput: FC<InputProps> = ({
     useEffect(() => {
         if (intlTel) {
             setIsValidate(intlTel.isValidNumber());
-            // setValue("phone", value.phone_number, { shouldValidate: true });
-            // trigger("phone");
         }
     }, [intlTel, value.phone_number]);
 
@@ -144,11 +136,6 @@ export const IntlTelInput: FC<InputProps> = ({
                     <p className="intlTelInput__title">{title}</p>
                 </div>
             )}
-            {/* <div
-                className={classNames({
-                    "intlTelInput__input-hide": !isLoaded,
-                })}
-            > */}
             <input
                 {...register("phone", { required: requiredMessage })}
                 value={value.phone_number}
@@ -164,10 +151,9 @@ export const IntlTelInput: FC<InputProps> = ({
                 onBlur={onBlur}
                 disabled={disabled}
                 onKeyDown={onKeyDown}
-                autoComplete="off"
+                autoComplete="new-password"
                 autoCorrect="off"
             />
-            {/* </div> */}
             {errText && <p className="intlTelInput__errText">{errText}</p>}
         </div>
     );
