@@ -101,12 +101,11 @@ export const Footer = () => {
                 <div className={style.footerContent}>
                     <div className={style["footerContent-left"]}>
                         <div className={style.footerContentTitle}>
-                            <span>© 2024 Название компании</span>
+                            <span>© 2024 / ООО "Витаем"</span>
 
-                        </div>              {/* <div className={style.infoDescription}> */}
+                        </div>
                         <div className={style["footerContent-politics"]}>Политика конфиденциальности</div>
                         <div className={style["footerContent-agree"]}>Пользовательское соглашение</div>
-                        {/* </div> */}
                     </div>
                     <div className={style["footerContent-right"]}>Разработано студией TravelWeb | Система бронирования Vitaem</div>
                 </div>
