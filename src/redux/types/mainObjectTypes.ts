@@ -26,6 +26,7 @@ type ContactsType = {
   phone: PhoneType
   email: string
   social_networks: SocialNetworkItemType[]
+  coordinates: any
 }
 
 export type MainObjectType = {

@@ -4,6 +4,7 @@ import { useAppSelector } from "../../utils/hooks/hooks";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import BackIcon from "../../assets/icons/back.svg";
 import { useEffect, useState } from "react";
+import { FilteredBlock } from "../FilteredBlock";
 
 export const Header = () => {
     const [visibilityBtnBack, setVisibilityBtnBack] = useState(false);
@@ -36,14 +37,15 @@ export const Header = () => {
                             <p className={style["headerContainer_info-text"]}>Назад</p>
                         </NavLink>
                     }
-                    <NavLink to={`/${id}`} className={style["headerContainer_info-backIconLogo"]}>
+                    {/* <NavLink to={`/${id}`} className={style["headerContainer_info-backIconLogo"]}>
                         <div className={style["headerContainer_info-logo"]}>
-                            {/* <Logo /> */}
+                            <Logo />
                         </div>
-                    </NavLink>
+                    </NavLink> */}
                 </div>
                 <h1 className={style.title}>{name ? name : "Название объекта"}</h1>
             </div>
+            <FilteredBlock />
         </div>
     )
 }

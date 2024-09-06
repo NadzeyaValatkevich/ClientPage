@@ -4,14 +4,13 @@ import { Header } from "../Header";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/hooks";
 import { useEffect } from "react";
 import { fetchMainObject } from "../../redux/thunks/mainObjectThunk";
-import { FilteredBlock } from "../FilteredBlock";
 import { RequestStatusType } from "../../common/enums/enums";
 import { BeatLoader } from "react-spinners";
 import { NETWORK_ERROR, NOTFOUND_ERROR } from "../../utils/constants";
 import { ErrorPage } from "../../pages/ErrorPage";
 import { SmileIcon } from "../../assets/icons/Smile";
 
-export const Layout = ({ scrollToFilteredObjects }: any) => {
+export const Layout = () => {
     const dispatch = useAppDispatch();
     const { status } = useAppSelector(state => state.mainObject);
     const { error } = useAppSelector(state => state.mainObject);
@@ -44,7 +43,7 @@ export const Layout = ({ scrollToFilteredObjects }: any) => {
                 :
                 <>
                     <Header />
-                    <FilteredBlock scrollToFilteredObjects={scrollToFilteredObjects} />
+                    {/* <FilteredBlock scrollToFilteredObjects={scrollToFilteredObjects} /> */}
                     <Outlet />
                     <Footer />
                 </>

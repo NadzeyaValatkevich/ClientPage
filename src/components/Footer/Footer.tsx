@@ -6,41 +6,12 @@ import { getCountCountry } from "../../utils/functions/getCountCountry";
 import { SocialNetworkItemType } from "../../redux/types/mainObjectTypes";
 import { SOCIAL_OPTIONS } from "../../utils/constants";
 import { getPhone } from "../../utils/functions/getPhone";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 export const Footer = () => {
     const { country, full_address, contacts } = useAppSelector(state => state.mainObject.data);
     const region = full_address?.region;
     const locality = full_address?.locality;
     const address = full_address?.address;
-
-    const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
-    // console.log(contacts?.phone)
-
-    useEffect(() => {
-        if (address) {
-            // const fullAddress = `${country ? getCountCountry(country) : ""}, ${region ? region : ""}, ${locality ? locality : ""}, ${address}`;
-            // const encodedAddress = encodeURIComponent(fullAddress);
-
-            const fullAddress = `18, улица Победы, Ганцевичи, Брестская область, Республика Беларусь`;
-            axios.get(`https://nominatim.openstreetmap.org/search`, {
-                params: {
-                    q: fullAddress,
-                    format: 'json',
-                    limit: 1,
-                    addressdetails: 1
-                }
-            }).then(response => {
-                if (response.data.length > 0) {
-                    const { lat, lon } = response.data[0];
-                    setCoordinates([parseFloat(lat), parseFloat(lon)]);
-                }
-            }).catch(error => {
-                console.error("Error fetching coordinates:", error);
-            });
-        }
-    }, [country, region, locality, address]);
 
     return (
         <div className={style.footer}>
@@ -75,7 +46,6 @@ export const Footer = () => {
                         </p>
                         <div className={style.phones}>
                             <p>{contacts?.phone ? getPhone(contacts.phone) : ""}</p>
-                            {/* <p>+375 (29) 853-25-10</p> */}
                         </div>
                         <div className={style.email}>{contacts?.email}</div>
 
@@ -84,7 +54,8 @@ export const Footer = () => {
                         <YMaps>
                             <Map
                                 defaultState={{
-                                    center: coordinates || [53.913699, 27.612626],
+                                    // center: coordinates || [53.913699, 27.612626],
+                                    center: [53.913699, 27.612626],
                                     zoom: 14,
                                     controls: [],
                                 }}
@@ -92,8 +63,8 @@ export const Footer = () => {
                             >
                                 <GeolocationControl options={{ float: "right", borderRadius: '16px' }} />
                                 <FullscreenControl />
-                                {coordinates && <Placemark geometry={coordinates} />}
-                                {/* {coordinates && <Placemark geometry={[52.7581445, 26.4245277]} />} */}
+                                {/* {coordinates && <Placemark geometry={coordinates} />} */}
+                                <Placemark geometry={[52.7581445, 26.4245277]} />
                             </Map>
                         </YMaps>
                     </div>

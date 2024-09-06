@@ -5,17 +5,29 @@
   // flex: 1 1 0 auto;
   width: 100%;
   padding-bottom: 80px;
+  padding-top: 80px;
 
   @include media-query(lg) {
     padding-bottom: 60px;
+    padding-top: 60px;
   }
 
-  // @include media-query(md) {
-  //   padding-bottom: 80px;
-  // }
+  @media (max-width: 1251px) {
+    padding-top: 170px;
+  }
+
+  @include media-query(md) {
+    padding-top: 140px;
+  }
 
   @media (max-width: 571px) {
+    padding-top: 410px;
     padding-bottom: 40px;
+  }
+
+  @include media-query(sm) {
+    padding-top: 390px;
+    padding-bottom: 30px;
   }
 }
 

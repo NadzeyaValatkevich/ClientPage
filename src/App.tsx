@@ -11,15 +11,15 @@ import { SmileIcon } from './assets/icons/Smile';
 function App() {
   const filteredObjectsRef = useRef<HTMLDivElement>(null);
 
-  const scrollToFilteredObjects = () => {
-    if (filteredObjectsRef.current) {
-      filteredObjectsRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
+  // const scrollToFilteredObjects = () => {
+  //   if (filteredObjectsRef.current) {
+  //     filteredObjectsRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }
 
   return (
     <Routes>
-      <Route path="/:id" element={<Layout scrollToFilteredObjects={scrollToFilteredObjects} />}>
+      <Route path="/:id" element={<Layout />}>
         <Route index element={<Main />} />
         <Route path="filteredRental_objects" element={<FilteredRentalObjects ref={filteredObjectsRef} />} />
       </Route>

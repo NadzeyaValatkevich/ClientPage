@@ -14,10 +14,9 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { formatPeople } from "../../utils/functions/formatPeople";
 import { RequestStatusType } from "../../common/enums/enums";
 
-export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
+export const FilteredBlock = () => {
     const [check_in_date, setCheckInDate] = useState<Date | null | undefined>(null);
     const [check_out_date, setCheckOutDate] = useState<Date | null | undefined>(null);
-    // const [guests, setGuests] = useState<GuestsType>({ adults: 0, children: 0, childAges: [] });
     const [formattedValue, setFormattedValue] = useState("");
     const [dateError, setDateError] = useState<string | null>(null);
 
@@ -33,9 +32,9 @@ export const FilteredBlock = ({ scrollToFilteredObjects }: any) => {
     const methods = useForm();
     const { handleSubmit, formState: { errors }, clearErrors, setValue, register, reset } = methods;
 
-    useEffect(() => {
-        scrollToFilteredObjects();
-    }, [location]);
+    // useEffect(() => {
+    //     scrollToFilteredObjects();
+    // }, [location]);
 
     useEffect(() => {
         if (location.pathname === `/${id}`) {

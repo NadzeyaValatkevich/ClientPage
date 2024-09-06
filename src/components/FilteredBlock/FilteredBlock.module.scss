@@ -3,43 +3,27 @@
 
 .filteredBlockWrapper {
   width: 100%;
-  position: relative;
-  min-height: 200px;
+  position: absolute;
+  bottom: 30px;
   display: flex;
   justify-content: center;
-  // margin-bottom: 30px;
-
-  @include media-query(lg) {
-    min-height: 160px;
-    margin-bottom: 0px;
-  }
 
   @media (max-width: 1251px) {
-    margin-bottom: 120px;
-  }
-
-  @media (max-width: 950px) {
-    margin-bottom: 180px;
-  }
-
-  @include media-query(md) {
-    margin-bottom: 140px;
+    bottom: -110px;
   }
 
   @media (max-width: 571px) {
-    margin-bottom: 60px;
-    min-height: 451px;
+    bottom: -370px;
   }
 
   @include media-query(sm) {
-    min-height: 360px;
-    margin-bottom: 20px;
+    bottom: -357px;
   }
 
   .filteredBlockContainer {
     height: 100%;
-    position: absolute;
-    top: -70%;
+    // position: absolute;
+    // top: -120%;
     background-color: $secondary;
     padding: 60px 114px;
     border-radius: $radius-primary;
