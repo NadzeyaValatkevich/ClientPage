@@ -24,6 +24,10 @@
     padding-bottom: 40px;
   }
 
+  @media (max-width: 420px) {
+    padding-top: 430px;
+  }
+
   @include media-query(sm) {
     padding-top: 390px;
     padding-bottom: 30px;

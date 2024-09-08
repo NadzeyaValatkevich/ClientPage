@@ -16,6 +16,10 @@
     bottom: -370px;
   }
 
+  @media (max-width: 430px) {
+    bottom: -390px;
+  }
+
   @include media-query(sm) {
     bottom: -357px;
   }
