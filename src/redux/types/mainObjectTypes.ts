@@ -1,5 +1,4 @@
 import { SocialNetworkType } from '../../common/enums/enums'
-import { Latvia } from './../../assets/flag_icons/Latvia'
 
 type AddressType = {
   region: string
