@@ -1,4 +1,5 @@
 import { SocialNetworkType } from '../../common/enums/enums'
+import { Latvia } from './../../assets/flag_icons/Latvia'
 
 type AddressType = {
   region: string
@@ -22,11 +23,16 @@ export type SocialNetworkItemType = {
   account: string
 }
 
+type CoordinatesItem = {
+  lat: string
+  lon: string
+}
+
 type ContactsType = {
   phone: PhoneType
   email: string
   social_networks: SocialNetworkItemType[]
-  coordinates: any
+  coordinates: CoordinatesItem
 }
 
 export type MainObjectType = {

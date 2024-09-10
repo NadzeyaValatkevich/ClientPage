@@ -13,6 +13,11 @@ export const Footer = () => {
     const locality = full_address?.locality;
     const address = full_address?.address;
 
+    const coordinates = contacts?.coordinates ? [+contacts?.coordinates.lat, +contacts?.coordinates.lon] : [53.9, 27.5667];
+
+
+
+
     return (
         <div className={style.footer}>
             <div className={`${styleContainer.container} ${style.footerContainer}`}>
@@ -54,8 +59,8 @@ export const Footer = () => {
                         <YMaps>
                             <Map
                                 defaultState={{
-                                    // center: coordinates || [53.913699, 27.612626],
-                                    center: [53.913699, 27.612626],
+                                    center: coordinates,
+                                    // center: [54.86161100, 26.71161000],
                                     zoom: 14,
                                     controls: [],
                                 }}
@@ -63,8 +68,7 @@ export const Footer = () => {
                             >
                                 <GeolocationControl options={{ float: "right", borderRadius: '16px' }} />
                                 <FullscreenControl />
-                                {/* {coordinates && <Placemark geometry={coordinates} />} */}
-                                <Placemark geometry={[52.7581445, 26.4245277]} />
+                                <Placemark geometry={contacts?.coordinates && coordinates} />
                             </Map>
                         </YMaps>
                     </div>
@@ -75,8 +79,10 @@ export const Footer = () => {
                             <span>© 2024 / ООО "Витаем"</span>
 
                         </div>
-                        <div className={style["footerContent-politics"]}>Политика конфиденциальности</div>
-                        <div className={style["footerContent-agree"]}>Пользовательское соглашение</div>
+                        <div className={style["footerContent-politics"]}>
+                            <a href="../../../public/politics.pdf" target="_blank">Политика конфиденциальности</a>
+                        </div>
+                        {/* <div className={style["footerContent-agree"]}>Пользовательское соглашение</div> */}
                     </div>
                     <div className={style["footerContent-right"]}>Разработано студией TravelWeb | Система бронирования Vitaem</div>
                 </div>

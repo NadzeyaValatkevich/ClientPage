@@ -17,8 +17,8 @@ export default defineConfig({
             filepath: id,
             requirePragma: false,
             ...JSON.parse(fs.readFileSync('.prettierrc.json', 'utf-8')),
-          };
-          return format(code, prettierOptions);
+          }
+          return format(code, prettierOptions)
         }
       },
     },
@@ -26,4 +26,4 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },
-});
+})
