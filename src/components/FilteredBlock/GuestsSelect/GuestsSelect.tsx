@@ -35,10 +35,8 @@ type GuestsSelectPropsType = {
     setFormattedValue: (value: string) => void
 }
 
-export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedValue }: GuestsSelectPropsType, ref: any) => {
+export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedValue }: GuestsSelectPropsType, _) => {
     const { id } = useAppSelector(state => state.mainObject.data);
-
-    console.log(ref)
 
     const [isOpen, setIsOpen] = useState(false);
     const [adults, setAdults] = useState(0);

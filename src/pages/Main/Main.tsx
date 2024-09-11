@@ -78,7 +78,7 @@ export const Main = () => {
                     }) :
                     <div className={style.infoText}>В ближайшее время здесь появятся сдаваемые объекты</div>}
             </div>
-            {currentResults && currentResults.length && <Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"all"} />}
+            {results && results.length > 1 && <Pagination currentPage={currentPage} onPageChange={handlePageChange} type={"all"} />}
             {modalActive && activeHouse && <Modal active={modalActive} onClose={onCloseHandler} setActive={setModalActive} type={"houseModal"}>
                 <FullHouseCard rentalObject={activeHouse} modalActive={modalActive} />
             </Modal>}

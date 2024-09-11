@@ -5,8 +5,9 @@ import { Main } from './pages/Main';
 import { FilteredRentalObjects } from './pages/FilteredRentalObjects';
 import { useRef } from 'react';
 import { ErrorPage } from './pages/ErrorPage';
-import { NOTFOUND_ERROR } from './utils/constants';
+import { APP_ERROR, NOTFOUND_ERROR } from './utils/constants';
 import { SmileIcon } from './assets/icons/Smile';
+import { withErrorBoundary } from 'react-error-boundary'
 
 function App() {
   const filteredObjectsRef = useRef<HTMLDivElement>(null);
@@ -28,4 +29,6 @@ function App() {
   )
 }
 
-export default App
+export default withErrorBoundary(App, {
+  fallback: <ErrorPage text={APP_ERROR} image={<SmileIcon />} />
+})

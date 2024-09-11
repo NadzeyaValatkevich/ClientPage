@@ -40,6 +40,7 @@ export const ANIMALS_ERROR = "Максимальное число символо
 
 export const NETWORK_ERROR = 'Ошибка сети. Проверьте подключение к Интернету и повторите попытку';
 export const NOTFOUND_ERROR = 'Страница по этому адресу недоступна';
+export const APP_ERROR = "Что-то пошло не так. Обратитесь в службу поддержки"
 
 
 // REQUIREMENTS
