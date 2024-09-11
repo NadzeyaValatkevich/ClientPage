@@ -51,7 +51,7 @@ export const Footer = () => {
                         </p>
                         <div className={style.phones}>
                             {/* <p>{contacts?.phone ? getPhone(contacts.phone) : ""}</p> */}
-                            <p>{contacts ? getPhone(contacts.phone) : ""}</p>
+                            <p>{contacts && getPhone(contacts.phone)}</p>
                         </div>
                         <div className={style.email}>{contacts?.email}</div>
 
