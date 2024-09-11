@@ -15,9 +15,6 @@ export const Footer = () => {
 
     const coordinates = contacts?.coordinates ? [+contacts?.coordinates.lat, +contacts?.coordinates.lon] : [53.9, 27.5667];
 
-
-
-
     return (
         <div className={style.footer}>
             <div className={`${styleContainer.container} ${style.footerContainer}`}>
@@ -50,8 +47,7 @@ export const Footer = () => {
                             {`${country ? getCountCountry(country) : "страна"}, ${region ? region : "регион"}, ${locality ? locality : "населенный пункт"}, ${address ? address : "адрес"}`}
                         </p>
                         <div className={style.phones}>
-                            {/* <p>{contacts?.phone ? getPhone(contacts.phone) : ""}</p> */}
-                            <p>{contacts && getPhone(contacts.phone)}</p>
+                            <p>{contacts?.phone ? getPhone(contacts.phone) : ""}</p>
                         </div>
                         <div className={style.email}>{contacts?.email}</div>
 
