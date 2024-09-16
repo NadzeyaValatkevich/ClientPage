@@ -51,16 +51,8 @@ export const Main = () => {
     }
 
     if (error || errorRental) {
-        return <div style={{
-            width: "100%",
-            marginBottom: "120px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "18px",
-            fontWeight: "600",
-            textAlign: "center"
-        }} >
+        return <div className={style.error}
+        >
             {error || errorRental}
         </div >
     }

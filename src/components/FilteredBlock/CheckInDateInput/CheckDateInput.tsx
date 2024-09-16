@@ -5,21 +5,33 @@ import { ru } from "date-fns/locale/ru";
 import style from "./CheckDateInput.module.scss";
 import calendarIcon from "../../../assets/icons/calendar.svg";
 import calendarGrayIcon from "../../../assets/icons/calendarGray.svg";
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useRef } from "react";
 import classNames from "classnames";
 
 type CheckDateInputPropsType = {
     // selectedDate: Date | string | undefined | null,
     selectedDate: any,
     onDateChange: (date: Date) => void,
+    toggleCalendar?: () => void,
+    isOpen?: boolean,
+    closeCalendar?: () => void,
     firstDay?: Date,
     type?: string
 };
 
 registerLocale("ru", ru);
 
-export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsType>(({ selectedDate, onDateChange, firstDay, type }, ref) => {
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsType>(({
+    selectedDate,
+    onDateChange,
+    firstDay,
+    type,
+    toggleCalendar,
+    isOpen,
+    closeCalendar
+}, ref) => {
+
+    // const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleDivClick = (e: any) => {
@@ -27,7 +39,9 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
         if (inputRef.current) {
             inputRef.current.focus();
         }
-        setIsCalendarOpen(true);
+        // setIsCalendarOpen(true);
+        // setIsCalendarOpen((prevState) => !prevState);
+        toggleCalendar && toggleCalendar();
     };
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -48,7 +62,7 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
             <div
                 className={classNames(style.customDatePickDiv, {
                     [style["customDatePickDiv-selected"]]: selectedDate,
-                    [style["customDatePickDiv-focused"]]: isCalendarOpen,
+                    [style["customDatePickDiv-focused"]]: isOpen,
                     [style["customDatePickDiv-birthday"]]: type === "birthday",
                 })}
                 onMouseDown={handleDivClick}
@@ -82,15 +96,21 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
                 selected={selectedDate}
                 locale={"ru"}
                 dateFormat="dd.MM.yyyy"
-                onChange={(date) => onDateChange(date as Date)}
+                onChange={(date) => {
+                    onDateChange(date as Date)
+                    closeCalendar && closeCalendar()
+                }}
                 customInput={<CustomInput ref={ref} />}
                 minDate={firstDay}
                 maxDate={type === "birthday" ? new Date() : new Date(new Date().setMonth(new Date().getMonth() + 12))}
                 showMonthDropdown={type === 'birthday'}
                 showYearDropdown={type === 'birthday'}
                 dropdownMode={(type === 'birthday') ? "select" : undefined}
-                onCalendarOpen={() => setIsCalendarOpen(true)}
-                onCalendarClose={() => setIsCalendarOpen(false)}
+                open={isOpen}
+                // onClickOutside={() => setIsCalendarOpen(false)}
+                // onCalendarOpen={() => setIsCalendarOpen(true)}
+                // onCalendarClose={() => setIsCalendarOpen(false)}
+                onClickOutside={closeCalendar}
             />
         </div>
     );

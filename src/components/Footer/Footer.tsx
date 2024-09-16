@@ -57,7 +57,6 @@ export const Footer = () => {
                             <Map
                                 defaultState={{
                                     center: coordinates,
-                                    // center: [54.86161100, 26.71161000],
                                     zoom: 14,
                                     controls: [],
                                 }}
@@ -74,7 +73,6 @@ export const Footer = () => {
                     <div className={style["footerContent-left"]}>
                         <div className={style.footerContentTitle}>
                             <span>© 2024 / ООО "Витаем"</span>
-
                         </div>
                         <div className={style["footerContent-politics"]}>
                             <a href="../../../public/politics.pdf" target="_blank">Политика конфиденциальности</a>

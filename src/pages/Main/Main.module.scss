@@ -93,6 +93,26 @@
   }
 }
 
+.error {
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1251px) {
+    height: 250px;
+    margin-top: 50px;
+    text-align: center;
+  }
+  @media (max-width: 571px) {
+    height: 450px;
+    margin-top: 0px;
+    padding: 40px 20px 20px;
+    align-items: flex-end;
+  }
+}
+
 // .errorText {
 //   width: '100vw';
 //   margin-bottom: '120px';

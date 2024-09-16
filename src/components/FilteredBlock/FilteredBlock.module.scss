@@ -25,9 +25,8 @@
   }
 
   .filteredBlockContainer {
+    position: relative;
     height: 100%;
-    // position: absolute;
-    // top: -120%;
     background-color: $secondary;
     padding: 60px 114px;
     border-radius: $radius-primary;
@@ -151,7 +150,7 @@
     position: absolute;
     right: 114px;
     margin-top: 10px;
-    text-align: end;
+    // text-align: end;
 
     @media (max-width: 1600px) {
       right: 40px;

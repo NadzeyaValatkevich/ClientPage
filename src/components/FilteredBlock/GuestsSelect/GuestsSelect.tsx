@@ -43,7 +43,8 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
     const [children, setChildren] = useState(0);
     const [childAges, setChildAges] = useState<Array<ChildAge | undefined>>([]);
     const [childAgeErrors, setChildAgeErrors] = useState<string[]>([]);
-    const modalRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLDivElement>(null);
 
     const location = useLocation();
 
@@ -58,27 +59,24 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-                if (
-                    event.clientX >= document.documentElement.clientWidth ||
-                    event.clientY >= document.documentElement.clientHeight
-                ) {
-                    return;
-                }
+            if (
+                dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+                inputRef.current &&
+                !inputRef.current.contains(event.target as Node)
+            ) {
                 setIsOpen(false);
             }
         };
 
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside, true);
 
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside, true);
         };
-
     }, []);
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen)
+        setIsOpen((prevIsOpen) => !prevIsOpen);
     };
 
     const handleAdultIncrement = () => {
@@ -137,12 +135,12 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
 
     return (
         <div className={value ? `${style.customDropDown} ${style["customDropDown--selected"]}` : style.customDropDown}>
-            <div className={style["customDropDown__item"]} onClick={toggleDropdown}>
+            <div className={style["customDropDown__item"]} onClick={toggleDropdown} ref={inputRef}>
                 <input className={style["customDropDown__item-input"]} value={value} readOnly />
                 <img className={style["customDropDown__item-image"]} src={value ? guestsIcon : guestsGrayIcon} alt="Guests" />
             </div>
             {isOpen && (
-                <div className={style.guestsSelectBlock} ref={modalRef}>
+                <div className={style.guestsSelectBlock} ref={dropdownRef}>
                     <SelectCountPeople title={"Количество взрослых"} value={adults} onIncrement={handleAdultIncrement}
                         onDecrement={handleAdultDecrement} disabled={adults === 50} />
                     <SelectCountPeople title={"Количество детей"} value={children} onIncrement={handleChildIncrement}

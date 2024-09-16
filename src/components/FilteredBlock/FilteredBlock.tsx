@@ -17,6 +17,8 @@ import { RequestStatusType } from "../../common/enums/enums";
 export const FilteredBlock = () => {
     const [check_in_date, setCheckInDate] = useState<Date | null | undefined>(null);
     const [check_out_date, setCheckOutDate] = useState<Date | null | undefined>(null);
+    const [isFirstCalendarOpen, setIsFirstCalendarOpen] = useState(false);
+    const [isSecondCalendarOpen, setIsSecondCalendarOpen] = useState(false);
     const [formattedValue, setFormattedValue] = useState("");
     const [dateError, setDateError] = useState<string | null>(null);
 
@@ -41,10 +43,23 @@ export const FilteredBlock = () => {
             reset({});
             setCheckInDate(null);
             setCheckOutDate(null);
-            // setGuests({ adults: 0, children: 0, childAges: [] });
             setFormattedValue("");
         }
     }, [id, location.pathname, reset]);
+
+    const toggleFirstCalendar = () => {
+        setIsFirstCalendarOpen((prev) => !prev);
+        setIsSecondCalendarOpen(false);
+    }
+
+    const toggleSecondCalendar = () => {
+        setIsSecondCalendarOpen((prev) => !prev);
+        setIsFirstCalendarOpen(false);
+    };
+
+    const closeFirstCalendar = () => setIsFirstCalendarOpen(false);
+    const closeSecondCalendar = () => setIsSecondCalendarOpen(false);
+
 
     const handleCheckInDateChange = (date: Date) => {
 
@@ -174,11 +189,25 @@ export const FilteredBlock = () => {
                     <form className={style.filteredBlock} onSubmit={handleSubmit(onSubmit)}>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Дата заезда</h4>
-                            <CheckDateInput {...register("check_in_date", { required: true })} selectedDate={check_in_date} onDateChange={handleCheckInDateChange} firstDay={today} />
+                            <CheckDateInput {...register("check_in_date", { required: true })}
+                                selectedDate={check_in_date}
+                                onDateChange={handleCheckInDateChange}
+                                toggleCalendar={toggleFirstCalendar}
+                                firstDay={today}
+                                isOpen={isFirstCalendarOpen}
+                                closeCalendar={closeFirstCalendar}
+                            />
                         </div>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Дата выезда</h4>
-                            <CheckDateInput {...register("check_out_date", { required: true })} selectedDate={check_out_date} onDateChange={handleCheckOutDateChange} firstDay={check_in_date && new Date(check_in_date.getTime() + (24 * 60 * 60 * 1000)) || today} />
+                            <CheckDateInput {...register("check_out_date", { required: true })}
+                                selectedDate={check_out_date}
+                                onDateChange={handleCheckOutDateChange}
+                                firstDay={check_in_date && new Date(check_in_date.getTime() + (24 * 60 * 60 * 1000)) || today}
+                                isOpen={isSecondCalendarOpen}
+                                toggleCalendar={toggleSecondCalendar}
+                                closeCalendar={closeSecondCalendar}
+                            />
                         </div>
                         <div className={style.titleItemBlock}>
                             <h4 className={style.titleItem}>Количество гостей</h4>
