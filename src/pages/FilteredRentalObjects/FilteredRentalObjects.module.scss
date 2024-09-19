@@ -16,11 +16,11 @@
   }
 
   @include media-query(md) {
-    padding-top: 140px;
+    padding-top: 120px;
   }
 
   @media (max-width: 571px) {
-    padding-top: 410px;
+    padding-top: 380px;
     padding-bottom: 40px;
   }
 

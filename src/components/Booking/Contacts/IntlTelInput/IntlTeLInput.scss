@@ -35,7 +35,9 @@
   }
 
   &__input:placeholder-shown {
-    text-overflow: ellipsis;
+    font-size: 13px;
+    padding-left: 87px !important;
+    padding-right: 0px !important;
   }
 
   &__input {

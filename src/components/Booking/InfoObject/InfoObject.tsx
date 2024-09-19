@@ -190,9 +190,11 @@ export const InfoObject = ({ title, check_in_time, check_out_time, price, format
                     </div>
                 </div>
                 <div className={style["infoObject__block-price"]}>
-                    <p className={style["infoObject__block-price--text"]}>Общая стоимость за выбранный период</p>
-                    <input className={style["infoObject__block-price--input"]} name={"price"} type={"number"} value={price} readOnly />
-                    <span className={style["infoObject__block-price--currency"]}>BYN</span>
+                    <p className={style["infoObject__block-price--text"]}>Общая стоимость за выбранный период:</p>
+                    <div className={style["infoObject__block-price--number"]}>
+                        <input className={style["infoObject__block-price--input"]} name={"price"} type={"number"} value={price} readOnly />
+                        <span className={style["infoObject__block-price--currency"]}>BYN</span>
+                    </div>
                 </div>
             </div>
         </div >

@@ -1,21 +1,12 @@
 export const SmileIcon = () => {
     return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100"
-            height="100"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="feather feather-frown"
-        >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M9 10h.01" />
-            <path d="M15 10h.01" />
-            <path d="M9 16s1.5-2 3-2 3 2 3 2" />
+        <svg width="96" height="96" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="21" stroke="#0A3A86" stroke-width="2" />
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0148 23.2776C17.2086 21.5288 18.6497 19.8459 20.3686 19.7941C20.2361 19.2078 20.0134 18.7066 19.746 18.3247C19.3063 17.6965 18.8427 17.5 18.5 17.5C18.1573 17.5 17.6937 17.6965 17.254 18.3247C16.8176 18.9481 16.5 19.8893 16.5 21C16.5 21.8951 16.7063 22.6802 17.0148 23.2776ZM22 21C22 23.7614 20.433 26 18.5 26C16.567 26 15 23.7614 15 21C15 18.2386 16.567 16 18.5 16C20.433 16 22 18.2386 22 21Z" fill="#1855B7" />
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M31.2442 22.6562C31.4037 22.1721 31.5 21.6117 31.5 21C31.5 19.8893 31.1824 18.9481 30.746 18.3247C30.3063 17.6965 29.8427 17.5 29.5 17.5C29.1573 17.5 28.6937 17.6965 28.254 18.3247C27.9842 18.71 27.7599 19.2168 27.6279 19.81C29.1584 19.8773 30.6345 21.1772 31.2442 22.6562ZM33 21C33 23.7614 31.433 26 29.5 26C27.567 26 26 23.7614 26 21C26 18.2386 27.567 16 29.5 16C31.433 16 33 18.2386 33 21Z" fill="#1855B7" />
+            <path d="M13 35.0002C15 33.0002 17.5 32.5002 21 35.0002C23.7294 36.9497 24.5001 37.0003 27 35.0002C29.775 32.7799 32.5 32.5001 35 35.0002" stroke="#1855B7" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M18.5 9.5C17.6667 10.8333 15.2 13.5 12 13.5" stroke="#1855B7" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M29.5 9.5C30.3333 10.8333 32.8 13.5 36 13.5" stroke="#1855B7" stroke-width="1.5" stroke-linecap="round" />
         </svg>
     );
 };

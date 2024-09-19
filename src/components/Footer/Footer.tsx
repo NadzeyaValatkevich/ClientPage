@@ -75,7 +75,7 @@ export const Footer = () => {
                             <span>© 2024 / ООО "Витаем"</span>
                         </div>
                         <div className={style["footerContent-politics"]}>
-                            <a href="../../../public/politics.pdf" target="_blank">Политика конфиденциальности</a>
+                            <a href="/politics.pdf" target="_blank">Политика конфиденциальности</a>
                         </div>
                         {/* <div className={style["footerContent-agree"]}>Пользовательское соглашение</div> */}
                     </div>

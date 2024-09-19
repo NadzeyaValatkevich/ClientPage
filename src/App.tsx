@@ -30,5 +30,5 @@ function App() {
 }
 
 export default withErrorBoundary(App, {
-  fallback: <ErrorPage text={APP_ERROR} image={<SmileIcon />} />
+  fallback: <ErrorPage text={APP_ERROR} image={<SmileIcon />} type={"appError"} />
 })
