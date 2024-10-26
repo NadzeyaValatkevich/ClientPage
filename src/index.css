@@ -10,7 +10,6 @@ html {
 
 body.modal-open {
   overflow: hidden;
-  /* height: 100%; */
 }
 
 #root {

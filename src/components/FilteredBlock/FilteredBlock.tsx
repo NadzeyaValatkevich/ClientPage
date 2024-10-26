@@ -93,9 +93,6 @@ export const FilteredBlock = () => {
                 check_out_date: queryParams.get('check_out_date') ?? "",
             };
 
-            // queryParamsData.check_in_date && setCheckInDate(new Date(queryParamsData.check_in_date));
-            // queryParamsData.check_out_date && setCheckOutDate(new Date(queryParamsData.check_out_date));
-
             if (queryParamsData.check_in_date) {
                 const checkInDate = new Date(queryParamsData.check_in_date);
                 setCheckInDate(checkInDate);
@@ -111,11 +108,9 @@ export const FilteredBlock = () => {
 
             if (storedGuestsData) {
                 const parsedGuestsData: GuestsType = JSON.parse(storedGuestsData);
-                // queryParams.get('people_amount') && setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children))
                 if (queryParams.get('people_amount')) {
                     setFormattedValue(formatPeople(parsedGuestsData.adults, parsedGuestsData.children));
                     setValue("guests", parsedGuestsData);
-                    // setGuests(parsedGuestsData);
                 }
 
             }
@@ -166,7 +161,6 @@ export const FilteredBlock = () => {
             check_in_date: formatDashDate(data.check_in_date),
             check_out_date: formatDashDate(data.check_out_date),
             people_amount: (data.guests.adults + children).toString(),
-            // main_object: id ? (id).toString() : "",
         })
         navigate(`/${id}/filteredRental_objects?${queryParams.toString()}`)
 

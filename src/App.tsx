@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout/Layout'
 import { Main } from './pages/Main';
 import { FilteredRentalObjects } from './pages/FilteredRentalObjects';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { ErrorPage } from './pages/ErrorPage';
 import { APP_ERROR, NOTFOUND_ERROR } from './utils/constants';
 import { SmileIcon } from './assets/icons/Smile';
@@ -12,11 +12,9 @@ import { withErrorBoundary } from 'react-error-boundary'
 function App() {
   const filteredObjectsRef = useRef<HTMLDivElement>(null);
 
-  // const scrollToFilteredObjects = () => {
-  //   if (filteredObjectsRef.current) {
-  //     filteredObjectsRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // }
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   return (
     <Routes>

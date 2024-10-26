@@ -13,9 +13,7 @@ export const fetchRentalObjects = createAsyncThunk<
       return response.data
     }
   } catch (error: any) {
-    console.log(error)
     const errorMessage = handleAsyncServerNetworkError(error, thunkAPI, false)
-    console.log(errorMessage)
     return thunkAPI.rejectWithValue(errorMessage)
   }
 })

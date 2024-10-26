@@ -31,9 +31,6 @@ export const Layout = () => {
         return (
             <ErrorPage text={NETWORK_ERROR} />
         )
-        // <div style={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        //     {NETWORK_ERROR}
-        // </div>
     }
 
     return (
@@ -43,7 +40,6 @@ export const Layout = () => {
                 :
                 <>
                     <Header />
-                    {/* <FilteredBlock scrollToFilteredObjects={scrollToFilteredObjects} /> */}
                     <Outlet />
                     <Footer />
                 </>

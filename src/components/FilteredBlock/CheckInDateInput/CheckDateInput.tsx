@@ -9,7 +9,6 @@ import { forwardRef, useRef } from "react";
 import classNames from "classnames";
 
 type CheckDateInputPropsType = {
-    // selectedDate: Date | string | undefined | null,
     selectedDate: any,
     onDateChange: (date: Date) => void,
     toggleCalendar?: () => void,
@@ -31,7 +30,6 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
     closeCalendar
 }, ref) => {
 
-    // const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleDivClick = (e: any) => {
@@ -39,8 +37,6 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
         if (inputRef.current) {
             inputRef.current.focus();
         }
-        // setIsCalendarOpen(true);
-        // setIsCalendarOpen((prevState) => !prevState);
         toggleCalendar && toggleCalendar();
     };
 
@@ -49,13 +45,6 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
             event.preventDefault();
         }
     };
-
-    // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const value = event.target.value;
-    //     if (!value) {
-    //         onDateChange(null);
-    //     }
-    // };
 
     const CustomInput = forwardRef<HTMLInputElement, any>((props: any, ref: any) => {
         return (
@@ -107,9 +96,6 @@ export const CheckDateInput = forwardRef<HTMLInputElement, CheckDateInputPropsTy
                 showYearDropdown={type === 'birthday'}
                 dropdownMode={(type === 'birthday') ? "select" : undefined}
                 open={isOpen}
-                // onClickOutside={() => setIsCalendarOpen(false)}
-                // onCalendarOpen={() => setIsCalendarOpen(true)}
-                // onCalendarClose={() => setIsCalendarOpen(false)}
                 onClickOutside={closeCalendar}
             />
         </div>

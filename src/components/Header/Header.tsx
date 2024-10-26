@@ -23,16 +23,20 @@ export const Header = () => {
         }
     }, [id, location.pathname]);
 
+    const handleBackClick = () => {
+        localStorage.clear();
+    };
+
     return (
         <div className={style.header}>
             <div className={style.image}>
-                <img src={booking_photo} alt="background" />
+                <img src={booking_photo} alt="background" fetchPriority="high" />
             </div>
             <div className={style.background}></div>
             <div className={`${styleContainer.container} ${style.headerContainer}`}>
                 <div className={style["headerContainer_info"]}>
                     {visibilityBtnBack &&
-                        <NavLink to={`/${id}`} className={style["headerContainer_info-backIcon"]}>
+                        <NavLink to={`/${id}`} className={style["headerContainer_info-backIcon"]} onClick={handleBackClick}>
                             <img src={BackIcon} alt="Arrow back" />
                             <p className={style["headerContainer_info-text"]}>Назад</p>
                         </NavLink>

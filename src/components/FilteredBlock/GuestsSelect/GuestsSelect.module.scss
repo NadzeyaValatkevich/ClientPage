@@ -4,17 +4,19 @@
 .customDropDown {
   width: 100%;
   position: relative;
-  padding: 25px 20px;
+  height: 66.66px;
+  padding: 0px 20px 0px;
   background-color: $text-white;
   border: solid 1px $text-secondary;
   border-radius: $radius-secondary;
+  cursor: pointer;
 
   @include media-query(md) {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    height: 52.66px;
   }
 
   @include media-query(sm) {
+    height: 42.66px;
     padding-top: 11.5px;
     padding-bottom: 11.5px;
   }
@@ -26,11 +28,13 @@
 
   .customDropDown__item {
     @include flex(row, space-between, center, nowrap);
+    height: 100%;
 
     &-input {
       width: 100%;
       border: none;
       @include typography(500, 14px, 17.07px, $text-primary);
+      cursor: pointer;
     }
 
     &-input:focus {

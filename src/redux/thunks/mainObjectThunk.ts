@@ -10,7 +10,11 @@ export const fetchMainObject = createAsyncThunk<MainObjectType, string>(
     try {
       const response = await objectsApi.getMainObject(id)
 
-      thunkAPI.dispatch(fetchRentalObjects(id))
+      // thunkAPI.dispatch(fetchRentalObjects(id))
+
+      setTimeout(() => {
+        thunkAPI.dispatch(fetchRentalObjects(id))
+      }, 1000)
 
       return response.data
     } catch (error: any) {

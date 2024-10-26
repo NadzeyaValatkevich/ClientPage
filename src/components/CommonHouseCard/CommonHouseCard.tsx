@@ -51,7 +51,9 @@ export const CommonHouseCard = ({ children, house, type }: CommonHouseCardPropsT
                                         className={`${style.image} ${imageClass[el.id] || ''}`}
                                         src={el.image}
                                         alt={"house image"}
-                                        onLoad={(event) => handleImageLoad(el.id, event, setImageClass, style)} />
+                                        onLoad={(event) => handleImageLoad(el.id, event, setImageClass, style)}
+                                        loading="lazy"
+                                    />
                                 </div>
                             )
                         })}

@@ -123,10 +123,10 @@
 
         .btnSearch {
           background-color: $color-8;
-          height: 68px;
+          height: 66.66px;
 
           @include media-query(md) {
-            height: 54px;
+            height: 52.66px;
           }
 
           @include media-query(sm) {

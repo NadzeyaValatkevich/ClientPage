@@ -10,6 +10,8 @@ type SelectCountPeoplePropsType = {
 
 export const SelectCountPeople = ({ title, value, onIncrement, onDecrement, disabled }: SelectCountPeoplePropsType) => {
 
+    console.log(value)
+
     return (
         <div className={style["select__block"]}>
             <p className={style["select__block-title"]}>{title}</p>

@@ -50,7 +50,7 @@ export const GuestsSelect = forwardRef(({ onGuestsChange, value, setFormattedVal
 
     useEffect(() => {
 
-        if (location.pathname === `/main_object/${id}`) {
+        if (location.pathname === `/${id}`) {
             setAdults(0);
             setChildren(0);
             setChildAges([])
