@@ -47,8 +47,8 @@
       }
     }
 
-    &-object input,
-    &-date--checkIn input,
+    // &-object input,
+    // &-date--checkIn input,
     &-date--checkOut input,
     &-guests input {
       // @include typography(500, 14px, 17.07px, $text-secondary);
@@ -105,6 +105,10 @@
     // &-time--checkOut {
     //   width: 130px;
     // }
+
+    &-time--checkOut > div {
+      width: 100%;
+    }
 
     &-time--checkOut input {
       width: 130px;

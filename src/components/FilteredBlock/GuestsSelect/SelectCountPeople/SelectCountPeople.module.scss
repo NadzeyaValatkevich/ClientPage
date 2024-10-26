@@ -8,6 +8,7 @@
 
   &-title {
     @include typography(400, 16px, 19.5px, $text-secondary);
+    margin-right: 10px;
 
     @media (max-width: 390px) {
       font-size: 14px;
