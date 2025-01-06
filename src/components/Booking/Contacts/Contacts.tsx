@@ -10,7 +10,6 @@ import { validateField } from "../../../utils/functions/validateField";
 import { Controller, useFormContext } from "react-hook-form";
 
 export const Contacts = () => {
-
     const [telephoneError, setTelephoneError] = useState("");
     const [telephone, setTelephone] = useState<TelephoneType>({
         country_code: "",
@@ -37,7 +36,7 @@ export const Contacts = () => {
         setEmail(value);
 
         if (emailTouched) {
-            setValue(fieldName, value, { shouldValidate: true })
+            setValue(fieldName, value.toLowerCase(), { shouldValidate: true })
             const error = validateField(fieldName, value);
             setEmailError(error)
         }
