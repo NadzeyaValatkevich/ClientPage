@@ -93,7 +93,7 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
 
     const handleOnChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const newComment = event.target.value;
-        setValue("comment", newComment, { shouldValidate: true })
+        setValue("client_comment", newComment, { shouldValidate: true })
         setComment(newComment)
 
         if (newComment.length >= 500) {
@@ -124,7 +124,7 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
         sex: "mal",
         nationality: optionsNationality[0].value,
         telegram: "",
-        comment: ""
+        client_comment: ""
     }
 
     const methods = useForm<FormValues>({
@@ -135,7 +135,6 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
     const { handleSubmit, register, setValue } = methods;
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
-
         const childAges = data.guests.childAges.map((item: ChildAge | undefined) => item?.value);
 
         const transformData: TransformedFormValues = {
@@ -159,7 +158,7 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
             },
             email: data.email,
             telegram: data.telegram,
-            comment: data.comment,
+            client_comment: data.client_comment,
             children: childAges,
         };
         console.log(transformData.animals_info)
@@ -186,7 +185,7 @@ export const Booking = ({ house, setModalBookingActive }: BookingPropsType) => {
                         <h4 className={style["booking__comment-title"]}>Дополнительные комментарии</h4>
                         <label className={style["booking__comment-label"]} htmlFor="comments">Комментарии</label>
                         <textarea
-                            {...register("comment")}
+                            {...register("client_comment")}
                             className={classNames(style["booking__comment-text"], {
                                 [style["booking__comment-text--error"]]: commentError
                             })}

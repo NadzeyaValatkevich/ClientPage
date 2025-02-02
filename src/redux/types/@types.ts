@@ -31,7 +31,7 @@ export type FormValues = {
   email: string
   telegram: string
   phone: TelephoneType
-  comment: string
+  client_comment: string
 }
 
 export type FormValuesDefault = Omit<
